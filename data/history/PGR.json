@@ -1,0 +1,543 @@
+{
+  "ticker": "PGR",
+  "company": "PROGRESSIVE CORP/OH/",
+  "cik": 80661,
+  "unit": "USD",
+  "filings": [
+    {
+      "accession": "0000080661-26-000086",
+      "report_date": "2025-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/80661/000008066126000086/pgr-20251231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/80661/000008066126000086/0000080661-26-000086-index.html",
+      "statement": "Consolidated Statements of Comprehensive Income",
+      "years": [
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "stitched_from": null
+    },
+    {
+      "accession": "0000080661-24-000007",
+      "report_date": "2023-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/80661/000008066124000007/pgr-20231231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/80661/000008066124000007/0000080661-24-000007-index.html",
+      "statement": "Consolidated Statements of Comprehensive Income",
+      "years": [
+        "2021-12-31",
+        "2022-12-31",
+        "2023-12-31"
+      ],
+      "stitched_from": null
+    }
+  ],
+  "revenue_label": "Total revenues",
+  "period_ends": [
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "revenue": {
+    "2021-12-31": 47702000000,
+    "2022-12-31": 49610700000,
+    "2023-12-31": 62109000000,
+    "2024-12-31": 75372000000,
+    "2025-12-31": 87671000000
+  },
+  "pretax_income": {
+    "2021-12-31": 4210000000,
+    "2022-12-31": 922100000,
+    "2023-12-31": 4904000000,
+    "2024-12-31": 10713000000,
+    "2025-12-31": 14223000000
+  },
+  "operating_income": null,
+  "lines": [
+    {
+      "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+      "label": "Losses and loss adjustment expenses",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 45655000000,
+        "2024-12-31": 49060000000,
+        "2025-12-31": 53959000000,
+        "2021-12-31": null,
+        "2022-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_DeferredPolicyAcquisitionCostAmortizationExpense",
+      "label": "Policy acquisition costs",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 4665000000,
+        "2024-12-31": 5383000000,
+        "2025-12-31": 6096000000,
+        "2021-12-31": 3712800000,
+        "2022-12-31": 3917000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_OtherUnderwritingExpense",
+      "label": "Other underwriting expenses",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 6242000000,
+        "2024-12-31": 9462000000,
+        "2025-12-31": 11329000000,
+        "2021-12-31": 5654700000,
+        "2022-12-31": 5859600000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "pgr_PolicyholderCreditExpenseProfitLimit",
+      "label": "Policyholder credit expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 0,
+        "2024-12-31": 0,
+        "2025-12-31": 1224000000,
+        "2021-12-31": null,
+        "2022-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InvestmentIncomeInvestmentExpense",
+      "label": "Investment expenses",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 26000000,
+        "2024-12-31": 29000000,
+        "2025-12-31": 34000000,
+        "2021-12-31": 25500000,
+        "2022-12-31": 24300000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "pgr_NonInsuranceServiceExpenses",
+      "label": "Service expenses",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 349000000,
+        "2024-12-31": 446000000,
+        "2025-12-31": 528000000,
+        "2021-12-31": 252800000,
+        "2022-12-31": 296700000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpenseDebt",
+      "label": "Interest expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 268000000,
+        "2024-12-31": 279000000,
+        "2025-12-31": 278000000,
+        "2021-12-31": 218600000,
+        "2022-12-31": 243500000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
+      "label": "Losses and loss adjustment expenses",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2021-12-31": 33627600000,
+        "2022-12-31": 38122700000,
+        "2023-12-31": null,
+        "2024-12-31": null,
+        "2025-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_GoodwillImpairmentLoss",
+      "label": "Goodwill impairment",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2021-12-31": 0,
+        "2022-12-31": 224800000,
+        "2023-12-31": null,
+        "2024-12-31": null,
+        "2025-12-31": null
+      },
+      "dimensioned_years": []
+    }
+  ],
+  "disagreements": [
+    {
+      "item": "revenue",
+      "period_end": "2023-12-31",
+      "latest_filing": 62109000000,
+      "earlier_filing": 62108500000
+    },
+    {
+      "item": "pre-tax income",
+      "period_end": "2023-12-31",
+      "latest_filing": 4904000000,
+      "earlier_filing": 4903700000
+    },
+    {
+      "item": "Policy acquisition costs",
+      "period_end": "2023-12-31",
+      "latest_filing": 4665000000,
+      "earlier_filing": 4665100000
+    },
+    {
+      "item": "Other underwriting expenses",
+      "period_end": "2023-12-31",
+      "latest_filing": 6242000000,
+      "earlier_filing": 6241500000
+    },
+    {
+      "item": "Investment expenses",
+      "period_end": "2023-12-31",
+      "latest_filing": 26000000,
+      "earlier_filing": 26200000
+    },
+    {
+      "item": "Interest expense",
+      "period_end": "2023-12-31",
+      "latest_filing": 268000000,
+      "earlier_filing": 268400000
+    }
+  ],
+  "changes": [
+    {
+      "from": "2021-12-31",
+      "to": "2022-12-31",
+      "revenue_change": 1908700000,
+      "pretax_change": -3287900000,
+      "pretax_flex": 168454718.87971154,
+      "leverage": -3456354718.8797116,
+      "lines": [
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_DeferredPolicyAcquisitionCostAmortizationExpense",
+          "actual": 204200000.0,
+          "flex": 148560256.593015,
+          "ratio": 55639743.406985015,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherUnderwritingExpense",
+          "actual": 204900000.0,
+          "flex": 226261496.16368288,
+          "ratio": -21361496.163682878,
+          "absent": []
+        },
+        {
+          "concept": "pgr_PolicyholderCreditExpenseProfitLimit",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInvestmentExpense",
+          "actual": -1200000.0,
+          "flex": 1020331.4326443336,
+          "ratio": -2220331.4326443337,
+          "absent": []
+        },
+        {
+          "concept": "pgr_NonInsuranceServiceExpenses",
+          "actual": 43900000.0,
+          "flex": 10115285.732254414,
+          "ratio": 33784714.267745584,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseDebt",
+          "actual": 24900000.0,
+          "flex": 8746841.222590247,
+          "ratio": 16153158.777409753,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
+          "actual": 4495100000.0,
+          "flex": 1345541069.9761016,
+          "ratio": 3149558930.023898,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GoodwillImpairmentLoss",
+          "actual": 224800000.0,
+          "flex": 0.0,
+          "ratio": 224800000.0,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2022-12-31",
+      "to": "2023-12-31",
+      "revenue_change": 12498300000,
+      "pretax_change": 3981900000,
+      "pretax_flex": 232302354.7339586,
+      "leverage": 3749597645.2660413,
+      "lines": [
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+          "actual": 45655000000.0,
+          "flex": 0.0,
+          "ratio": 45655000000.0,
+          "absent": [
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_DeferredPolicyAcquisitionCostAmortizationExpense",
+          "actual": 748000000.0,
+          "flex": 986800047.1672441,
+          "ratio": -238800047.16724408,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherUnderwritingExpense",
+          "actual": 382400000.0,
+          "flex": 1476194423.38044,
+          "ratio": -1093794423.38044,
+          "absent": []
+        },
+        {
+          "concept": "pgr_PolicyholderCreditExpenseProfitLimit",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInvestmentExpense",
+          "actual": 1700000.0,
+          "flex": 6121838.434047494,
+          "ratio": -4421838.434047494,
+          "absent": []
+        },
+        {
+          "concept": "pgr_NonInsuranceServiceExpenses",
+          "actual": 52300000.0,
+          "flex": 74746891.49719718,
+          "ratio": -22446891.49719718,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseDebt",
+          "actual": 24500000.0,
+          "flex": 61344348.09426192,
+          "ratio": -36844348.09426192,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
+          "actual": -38122700000.0,
+          "flex": 9604156792.990221,
+          "ratio": -47726856792.99022,
+          "absent": [
+            "2023-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_GoodwillImpairmentLoss",
+          "actual": -224800000.0,
+          "flex": 56633303.702628665,
+          "ratio": -281433303.7026287,
+          "absent": [
+            "2023-12-31"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2023-12-31",
+      "to": "2024-12-31",
+      "revenue_change": 13263000000,
+      "pretax_change": 5809000000,
+      "pretax_flex": 1047219436.7965996,
+      "leverage": 4761780563.203401,
+      "lines": [
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+          "actual": 3405000000.0,
+          "flex": 9749348162.102112,
+          "ratio": -6344348162.102112,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DeferredPolicyAcquisitionCostAmortizationExpense",
+          "actual": 718000000.0,
+          "flex": 996182437.3279234,
+          "ratio": -278182437.3279234,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherUnderwritingExpense",
+          "actual": 3220000000.0,
+          "flex": 1332941216.248853,
+          "ratio": 1887058783.751147,
+          "absent": []
+        },
+        {
+          "concept": "pgr_PolicyholderCreditExpenseProfitLimit",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInvestmentExpense",
+          "actual": 3000000.0,
+          "flex": 5552142.201613293,
+          "ratio": -2552142.201613293,
+          "absent": []
+        },
+        {
+          "concept": "pgr_NonInsuranceServiceExpenses",
+          "actual": 97000000.0,
+          "flex": 74526831.8601169,
+          "ratio": 22473168.1398831,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseDebt",
+          "actual": 11000000.0,
+          "flex": 57229773.462783165,
+          "ratio": -46229773.462783165,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-12-31",
+            "2024-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_GoodwillImpairmentLoss",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-12-31",
+            "2024-12-31"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2024-12-31",
+      "to": "2025-12-31",
+      "revenue_change": 12299000000,
+      "pretax_change": 3510000000,
+      "pretax_flex": 1748118492.2782998,
+      "leverage": 1761881507.7217002,
+      "lines": [
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+          "actual": 4899000000.0,
+          "flex": 8005478692.352598,
+          "ratio": -3106478692.352598,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DeferredPolicyAcquisitionCostAmortizationExpense",
+          "actual": 713000000.0,
+          "flex": 878383444.7805551,
+          "ratio": -165383444.78055513,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherUnderwritingExpense",
+          "actual": 1867000000.0,
+          "flex": 1543983680.9425251,
+          "ratio": 323016319.05747485,
+          "absent": []
+        },
+        {
+          "concept": "pgr_PolicyholderCreditExpenseProfitLimit",
+          "actual": 1224000000.0,
+          "flex": 0.0,
+          "ratio": 1224000000.0,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInvestmentExpense",
+          "actual": 5000000.0,
+          "flex": 4732141.9094624,
+          "ratio": 267858.0905376002,
+          "absent": []
+        },
+        {
+          "concept": "pgr_NonInsuranceServiceExpenses",
+          "actual": 82000000.0,
+          "flex": 72777079.02138725,
+          "ratio": 9222920.97861275,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseDebt",
+          "actual": -1000000.0,
+          "flex": 45526468.71517274,
+          "ratio": -46526468.71517274,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_GoodwillImpairmentLoss",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        }
+      ]
+    }
+  ]
+}

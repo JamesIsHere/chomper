@@ -1,0 +1,376 @@
+{
+  "ticker": "HD",
+  "company": "HOME DEPOT, INC.",
+  "cik": 354950,
+  "unit": "USD",
+  "filings": [
+    {
+      "accession": "0001628280-26-019436",
+      "report_date": "2026-02-01",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/hd-20260201.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/0001628280-26-019436-index.html",
+      "statement": "CONSOLIDATED STATEMENTS OF EARNINGS",
+      "years": [
+        "2024-01-28",
+        "2025-02-02",
+        "2026-02-01"
+      ],
+      "stitched_from": null
+    },
+    {
+      "accession": "0000354950-24-000062",
+      "report_date": "2024-01-28",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/354950/000035495024000062/hd-20240128.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/354950/000035495024000062/0000354950-24-000062-index.html",
+      "statement": "CONSOLIDATED STATEMENTS OF EARNINGS",
+      "years": [
+        "2022-01-30",
+        "2023-01-29",
+        "2024-01-28"
+      ],
+      "stitched_from": [
+        "us-gaap_OperatingIncomeLoss",
+        "us-gaap_NonoperatingIncomeExpense"
+      ]
+    }
+  ],
+  "revenue_label": "Net sales",
+  "period_ends": [
+    "2022-01-30",
+    "2023-01-29",
+    "2024-01-28",
+    "2025-02-02",
+    "2026-02-01"
+  ],
+  "revenue": {
+    "2022-01-30": 151157000000,
+    "2023-01-29": 157403000000,
+    "2024-01-28": 152669000000,
+    "2025-02-02": 159514000000,
+    "2026-02-01": 164683000000
+  },
+  "pretax_income": {
+    "2022-01-30": 21737000000,
+    "2023-01-29": 22477000000,
+    "2024-01-28": 19924000000,
+    "2025-02-02": 19406000000,
+    "2026-02-01": 18602000000
+  },
+  "operating_income": {
+    "2022-01-30": 23040000000,
+    "2023-01-29": 24039000000,
+    "2024-01-28": 21689000000,
+    "2025-02-02": 21526000000,
+    "2026-02-01": 20890000000
+  },
+  "lines": [
+    {
+      "concept": "us-gaap_CostOfRevenue",
+      "label": "Cost of sales",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2024-01-28": 101709000000,
+        "2025-02-02": 106206000000,
+        "2026-02-01": 109818000000,
+        "2022-01-30": 100325000000,
+        "2023-01-29": 104625000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+      "label": "Selling, general and administrative",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2024-01-28": 26598000000,
+        "2025-02-02": 28748000000,
+        "2026-02-01": 30702000000,
+        "2022-01-30": 25406000000,
+        "2023-01-29": 26284000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_DepreciationAndAmortization",
+      "label": "Depreciation and amortization",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2024-01-28": 2673000000,
+        "2025-02-02": 3034000000,
+        "2026-02-01": 3273000000,
+        "2022-01-30": 2386000000,
+        "2023-01-29": 2455000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InvestmentIncomeInterestAndDividend",
+      "label": "Interest income and other, net",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2024-01-28": 178000000,
+        "2025-02-02": 201000000,
+        "2026-02-01": 124000000,
+        "2022-01-30": 44000000,
+        "2023-01-29": 55000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpenseNonoperating",
+      "label": "Interest expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2024-01-28": 1943000000,
+        "2025-02-02": 2321000000,
+        "2026-02-01": 2412000000,
+        "2022-01-30": null,
+        "2023-01-29": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpense",
+      "label": "Interest expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2022-01-30": 1347000000,
+        "2023-01-29": 1617000000,
+        "2024-01-28": null,
+        "2025-02-02": null,
+        "2026-02-01": null
+      },
+      "dimensioned_years": []
+    }
+  ],
+  "disagreements": [],
+  "changes": [
+    {
+      "from": "2022-01-30",
+      "to": "2023-01-29",
+      "revenue_change": 6246000000,
+      "pretax_change": 740000000,
+      "pretax_flex": 898200559.6829786,
+      "leverage": -158200559.68297863,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfRevenue",
+          "actual": 4300000000.0,
+          "flex": 4145556937.488836,
+          "ratio": 154443062.5111642,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 878000000.0,
+          "flex": 1049808318.503278,
+          "ratio": -171808318.50327802,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 69000000.0,
+          "flex": 98592562.69970956,
+          "ratio": -29592562.699709564,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterestAndDividend",
+          "actual": -11000000.0,
+          "flex": -1818136.1101371422,
+          "ratio": -9181863.889862858,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2022-01-30",
+            "2023-01-29"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 270000000.0,
+          "flex": 55659757.73533479,
+          "ratio": 214340242.26466522,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2023-01-29",
+      "to": "2024-01-28",
+      "revenue_change": -4734000000,
+      "pretax_change": -2553000000,
+      "pretax_flex": -676010736.7712178,
+      "leverage": -1876989263.2287822,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfRevenue",
+          "actual": -2916000000.0,
+          "flex": -3146666518.427222,
+          "ratio": 230666518.42722178,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 314000000.0,
+          "flex": -790508795.8933438,
+          "ratio": 1104508795.893344,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 218000000.0,
+          "flex": -73835759.16596253,
+          "ratio": 291835759.1659625,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterestAndDividend",
+          "actual": -123000000.0,
+          "flex": 1654161.6106427452,
+          "ratio": -124654161.61064275,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 1943000000.0,
+          "flex": -0.0,
+          "ratio": 1943000000.0,
+          "absent": [
+            "2023-01-29"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": -1617000000.0,
+          "flex": -48632351.3528967,
+          "ratio": -1568367648.6471033,
+          "absent": [
+            "2024-01-28"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2024-01-28",
+      "to": "2025-02-02",
+      "revenue_change": 6845000000,
+      "pretax_change": -518000000,
+      "pretax_flex": 893303683.1314805,
+      "leverage": -1411303683.1314805,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfRevenue",
+          "actual": 4497000000.0,
+          "flex": 4560179898.997177,
+          "ratio": -63179898.997177124,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 2150000000.0,
+          "flex": 1192536205.7785144,
+          "ratio": 957463794.2214856,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 361000000.0,
+          "flex": 119845449.96037178,
+          "ratio": 241154550.0396282,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterestAndDividend",
+          "actual": -23000000.0,
+          "flex": -7980729.552168417,
+          "ratio": -15019270.447831582,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 378000000.0,
+          "flex": 87115491.68462491,
+          "ratio": 290884508.3153751,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-01-28",
+            "2025-02-02"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2025-02-02",
+      "to": "2026-02-01",
+      "revenue_change": 5169000000,
+      "pretax_change": -804000000,
+      "pretax_flex": 628845204.8096092,
+      "leverage": -1432845204.8096092,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfRevenue",
+          "actual": 3612000000.0,
+          "flex": 3441571360.5075417,
+          "ratio": 170428639.49245834,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 1954000000.0,
+          "flex": 931569718.018481,
+          "ratio": 1022430281.981519,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 239000000.0,
+          "flex": 98315796.7325752,
+          "ratio": 140684203.26742482,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterestAndDividend",
+          "actual": 77000000.0,
+          "flex": -6513340.521835074,
+          "ratio": 83513340.52183507,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 91000000.0,
+          "flex": 75211260.45362788,
+          "ratio": 15788739.546372116,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2025-02-02",
+            "2026-02-01"
+          ]
+        }
+      ]
+    }
+  ]
+}

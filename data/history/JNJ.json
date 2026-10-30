@@ -1,0 +1,493 @@
+{
+  "ticker": "JNJ",
+  "company": "JOHNSON & JOHNSON",
+  "cik": 200406,
+  "unit": "USD",
+  "filings": [
+    {
+      "accession": "0000200406-26-000016",
+      "report_date": "2025-12-28",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/0000200406-26-000016-index.html",
+      "statement": "Consolidated Statements of Earnings",
+      "years": [
+        "2023-12-31",
+        "2024-12-29",
+        "2025-12-28"
+      ],
+      "stitched_from": null
+    },
+    {
+      "accession": "0000200406-24-000013",
+      "report_date": "2023-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/200406/000020040624000013/jnj-20231231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/200406/000020040624000013/0000200406-24-000013-index.html",
+      "statement": "Consolidated Statements of Earnings",
+      "years": [
+        "2022-01-02",
+        "2023-01-01",
+        "2023-12-31"
+      ],
+      "stitched_from": null
+    }
+  ],
+  "revenue_label": "Sales to customers",
+  "period_ends": [
+    "2022-01-02",
+    "2023-01-01",
+    "2023-12-31",
+    "2024-12-29",
+    "2025-12-28"
+  ],
+  "revenue": {
+    "2022-01-02": 78740000000,
+    "2023-01-01": 79990000000,
+    "2023-12-31": 85159000000,
+    "2024-12-29": 88821000000,
+    "2025-12-28": 94193000000
+  },
+  "pretax_income": {
+    "2022-01-02": 19178000000,
+    "2023-01-01": 19359000000,
+    "2023-12-31": 15062000000,
+    "2024-12-29": 16687000000,
+    "2025-12-28": 32581000000
+  },
+  "operating_income": null,
+  "lines": [
+    {
+      "concept": "us-gaap_CostOfGoodsAndServicesSold",
+      "label": "Cost of products sold",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 26553000000,
+        "2024-12-29": 27471000000,
+        "2025-12-28": 30256000000,
+        "2022-01-02": 23402000000,
+        "2023-01-01": 24596000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+      "label": "Selling, marketing and administrative expenses",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 21512000000,
+        "2024-12-29": 22869000000,
+        "2025-12-28": 23676000000,
+        "2022-01-02": 20118000000,
+        "2023-01-01": 20246000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
+      "label": "Research and development expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 15085000000,
+        "2024-12-29": 17232000000,
+        "2025-12-28": 14665000000,
+        "2022-01-02": 14277000000,
+        "2023-01-01": 14135000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "jnj_ResearchAndDevelopmentInProcess1",
+      "label": "In-process research and development impairments",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 313000000,
+        "2024-12-29": 211000000,
+        "2025-12-28": 81000000,
+        "2022-01-02": 900000000,
+        "2023-01-01": 783000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InvestmentIncomeInterest",
+      "label": "Interest income",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 1261000000,
+        "2024-12-29": 1332000000,
+        "2025-12-28": 1056000000,
+        "2022-01-02": 53000000,
+        "2023-01-01": 490000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpenseNonoperating",
+      "label": "Interest expense, net of portion capitalized",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 772000000,
+        "2024-12-29": 755000000,
+        "2025-12-28": 971000000,
+        "2022-01-02": null,
+        "2023-01-01": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+      "label": "Other (income) expense, net",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": -6634000000,
+        "2024-12-29": -4694000000,
+        "2025-12-28": 7209000000,
+        "2022-01-02": -526000000,
+        "2023-01-01": -810000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_RestructuringCharges",
+      "label": "Restructuring",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 489000000,
+        "2024-12-29": 234000000,
+        "2025-12-28": 228000000,
+        "2022-01-02": 209000000,
+        "2023-01-01": 275000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpense",
+      "label": "Interest expense, net of portion capitalized",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2022-01-02": 183000000,
+        "2023-01-01": 276000000,
+        "2023-12-31": null,
+        "2024-12-29": null,
+        "2025-12-28": null
+      },
+      "dimensioned_years": []
+    }
+  ],
+  "disagreements": [],
+  "changes": [
+    {
+      "from": "2022-01-02",
+      "to": "2023-01-01",
+      "revenue_change": 1250000000,
+      "pretax_change": 181000000,
+      "pretax_flex": 304451358.9027178,
+      "leverage": -123451358.90271783,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 1194000000.0,
+          "flex": 371507493.014986,
+          "ratio": 822492506.985014,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 128000000.0,
+          "flex": 319373888.74777746,
+          "ratio": -191373888.74777746,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
+          "actual": -142000000.0,
+          "flex": 226647828.2956566,
+          "ratio": -368647828.29565656,
+          "absent": []
+        },
+        {
+          "concept": "jnj_ResearchAndDevelopmentInProcess1",
+          "actual": -117000000.0,
+          "flex": 14287528.57505715,
+          "ratio": -131287528.57505715,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterest",
+          "actual": -437000000.0,
+          "flex": -841376.6827533656,
+          "ratio": -436158623.3172466,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2022-01-02",
+            "2023-01-01"
+          ]
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": 284000000.0,
+          "flex": 8350266.7005334,
+          "ratio": 275649733.2994666,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_RestructuringCharges",
+          "actual": 66000000.0,
+          "flex": 3317881.6357632712,
+          "ratio": 62682118.36423673,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 93000000.0,
+          "flex": 2905130.8102616207,
+          "ratio": 90094869.18973838,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2023-01-01",
+      "to": "2023-12-31",
+      "revenue_change": 5169000000,
+      "pretax_change": -4297000000,
+      "pretax_flex": 1250989761.2201526,
+      "leverage": -5547989761.220153,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 1957000000.0,
+          "flex": 1589407725.9657457,
+          "ratio": 367592274.0342543,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 1266000000.0,
+          "flex": 1308308213.526691,
+          "ratio": -42308213.52669096,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
+          "actual": 950000000.0,
+          "flex": 913411863.9829979,
+          "ratio": 36588136.017002106,
+          "absent": []
+        },
+        {
+          "concept": "jnj_ResearchAndDevelopmentInProcess1",
+          "actual": -470000000.0,
+          "flex": 50597912.23902988,
+          "ratio": -520597912.2390299,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterest",
+          "actual": -771000000.0,
+          "flex": -31664083.010376297,
+          "ratio": -739335916.9896237,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 772000000.0,
+          "flex": 0.0,
+          "ratio": 772000000.0,
+          "absent": [
+            "2023-01-01"
+          ]
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": 5824000000.0,
+          "flex": 52342667.83347918,
+          "ratio": 5771657332.166521,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_RestructuringCharges",
+          "actual": 214000000.0,
+          "flex": 17770658.832354043,
+          "ratio": 196229341.16764596,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": -276000000.0,
+          "flex": 17835279.409926243,
+          "ratio": -293835279.40992624,
+          "absent": [
+            "2023-12-31"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2023-12-31",
+      "to": "2024-12-29",
+      "revenue_change": 3662000000,
+      "pretax_change": 1625000000,
+      "pretax_flex": 647694829.6715555,
+      "leverage": 977305170.3284445,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 918000000.0,
+          "flex": 1141829824.2111814,
+          "ratio": -223829824.2111814,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 1357000000.0,
+          "flex": 925057175.4013082,
+          "ratio": 431942824.5986918,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
+          "actual": 2147000000.0,
+          "flex": 648683873.695088,
+          "ratio": 1498316126.304912,
+          "absent": []
+        },
+        {
+          "concept": "jnj_ResearchAndDevelopmentInProcess1",
+          "actual": -102000000.0,
+          "flex": 13459599.10285466,
+          "ratio": -115459599.10285465,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterest",
+          "actual": -71000000.0,
+          "flex": -54225413.638018295,
+          "ratio": -16774586.361981705,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": -17000000.0,
+          "flex": 33197477.659437053,
+          "ratio": -50197477.65943705,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": -1940000000.0,
+          "flex": 285274697.9180122,
+          "ratio": -2225274697.918012,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_RestructuringCharges",
+          "actual": -255000000.0,
+          "flex": 21027935.978581242,
+          "ratio": -276027935.97858125,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-12-31",
+            "2024-12-29"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2024-12-29",
+      "to": "2025-12-28",
+      "revenue_change": 5372000000,
+      "pretax_change": 15894000000,
+      "pretax_flex": 1009249659.4273877,
+      "leverage": 14884750340.572613,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 2785000000.0,
+          "flex": 1661478839.4636405,
+          "ratio": 1123521160.5363595,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 807000000.0,
+          "flex": 1383144391.5290303,
+          "ratio": -576144391.5290303,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
+          "actual": -2567000000.0,
+          "flex": 1042211909.3457628,
+          "ratio": -3609211909.3457627,
+          "absent": []
+        },
+        {
+          "concept": "jnj_ResearchAndDevelopmentInProcess1",
+          "actual": -130000000.0,
+          "flex": 12761531.619774602,
+          "ratio": -142761531.6197746,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterest",
+          "actual": 276000000.0,
+          "flex": -80560948.4243591,
+          "ratio": 356560948.4243591,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 216000000.0,
+          "flex": 45663300.34563898,
+          "ratio": 170336699.654361,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": -11903000000.0,
+          "flex": 283898717.6456018,
+          "ratio": -12186898717.645601,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_RestructuringCharges",
+          "actual": -6000000.0,
+          "flex": 14152599.047522545,
+          "ratio": -20152599.047522545,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-12-29",
+            "2025-12-28"
+          ]
+        }
+      ]
+    }
+  ]
+}

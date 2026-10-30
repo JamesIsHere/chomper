@@ -1,0 +1,276 @@
+{
+  "ticker": "AAPL",
+  "company": "Apple Inc.",
+  "cik": 320193,
+  "unit": "USD",
+  "filings": [
+    {
+      "accession": "0000320193-25-000079",
+      "report_date": "2025-09-27",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/0000320193-25-000079-index.html",
+      "statement": "CONSOLIDATED STATEMENTS OF OPERATIONS",
+      "years": [
+        "2023-09-30",
+        "2024-09-28",
+        "2025-09-27"
+      ],
+      "stitched_from": null
+    },
+    {
+      "accession": "0000320193-23-000106",
+      "report_date": "2023-09-30",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.html",
+      "statement": "CONSOLIDATED STATEMENTS OF OPERATIONS",
+      "years": [
+        "2021-09-25",
+        "2022-09-24",
+        "2023-09-30"
+      ],
+      "stitched_from": null
+    }
+  ],
+  "revenue_label": "Net sales",
+  "period_ends": [
+    "2021-09-25",
+    "2022-09-24",
+    "2023-09-30",
+    "2024-09-28",
+    "2025-09-27"
+  ],
+  "revenue": {
+    "2021-09-25": 365817000000,
+    "2022-09-24": 394328000000,
+    "2023-09-30": 383285000000,
+    "2024-09-28": 391035000000,
+    "2025-09-27": 416161000000
+  },
+  "pretax_income": {
+    "2021-09-25": 109207000000,
+    "2022-09-24": 119103000000,
+    "2023-09-30": 113736000000,
+    "2024-09-28": 123485000000,
+    "2025-09-27": 132729000000
+  },
+  "operating_income": {
+    "2021-09-25": 108949000000,
+    "2022-09-24": 119437000000,
+    "2023-09-30": 114301000000,
+    "2024-09-28": 123216000000,
+    "2025-09-27": 133050000000
+  },
+  "lines": [
+    {
+      "concept": "us-gaap_CostOfGoodsAndServicesSold",
+      "label": "Cost of sales",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-09-30": 214137000000,
+        "2024-09-28": 210352000000,
+        "2025-09-27": 220960000000,
+        "2021-09-25": 212981000000,
+        "2022-09-24": 223546000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_ResearchAndDevelopmentExpense",
+      "label": "Research and development",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-09-30": 29915000000,
+        "2024-09-28": 31370000000,
+        "2025-09-27": 34550000000,
+        "2021-09-25": 21914000000,
+        "2022-09-24": 26251000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+      "label": "Selling, general and administrative",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-09-30": 24932000000,
+        "2024-09-28": 26097000000,
+        "2025-09-27": 27601000000,
+        "2021-09-25": 21973000000,
+        "2022-09-24": 25094000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_NonoperatingIncomeExpense",
+      "label": "Other income/(expense), net",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-09-30": -565000000,
+        "2024-09-28": 269000000,
+        "2025-09-27": -321000000,
+        "2021-09-25": 258000000,
+        "2022-09-24": -334000000
+      },
+      "dimensioned_years": []
+    }
+  ],
+  "disagreements": [],
+  "changes": [
+    {
+      "from": "2021-09-25",
+      "to": "2022-09-24",
+      "revenue_change": 28511000000,
+      "pretax_change": 9896000000,
+      "pretax_flex": 8511361628.901883,
+      "leverage": 1384638371.0981169,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 10565000000.0,
+          "flex": 16599286777.268415,
+          "ratio": -6034286777.268415,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": 4337000000.0,
+          "flex": 1707930615.5810146,
+          "ratio": 2629069384.4189854,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 3121000000.0,
+          "flex": 1712528950.2674835,
+          "ratio": 1408471049.7325165,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_NonoperatingIncomeExpense",
+          "actual": 592000000.0,
+          "flex": -20107972.018796284,
+          "ratio": 612107972.0187963,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2022-09-24",
+      "to": "2023-09-30",
+      "revenue_change": -11043000000,
+      "pretax_change": -5367000000,
+      "pretax_flex": -3335432505.426954,
+      "leverage": -2031567494.5730462,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": -9409000000.0,
+          "flex": -6260317497.109005,
+          "ratio": -3148682502.890995,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": 3664000000.0,
+          "flex": -735148893.8142866,
+          "ratio": 4399148893.814286,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": -162000000.0,
+          "flex": -702747565.478485,
+          "ratio": 540747565.478485,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_NonoperatingIncomeExpense",
+          "actual": 231000000.0,
+          "flex": -9353538.171268588,
+          "ratio": 240353538.17126858,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2023-09-30",
+      "to": "2024-09-28",
+      "revenue_change": 7750000000,
+      "pretax_change": 9749000000,
+      "pretax_flex": 2299735184.001461,
+      "leverage": 7449264815.998539,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": -3785000000.0,
+          "flex": 4329837457.766414,
+          "ratio": -8114837457.766414,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": 1455000000.0,
+          "flex": 604879528.2883494,
+          "ratio": 850120471.7116506,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 1165000000.0,
+          "flex": 504123563.4058207,
+          "ratio": 660876436.5941793,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_NonoperatingIncomeExpense",
+          "actual": -834000000.0,
+          "flex": 11424266.537954787,
+          "ratio": -845424266.5379548,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2024-09-28",
+      "to": "2025-09-27",
+      "revenue_change": 25126000000,
+      "pretax_change": 9244000000,
+      "pretax_flex": 7934543225.031008,
+      "leverage": 1309456774.9689922,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 10608000000.0,
+          "flex": 13516192545.424324,
+          "ratio": -2908192545.424324,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": 3180000000.0,
+          "flex": 2015683046.27463,
+          "ratio": 1164316953.72537,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 1504000000.0,
+          "flex": 1676865809.9658597,
+          "ratio": -172865809.96585965,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_NonoperatingIncomeExpense",
+          "actual": 590000000.0,
+          "flex": -17284626.695820067,
+          "ratio": 607284626.6958201,
+          "absent": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MSFT Cost Response</title>
+<style>
+:root { color-scheme: light; --s1: #2a78d6; --s2: #eb6834; --bg: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --ink-3: #75746f;
+  --rule: #e2e1dc; --up: #1f8a4c; --down: #d03b3b; --link: #1c5cab; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: dark; --s1: #3987e5; --s2: #d95926;
+  --bg: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #9a9992; --rule: #383835;
+  --up: #3fb36b; --down: #e05252; --link: #86b6ef; } }
+:root[data-theme="dark"] { color-scheme: dark; --s1: #3987e5; --s2: #d95926; --bg: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
+  --ink-3: #9a9992; --rule: #383835; --up: #3fb36b; --down: #e05252; --link: #86b6ef; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 60rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+h1 { font-size: 1.5rem; line-height: 1.25; margin: 0 0 .5rem; }
+h2 { font-size: 1.05rem; margin: 2rem 0 .5rem; }
+.lede { color: var(--ink-2); max-width: 46rem; margin: 0 0 1.25rem; }
+a { color: var(--link); }
+.wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: .9rem; }
+th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
+thead th { font-weight: 600; color: var(--ink-3); font-size: .8rem; }
+tbody th { text-align: left; font-weight: normal; white-space: normal; min-width: 12rem; }
+tr.strong th, tr.strong td { font-weight: 600; }
+tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
+.dim { color: var(--ink-3); font-size: .8rem; }
+.legend { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; font-size: .85rem; color: var(--ink-2);
+  margin: .5rem 0 .25rem; align-items: center; }
+.legend i { display: inline-block; width: .8rem; height: .2rem; border-radius: 1px; margin-right: .4rem;
+  vertical-align: middle; }
+.trend { display: block; width: 100%; max-width: 40rem; height: auto; margin-bottom: 1rem; }
+.trend .g { stroke: var(--rule); stroke-width: 1; }
+.trend .ax { fill: var(--ink-3); font-size: 11px; }
+.trend .lab { fill: var(--ink-2); font-size: 12px; }
+.trend .dot { stroke: var(--bg); stroke-width: 2; }
+.trend .hit { fill: transparent; }
+.trend .hit:hover { fill: var(--rule); fill-opacity: .35; }
+tr.sub th { text-align: left; font-size: .8rem; font-weight: 600; color: var(--ink-3); padding-top: .9rem; }
+td.name { text-align: left; white-space: normal; }
+table.index tbody th { min-width: 4rem; width: 4rem; }
+table.index td.name { width: 16rem; }
+tr.pending th, tr.pending td { color: var(--ink-3); }
+details.sector { border-bottom: 1px solid var(--rule); }
+details.sector > summary { font-weight: 600; font-size: 1.05rem; }
+details.sub { margin-left: 1.25rem; }
+details.sub > summary { font-size: .95rem; }
+details > summary { cursor: pointer; padding: .45rem 0; }
+details > summary .dim { margin-left: .5rem; font-weight: normal; }
+details.sub[open] { margin-bottom: .75rem; }
+h2 .dim { font-weight: normal; margin-left: .4rem; }
+table.decisions td, table.decisions th { vertical-align: top; text-align: left; white-space: normal; }
+table.decisions td.date { white-space: nowrap; color: var(--ink-3); width: 6.5rem; }
+table.decisions tbody th { font-weight: 600; width: 13rem; min-width: 9rem; }
+table.decisions td.text p { margin: 0 0 .3rem; }
+table.decisions .why { color: var(--ink-2); font-size: .85rem; }
+table.decisions .status { color: var(--down); font-size: .8rem; }
+tr.superseded th, tr.superseded td.text p:not(.status) { color: var(--ink-3); text-decoration: line-through; }
+table.index thead th { white-space: normal; vertical-align: bottom; }
+.menu { display: flex; flex-wrap: wrap; gap: .25rem; margin: 0 0 1.5rem; padding-bottom: .75rem;
+  border-bottom: 1px solid var(--rule); }
+.menu a { padding: .3rem .65rem; border-radius: 4px; text-decoration: none; font-size: .9rem; font-weight: 600;
+  color: var(--ink-2); }
+.menu a:hover { background: var(--rule); }
+.menu a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+.note, footer { font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+</style>
+</head>
+<body>
+<main>
+<nav class="menu"><a href="index.html">All</a><a href="decisions.html">Decisioning</a></nav>
+<h1>MICROSOFT CORP: which costs moved with revenue, Jun 2022 to Jun 2026</h1>
+<p class="legend"><span><i style="background:var(--s1)"></i>Revenue</span><span><i style="background:var(--s2)"></i>Pre-tax income</span><span class="dim">Indexed: Jun 2022 = 100</span></p><svg class="trend" viewBox="0 0 640 220" role="img" aria-label="Revenue and pre-tax income, indexed to Jun 2022 = 100; values in the table below"><line x1="36" x2="490" y1="194.0" y2="194.0" class="g"/><text x="30" y="198.0" class="ax" text-anchor="end">100</text><line x1="36" x2="490" y1="148.5" y2="148.5" class="g"/><text x="30" y="152.5" class="ax" text-anchor="end">125</text><line x1="36" x2="490" y1="103.0" y2="103.0" class="g"/><text x="30" y="107.0" class="ax" text-anchor="end">150</text><line x1="36" x2="490" y1="57.5" y2="57.5" class="g"/><text x="30" y="61.5" class="ax" text-anchor="end">175</text><line x1="36" x2="490" y1="12.0" y2="12.0" class="g"/><text x="30" y="16.0" class="ax" text-anchor="end">200</text><text x="36.0" y="214" class="ax" text-anchor="middle">Jun 2022</text><text x="149.5" y="214" class="ax" text-anchor="middle">Jun 2023</text><text x="263.0" y="214" class="ax" text-anchor="middle">Jun 2024</text><text x="376.5" y="214" class="ax" text-anchor="middle">Jun 2025</text><text x="490.0" y="214" class="ax" text-anchor="middle">Jun 2026</text><polyline points="36.0,194.0 149.5,181.5 263.0,151.0 376.5,117.4 490.0,71.4" fill="none" style="stroke:var(--s1)" stroke-width="2"/><circle cx="36.0" cy="194.0" r="4" style="fill:var(--s1)" class="dot"/><circle cx="149.5" cy="181.5" r="4" style="fill:var(--s1)" class="dot"/><circle cx="263.0" cy="151.0" r="4" style="fill:var(--s1)" class="dot"/><circle cx="376.5" cy="117.4" r="4" style="fill:var(--s1)" class="dot"/><circle cx="490.0" cy="71.4" r="4" style="fill:var(--s1)" class="dot"/><polyline points="36.0,194.0 149.5,181.8 263.0,141.7 376.5,107.2 490.0,15.3" fill="none" style="stroke:var(--s2)" stroke-width="2"/><circle cx="36.0" cy="194.0" r="4" style="fill:var(--s2)" class="dot"/><circle cx="149.5" cy="181.8" r="4" style="fill:var(--s2)" class="dot"/><circle cx="263.0" cy="141.7" r="4" style="fill:var(--s2)" class="dot"/><circle cx="376.5" cy="107.2" r="4" style="fill:var(--s2)" class="dot"/><circle cx="490.0" cy="15.3" r="4" style="fill:var(--s2)" class="dot"/><text x="500.0" y="75.4" class="lab">Revenue 167</text><text x="500.0" y="19.3" class="lab">Pre-tax income 198</text><rect x="36.0" y="12" width="113.5" height="182" class="hit"><title>Jun 2022: revenue $198.27B (100), pre-tax income $83.72B (100)</title></rect><rect x="92.8" y="12" width="113.5" height="182" class="hit"><title>Jun 2023: revenue $211.91B (107), pre-tax income $89.31B (107)</title></rect><rect x="206.2" y="12" width="113.5" height="182" class="hit"><title>Jun 2024: revenue $245.12B (124), pre-tax income $107.79B (129)</title></rect><rect x="319.8" y="12" width="113.5" height="182" class="hit"><title>Jun 2025: revenue $281.72B (142), pre-tax income $123.63B (148)</title></rect><rect x="433.2" y="12" width="113.5" height="182" class="hit"><title>Jun 2026: revenue $331.84B (167), pre-tax income $165.93B (198)</title></rect></svg>
+<div class="wrap"><table>
+<thead><tr><th></th><th>Jun 2022</th><th>Jun 2023</th><th>Jun 2024</th><th>Jun 2025</th><th>Jun 2026</th></tr></thead>
+<tbody>
+<tr class="strong"><th scope="row">Revenue</th><td>$198.27B</td><td>$211.91B</td><td>$245.12B</td><td>$281.72B</td><td>$331.84B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td>+6.9%</td><td>+15.7%</td><td>+14.9%</td><td>+17.8%</td></tr><tr class="strong"><th scope="row">Operating income</th><td>$83.38B</td><td>$88.52B</td><td>$109.43B</td><td>$128.53B</td><td>$155.24B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td>+6.2%</td><td>+23.6%</td><td>+17.4%</td><td>+20.8%</td></tr><tr class="strong"><th scope="row">Pre-tax income</th><td>$83.72B</td><td>$89.31B</td><td>$107.79B</td><td>$123.63B</td><td>$165.93B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td>+6.7%</td><td>+20.7%</td><td>+14.7%</td><td>+34.2%</td></tr>
+</tbody></table></div>
+
+<h2>Costs as a share of revenue</h2>
+<p class="note">Shading shows the change from the year before: green where the share moved in pre-tax
+income's favor, red where it moved against. A fixed cost's share falls when revenue grows and rises when
+revenue shrinks; a variable cost's share stays flat.</p>
+<div class="wrap"><table>
+<thead><tr><th></th><th>Jun 2022</th><th>Jun 2023</th><th>Jun 2024</th><th>Jun 2025</th><th>Jun 2026</th></tr></thead>
+<tbody>
+<tr class="strong"><th scope="row">Pre-tax margin</th><td>42.2%</td><td style="background:color-mix(in srgb, var(--down) 1%, transparent)" title="-0.08 points from Jun 2022">42.1%</td><td style="background:color-mix(in srgb, var(--up) 26%, transparent)" title="+1.83 points from Jun 2023">44.0%</td><td style="background:color-mix(in srgb, var(--down) 1%, transparent)" title="-0.09 points from Jun 2024">43.9%</td><td style="background:color-mix(in srgb, var(--up) 70%, transparent)" title="+6.12 points from Jun 2025">50.0%</td></tr>
+<tr><th scope="row">&nbsp;&nbsp;operating margin</th><td>42.1%</td><td style="background:color-mix(in srgb, var(--down) 4%, transparent)" title="-0.28 points from Jun 2022">41.8%</td><td style="background:color-mix(in srgb, var(--up) 40%, transparent)" title="+2.87 points from Jun 2023">44.6%</td><td style="background:color-mix(in srgb, var(--up) 14%, transparent)" title="+0.98 points from Jun 2024">45.6%</td><td style="background:color-mix(in srgb, var(--up) 16%, transparent)" title="+1.16 points from Jun 2025">46.8%</td></tr>
+<tr class="sep"><td colspan="99"></td></tr>
+<tr><th scope="row">Cost of revenue</th><td>31.6%</td><td style="background:color-mix(in srgb, var(--up) 7%, transparent)" title="-0.52 points from Jun 2022">31.1%</td><td style="background:color-mix(in srgb, var(--up) 12%, transparent)" title="-0.84 points from Jun 2023">30.2%</td><td style="background:color-mix(in srgb, var(--down) 13%, transparent)" title="+0.94 points from Jun 2024">31.2%</td><td style="background:color-mix(in srgb, var(--down) 12%, transparent)" title="+0.88 points from Jun 2025">32.1%</td></tr>
+<tr><th scope="row">Research and development</th><td>12.4%</td><td style="background:color-mix(in srgb, var(--down) 7%, transparent)" title="+0.47 points from Jun 2022">12.8%</td><td style="background:color-mix(in srgb, var(--up) 11%, transparent)" title="-0.79 points from Jun 2023">12.0%</td><td style="background:color-mix(in srgb, var(--up) 7%, transparent)" title="-0.51 points from Jun 2024">11.5%</td><td style="background:color-mix(in srgb, var(--up) 11%, transparent)" title="-0.82 points from Jun 2025">10.7%</td></tr>
+<tr><th scope="row">Sales and marketing</th><td>11.0%</td><td style="background:color-mix(in srgb, var(--up) 4%, transparent)" title="-0.27 points from Jun 2022">10.7%</td><td style="background:color-mix(in srgb, var(--up) 11%, transparent)" title="-0.76 points from Jun 2023">10.0%</td><td style="background:color-mix(in srgb, var(--up) 12%, transparent)" title="-0.87 points from Jun 2024">9.1%</td><td style="background:color-mix(in srgb, var(--up) 15%, transparent)" title="-1.06 points from Jun 2025">8.0%</td></tr>
+<tr><th scope="row">General and administrative</th><td>3.0%</td><td style="background:color-mix(in srgb, var(--down) 8%, transparent)" title="+0.60 points from Jun 2022">3.6%</td><td style="background:color-mix(in srgb, var(--up) 7%, transparent)" title="-0.47 points from Jun 2023">3.1%</td><td style="background:color-mix(in srgb, var(--up) 8%, transparent)" title="-0.54 points from Jun 2024">2.6%</td><td style="background:color-mix(in srgb, var(--up) 2%, transparent)" title="-0.17 points from Jun 2025">2.4%</td></tr>
+<tr class="sub"><th colspan="99">Below operating income</th></tr>
+<tr><th scope="row">Other income (expense), net</th><td>-0.2%</td><td style="background:color-mix(in srgb, var(--up) 3%, transparent)" title="-0.20 points from Jun 2022">-0.4%</td><td style="background:color-mix(in srgb, var(--down) 15%, transparent)" title="+1.04 points from Jun 2023">0.7%</td><td style="background:color-mix(in srgb, var(--down) 15%, transparent)" title="+1.07 points from Jun 2024">1.7%</td><td style="background:color-mix(in srgb, var(--up) 70%, transparent)" title="-4.96 points from Jun 2025">-3.2%</td></tr>
+</tbody></table></div>
+<p class="note">Hover a cell for its change in percentage points. Revenue mixes price and volume, so a
+price cut raises every cost's share even when the cost itself did not change.</p>
+
+<h2>In dollars</h2>
+<p class="note">The same changes in money. Each cell is what the line did to pre-tax income beyond moving
+in step with revenue: that year's change in its share of revenue, times that year's revenue. Hover a cell
+for the line's actual change and its in-step-with-revenue change.</p>
+<div class="wrap"><table>
+<thead><tr><th></th><th>Jun 2022 to Jun 2023</th><th>Jun 2023 to Jun 2024</th><th>Jun 2024 to Jun 2025</th><th>Jun 2025 to Jun 2026</th></tr></thead>
+<tbody>
+<tr class=""><th scope="row">Revenue change</th><td>+$13.64B</td><td>+$33.21B</td><td>+$36.60B</td><td>+$50.12B</td></tr><tr class="strong"><th scope="row">Pre-tax income change</th><td>+$5.59B</td><td>+$18.48B</td><td>+$15.84B</td><td>+$42.31B</td></tr><tr class=""><th scope="row">&nbsp;&nbsp;if every cost moved in step with revenue</th><td>+$5.76B</td><td>+$13.99B</td><td>+$16.09B</td><td>+$21.99B</td></tr><tr class=""><th scope="row">&nbsp;&nbsp;beyond revenue (sum of lines below)</th><td>-$166.4M</td><td>+$4.48B</td><td>-$254.9M</td><td>+$20.32B</td></tr>
+<tr class="sep"><td colspan="99"></td></tr>
+<tr><th scope="row">Cost of revenue</th><td style="background:color-mix(in srgb, var(--up) 5%, transparent)" title="Line changed +$3.21B; in step with revenue it would have changed +$4.31B">+$1.10B</td><td style="background:color-mix(in srgb, var(--up) 9%, transparent)" title="Line changed +$8.25B; in step with revenue it would have changed +$10.32B">+$2.07B</td><td style="background:color-mix(in srgb, var(--down) 11%, transparent)" title="Line changed +$13.72B; in step with revenue it would have changed +$11.07B">-$2.65B</td><td style="background:color-mix(in srgb, var(--down) 12%, transparent)" title="Line changed +$18.54B; in step with revenue it would have changed +$15.62B">-$2.92B</td></tr>
+<tr><th scope="row">Research and development</th><td style="background:color-mix(in srgb, var(--down) 4%, transparent)" title="Line changed +$2.68B; in step with revenue it would have changed +$1.69B">-$996.1M</td><td style="background:color-mix(in srgb, var(--up) 8%, transparent)" title="Line changed +$2.31B; in step with revenue it would have changed +$4.26B">+$1.95B</td><td style="background:color-mix(in srgb, var(--up) 6%, transparent)" title="Line changed +$2.98B; in step with revenue it would have changed +$4.41B">+$1.43B</td><td style="background:color-mix(in srgb, var(--up) 11%, transparent)" title="Line changed +$3.07B; in step with revenue it would have changed +$5.78B">+$2.71B</td></tr>
+<tr><th scope="row">Sales and marketing</th><td style="background:color-mix(in srgb, var(--up) 2%, transparent)" title="Line changed +$934.0M; in step with revenue it would have changed +$1.50B">+$568.0M</td><td style="background:color-mix(in srgb, var(--up) 8%, transparent)" title="Line changed +$1.70B; in step with revenue it would have changed +$3.57B">+$1.87B</td><td style="background:color-mix(in srgb, var(--up) 10%, transparent)" title="Line changed +$1.20B; in step with revenue it would have changed +$3.65B">+$2.45B</td><td style="background:color-mix(in srgb, var(--up) 15%, transparent)" title="Line changed +$1.06B; in step with revenue it would have changed +$4.56B">+$3.51B</td></tr>
+<tr><th scope="row">General and administrative</th><td style="background:color-mix(in srgb, var(--down) 5%, transparent)" title="Line changed +$1.68B; in step with revenue it would have changed +$406.0M">-$1.27B</td><td style="background:color-mix(in srgb, var(--up) 5%, transparent)" title="Line changed +$34.0M; in step with revenue it would have changed +$1.19B">+$1.15B</td><td style="background:color-mix(in srgb, var(--up) 6%, transparent)" title="Line changed -$386.0M; in step with revenue it would have changed +$1.14B">+$1.52B</td><td style="background:color-mix(in srgb, var(--up) 2%, transparent)" title="Line changed +$733.0M; in step with revenue it would have changed +$1.28B">+$551.9M</td></tr>
+<tr class="sub"><th colspan="99">Below operating income</th></tr>
+<tr><th scope="row">Other income (expense), net</th><td style="background:color-mix(in srgb, var(--up) 2%, transparent)" title="Line changed -$455.0M; in step with revenue it would have changed -$22.9M">+$432.1M</td><td style="background:color-mix(in srgb, var(--down) 11%, transparent)" title="Line changed +$2.43B; in step with revenue it would have changed -$123.5M">-$2.56B</td><td style="background:color-mix(in srgb, var(--down) 13%, transparent)" title="Line changed +$3.25B; in step with revenue it would have changed +$245.8M">-$3.01B</td><td style="background:color-mix(in srgb, var(--up) 70%, transparent)" title="Line changed -$15.60B; in step with revenue it would have changed +$871.8M">+$16.47B</td></tr>
+</tbody></table></div>
+
+<footer>
+<p>Source: <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">10-K for Jun 2026</a> (accession 0001193125-26-323660); <a href="https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm">10-K for Jun 2024</a> (accession 0000950170-24-087843). Lines, labels and order come from each filing's income statement; every year foots
+to reported pre-tax income, and to operating income where the company reports it. No figure differs between the two filings for the year they share.</p>
+</footer>
+</main>
+</body>
+</html>

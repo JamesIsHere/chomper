@@ -1,0 +1,318 @@
+{
+  "ticker": "MSFT",
+  "company": "MICROSOFT CORP",
+  "cik": 789019,
+  "unit": "USD",
+  "filings": [
+    {
+      "accession": "0001193125-26-323660",
+      "report_date": "2026-06-30",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html",
+      "statement": "INCOME STATEMENTS",
+      "years": [
+        "2024-06-30",
+        "2025-06-30",
+        "2026-06-30"
+      ],
+      "stitched_from": null
+    },
+    {
+      "accession": "0000950170-24-087843",
+      "report_date": "2024-06-30",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/0000950170-24-087843-index.html",
+      "statement": "INCOME STATEMENTS",
+      "years": [
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "stitched_from": null
+    }
+  ],
+  "revenue_label": "Revenue",
+  "period_ends": [
+    "2022-06-30",
+    "2023-06-30",
+    "2024-06-30",
+    "2025-06-30",
+    "2026-06-30"
+  ],
+  "revenue": {
+    "2022-06-30": 198270000000,
+    "2023-06-30": 211915000000,
+    "2024-06-30": 245122000000,
+    "2025-06-30": 281724000000,
+    "2026-06-30": 331839000000
+  },
+  "pretax_income": {
+    "2022-06-30": 83716000000,
+    "2023-06-30": 89311000000,
+    "2024-06-30": 107787000000,
+    "2025-06-30": 123627000000,
+    "2026-06-30": 165934000000
+  },
+  "operating_income": {
+    "2022-06-30": 83383000000,
+    "2023-06-30": 88523000000,
+    "2024-06-30": 109433000000,
+    "2025-06-30": 128528000000,
+    "2026-06-30": 155237000000
+  },
+  "lines": [
+    {
+      "concept": "us-gaap_CostOfGoodsAndServicesSold",
+      "label": "Cost of revenue",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2024-06-30": 74114000000,
+        "2025-06-30": 87831000000,
+        "2026-06-30": 106374000000,
+        "2022-06-30": 62650000000,
+        "2023-06-30": 65863000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_ResearchAndDevelopmentExpense",
+      "label": "Research and development",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2024-06-30": 29510000000,
+        "2025-06-30": 32488000000,
+        "2026-06-30": 35562000000,
+        "2022-06-30": 24512000000,
+        "2023-06-30": 27195000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_SellingAndMarketingExpense",
+      "label": "Sales and marketing",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2024-06-30": 24456000000,
+        "2025-06-30": 25654000000,
+        "2026-06-30": 26710000000,
+        "2022-06-30": 21825000000,
+        "2023-06-30": 22759000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_GeneralAndAdministrativeExpense",
+      "label": "General and administrative",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2024-06-30": 7609000000,
+        "2025-06-30": 7223000000,
+        "2026-06-30": 7956000000,
+        "2022-06-30": 5900000000,
+        "2023-06-30": 7575000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_NonoperatingIncomeExpense",
+      "label": "Other income (expense), net",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2024-06-30": -1646000000,
+        "2025-06-30": -4901000000,
+        "2026-06-30": 10697000000,
+        "2022-06-30": 333000000,
+        "2023-06-30": 788000000
+      },
+      "dimensioned_years": []
+    }
+  ],
+  "disagreements": [],
+  "changes": [
+    {
+      "from": "2022-06-30",
+      "to": "2023-06-30",
+      "revenue_change": 13645000000,
+      "pretax_change": 5595000000,
+      "pretax_flex": 5761359862.813335,
+      "leverage": -166359862.81333542,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 3213000000.0,
+          "flex": 4311591516.6187525,
+          "ratio": -1098591516.6187525,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": 2683000000.0,
+          "flex": 1686923084.6825037,
+          "ratio": 996076915.3174963,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingAndMarketingExpense",
+          "actual": 934000000.0,
+          "flex": 1502002950.5220156,
+          "ratio": -568002950.5220156,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GeneralAndAdministrativeExpense",
+          "actual": 1675000000.0,
+          "flex": 406039743.78372926,
+          "ratio": 1268960256.2162707,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_NonoperatingIncomeExpense",
+          "actual": -455000000.0,
+          "flex": -22917158.420335907,
+          "ratio": -432082841.5796641,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2023-06-30",
+      "to": "2024-06-30",
+      "revenue_change": 33207000000,
+      "pretax_change": 18476000000,
+      "pretax_flex": 13994999773.49409,
+      "leverage": 4481000226.505911,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 8251000000.0,
+          "flex": 10320707080.669136,
+          "ratio": -2069707080.669136,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": 2315000000.0,
+          "flex": 4261446169.4547343,
+          "ratio": -1946446169.4547343,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingAndMarketingExpense",
+          "actual": 1697000000.0,
+          "flex": 3566326654.554892,
+          "ratio": -1869326654.554892,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GeneralAndAdministrativeExpense",
+          "actual": 34000000.0,
+          "flex": 1186999622.4901493,
+          "ratio": -1152999622.4901493,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_NonoperatingIncomeExpense",
+          "actual": 2434000000.0,
+          "flex": -123479300.66300167,
+          "ratio": 2557479300.6630015,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2024-06-30",
+      "to": "2025-06-30",
+      "revenue_change": 36602000000,
+      "pretax_change": 15840000000,
+      "pretax_flex": 16094923238.22423,
+      "leverage": -254923238.2242298,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 13717000000.0,
+          "flex": 11066818270.085917,
+          "ratio": 2650181729.9140835,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": 2978000000.0,
+          "flex": 4406479304.183223,
+          "ratio": -1428479304.1832228,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingAndMarketingExpense",
+          "actual": 1198000000.0,
+          "flex": 3651808128.197387,
+          "ratio": -2453808128.197387,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GeneralAndAdministrativeExpense",
+          "actual": -386000000.0,
+          "flex": 1136187767.7238274,
+          "ratio": -1522187767.7238274,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_NonoperatingIncomeExpense",
+          "actual": 3255000000.0,
+          "flex": 245783291.58541462,
+          "ratio": 3009216708.4145856,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2025-06-30",
+      "to": "2026-06-30",
+      "revenue_change": 50115000000,
+      "pretax_change": 42307000000,
+      "pretax_flex": 21991619830.04643,
+      "leverage": 20315380169.95357,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 18543000000.0,
+          "flex": 15623981503.173319,
+          "ratio": 2919018496.826681,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": 3074000000.0,
+          "flex": 5779188567.534183,
+          "ratio": -2705188567.5341825,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingAndMarketingExpense",
+          "actual": 1056000000.0,
+          "flex": 4563509711.632662,
+          "ratio": -3507509711.632662,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GeneralAndAdministrativeExpense",
+          "actual": 733000000.0,
+          "flex": 1284876847.5529242,
+          "ratio": -551876847.5529242,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_NonoperatingIncomeExpense",
+          "actual": -15598000000.0,
+          "flex": 871823540.0604846,
+          "ratio": -16469823540.060484,
+          "absent": []
+        }
+      ]
+    }
+  ]
+}

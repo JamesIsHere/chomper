@@ -1,0 +1,420 @@
+{
+  "ticker": "UNH",
+  "company": "UNITEDHEALTH GROUP INC",
+  "cik": 731766,
+  "unit": "USD",
+  "filings": [
+    {
+      "accession": "0000731766-26-000062",
+      "report_date": "2025-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/unh-20251231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/0000731766-26-000062-index.html",
+      "statement": "Consolidated Statements of Operations",
+      "years": [
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "stitched_from": null
+    },
+    {
+      "accession": "0000731766-24-000081",
+      "report_date": "2023-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/731766/000073176624000081/unh-20231231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/731766/000073176624000081/0000731766-24-000081-index.html",
+      "statement": "Consolidated Statements of Operations",
+      "years": [
+        "2021-12-31",
+        "2022-12-31",
+        "2023-12-31"
+      ],
+      "stitched_from": null
+    }
+  ],
+  "revenue_label": "Total revenues",
+  "period_ends": [
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "revenue": {
+    "2021-12-31": 287597000000,
+    "2022-12-31": 324162000000,
+    "2023-12-31": 371622000000,
+    "2024-12-31": 400278000000,
+    "2025-12-31": 447567000000
+  },
+  "pretax_income": {
+    "2021-12-31": 22310000000,
+    "2022-12-31": 26343000000,
+    "2023-12-31": 29112000000,
+    "2024-12-31": 20071000000,
+    "2025-12-31": 14697000000
+  },
+  "operating_income": {
+    "2021-12-31": 23970000000,
+    "2022-12-31": 28435000000,
+    "2023-12-31": 32358000000,
+    "2024-12-31": 32287000000,
+    "2025-12-31": 18964000000
+  },
+  "lines": [
+    {
+      "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+      "label": "Medical costs",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 241894000000,
+        "2024-12-31": 264185000000,
+        "2025-12-31": 313995000000,
+        "2021-12-31": null,
+        "2022-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+      "label": "Operating costs",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 54628000000,
+        "2024-12-31": 53013000000,
+        "2025-12-31": 59592000000,
+        "2021-12-31": 42579000000,
+        "2022-12-31": 47782000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_CostOfGoodsAndServicesSold",
+      "label": "Cost of products sold",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 38770000000,
+        "2024-12-31": 46694000000,
+        "2025-12-31": 50655000000,
+        "2021-12-31": 31034000000,
+        "2022-12-31": 33703000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_DepreciationAndAmortization",
+      "label": "Depreciation and amortization",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 3972000000,
+        "2024-12-31": 4099000000,
+        "2025-12-31": 4361000000,
+        "2021-12-31": 3103000000,
+        "2022-12-31": 3400000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpense",
+      "label": "Interest expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 3246000000,
+        "2024-12-31": 3906000000,
+        "2025-12-31": 4002000000,
+        "2021-12-31": 1660000000,
+        "2022-12-31": 2092000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "unh_LossOnSaleOfSubsidiaryAndSubsidiariesHeldForSale",
+      "label": "Loss on sale of subsidiary and subsidiaries held for sale",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 0,
+        "2024-12-31": -8310000000,
+        "2025-12-31": -265000000,
+        "2021-12-31": null,
+        "2022-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
+      "label": "Medical costs",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2021-12-31": 186911000000,
+        "2022-12-31": 210842000000,
+        "2023-12-31": null,
+        "2024-12-31": null,
+        "2025-12-31": null
+      },
+      "dimensioned_years": []
+    }
+  ],
+  "disagreements": [],
+  "changes": [
+    {
+      "from": "2021-12-31",
+      "to": "2022-12-31",
+      "revenue_change": 36565000000,
+      "pretax_change": 4033000000,
+      "pretax_flex": 2836486993.953345,
+      "leverage": 1196513006.0466552,
+      "lines": [
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 5203000000.0,
+          "flex": 5413481833.9551525,
+          "ratio": -210481833.9551525,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 2669000000.0,
+          "flex": 3945653848.962263,
+          "ratio": -1276653848.962263,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 297000000.0,
+          "flex": 394514529.01108146,
+          "ratio": -97514529.01108146,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 432000000.0,
+          "flex": 211051923.35107806,
+          "ratio": 220948076.64892194,
+          "absent": []
+        },
+        {
+          "concept": "unh_LossOnSaleOfSubsidiaryAndSubsidiariesHeldForSale",
+          "actual": 0.0,
+          "flex": -0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
+          "actual": 23931000000.0,
+          "flex": 23763810870.767082,
+          "ratio": 167189129.2329178,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2022-12-31",
+      "to": "2023-12-31",
+      "revenue_change": 47460000000,
+      "pretax_change": 2769000000,
+      "pretax_flex": 3856833250.041646,
+      "leverage": -1087833250.041646,
+      "lines": [
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+          "actual": 241894000000.0,
+          "flex": 0.0,
+          "ratio": 241894000000.0,
+          "absent": [
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 6846000000.0,
+          "flex": 6995680307.994151,
+          "ratio": -149680307.99415112,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 5067000000.0,
+          "flex": 4934398171.284728,
+          "ratio": 132601828.71527195,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 572000000.0,
+          "flex": 497788142.9655543,
+          "ratio": 74211857.0344457,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 1154000000.0,
+          "flex": 306286116.2011587,
+          "ratio": 847713883.7988412,
+          "absent": []
+        },
+        {
+          "concept": "unh_LossOnSaleOfSubsidiaryAndSubsidiariesHeldForSale",
+          "actual": 0.0,
+          "flex": -0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
+          "actual": -210842000000.0,
+          "flex": 30869014011.51276,
+          "ratio": -241711014011.51276,
+          "absent": [
+            "2023-12-31"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2023-12-31",
+      "to": "2024-12-31",
+      "revenue_change": 28656000000,
+      "pretax_change": -9041000000,
+      "pretax_flex": 2244844148.0859585,
+      "leverage": -11285844148.085958,
+      "lines": [
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+          "actual": 22291000000.0,
+          "flex": 18652594475.031082,
+          "ratio": 3638405524.968918,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": -1615000000.0,
+          "flex": 4212398533.9942203,
+          "ratio": -5827398533.994221,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 7924000000.0,
+          "flex": 2989578442.6110406,
+          "ratio": 4934421557.38896,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 127000000.0,
+          "flex": 306283352.43876845,
+          "ratio": -179283352.43876845,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 660000000.0,
+          "flex": 250301047.8389331,
+          "ratio": 409698952.1610669,
+          "absent": []
+        },
+        {
+          "concept": "unh_LossOnSaleOfSubsidiaryAndSubsidiariesHeldForSale",
+          "actual": 8310000000.0,
+          "flex": -0.0,
+          "ratio": 8310000000.0,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-12-31",
+            "2024-12-31"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2024-12-31",
+      "to": "2025-12-31",
+      "revenue_change": 47289000000,
+      "pretax_change": -5374000000,
+      "pretax_flex": 2371195816.4075966,
+      "leverage": -7745195816.407597,
+      "lines": [
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+          "actual": 49810000000.0,
+          "flex": 31210919573.396492,
+          "ratio": 18599080426.603508,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 6579000000.0,
+          "flex": 6262976623.746495,
+          "ratio": 316023376.25350475,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_CostOfGoodsAndServicesSold",
+          "actual": 3961000000.0,
+          "flex": 5516447483.998621,
+          "ratio": -1555447483.998621,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 262000000.0,
+          "flex": 484257468.55935127,
+          "ratio": -222257468.55935127,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 96000000.0,
+          "flex": 461456372.8208895,
+          "ratio": -365456372.8208895,
+          "absent": []
+        },
+        {
+          "concept": "unh_LossOnSaleOfSubsidiaryAndSubsidiariesHeldForSale",
+          "actual": -8045000000.0,
+          "flex": 981746661.070556,
+          "ratio": -9026746661.070557,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,612 @@
+{
+  "ticker": "ODFL",
+  "company": "OLD DOMINION FREIGHT LINE, INC.",
+  "cik": 878927,
+  "unit": "USD",
+  "filings": [
+    {
+      "accession": "0001193125-26-067161",
+      "report_date": "2025-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/878927/000119312526067161/odfl-20251231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/878927/000119312526067161/0001193125-26-067161-index.html",
+      "statement": "Statements of Operations",
+      "years": [
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "stitched_from": null
+    },
+    {
+      "accession": "0000950170-24-020176",
+      "report_date": "2023-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/878927/000095017024020176/odfl-20231231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/878927/000095017024020176/0000950170-24-020176-index.html",
+      "statement": "Statements of Operations",
+      "years": [
+        "2021-12-31",
+        "2022-12-31",
+        "2023-12-31"
+      ],
+      "stitched_from": null
+    }
+  ],
+  "revenue_label": "Revenue from operations",
+  "period_ends": [
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "revenue": {
+    "2021-12-31": 5256328000,
+    "2022-12-31": 6260077000,
+    "2023-12-31": 5866152000,
+    "2024-12-31": 5814810000,
+    "2025-12-31": 5496389000
+  },
+  "pretax_income": {
+    "2021-12-31": 1388423000,
+    "2022-12-31": 1841349000,
+    "2023-12-31": 1647776000,
+    "2024-12-31": 1557597000,
+    "2025-12-31": 1361308000
+  },
+  "operating_income": {
+    "2021-12-31": 1391602000,
+    "2022-12-31": 1840632000,
+    "2023-12-31": 1640673000,
+    "2024-12-31": 1543998000,
+    "2025-12-31": 1361045000
+  },
+  "lines": [
+    {
+      "concept": "us-gaap_LaborAndRelatedExpense",
+      "label": "Salaries, wages and benefits",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 2629676000,
+        "2024-12-31": 2689314000,
+        "2025-12-31": 2635325000,
+        "2021-12-31": 2467985000,
+        "2022-12-31": 2716835000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_OperatingCostsAndExpenses",
+      "label": "Operating supplies and expenses",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 718326000,
+        "2024-12-31": 635320000,
+        "2025-12-31": 570981000,
+        "2021-12-31": 567615000,
+        "2022-12-31": 852955000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "odfl_OtherSellingAndGeneralExpense",
+      "label": "General supplies and expenses",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 162416000,
+        "2024-12-31": 176546000,
+        "2025-12-31": 169161000,
+        "2021-12-31": 136059000,
+        "2022-12-31": 159998000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_DirectTaxesAndLicensesCosts",
+      "label": "Operating taxes and licenses",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 145642000,
+        "2024-12-31": 144690000,
+        "2025-12-31": 138940000,
+        "2021-12-31": 133452000,
+        "2022-12-31": 141239000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_OperatingInsuranceAndClaimsCostsProduction",
+      "label": "Insurance and claims",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 75368000,
+        "2024-12-31": 92359000,
+        "2025-12-31": 74416000,
+        "2021-12-31": 53549000,
+        "2022-12-31": 58301000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_DirectCommunicationsAndUtilitiesCosts",
+      "label": "Communications and utilities",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 43269000,
+        "2024-12-31": 40827000,
+        "2025-12-31": 38939000,
+        "2021-12-31": 34149000,
+        "2022-12-31": 40584000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_DepreciationAndAmortization",
+      "label": "Depreciation and amortization",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 324435000,
+        "2024-12-31": 344568000,
+        "2025-12-31": 364683000,
+        "2021-12-31": 259883000,
+        "2022-12-31": 276050000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "odfl_PurchasedTransportation",
+      "label": "Purchased transportation",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 121516000,
+        "2024-12-31": 122815000,
+        "2025-12-31": 110036000,
+        "2021-12-31": 185785000,
+        "2022-12-31": 158111000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_OtherCostAndExpenseOperating",
+      "label": "Miscellaneous expenses, net",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 4831000,
+        "2024-12-31": 24373000,
+        "2025-12-31": 32863000,
+        "2021-12-31": 26249000,
+        "2022-12-31": 15372000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestAndDebtExpense",
+      "label": "Interest expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 464000,
+        "2024-12-31": 212000,
+        "2025-12-31": 296000,
+        "2021-12-31": 1727000,
+        "2022-12-31": 1563000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InvestmentIncomeNet",
+      "label": "Interest income",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 12799000,
+        "2024-12-31": 17011000,
+        "2025-12-31": 4145000,
+        "2021-12-31": 786000,
+        "2022-12-31": 4884000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+      "label": "Other expense, net",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": -5232000,
+        "2024-12-31": -3200000,
+        "2025-12-31": -3586000,
+        "2021-12-31": -2238000,
+        "2022-12-31": -2604000
+      },
+      "dimensioned_years": []
+    }
+  ],
+  "disagreements": [],
+  "changes": [
+    {
+      "from": "2021-12-31",
+      "to": "2022-12-31",
+      "revenue_change": 1003749000,
+      "pretax_change": 452926000,
+      "pretax_flex": 265133415.91829884,
+      "leverage": 187792584.08170116,
+      "lines": [
+        {
+          "concept": "us-gaap_LaborAndRelatedExpense",
+          "actual": 248850000.0,
+          "flex": 471286699.71984243,
+          "ratio": -222436699.71984243,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OperatingCostsAndExpenses",
+          "actual": 285340000.0,
+          "flex": 108391825.74508287,
+          "ratio": 176948174.25491714,
+          "absent": []
+        },
+        {
+          "concept": "odfl_OtherSellingAndGeneralExpense",
+          "actual": 23939000.0,
+          "flex": 25981842.30341029,
+          "ratio": -2042842.3034102917,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DirectTaxesAndLicensesCosts",
+          "actual": 7787000.0,
+          "flex": 25484009.283286735,
+          "ratio": -17697009.283286735,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OperatingInsuranceAndClaimsCostsProduction",
+          "actual": 4752000.0,
+          "flex": 10225723.204678247,
+          "ratio": -5473723.204678247,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DirectCommunicationsAndUtilitiesCosts",
+          "actual": 6435000.0,
+          "flex": 6521096.971307727,
+          "ratio": -86096.97130772658,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 16167000.0,
+          "flex": 49627287.59830056,
+          "ratio": -33460287.59830056,
+          "absent": []
+        },
+        {
+          "concept": "odfl_PurchasedTransportation",
+          "actual": -27674000.0,
+          "flex": 35477524.9879764,
+          "ratio": -63151524.9879764,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherCostAndExpenseOperating",
+          "actual": -10877000.0,
+          "flex": 5012512.061842412,
+          "ratio": -15889512.061842412,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestAndDebtExpense",
+          "actual": -164000.0,
+          "flex": 329788.1188160252,
+          "ratio": -493788.1188160252,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeNet",
+          "actual": -4098000.0,
+          "flex": -150094.65048604272,
+          "ratio": -3947905.3495139573,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": 366000.0,
+          "flex": 427368.73764346517,
+          "ratio": -61368.73764346517,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2022-12-31",
+      "to": "2023-12-31",
+      "revenue_change": -393925000,
+      "pretax_change": -193573000,
+      "pretax_flex": -115869725.69586605,
+      "leverage": -77703274.30413395,
+      "lines": [
+        {
+          "concept": "us-gaap_LaborAndRelatedExpense",
+          "actual": -87159000.0,
+          "flex": -170961032.48809877,
+          "ratio": 83802032.48809877,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OperatingCostsAndExpenses",
+          "actual": -134629000.0,
+          "flex": -53673508.86818165,
+          "ratio": -80955491.13181835,
+          "absent": []
+        },
+        {
+          "concept": "odfl_OtherSellingAndGeneralExpense",
+          "actual": 2418000.0,
+          "flex": -10068120.911292305,
+          "ratio": 12486120.911292305,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DirectTaxesAndLicensesCosts",
+          "actual": 4403000.0,
+          "flex": -8887681.904711396,
+          "ratio": 13290681.904711396,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OperatingInsuranceAndClaimsCostsProduction",
+          "actual": 17067000.0,
+          "flex": -3668680.3413120955,
+          "ratio": 20735680.341312096,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DirectCommunicationsAndUtilitiesCosts",
+          "actual": 2685000.0,
+          "flex": -2553810.7917841906,
+          "ratio": 5238810.791784191,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 48385000.0,
+          "flex": -17370871.99566395,
+          "ratio": 65755871.99566395,
+          "absent": []
+        },
+        {
+          "concept": "odfl_PurchasedTransportation",
+          "actual": -36595000.0,
+          "flex": -9949378.526014935,
+          "ratio": -26645621.473985065,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherCostAndExpenseOperating",
+          "actual": -10541000.0,
+          "flex": -967306.8078875068,
+          "ratio": -9573693.192112492,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestAndDebtExpense",
+          "actual": -1099000.0,
+          "flex": -98354.18557950645,
+          "ratio": -1000645.8144204936,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeNet",
+          "actual": -7915000.0,
+          "flex": 307333.2324826037,
+          "ratio": -8222333.232482604,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": 2628000.0,
+          "flex": -163860.71609023339,
+          "ratio": 2791860.7160902335,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2023-12-31",
+      "to": "2024-12-31",
+      "revenue_change": -51342000,
+      "pretax_change": -90179000,
+      "pretax_flex": -14421739.394410511,
+      "leverage": -75757260.6055895,
+      "lines": [
+        {
+          "concept": "us-gaap_LaborAndRelatedExpense",
+          "actual": 59638000.0,
+          "flex": -23015568.841721114,
+          "ratio": 82653568.84172112,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OperatingCostsAndExpenses",
+          "actual": -83006000.0,
+          "flex": -6286965.201719969,
+          "ratio": -76719034.79828003,
+          "absent": []
+        },
+        {
+          "concept": "odfl_OtherSellingAndGeneralExpense",
+          "actual": 14130000.0,
+          "flex": -1421504.6374522855,
+          "ratio": 15551504.637452286,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DirectTaxesAndLicensesCosts",
+          "actual": -952000.0,
+          "flex": -1274694.4784246983,
+          "ratio": 322694.47842469835,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OperatingInsuranceAndClaimsCostsProduction",
+          "actual": 16991000.0,
+          "flex": -659639.2074395617,
+          "ratio": 17650639.20743956,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DirectCommunicationsAndUtilitiesCosts",
+          "actual": -2442000.0,
+          "flex": -378700.89251011563,
+          "ratio": -2063299.1074898844,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 20133000.0,
+          "flex": -2839534.6336064935,
+          "ratio": 22972534.633606493,
+          "absent": []
+        },
+        {
+          "concept": "odfl_PurchasedTransportation",
+          "actual": 1299000.0,
+          "flex": -1063537.8135445518,
+          "ratio": 2362537.813544552,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherCostAndExpenseOperating",
+          "actual": 19542000.0,
+          "flex": -42282.09599751251,
+          "ratio": 19584282.095997512,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestAndDebtExpense",
+          "actual": -252000.0,
+          "flex": -4061.041718659864,
+          "ratio": -247938.95828134014,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeNet",
+          "actual": -4212000.0,
+          "flex": 112019.98482139569,
+          "ratio": -4324019.984821396,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": -2032000.0,
+          "flex": -45791.746275923295,
+          "ratio": -1986208.2537240768,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2024-12-31",
+      "to": "2025-12-31",
+      "revenue_change": -318421000,
+      "pretax_change": -196289000,
+      "pretax_flex": -85294548.63305938,
+      "leverage": -110994451.36694062,
+      "lines": [
+        {
+          "concept": "us-gaap_LaborAndRelatedExpense",
+          "actual": -53989000.0,
+          "flex": -147267761.66271985,
+          "ratio": 93278761.66271985,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OperatingCostsAndExpenses",
+          "actual": -64339000.0,
+          "flex": -34790342.19862729,
+          "ratio": -29548657.801372707,
+          "absent": []
+        },
+        {
+          "concept": "odfl_OtherSellingAndGeneralExpense",
+          "actual": -7385000.0,
+          "flex": -9667719.816468637,
+          "ratio": 2282719.8164686374,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DirectTaxesAndLicensesCosts",
+          "actual": -5750000.0,
+          "flex": -7923274.275513732,
+          "ratio": 2173274.275513732,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OperatingInsuranceAndClaimsCostsProduction",
+          "actual": -17943000.0,
+          "flex": -5057610.676703108,
+          "ratio": -12885389.323296893,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DirectCommunicationsAndUtilitiesCosts",
+          "actual": -1888000.0,
+          "flex": -2235700.593312593,
+          "ratio": 347700.5933125932,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 20115000.0,
+          "flex": -18868662.45466318,
+          "ratio": 38983662.45466318,
+          "absent": []
+        },
+        {
+          "concept": "odfl_PurchasedTransportation",
+          "actual": -12779000.0,
+          "flex": -6725391.73506959,
+          "ratio": -6053608.26493041,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherCostAndExpenseOperating",
+          "actual": 8490000.0,
+          "flex": -1334673.8815197744,
+          "ratio": 9824673.881519774,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestAndDebtExpense",
+          "actual": 84000.0,
+          "flex": -11609.193077675796,
+          "ratio": 95609.1930776758,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeNet",
+          "actual": 12866000.0,
+          "flex": 931528.2237940707,
+          "ratio": 11934471.776205929,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": 386000.0,
+          "flex": -175233.10305925732,
+          "ratio": 561233.1030592574,
+          "absent": []
+        }
+      ]
+    }
+  ]
+}

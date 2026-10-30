@@ -1,0 +1,396 @@
+{
+  "ticker": "JPM",
+  "company": "JPMORGAN CHASE & CO",
+  "cik": 19617,
+  "unit": "USD",
+  "filings": [
+    {
+      "accession": "0001628280-26-008131",
+      "report_date": "2025-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/0001628280-26-008131-index.html",
+      "statement": "Consolidated Statements of Income",
+      "years": [
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "stitched_from": null
+    },
+    {
+      "accession": "0000019617-24-000225",
+      "report_date": "2023-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/19617/000001961724000225/jpm-20231231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/19617/000001961724000225/0000019617-24-000225-index.html",
+      "statement": "Consolidated Statements of Income",
+      "years": [
+        "2021-12-31",
+        "2022-12-31",
+        "2023-12-31"
+      ],
+      "stitched_from": null
+    }
+  ],
+  "revenue_label": "Total net revenue",
+  "period_ends": [
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "revenue": {
+    "2021-12-31": 121649000000,
+    "2022-12-31": 128695000000,
+    "2023-12-31": 158104000000,
+    "2024-12-31": 177556000000,
+    "2025-12-31": 182447000000
+  },
+  "pretax_income": {
+    "2021-12-31": 59562000000,
+    "2022-12-31": 46166000000,
+    "2023-12-31": 61612000000,
+    "2024-12-31": 75081000000,
+    "2025-12-31": 72595000000
+  },
+  "operating_income": null,
+  "lines": [
+    {
+      "concept": "us-gaap_ProvisionForLoanLeaseAndOtherLosses",
+      "label": "Provision for credit losses",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 9320000000,
+        "2024-12-31": 10678000000,
+        "2025-12-31": 14212000000,
+        "2021-12-31": -9256000000,
+        "2022-12-31": 6389000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_LaborAndRelatedExpense",
+      "label": "Compensation expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 46465000000,
+        "2024-12-31": 51357000000,
+        "2025-12-31": 54487000000,
+        "2021-12-31": 38567000000,
+        "2022-12-31": 41636000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_OccupancyNet",
+      "label": "Occupancy expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 4590000000,
+        "2024-12-31": 5026000000,
+        "2025-12-31": 5461000000,
+        "2021-12-31": 4516000000,
+        "2022-12-31": 4696000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_CommunicationsAndInformationTechnology",
+      "label": "Technology, communications and equipment expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 9246000000,
+        "2024-12-31": 9831000000,
+        "2025-12-31": 11029000000,
+        "2021-12-31": 9941000000,
+        "2022-12-31": 9358000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_ProfessionalAndContractServicesExpense",
+      "label": "Professional and outside services",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 10235000000,
+        "2024-12-31": 11057000000,
+        "2025-12-31": 12356000000,
+        "2021-12-31": 9814000000,
+        "2022-12-31": 10174000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_MarketingAndAdvertisingExpense",
+      "label": "Marketing",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 4591000000,
+        "2024-12-31": 4974000000,
+        "2025-12-31": 5531000000,
+        "2021-12-31": 3036000000,
+        "2022-12-31": 3911000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_OtherNoninterestExpense",
+      "label": "Other expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 12045000000,
+        "2024-12-31": 9552000000,
+        "2025-12-31": 6776000000,
+        "2021-12-31": 5469000000,
+        "2022-12-31": 6365000000
+      },
+      "dimensioned_years": []
+    }
+  ],
+  "disagreements": [],
+  "changes": [
+    {
+      "from": "2021-12-31",
+      "to": "2022-12-31",
+      "revenue_change": 7046000000,
+      "pretax_change": -13396000000,
+      "pretax_flex": 3449875066.79052,
+      "leverage": -16845875066.79052,
+      "lines": [
+        {
+          "concept": "us-gaap_ProvisionForLoanLeaseAndOtherLosses",
+          "actual": 15645000000.0,
+          "flex": -536114361.8114412,
+          "ratio": 16181114361.811441,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_LaborAndRelatedExpense",
+          "actual": 3069000000.0,
+          "flex": 2233829147.794063,
+          "ratio": 835170852.2059369,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OccupancyNet",
+          "actual": 180000000.0,
+          "flex": 261570058.11802807,
+          "ratio": -81570058.11802807,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_CommunicationsAndInformationTechnology",
+          "actual": -583000000.0,
+          "flex": 575790068.1468816,
+          "ratio": -1158790068.1468816,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ProfessionalAndContractServicesExpense",
+          "actual": 360000000.0,
+          "flex": 568434134.2715517,
+          "ratio": -208434134.27155173,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_MarketingAndAdvertisingExpense",
+          "actual": 875000000.0,
+          "flex": 175847364.1378063,
+          "ratio": 699152635.8621937,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNoninterestExpense",
+          "actual": 896000000.0,
+          "flex": 316768522.55258983,
+          "ratio": 579231477.4474101,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2022-12-31",
+      "to": "2023-12-31",
+      "revenue_change": 29409000000,
+      "pretax_change": 15446000000,
+      "pretax_flex": 10549717502.622478,
+      "leverage": 4896282497.3775215,
+      "lines": [
+        {
+          "concept": "us-gaap_ProvisionForLoanLeaseAndOtherLosses",
+          "actual": 2931000000.0,
+          "flex": 1459995345.5845215,
+          "ratio": 1471004654.4154785,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_LaborAndRelatedExpense",
+          "actual": 4829000000.0,
+          "flex": 9514535327.71281,
+          "ratio": -4685535327.7128105,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OccupancyNet",
+          "actual": -106000000.0,
+          "flex": 1073116002.9527177,
+          "ratio": -1179116002.9527178,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_CommunicationsAndInformationTechnology",
+          "actual": -112000000.0,
+          "flex": 2138462426.667703,
+          "ratio": -2250462426.6677027,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ProfessionalAndContractServicesExpense",
+          "actual": 61000000.0,
+          "flex": 2324932328.373286,
+          "ratio": -2263932328.373286,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_MarketingAndAdvertisingExpense",
+          "actual": 680000000.0,
+          "flex": 893730129.3756557,
+          "ratio": -213730129.37565565,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNoninterestExpense",
+          "actual": 5680000000.0,
+          "flex": 1454510936.7108278,
+          "ratio": 4225489063.289172,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2023-12-31",
+      "to": "2024-12-31",
+      "revenue_change": 19452000000,
+      "pretax_change": 13469000000,
+      "pretax_flex": 7580305520.416941,
+      "leverage": 5888694479.583059,
+      "lines": [
+        {
+          "concept": "us-gaap_ProvisionForLoanLeaseAndOtherLosses",
+          "actual": 1358000000.0,
+          "flex": 1146667003.9973688,
+          "ratio": 211332996.0026312,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_LaborAndRelatedExpense",
+          "actual": 4892000000.0,
+          "flex": 5716725573.04053,
+          "ratio": -824725573.0405302,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OccupancyNet",
+          "actual": 436000000.0,
+          "flex": 564721196.1746699,
+          "ratio": -128721196.17466986,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_CommunicationsAndInformationTechnology",
+          "actual": 585000000.0,
+          "flex": 1137562566.411982,
+          "ratio": -552562566.411982,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ProfessionalAndContractServicesExpense",
+          "actual": 822000000.0,
+          "flex": 1259242144.4112735,
+          "ratio": -437242144.4112735,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_MarketingAndAdvertisingExpense",
+          "actual": 383000000.0,
+          "flex": 564844229.1150129,
+          "ratio": -181844229.11501288,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNoninterestExpense",
+          "actual": -2493000000.0,
+          "flex": 1481931766.432222,
+          "ratio": -3974931766.432222,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2024-12-31",
+      "to": "2025-12-31",
+      "revenue_change": 4891000000,
+      "pretax_change": -2486000000,
+      "pretax_flex": 2068199165.3337538,
+      "leverage": -4554199165.333754,
+      "lines": [
+        {
+          "concept": "us-gaap_ProvisionForLoanLeaseAndOtherLosses",
+          "actual": 3534000000.0,
+          "flex": 294138739.3273108,
+          "ratio": 3239861260.6726894,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_LaborAndRelatedExpense",
+          "actual": 3130000000.0,
+          "flex": 1414692192.885625,
+          "ratio": 1715307807.114375,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OccupancyNet",
+          "actual": 435000000.0,
+          "flex": 138447396.8776048,
+          "ratio": 296552603.12239516,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_CommunicationsAndInformationTechnology",
+          "actual": 1198000000.0,
+          "flex": 270807074.95100135,
+          "ratio": 927192925.0489986,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ProfessionalAndContractServicesExpense",
+          "actual": 1299000000.0,
+          "flex": 304578763.882944,
+          "ratio": 994421236.117056,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_MarketingAndAdvertisingExpense",
+          "actual": 557000000.0,
+          "flex": 137014992.4530852,
+          "ratio": 419985007.5469148,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNoninterestExpense",
+          "actual": -2776000000.0,
+          "flex": 263121674.28867513,
+          "ratio": -3039121674.2886753,
+          "absent": []
+        }
+      ]
+    }
+  ]
+}

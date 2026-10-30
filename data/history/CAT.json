@@ -1,0 +1,520 @@
+{
+  "ticker": "CAT",
+  "company": "CATERPILLAR INC",
+  "cik": 18230,
+  "unit": "USD",
+  "filings": [
+    {
+      "accession": "0000018230-26-000008",
+      "report_date": "2025-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000008/cat-20251231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000008/0000018230-26-000008-index.html",
+      "statement": "Consolidated Results of Operations for the Years Ended December 31",
+      "years": [
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "stitched_from": null
+    },
+    {
+      "accession": "0000018230-24-000009",
+      "report_date": "2023-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/18230/000001823024000009/cat-20231231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/18230/000001823024000009/0000018230-24-000009-index.html",
+      "statement": "Consolidated Results of Operations at December 31",
+      "years": [
+        "2021-12-31",
+        "2022-12-31",
+        "2023-12-31"
+      ],
+      "stitched_from": null
+    }
+  ],
+  "revenue_label": "Total sales and revenues",
+  "period_ends": [
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "revenue": {
+    "2021-12-31": 50971000000,
+    "2022-12-31": 59427000000,
+    "2023-12-31": 67060000000,
+    "2024-12-31": 64809000000,
+    "2025-12-31": 67589000000
+  },
+  "pretax_income": {
+    "2021-12-31": 8204000000,
+    "2022-12-31": 8752000000,
+    "2023-12-31": 13050000000,
+    "2024-12-31": 13373000000,
+    "2025-12-31": 11541000000
+  },
+  "operating_income": {
+    "2021-12-31": 6878000000,
+    "2022-12-31": 7904000000,
+    "2023-12-31": 12966000000,
+    "2024-12-31": 13072000000,
+    "2025-12-31": 11151000000
+  },
+  "lines": [
+    {
+      "concept": "us-gaap_CostOfRevenue",
+      "label": "Cost of goods sold",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 42767000000,
+        "2024-12-31": 40199000000,
+        "2025-12-31": 44752000000,
+        "2021-12-31": 35513000000,
+        "2022-12-31": 41350000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+      "label": "Selling, general and administrative expenses",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 6371000000,
+        "2024-12-31": 6667000000,
+        "2025-12-31": 6985000000,
+        "2021-12-31": 5365000000,
+        "2022-12-31": 5651000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_ResearchAndDevelopmentExpense",
+      "label": "Research and development expenses",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 2108000000,
+        "2024-12-31": 2107000000,
+        "2025-12-31": 2148000000,
+        "2021-12-31": 1686000000,
+        "2022-12-31": 1814000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_FinancingInterestExpense",
+      "label": "Interest expense of Financial Products",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 1030000000,
+        "2024-12-31": 1286000000,
+        "2025-12-31": 1359000000,
+        "2021-12-31": 455000000,
+        "2022-12-31": 565000000
+      },
+      "dimensioned_years": [
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31",
+        "2021-12-31",
+        "2022-12-31"
+      ]
+    },
+    {
+      "concept": "us-gaap_OtherOperatingIncomeExpenseNet",
+      "label": "Other operating (income) expenses",
+      "weight": 1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": -1818000000,
+        "2024-12-31": -1478000000,
+        "2025-12-31": -1194000000,
+        "2021-12-31": -1074000000,
+        "2022-12-31": -1218000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpenseNonoperating",
+      "label": "Interest expense excluding Financial Products",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 511000000,
+        "2024-12-31": 512000000,
+        "2025-12-31": 502000000,
+        "2021-12-31": null,
+        "2022-12-31": null
+      },
+      "dimensioned_years": [
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ]
+    },
+    {
+      "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+      "label": "Other income (expense)",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 595000000,
+        "2024-12-31": 813000000,
+        "2025-12-31": 892000000,
+        "2021-12-31": 1814000000,
+        "2022-12-31": 1291000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_GoodwillImpairmentLoss",
+      "label": "Goodwill impairment charge",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2021-12-31": 0,
+        "2022-12-31": 925000000,
+        "2023-12-31": null,
+        "2024-12-31": null,
+        "2025-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpense",
+      "label": "Interest expense excluding Financial Products",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2021-12-31": 488000000,
+        "2022-12-31": 443000000,
+        "2023-12-31": null,
+        "2024-12-31": null,
+        "2025-12-31": null
+      },
+      "dimensioned_years": [
+        "2021-12-31",
+        "2022-12-31"
+      ]
+    }
+  ],
+  "disagreements": [],
+  "changes": [
+    {
+      "from": "2021-12-31",
+      "to": "2022-12-31",
+      "revenue_change": 8456000000,
+      "pretax_change": 548000000,
+      "pretax_flex": 1361029291.1655648,
+      "leverage": -813029291.1655648,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfRevenue",
+          "actual": 5837000000.0,
+          "flex": 5891544760.746306,
+          "ratio": -54544760.74630642,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 286000000.0,
+          "flex": 890044142.747837,
+          "ratio": -604044142.747837,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": 128000000.0,
+          "flex": 279704459.3984815,
+          "ratio": -151704459.3984815,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_FinancingInterestExpense",
+          "actual": 110000000.0,
+          "flex": 75483706.42129838,
+          "ratio": 34516293.578701615,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherOperatingIncomeExpenseNet",
+          "actual": 144000000.0,
+          "flex": 178174726.8054384,
+          "ratio": -34174726.8054384,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": 523000000.0,
+          "flex": -300939436.1499676,
+          "ratio": 823939436.1499677,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GoodwillImpairmentLoss",
+          "actual": 925000000.0,
+          "flex": 0.0,
+          "ratio": 925000000.0,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": -45000000.0,
+          "flex": 80958348.86504091,
+          "ratio": -125958348.86504091,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2022-12-31",
+      "to": "2023-12-31",
+      "revenue_change": 7633000000,
+      "pretax_change": 4298000000,
+      "pretax_flex": 1124135763.205277,
+      "leverage": 3173864236.794723,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfRevenue",
+          "actual": 1417000000.0,
+          "flex": 5311130462.584347,
+          "ratio": -3894130462.584347,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 720000000.0,
+          "flex": 725833089.336497,
+          "ratio": -5833089.336496949,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": 294000000.0,
+          "flex": 232996146.5327208,
+          "ratio": 61003853.467279196,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_FinancingInterestExpense",
+          "actual": 465000000.0,
+          "flex": 72570464.60363135,
+          "ratio": 392429535.3963686,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherOperatingIncomeExpenseNet",
+          "actual": 600000000.0,
+          "flex": 156443939.6234035,
+          "ratio": 443556060.3765965,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 511000000.0,
+          "flex": 0.0,
+          "ratio": 511000000.0,
+          "absent": [
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": 696000000.0,
+          "flex": -165820300.53679302,
+          "ratio": 861820300.536793,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GoodwillImpairmentLoss",
+          "actual": -925000000.0,
+          "flex": 118810052.66966194,
+          "ratio": -1043810052.669662,
+          "absent": [
+            "2023-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": -443000000.0,
+          "flex": 56900381.98125431,
+          "ratio": -499900381.98125434,
+          "absent": [
+            "2023-12-31"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2023-12-31",
+      "to": "2024-12-31",
+      "revenue_change": -2251000000,
+      "pretax_change": 323000000,
+      "pretax_flex": -438048762.3024158,
+      "leverage": 761048762.3024158,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfRevenue",
+          "actual": -2568000000.0,
+          "flex": -1435557963.0181925,
+          "ratio": -1132442036.9818075,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 296000000.0,
+          "flex": -213855070.0864897,
+          "ratio": 509855070.0864897,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": -1000000.0,
+          "flex": -70759141.06770056,
+          "ratio": 69759141.06770056,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_FinancingInterestExpense",
+          "actual": 256000000.0,
+          "flex": -34573963.61467343,
+          "ratio": 290573963.61467344,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherOperatingIncomeExpenseNet",
+          "actual": -340000000.0,
+          "flex": -61024724.127646886,
+          "ratio": -278975275.87235314,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 1000000.0,
+          "flex": -17152713.987473905,
+          "ratio": 18152713.987473905,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": -218000000.0,
+          "flex": 19972338.204592902,
+          "ratio": -237972338.2045929,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GoodwillImpairmentLoss",
+          "actual": 0.0,
+          "flex": -0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-12-31",
+            "2024-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 0.0,
+          "flex": -0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-12-31",
+            "2024-12-31"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2024-12-31",
+      "to": "2025-12-31",
+      "revenue_change": 2780000000,
+      "pretax_change": -1832000000,
+      "pretax_flex": 573638537.8573964,
+      "leverage": -2405638537.857396,
+      "lines": [
+        {
+          "concept": "us-gaap_CostOfRevenue",
+          "actual": 4553000000.0,
+          "flex": 1724347235.7234333,
+          "ratio": 2828652764.2765665,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 318000000.0,
+          "flex": 285982811.02933234,
+          "ratio": 32017188.97066766,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_ResearchAndDevelopmentExpense",
+          "actual": 41000000.0,
+          "flex": 90380348.40840006,
+          "ratio": -49380348.40840006,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_FinancingInterestExpense",
+          "actual": 73000000.0,
+          "flex": 55163326.08125415,
+          "ratio": 17836673.918745853,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherOperatingIncomeExpenseNet",
+          "actual": -284000000.0,
+          "flex": 63399219.24424077,
+          "ratio": -347399219.24424076,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": -10000000.0,
+          "flex": 21962381.767964326,
+          "ratio": -31962381.767964326,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": -79000000.0,
+          "flex": -34873860.112021476,
+          "ratio": -44126139.887978524,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GoodwillImpairmentLoss",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,789 @@
+{
+  "ticker": "PLD",
+  "company": "Prologis, Inc.",
+  "cik": 1045609,
+  "unit": "USD",
+  "filings": [
+    {
+      "accession": "0001193125-26-051453",
+      "report_date": "2025-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/1045609/000119312526051453/pld-20251231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/1045609/000119312526051453/0001193125-26-051453-index.html",
+      "statement": "Consolidated Statements of Income",
+      "years": [
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "stitched_from": null
+    },
+    {
+      "accession": "0000950170-24-014539",
+      "report_date": "2023-12-31",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/1045609/000095017024014539/pld-20231231.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/1045609/000095017024014539/0000950170-24-014539-index.html",
+      "statement": "Consolidated Statements of Income",
+      "years": [
+        "2021-12-31",
+        "2022-12-31",
+        "2023-12-31"
+      ],
+      "stitched_from": null
+    }
+  ],
+  "revenue_label": "Total revenues",
+  "period_ends": [
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "revenue": {
+    "2021-12-31": 4759440000,
+    "2022-12-31": 5973692000,
+    "2023-12-31": 8023469000,
+    "2024-12-31": 8201610000,
+    "2025-12-31": 8790127000
+  },
+  "pretax_income": {
+    "2021-12-31": 3322848000,
+    "2022-12-31": 3690810000,
+    "2023-12-31": 3464183000,
+    "2024-12-31": 4114878000,
+    "2025-12-31": 3769316000
+  },
+  "operating_income": {
+    "2021-12-31": 3206996000,
+    "2022-12-31": 3467538000,
+    "2023-12-31": 3707792000,
+    "2024-12-31": 4415920000,
+    "2025-12-31": 4357864000
+  },
+  "lines": [
+    {
+      "concept": "us-gaap_DirectCostsOfLeasedAndRentedPropertyOrEquipment",
+      "label": "Rental",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 1624793000,
+        "2024-12-31": 1765385000,
+        "2025-12-31": 1964137000,
+        "2021-12-31": 1041316000,
+        "2022-12-31": 1205738000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "pld_ServiceManagementCosts",
+      "label": "Strategic capital",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 385542000,
+        "2024-12-31": 291856000,
+        "2025-12-31": 270517000,
+        "2021-12-31": null,
+        "2022-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_GeneralAndAdministrativeExpense",
+      "label": "General and administrative",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 390406000,
+        "2024-12-31": 418765000,
+        "2025-12-31": 469114000,
+        "2021-12-31": 293167000,
+        "2022-12-31": 331083000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_DepreciationAndAmortization",
+      "label": "Depreciation and amortization",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 2484891000,
+        "2024-12-31": 2580519000,
+        "2025-12-31": 2626028000,
+        "2021-12-31": 1577942000,
+        "2022-12-31": 1812777000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_OtherCostAndExpenseOperating",
+      "label": "Other",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 53354000,
+        "2024-12-31": 47044000,
+        "2025-12-31": 46029000,
+        "2021-12-31": 22435000,
+        "2022-12-31": 40336000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "pld_GainsOnDispositionsOfDevelopmentPropertiesAndLandNet",
+      "label": "Gains on dispositions of development properties and land, net",
+      "weight": 1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 462270000,
+        "2024-12-31": 413743000,
+        "2025-12-31": 257731000,
+        "2021-12-31": 817017000,
+        "2022-12-31": 597745000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "pld_GainsOnOtherDispositionsOfInvestmentsInRealEstateNet",
+      "label": "Gains on other dispositions of investments in real estate, net",
+      "weight": 1.0,
+      "operating": true,
+      "values": {
+        "2023-12-31": 161039000,
+        "2024-12-31": 904136000,
+        "2025-12-31": 685831000,
+        "2021-12-31": 772570000,
+        "2022-12-31": 589391000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_IncomeLossFromEquityMethodInvestments",
+      "label": "Earnings from unconsolidated entities, net",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 307227000,
+        "2024-12-31": 353623000,
+        "2025-12-31": 402531000,
+        "2021-12-31": 404255000,
+        "2022-12-31": 310872000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpenseNonoperating",
+      "label": "Interest expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 641332000,
+        "2024-12-31": 863932000,
+        "2025-12-31": 1002344000,
+        "2021-12-31": null,
+        "2022-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsLossesAndOtherIncomeExpenseNet",
+      "label": "Foreign currency, derivative and other gains (losses) and other income (expense), net",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 87221000,
+        "2024-12-31": 208731000,
+        "2025-12-31": 14763000,
+        "2021-12-31": null,
+        "2022-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebt",
+      "label": "Gains (losses) on early extinguishment of debt, net",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-12-31": 3275000,
+        "2024-12-31": 536000,
+        "2025-12-31": -3498000,
+        "2021-12-31": -187453000,
+        "2022-12-31": -20184000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "pld_ServiceManagementCosts1",
+      "label": "Strategic capital",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2021-12-31": 207171000,
+        "2022-12-31": 303356000,
+        "2023-12-31": null,
+        "2024-12-31": null,
+        "2025-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpense",
+      "label": "Interest expense",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2021-12-31": 266228000,
+        "2022-12-31": 309037000,
+        "2023-12-31": null,
+        "2024-12-31": null,
+        "2025-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "pld_GainLossOnForeignCurrencyAndDerivativeAndOtherIncomeExpenseNet",
+      "label": "Foreign currency, derivative and other gains and other income, net",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2021-12-31": null,
+        "2022-12-31": null,
+        "2023-12-31": null,
+        "2024-12-31": null,
+        "2025-12-31": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsAndOtherIncomeExpenseNet",
+      "label": "Foreign currency, derivative and other gains and other income, net",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2021-12-31": 165278000,
+        "2022-12-31": 241621000,
+        "2023-12-31": null,
+        "2024-12-31": null,
+        "2025-12-31": null
+      },
+      "dimensioned_years": []
+    }
+  ],
+  "disagreements": [],
+  "changes": [
+    {
+      "from": "2021-12-31",
+      "to": "2022-12-31",
+      "revenue_change": 1214252000,
+      "pretax_change": 367962000,
+      "pretax_flex": 847741505.2392719,
+      "leverage": -479779505.2392719,
+      "lines": [
+        {
+          "concept": "us-gaap_DirectCostsOfLeasedAndRentedPropertyOrEquipment",
+          "actual": 164422000.0,
+          "flex": 265665716.0573513,
+          "ratio": -101243716.05735129,
+          "absent": []
+        },
+        {
+          "concept": "pld_ServiceManagementCosts",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_GeneralAndAdministrativeExpense",
+          "actual": 37916000.0,
+          "flex": 74794222.86739616,
+          "ratio": -36878222.86739616,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 234835000.0,
+          "flex": 402572409.6498748,
+          "ratio": -167737409.6498748,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherCostAndExpenseOperating",
+          "actual": 17901000.0,
+          "flex": 5723728.762207318,
+          "ratio": 12177271.237792682,
+          "absent": []
+        },
+        {
+          "concept": "pld_GainsOnDispositionsOfDevelopmentPropertiesAndLandNet",
+          "actual": 219272000.0,
+          "flex": -208441439.80888507,
+          "ratio": 427713439.8088851,
+          "absent": []
+        },
+        {
+          "concept": "pld_GainsOnOtherDispositionsOfInvestmentsInRealEstateNet",
+          "actual": 183179000.0,
+          "flex": -197101900.14791656,
+          "ratio": 380280900.14791656,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_IncomeLossFromEquityMethodInvestments",
+          "actual": 93383000.0,
+          "flex": -103135545.83312324,
+          "ratio": 196518545.83312324,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsLossesAndOtherIncomeExpenseNet",
+          "actual": 0.0,
+          "flex": -0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebt",
+          "actual": -167269000.0,
+          "flex": 47823941.50488293,
+          "ratio": -215092941.50488293,
+          "absent": []
+        },
+        {
+          "concept": "pld_ServiceManagementCosts1",
+          "actual": 96185000.0,
+          "flex": 52854495.71630276,
+          "ratio": 43330504.28369724,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 42809000.0,
+          "flex": 67921411.22821172,
+          "ratio": -25112411.228211716,
+          "absent": []
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyAndDerivativeAndOtherIncomeExpenseNet",
+          "actual": 0.0,
+          "flex": -0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsAndOtherIncomeExpenseNet",
+          "actual": -76343000.0,
+          "flex": -42166545.23557394,
+          "ratio": -34176454.76442606,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2022-12-31",
+      "to": "2023-12-31",
+      "revenue_change": 2049777000,
+      "pretax_change": -226627000,
+      "pretax_flex": 1266442503.1236966,
+      "leverage": -1493069503.1236966,
+      "lines": [
+        {
+          "concept": "us-gaap_DirectCostsOfLeasedAndRentedPropertyOrEquipment",
+          "actual": 419055000.0,
+          "flex": 413729737.05808735,
+          "ratio": 5325262.941912651,
+          "absent": []
+        },
+        {
+          "concept": "pld_ServiceManagementCosts",
+          "actual": 385542000.0,
+          "flex": 0.0,
+          "ratio": 385542000.0,
+          "absent": [
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_GeneralAndAdministrativeExpense",
+          "actual": 59323000.0,
+          "flex": 113605843.503649,
+          "ratio": -54282843.503649,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 672114000.0,
+          "flex": 622025474.4852931,
+          "ratio": 50088525.51470685,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherCostAndExpenseOperating",
+          "actual": 13018000.0,
+          "flex": 13840654.166970778,
+          "ratio": -822654.1669707783,
+          "absent": []
+        },
+        {
+          "concept": "pld_GainsOnDispositionsOfDevelopmentPropertiesAndLandNet",
+          "actual": 135475000.0,
+          "flex": -205106649.76784876,
+          "ratio": 340581649.76784873,
+          "absent": []
+        },
+        {
+          "concept": "pld_GainsOnOtherDispositionsOfInvestmentsInRealEstateNet",
+          "actual": 428352000.0,
+          "flex": -202240108.0951278,
+          "ratio": 630592108.0951278,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_IncomeLossFromEquityMethodInvestments",
+          "actual": 3645000.0,
+          "flex": -106670761.65694515,
+          "ratio": 110315761.65694515,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 641332000.0,
+          "flex": 0.0,
+          "ratio": 641332000.0,
+          "absent": [
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsLossesAndOtherIncomeExpenseNet",
+          "actual": -87221000.0,
+          "flex": -0.0,
+          "ratio": -87221000.0,
+          "absent": [
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebt",
+          "actual": -23459000.0,
+          "flex": 6925817.227938769,
+          "ratio": -30384817.22793877,
+          "absent": []
+        },
+        {
+          "concept": "pld_ServiceManagementCosts1",
+          "actual": -303356000.0,
+          "flex": 104091766.29996993,
+          "ratio": -407447766.2999699,
+          "absent": [
+            "2023-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": -309037000.0,
+          "flex": 106041110.71494815,
+          "ratio": -415078110.7149482,
+          "absent": [
+            "2023-12-31"
+          ]
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyAndDerivativeAndOtherIncomeExpenseNet",
+          "actual": 0.0,
+          "flex": -0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2022-12-31",
+            "2023-12-31"
+          ]
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsAndOtherIncomeExpenseNet",
+          "actual": 241621000.0,
+          "flex": -82908387.06063186,
+          "ratio": 324529387.0606319,
+          "absent": [
+            "2023-12-31"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2023-12-31",
+      "to": "2024-12-31",
+      "revenue_change": 178141000,
+      "pretax_change": 650695000,
+      "pretax_flex": 76913492.63055669,
+      "leverage": 573781507.3694433,
+      "lines": [
+        {
+          "concept": "us-gaap_DirectCostsOfLeasedAndRentedPropertyOrEquipment",
+          "actual": 140592000.0,
+          "flex": 36074452.31146279,
+          "ratio": 104517547.68853721,
+          "absent": []
+        },
+        {
+          "concept": "pld_ServiceManagementCosts",
+          "actual": -93686000.0,
+          "flex": 8559992.868670646,
+          "ratio": -102245992.86867064,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GeneralAndAdministrativeExpense",
+          "actual": 28359000.0,
+          "flex": 8667985.785948696,
+          "ratio": 19691014.214051306,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 95628000.0,
+          "flex": 55170770.6019678,
+          "ratio": 40457229.3980322,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherCostAndExpenseOperating",
+          "actual": -6310000.0,
+          "flex": 1184591.7163760462,
+          "ratio": -7494591.716376046,
+          "absent": []
+        },
+        {
+          "concept": "pld_GainsOnDispositionsOfDevelopmentPropertiesAndLandNet",
+          "actual": 48527000.0,
+          "flex": -10263545.614745941,
+          "ratio": 58790545.614745945,
+          "absent": []
+        },
+        {
+          "concept": "pld_GainsOnOtherDispositionsOfInvestmentsInRealEstateNet",
+          "actual": -743097000.0,
+          "flex": -3575466.983046859,
+          "ratio": -739521533.0169531,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_IncomeLossFromEquityMethodInvestments",
+          "actual": -46396000.0,
+          "flex": -6821204.769034442,
+          "ratio": -39574795.230965555,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 222600000.0,
+          "flex": 14239168.096991464,
+          "ratio": 208360831.90300852,
+          "absent": []
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsLossesAndOtherIncomeExpenseNet",
+          "actual": -121510000.0,
+          "flex": -1936523.486412174,
+          "ratio": -119573476.51358783,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebt",
+          "actual": 2739000.0,
+          "flex": -72713.1587347069,
+          "ratio": 2811713.1587347067,
+          "absent": []
+        },
+        {
+          "concept": "pld_ServiceManagementCosts1",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-12-31",
+            "2024-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-12-31",
+            "2024-12-31"
+          ]
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyAndDerivativeAndOtherIncomeExpenseNet",
+          "actual": 0.0,
+          "flex": -0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-12-31",
+            "2024-12-31"
+          ]
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsAndOtherIncomeExpenseNet",
+          "actual": 0.0,
+          "flex": -0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-12-31",
+            "2024-12-31"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "2024-12-31",
+      "to": "2025-12-31",
+      "revenue_change": 588517000,
+      "pretax_change": -345562000,
+      "pretax_flex": 295268326.0879266,
+      "leverage": -640830326.0879266,
+      "lines": [
+        {
+          "concept": "us-gaap_DirectCostsOfLeasedAndRentedPropertyOrEquipment",
+          "actual": 198752000.0,
+          "flex": 126677455.28560856,
+          "ratio": 72074544.71439144,
+          "absent": []
+        },
+        {
+          "concept": "pld_ServiceManagementCosts",
+          "actual": -21339000.0,
+          "flex": 20942500.015484765,
+          "ratio": -42281500.015484765,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GeneralAndAdministrativeExpense",
+          "actual": 50349000.0,
+          "flex": 30049017.388659053,
+          "ratio": 20299982.611340947,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 45509000.0,
+          "flex": 185168436.4805203,
+          "ratio": -139659436.4805203,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherCostAndExpenseOperating",
+          "actual": -1015000.0,
+          "flex": 3375702.3008897034,
+          "ratio": -4390702.300889703,
+          "absent": []
+        },
+        {
+          "concept": "pld_GainsOnDispositionsOfDevelopmentPropertiesAndLandNet",
+          "actual": 156012000.0,
+          "flex": -29688657.36495639,
+          "ratio": 185700657.36495638,
+          "absent": []
+        },
+        {
+          "concept": "pld_GainsOnOtherDispositionsOfInvestmentsInRealEstateNet",
+          "actual": 218305000.0,
+          "flex": -64877433.37125272,
+          "ratio": 283182433.3712527,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_IncomeLossFromEquityMethodInvestments",
+          "actual": -48908000.0,
+          "flex": -25374669.984429885,
+          "ratio": -23533330.015570115,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 138412000.0,
+          "flex": 61992544.00587201,
+          "ratio": 76419455.99412799,
+          "absent": []
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsLossesAndOtherIncomeExpenseNet",
+          "actual": 193968000.0,
+          "flex": -14977759.479785066,
+          "ratio": 208945759.47978505,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebt",
+          "actual": 4034000.0,
+          "flex": -38461.364536962865,
+          "ratio": 4072461.364536963,
+          "absent": []
+        },
+        {
+          "concept": "pld_ServiceManagementCosts1",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyAndDerivativeAndOtherIncomeExpenseNet",
+          "actual": 0.0,
+          "flex": -0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        },
+        {
+          "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsAndOtherIncomeExpenseNet",
+          "actual": 0.0,
+          "flex": -0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        }
+      ]
+    }
+  ]
+}
