@@ -1,0 +1,295 @@
+{
+  "generated": "2026-10-28T04:12:51+00:00",
+  "model": "claude-opus-5-5",
+  "coverage": {
+    "expense_change": 135468,
+    "quantified_by_mdna": 98213,
+    "unexplained": 37255,
+    "share_quantified": "72.5",
+    "lines_quantified": "3 of 9"
+  },
+  "failures": [],
+  "bars": [
+    {
+      "key": "volume",
+      "label": "Volume (LTL tons)",
+      "kind": "revenue",
+      "amount": -527543,
+      "draft": "Lower freight volume reduced operating income by $527.5 million. Total LTL tons fell 9.1%; the 8.8% drop management cites is tonnage per day, which is smaller because 2025 had one fewer work day (253 versus 254). Management attributes the decline to fewer shipments per day and lighter shipments, against a backdrop of continued softness in the domestic economy.",
+      "passages": [
+        {
+          "page": 25,
+          "quote": "Our financial results for 2025 reflect continued softness in the domestic economy, which contributed to the decline in our revenue, net income and diluted earnings per share.",
+          "verbatim": true
+        },
+        {
+          "page": 25,
+          "quote": "Revenue decreased $318.4 million, or 5.5%, in 2025 compared to 2024 due to a decrease in volumes that was partially offset by an increase in LTL revenue per hundredweight.",
+          "verbatim": true
+        },
+        {
+          "page": 25,
+          "quote": "LTL tonnage per day decreased 8.8% primarily due to decreases in LTL shipments per day and LTL weight per shipment.",
+          "verbatim": true
+        },
+        {
+          "page": 25,
+          "quote": "Work days 253 254 (1 ) (0.4 )",
+          "verbatim": true
+        },
+        {
+          "page": 25,
+          "quote": "LTL tons (in thousands) 8,177 9,000 (823 ) (9.1 )",
+          "verbatim": true
+        },
+        {
+          "page": 25,
+          "quote": "LTL tonnage per day 32,319 35,433 (3,114 ) (8.8 )",
+          "verbatim": true
+        }
+      ],
+      "flags": [],
+      "quantified": false,
+      "edited_by": "James McCoy"
+    },
+    {
+      "key": "yield",
+      "label": "Yield (revenue per hundredweight)",
+      "kind": "revenue",
+      "amount": 206060,
+      "draft": "Higher pricing per unit of freight added $206.1 million to operating income. Management credits its yield management strategy for the 3.9% rise in revenue per hundredweight (4.8% excluding fuel surcharges, which fell with diesel prices).",
+      "passages": [
+        {
+          "page": 25,
+          "quote": "This service performance supported the continued improvement in our yield.",
+          "verbatim": true
+        },
+        {
+          "page": 25,
+          "quote": "This decrease in our volumes was partially offset by a 3.9% increase in our LTL revenue per hundredweight.",
+          "verbatim": true
+        },
+        {
+          "page": 25,
+          "quote": "Our LTL revenue per hundredweight includes the impact of lower fuel surcharges resulting from a decline in the average price of diesel fuel from the comparable period.",
+          "verbatim": true
+        },
+        {
+          "page": 25,
+          "quote": "Excluding fuel surcharges, LTL revenue per hundredweight increased 4.8% in 2025 as compared to 2024.",
+          "verbatim": true
+        },
+        {
+          "page": 25,
+          "quote": "We believe the increase in our LTL revenue per hundredweight metric was driven by the ongoing execution of our yield management strategy.",
+          "verbatim": true
+        }
+      ],
+      "flags": [],
+      "quantified": false,
+      "edited_by": null
+    },
+    {
+      "key": "revenue_remainder",
+      "label": "Other revenue and remainder",
+      "kind": "revenue",
+      "amount": 3062,
+      "draft": "Management's discussion does not address this line. It is the $3.1 million of the revenue change left over after the volume and yield effects.",
+      "passages": [],
+      "flags": [
+        "not_discussed"
+      ],
+      "quantified": false,
+      "edited_by": null
+    },
+    {
+      "key": "salaries",
+      "label": "Salaries, wages and benefits",
+      "kind": "expense",
+      "amount": 53989,
+      "draft": "Labor costs fell $54.0 million, which helped operating income. Wages dropped $75.4 million because headcount fell 5.4% and bonuses were lower; this was partly offset by a $21.4 million rise in benefits, driven by higher health and dental claim costs.",
+      "passages": [
+        {
+          "page": 25,
+          "quote": "Salaries, wages, and benefits decreased $54.0 million, or 2.0%, in 2025 as compared to 2024, due to a $75.4 million decrease in salaries and wages and a $21.4 million increase in employee benefit costs.",
+          "verbatim": true,
+          "stated_amount": {
+            "text": "$54.0 million",
+            "thousands": "54000.0",
+            "tolerance": "50.00",
+            "matches_bar": true
+          }
+        },
+        {
+          "page": 25,
+          "quote": "The decrease in salaries and wages in 2025 as compared to 2024 was primarily due to the 5.4% decrease in our average number of active full-time employees, as we balanced our workforce with current shipping trends, and a decrease in performance-based bonus compensation.",
+          "verbatim": true
+        },
+        {
+          "page": 25,
+          "quote": "These changes were partially offset by the annual wage increase provided to our employees at the beginning of both September 2025 and 2024.",
+          "verbatim": true
+        },
+        {
+          "page": 26,
+          "quote": "The increase in our employee benefit costs was primarily due to higher costs associated with our group health and dental plans during 2025 that resulted from an increase in the average costs per claim as compared to 2024.",
+          "verbatim": true
+        },
+        {
+          "page": 26,
+          "quote": "Our employee benefit costs were also impacted by a decrease in retirement benefit plan costs that are directly linked to our net income as well as the reduction in our average number of active full-time employees.",
+          "verbatim": true
+        }
+      ],
+      "flags": [],
+      "quantified": true,
+      "edited_by": null
+    },
+    {
+      "key": "operating_supplies",
+      "label": "Operating supplies and expenses",
+      "kind": "expense",
+      "amount": 64339,
+      "draft": "Operating supplies fell $64.3 million, mainly because of cheaper diesel (price per gallon down 4.2%) and lower fuel use (gallons down 8.6% on fewer miles driven), plus lower fleet maintenance and repair costs.",
+      "passages": [
+        {
+          "page": 26,
+          "quote": "Operating supplies and expenses decreased $64.3 million, or 10.1%, in 2025 as compared to 2024, due primarily to decreases in our costs for diesel fuel used in our vehicles and lower maintenance and repair costs.",
+          "verbatim": true,
+          "stated_amount": {
+            "text": "$64.3 million",
+            "thousands": "64300.0",
+            "tolerance": "50.00",
+            "matches_bar": true
+          }
+        },
+        {
+          "page": 26,
+          "quote": "Our average cost per gallon of diesel fuel decreased 4.2% in 2025 as compared to 2024.",
+          "verbatim": true
+        },
+        {
+          "page": 26,
+          "quote": "Our gallons consumed also decreased 8.6% in 2025 as compared to 2024 due primarily to a decrease in miles driven.",
+          "verbatim": true
+        },
+        {
+          "page": 26,
+          "quote": "Additionally, other operating supplies and expenses decreased in 2025 as compared to 2024 primarily due to lower maintenance and repair costs for our fleet.",
+          "verbatim": true
+        }
+      ],
+      "flags": [],
+      "quantified": true,
+      "edited_by": null
+    },
+    {
+      "key": "general_supplies",
+      "label": "General supplies and expenses",
+      "kind": "expense",
+      "amount": 7385,
+      "draft": "Management's discussion does not address this line. General supplies and expenses fell $7.4 million, which helped operating income.",
+      "passages": [],
+      "flags": [
+        "not_discussed"
+      ],
+      "quantified": false,
+      "edited_by": null
+    },
+    {
+      "key": "operating_taxes",
+      "label": "Operating taxes and licenses",
+      "kind": "expense",
+      "amount": 5750,
+      "draft": "Management's discussion does not address this line. Operating taxes and licenses fell $5.8 million, which helped operating income.",
+      "passages": [],
+      "flags": [
+        "not_discussed"
+      ],
+      "quantified": false,
+      "edited_by": null
+    },
+    {
+      "key": "insurance",
+      "label": "Insurance and claims",
+      "kind": "expense",
+      "amount": 17943,
+      "draft": "Management's discussion does not address this line. Insurance and claims expense fell $17.9 million, which helped operating income.",
+      "passages": [],
+      "flags": [
+        "not_discussed"
+      ],
+      "quantified": false,
+      "edited_by": null
+    },
+    {
+      "key": "communications",
+      "label": "Communications and utilities",
+      "kind": "expense",
+      "amount": 1888,
+      "draft": "Management's discussion does not address this line. Communications and utilities fell $1.9 million, which helped operating income.",
+      "passages": [],
+      "flags": [
+        "not_discussed"
+      ],
+      "quantified": false,
+      "edited_by": null
+    },
+    {
+      "key": "depreciation",
+      "label": "Depreciation and amortization",
+      "kind": "expense",
+      "amount": -20115,
+      "draft": "Depreciation rose $20.1 million, which reduced operating income. Management attributes the increase to assets bought under the 2024 and 2025 capital spending programs.",
+      "passages": [
+        {
+          "page": 26,
+          "quote": "Depreciation and amortization increased $20.1 million, or 5.8%, in 2025 as compared to 2024.",
+          "verbatim": true,
+          "stated_amount": {
+            "text": "$20.1 million",
+            "thousands": "20100.0",
+            "tolerance": "50.00",
+            "matches_bar": true
+          }
+        },
+        {
+          "page": 26,
+          "quote": "The increase in depreciation and amortization costs was due primarily to the assets acquired as part of our 2024 and 2025 capital expenditure programs.",
+          "verbatim": true
+        }
+      ],
+      "flags": [],
+      "quantified": true,
+      "edited_by": null
+    },
+    {
+      "key": "purchased_transportation",
+      "label": "Purchased transportation",
+      "kind": "expense",
+      "amount": 12779,
+      "draft": "Management's discussion does not address this line. Purchased transportation fell $12.8 million, which helped operating income.",
+      "passages": [],
+      "flags": [
+        "not_discussed"
+      ],
+      "quantified": false,
+      "edited_by": null
+    },
+    {
+      "key": "miscellaneous",
+      "label": "Miscellaneous expenses, net",
+      "kind": "expense",
+      "amount": -8490,
+      "draft": "Management's discussion does not address this line. Miscellaneous expenses rose $8.5 million, which reduced operating income.",
+      "passages": [],
+      "flags": [
+        "not_discussed"
+      ],
+      "quantified": false,
+      "edited_by": null
+    }
+  ],
+  "reviewed_by": "James McCoy",
+  "reviewed_on": "2026-10-28"
+}

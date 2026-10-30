@@ -1,0 +1,12 @@
+{
+  "volume": {
+    "edited_by": "James McCoy",
+    "reason": "The MD&A cites tonnage per day (-8.8%); the bar uses total tons (-9.1%). Explain the one-work-day gap.",
+    "draft": "Lower freight volume reduced operating income by $527.5 million. Total LTL tons fell 9.1%; the 8.8% drop management cites is tonnage per day, which is smaller because 2025 had one fewer work day (253 versus 254). Management attributes the decline to fewer shipments per day and lighter shipments, against a backdrop of continued softness in the domestic economy.",
+    "add_passages": [
+      {"page": 25, "quote": "Work days 253 254 (1 ) (0.4 )", "stated_amount_text": null},
+      {"page": 25, "quote": "LTL tons (in thousands) 8,177 9,000 (823 ) (9.1 )", "stated_amount_text": null},
+      {"page": 25, "quote": "LTL tonnage per day 32,319 35,433 (3,114 ) (8.8 )", "stated_amount_text": null}
+    ]
+  }
+}

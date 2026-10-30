@@ -1,0 +1,169 @@
+{
+  "unit": "USD thousands",
+  "filing": {
+    "company": "Old Dominion Freight Line, Inc.",
+    "cik": 878927,
+    "accession": "0001193125-26-067161",
+    "document_url": "https://www.sec.gov/Archives/edgar/data/878927/000119312526067161/odfl-20251231.htm",
+    "index_url": "https://www.sec.gov/Archives/edgar/data/878927/000119312526067161/0001193125-26-067161-index.html",
+    "percent_table_page": 24
+  },
+  "start": {
+    "label": "FY2024 operating income",
+    "amount": 1543998,
+    "tag": "us-gaap:OperatingIncomeLoss"
+  },
+  "bars": [
+    {
+      "key": "volume",
+      "label": "Volume (LTL tons)",
+      "kind": "revenue",
+      "amount": -527543,
+      "basis": "(FY2025 tons - FY2024 tons) x 20 cwt/ton x FY2024 revenue per cwt",
+      "source": {
+        "page": 25,
+        "rows": [
+          "LTL tons (in thousands) 8,177 9,000",
+          "LTL revenue per hundredweight $ 33.31 $ 32.05"
+        ]
+      }
+    },
+    {
+      "key": "yield",
+      "label": "Yield (revenue per hundredweight)",
+      "kind": "revenue",
+      "amount": 206060,
+      "basis": "FY2025 tons x 20 cwt/ton x (FY2025 - FY2024 revenue per cwt)",
+      "source": {
+        "page": 25,
+        "rows": [
+          "LTL tons (in thousands) 8,177 9,000",
+          "LTL revenue per hundredweight $ 33.31 $ 32.05"
+        ]
+      }
+    },
+    {
+      "key": "revenue_remainder",
+      "label": "Other revenue and remainder",
+      "kind": "revenue",
+      "amount": 3062,
+      "basis": "reported revenue change - volume - yield",
+      "source": {
+        "tag": "us-gaap:RevenueFromContractWithCustomerIncludingAssessedTax"
+      }
+    },
+    {
+      "key": "salaries",
+      "label": "Salaries, wages and benefits",
+      "kind": "expense",
+      "amount": 53989,
+      "basis": "-(FY2025 - FY2024)",
+      "source": {
+        "tag": "us-gaap:LaborAndRelatedExpense",
+        "fy2024": 2689314,
+        "fy2025": 2635325
+      }
+    },
+    {
+      "key": "operating_supplies",
+      "label": "Operating supplies and expenses",
+      "kind": "expense",
+      "amount": 64339,
+      "basis": "-(FY2025 - FY2024)",
+      "source": {
+        "tag": "us-gaap:OperatingCostsAndExpenses",
+        "fy2024": 635320,
+        "fy2025": 570981
+      }
+    },
+    {
+      "key": "general_supplies",
+      "label": "General supplies and expenses",
+      "kind": "expense",
+      "amount": 7385,
+      "basis": "-(FY2025 - FY2024)",
+      "source": {
+        "tag": "odfl:OtherSellingAndGeneralExpense",
+        "fy2024": 176546,
+        "fy2025": 169161
+      }
+    },
+    {
+      "key": "operating_taxes",
+      "label": "Operating taxes and licenses",
+      "kind": "expense",
+      "amount": 5750,
+      "basis": "-(FY2025 - FY2024)",
+      "source": {
+        "tag": "us-gaap:DirectTaxesAndLicensesCosts",
+        "fy2024": 144690,
+        "fy2025": 138940
+      }
+    },
+    {
+      "key": "insurance",
+      "label": "Insurance and claims",
+      "kind": "expense",
+      "amount": 17943,
+      "basis": "-(FY2025 - FY2024)",
+      "source": {
+        "tag": "us-gaap:OperatingInsuranceAndClaimsCostsProduction",
+        "fy2024": 92359,
+        "fy2025": 74416
+      }
+    },
+    {
+      "key": "communications",
+      "label": "Communications and utilities",
+      "kind": "expense",
+      "amount": 1888,
+      "basis": "-(FY2025 - FY2024)",
+      "source": {
+        "tag": "us-gaap:DirectCommunicationsAndUtilitiesCosts",
+        "fy2024": 40827,
+        "fy2025": 38939
+      }
+    },
+    {
+      "key": "depreciation",
+      "label": "Depreciation and amortization",
+      "kind": "expense",
+      "amount": -20115,
+      "basis": "-(FY2025 - FY2024)",
+      "source": {
+        "tag": "us-gaap:DepreciationAndAmortization",
+        "fy2024": 344568,
+        "fy2025": 364683
+      }
+    },
+    {
+      "key": "purchased_transportation",
+      "label": "Purchased transportation",
+      "kind": "expense",
+      "amount": 12779,
+      "basis": "-(FY2025 - FY2024)",
+      "source": {
+        "tag": "odfl:PurchasedTransportation",
+        "fy2024": 122815,
+        "fy2025": 110036
+      }
+    },
+    {
+      "key": "miscellaneous",
+      "label": "Miscellaneous expenses, net",
+      "kind": "expense",
+      "amount": -8490,
+      "basis": "-(FY2025 - FY2024)",
+      "source": {
+        "tag": "us-gaap:OtherCostAndExpenseOperating",
+        "fy2024": 24373,
+        "fy2025": 32863
+      }
+    }
+  ],
+  "end": {
+    "label": "FY2025 operating income",
+    "amount": 1361045,
+    "tag": "us-gaap:OperatingIncomeLoss"
+  }
+}

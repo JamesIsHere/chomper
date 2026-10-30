@@ -1,0 +1,130 @@
+{
+  "filing": {
+    "company": "Old Dominion Freight Line, Inc.",
+    "cik": 878927,
+    "accession": "0001193125-26-067161",
+    "document_url": "https://www.sec.gov/Archives/edgar/data/878927/000119312526067161/odfl-20251231.htm",
+    "index_url": "https://www.sec.gov/Archives/edgar/data/878927/000119312526067161/0001193125-26-067161-index.html",
+    "percent_table_page": 24
+  },
+  "percent_table_disagreements": [
+    {
+      "label": "Operating taxes and licenses",
+      "year": "fy2024",
+      "page": 24,
+      "printed_pct": "2.6",
+      "computed_pct": "2.488"
+    }
+  ],
+  "unit": "USD thousands",
+  "lines": [
+    {
+      "key": "revenue",
+      "label": "Revenue from operations",
+      "tag": "us-gaap:RevenueFromContractWithCustomerIncludingAssessedTax",
+      "fy2024": 5814810,
+      "fy2025": 5496389,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "matches companyfacts"
+    },
+    {
+      "key": "salaries",
+      "label": "Salaries, wages and benefits",
+      "tag": "us-gaap:LaborAndRelatedExpense",
+      "fy2024": 2689314,
+      "fy2025": 2635325,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "matches companyfacts"
+    },
+    {
+      "key": "operating_supplies",
+      "label": "Operating supplies and expenses",
+      "tag": "us-gaap:OperatingCostsAndExpenses",
+      "fy2024": 635320,
+      "fy2025": 570981,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "matches companyfacts"
+    },
+    {
+      "key": "general_supplies",
+      "label": "General supplies and expenses",
+      "tag": "odfl:OtherSellingAndGeneralExpense",
+      "fy2024": 176546,
+      "fy2025": 169161,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "extension tag, not in companyfacts"
+    },
+    {
+      "key": "operating_taxes",
+      "label": "Operating taxes and licenses",
+      "tag": "us-gaap:DirectTaxesAndLicensesCosts",
+      "fy2024": 144690,
+      "fy2025": 138940,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "matches companyfacts"
+    },
+    {
+      "key": "insurance",
+      "label": "Insurance and claims",
+      "tag": "us-gaap:OperatingInsuranceAndClaimsCostsProduction",
+      "fy2024": 92359,
+      "fy2025": 74416,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "matches companyfacts"
+    },
+    {
+      "key": "communications",
+      "label": "Communications and utilities",
+      "tag": "us-gaap:DirectCommunicationsAndUtilitiesCosts",
+      "fy2024": 40827,
+      "fy2025": 38939,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "matches companyfacts"
+    },
+    {
+      "key": "depreciation",
+      "label": "Depreciation and amortization",
+      "tag": "us-gaap:DepreciationAndAmortization",
+      "fy2024": 344568,
+      "fy2025": 364683,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "matches companyfacts"
+    },
+    {
+      "key": "purchased_transportation",
+      "label": "Purchased transportation",
+      "tag": "odfl:PurchasedTransportation",
+      "fy2024": 122815,
+      "fy2025": 110036,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "extension tag, not in companyfacts"
+    },
+    {
+      "key": "miscellaneous",
+      "label": "Miscellaneous expenses, net",
+      "tag": "us-gaap:OtherCostAndExpenseOperating",
+      "fy2024": 24373,
+      "fy2025": 32863,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "matches companyfacts"
+    },
+    {
+      "key": "total_expenses",
+      "label": "Total operating expenses",
+      "tag": "us-gaap:CostsAndExpenses",
+      "fy2024": 4270812,
+      "fy2025": 4135344,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "matches companyfacts"
+    },
+    {
+      "key": "operating_income",
+      "label": "Operating income",
+      "tag": "us-gaap:OperatingIncomeLoss",
+      "fy2024": 1543998,
+      "fy2025": 1361045,
+      "source": "instance odfl-20251231_htm.xml",
+      "crosscheck": "matches companyfacts"
+    }
+  ]
+}
