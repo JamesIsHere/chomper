@@ -1,0 +1,132 @@
+{
+  "ticker": "UNH",
+  "company": "UNITEDHEALTH GROUP INC",
+  "cik": 731766,
+  "unit": "USD",
+  "period_ends": [
+    "2016-12-31",
+    "2017-12-31",
+    "2018-12-31",
+    "2019-12-31",
+    "2020-12-31",
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "revenue": {
+    "2016-12-31": 184840000000,
+    "2017-12-31": 201159000000,
+    "2018-12-31": 226247000000,
+    "2019-12-31": 242155000000,
+    "2020-12-31": 257141000000,
+    "2021-12-31": 287597000000,
+    "2022-12-31": 324162000000,
+    "2023-12-31": 371622000000,
+    "2024-12-31": 400278000000,
+    "2025-12-31": 447567000000
+  },
+  "pretax_income": {
+    "2016-12-31": 11863000000,
+    "2017-12-31": 14023000000,
+    "2018-12-31": 15944000000,
+    "2019-12-31": 17981000000,
+    "2020-12-31": 20742000000,
+    "2021-12-31": 22310000000,
+    "2022-12-31": 26343000000,
+    "2023-12-31": 29112000000,
+    "2024-12-31": 20071000000,
+    "2025-12-31": 14697000000
+  },
+  "revenue_tags": [
+    "Revenues"
+  ],
+  "pretax_tags": [
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+  ],
+  "disagreements": [],
+  "differs_from_five_year_page": [],
+  "deals": [
+    {
+      "name": "Change Healthcare",
+      "member": "unh:ChangeHealthcareMember",
+      "date": "2022-10-03",
+      "fiscal_year_end": "2022-12-31",
+      "size": 13900000000,
+      "measure": "consideration",
+      "prior_total_assets": 212206000000,
+      "share_of_assets": 0.06550238918786462,
+      "significant": false,
+      "accession": "0000731766-23-000008"
+    },
+    {
+      "name": "Other Acquisitions",
+      "member": "unh:OtherAcquisitionsMember",
+      "date": "2022-12-31",
+      "fiscal_year_end": "2022-12-31",
+      "size": 8800000000,
+      "measure": "consideration",
+      "prior_total_assets": 212206000000,
+      "share_of_assets": 0.0414691384786481,
+      "significant": false,
+      "accession": "0000731766-23-000008"
+    }
+  ],
+  "standards": [
+    {
+      "standard": "ASC 606 (revenue)",
+      "fiscal_year_end": "2018-12-31",
+      "required_for_years_beginning_after": "2017-12-15"
+    },
+    {
+      "standard": "ASC 842 (leases)",
+      "fiscal_year_end": "2019-12-31",
+      "required_for_years_beginning_after": "2018-12-15"
+    }
+  ],
+  "significance_test": "SEC Regulation S-X Rule 1-02(w)(1)(i): consideration >= 10% of total assets at the prior fiscal year end",
+  "filings": {
+    "2016-12-31": {
+      "accession": "0000731766-17-000009",
+      "report_date": "2016-12-31"
+    },
+    "2017-12-31": {
+      "accession": "0000731766-18-000005",
+      "report_date": "2017-12-31"
+    },
+    "2018-12-31": {
+      "accession": "0000731766-19-000005",
+      "report_date": "2018-12-31"
+    },
+    "2019-12-31": {
+      "accession": "0000731766-20-000006",
+      "report_date": "2019-12-31"
+    },
+    "2020-12-31": {
+      "accession": "0000731766-21-000013",
+      "report_date": "2020-12-31"
+    },
+    "2021-12-31": {
+      "accession": "0000731766-22-000008",
+      "report_date": "2021-12-31"
+    },
+    "2022-12-31": {
+      "accession": "0000731766-23-000008",
+      "report_date": "2022-12-31"
+    },
+    "2023-12-31": {
+      "accession": "0000731766-24-000081",
+      "report_date": "2023-12-31"
+    },
+    "2024-12-31": {
+      "accession": "0000731766-25-000063",
+      "report_date": "2024-12-31"
+    },
+    "2025-12-31": {
+      "accession": "0000731766-26-000062",
+      "report_date": "2025-12-31"
+    }
+  }
+}

@@ -16,6 +16,7 @@ from header import nav
 from pull import ROOT
 
 DATA = ROOT / "data" / "history"
+HEADLINE = ROOT / "data" / "headline"
 OUT = ROOT / "docs"
 
 
@@ -259,7 +260,65 @@ def page(h):
     return TEMPLATE.format(company=escape(h["company"]), ticker=escape(h["ticker"]), heads=heads, top=top,
                            rows="\n".join(rows), years=years, levels=levels, trend=trend_chart(h), filings=filings,
                            disagreements=disagreements, ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
-                           last=year(h["period_ends"][-1]), nav=nav(), bridge_link=bridge_link(h["ticker"]), css=CSS)
+                           last=year(h["period_ends"][-1]), nav=nav(), bridge_link=bridge_link(h["ticker"]),
+                           ten_years=ten_years(h["ticker"]), css=CSS)
+
+
+def ten_years(ticker):
+    """The long window: revenue, pre-tax income and margin for ten years, every break marked. Only if
+    headline.py has written data/headline/<TICKER>.json (run it first)."""
+    path = HEADLINE / f"{ticker}.json"
+    if not path.is_file():
+        return ""
+    t = json.loads(path.read_text(encoding="utf-8"))
+    ends, rev, pre = t["period_ends"], t["revenue"], t["pretax_income"]
+    marks, notes = {e: [] for e in ends}, []
+    for d in t["deals"]:
+        if d["significant"]:
+            e = d["fiscal_year_end"]
+            marks[e].append("Acquisition")
+            notes.append((e, f"Acquired {escape(d['name'])} on {d['date']} for {m(d['size'], False)} "
+                             f"({escape(d['measure'])}), {d['share_of_assets']:.0%} of total assets at the prior "
+                             f"year end."))
+    for s in t["standards"]:
+        e = s["fiscal_year_end"]
+        marks[e].append(s["standard"].split(" (")[0])
+        notes.append((e, f"{escape(s['standard'])} required: the first fiscal year beginning after "
+                         f"{s['required_for_years_beginning_after']}. The company may have adopted it earlier."))
+    first = {}
+    for d in t["disagreements"]:  # the earliest-filed other value is the figure as first reported
+        k = (d["period_end"], d["item"])
+        if k not in first or d["other_filed"] < first[k]["other_filed"]:
+            first[k] = d
+    for (e, item), d in sorted(first.items()):
+        if "Restated" not in marks[e]:
+            marks[e].append("Restated")
+        notes.append((e, f"{escape(item[0].upper() + item[1:])} {m(d['value'], False)} as later restated; first "
+                         f"reported as {m(d['other_value'], False)} "
+                         f"({(d['value'] - d['other_value']) / abs(d['other_value']) * 100:+.1f}%) in the 10-K "
+                         f"filed {d['other_filed']}."))
+
+    def growth(series):
+        return "<td></td>" + "".join(f"<td>{(series[b] - series[a]) / abs(series[a]) * 100:+.1f}%</td>"
+                                     for a, b in zip(ends, ends[1:]))
+    rows = "".join(f'<tr class="strong"><th scope="row">{label}</th>'
+                   + "".join(f"<td>{m(s[e], False)}</td>" for e in ends)
+                   + f'</tr><tr><th scope="row">&nbsp;&nbsp;change</th>{growth(s)}</tr>'
+                   for label, s in (("Revenue", rev), ("Pre-tax income", pre)))
+    rows += ('<tr><th scope="row">Pre-tax margin</th>'
+             + "".join(f"<td>{pre[e] / rev[e] * 100:.1f}%</td>" for e in ends) + "</tr>")
+    rows += ('<tr class="marks"><th scope="row">Breaks</th>'
+             + "".join(f"<td>{'<br>'.join(marks[e])}</td>" for e in ends) + "</tr>")
+    items = "".join(f"<li><b>{year(e)}</b>: {text}</li>" for e, text in sorted(notes, key=lambda n: n[0]))
+    return (f'<h2>Ten years</h2>\n<div class="wrap"><table>\n<thead><tr><th></th>'
+            + "".join(f"<th>{year(e)}</th>" for e in ends)
+            + f'</tr></thead>\n<tbody>\n{rows}\n</tbody></table></div>\n'
+            + (f'<ul class="breaks">{items}</ul>\n' if items else "")
+            + '<p class="note">Breaks are marked, never cut out: a year after a large acquisition, a new accounting '
+              'standard or a restatement may not compare cleanly with the years before it. An acquisition counts '
+              'when its price is at least 10% of the buyer\'s total assets (SEC Regulation S-X Rule 1-02(w), the '
+              'investment test). Where a later 10-K restated a year, the restated figure is shown; years before a '
+              'restated stretch stay as first reported.</p>\n')
 
 
 def bridge_link(ticker):
@@ -387,6 +446,9 @@ table.decisions .why { color: var(--ink-2); font-size: .85rem; }
 table.decisions .status { color: var(--down); font-size: .8rem; }
 tr.superseded th, tr.superseded td.text p:not(.status) { color: var(--ink-3); text-decoration: line-through; }
 table.index thead th { white-space: normal; vertical-align: bottom; }
+tr.marks td { font-size: .75rem; color: var(--ink-2); vertical-align: top; }
+ul.breaks { font-size: .85rem; color: var(--ink-2); max-width: 46rem; padding-left: 1.1rem; margin: .75rem 0; }
+ul.breaks li { margin-bottom: .2rem; }
 .note, footer { font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
 footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
 """ + header.CSS
@@ -402,8 +464,10 @@ TEMPLATE = """<!doctype html>
 <body>
 <main>
 {nav}
-<h1>{company}: which costs moved with revenue, {first} to {last}</h1>
+<h1>{company}</h1>
 {bridge_link}
+{ten_years}
+<h2>Five years: which costs moved with revenue, {first} to {last}</h2>
 {trend}
 <div class="wrap"><table>
 <thead><tr><th></th>{years}</tr></thead>

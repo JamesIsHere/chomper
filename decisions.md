@@ -142,3 +142,9 @@ Group: Evidence and review
 Decision: James reviewed the ODFL one-year bridge (wording, layout, the three findings) and approved it as it stands.
 Why: Good in its current form; work moves on to the longer windows.
 Status: active
+
+## 2026-10-30 | Ten-year breaks
+Group: Method
+Decision: An acquisition is marked when its price is at least 10% of the buyer's total assets at the prior year end (SEC Regulation S-X Rule 1-02(w), the investment test), read from each 10-K's own XBRL. ASC 606 and 842 are marked in the year they became required. Every restatement is shown with the figure as first reported.
+Why: Marking breaks must be correct, not a judgment call: the SEC's own significance test replaces a threshold of ours, and each deal's size comes from the filing.
+Status: active

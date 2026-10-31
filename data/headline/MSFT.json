@@ -1,0 +1,202 @@
+{
+  "ticker": "MSFT",
+  "company": "MICROSOFT CORP",
+  "cik": 789019,
+  "unit": "USD",
+  "period_ends": [
+    "2017-06-30",
+    "2018-06-30",
+    "2019-06-30",
+    "2020-06-30",
+    "2021-06-30",
+    "2022-06-30",
+    "2023-06-30",
+    "2024-06-30",
+    "2025-06-30",
+    "2026-06-30"
+  ],
+  "revenue": {
+    "2017-06-30": 96571000000,
+    "2018-06-30": 110360000000,
+    "2019-06-30": 125843000000,
+    "2020-06-30": 143015000000,
+    "2021-06-30": 168088000000,
+    "2022-06-30": 198270000000,
+    "2023-06-30": 211915000000,
+    "2024-06-30": 245122000000,
+    "2025-06-30": 281724000000,
+    "2026-06-30": 331839000000
+  },
+  "pretax_income": {
+    "2017-06-30": 29901000000,
+    "2018-06-30": 36474000000,
+    "2019-06-30": 43688000000,
+    "2020-06-30": 53036000000,
+    "2021-06-30": 71102000000,
+    "2022-06-30": 83716000000,
+    "2023-06-30": 89311000000,
+    "2024-06-30": 107787000000,
+    "2025-06-30": 123627000000,
+    "2026-06-30": 165934000000
+  },
+  "revenue_tags": [
+    "RevenueFromContractWithCustomerExcludingAssessedTax"
+  ],
+  "pretax_tags": [
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+  ],
+  "disagreements": [
+    {
+      "item": "pre-tax income",
+      "period_end": "2017-06-30",
+      "value": 29901000000,
+      "other_value": 23149000000,
+      "other_accession": "0001564590-17-014900",
+      "other_filed": "2017-08-02",
+      "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+    }
+  ],
+  "differs_from_five_year_page": [],
+  "deals": [
+    {
+      "name": "LinkedIn Corporation",
+      "member": "msft:LinkedInCorporationMember",
+      "date": "2016-12-08",
+      "fiscal_year_end": "2017-06-30",
+      "size": 27000000000,
+      "measure": "consideration",
+      "prior_total_assets": 193468000000,
+      "share_of_assets": 0.13955796307399673,
+      "significant": true,
+      "accession": "0001564590-19-027952"
+    },
+    {
+      "name": "Other acquisitions",
+      "member": "msft:OtherAcquisitionsMember",
+      "date": "2018-06-30",
+      "fiscal_year_end": "2018-06-30",
+      "size": 948000000,
+      "measure": "cash paid",
+      "prior_total_assets": 250312000000,
+      "share_of_assets": 0.0037872734826935985,
+      "significant": false,
+      "accession": "0001564590-18-019062"
+    },
+    {
+      "name": "GitHub, Inc",
+      "member": "msft:GitHubIncMember",
+      "date": "2018-10-25",
+      "fiscal_year_end": "2019-06-30",
+      "size": 7500000000,
+      "measure": "consideration",
+      "prior_total_assets": 258848000000,
+      "share_of_assets": 0.028974533316850043,
+      "significant": false,
+      "accession": "0001564590-21-039151"
+    },
+    {
+      "name": "Other",
+      "member": "us-gaap:SeriesOfIndividuallyImmaterialBusinessAcquisitionsMember",
+      "date": "2019-06-30",
+      "fiscal_year_end": "2019-06-30",
+      "size": 1600000000,
+      "measure": "cash paid",
+      "prior_total_assets": 258848000000,
+      "share_of_assets": 0.006181233774261343,
+      "significant": false,
+      "accession": "0001564590-19-027952"
+    },
+    {
+      "name": "ZeniMax Media Inc",
+      "member": "msft:ZeniMaxMediaIncMember",
+      "date": "2021-03-09",
+      "fiscal_year_end": "2021-06-30",
+      "size": 8100000000,
+      "measure": "consideration",
+      "prior_total_assets": 301311000000,
+      "share_of_assets": 0.0268825233728606,
+      "significant": false,
+      "accession": "0000950170-23-035122"
+    },
+    {
+      "name": "Nuance Communications, Inc.",
+      "member": "msft:NuanceCommunicationsIncMember",
+      "date": "2022-03-04",
+      "fiscal_year_end": "2022-06-30",
+      "size": 18800000000,
+      "measure": "consideration",
+      "prior_total_assets": 333779000000,
+      "share_of_assets": 0.05632469388427672,
+      "significant": false,
+      "accession": "0000950170-24-087843"
+    },
+    {
+      "name": "Activision Blizzard, Inc",
+      "member": "msft:ActivisionBlizzardIncMember",
+      "date": "2023-10-13",
+      "fiscal_year_end": "2024-06-30",
+      "size": 75400000000,
+      "measure": "consideration",
+      "prior_total_assets": 411976000000,
+      "share_of_assets": 0.1830203701186477,
+      "significant": true,
+      "accession": "0001193125-26-323660"
+    }
+  ],
+  "standards": [
+    {
+      "standard": "ASC 606 (revenue)",
+      "fiscal_year_end": "2019-06-30",
+      "required_for_years_beginning_after": "2017-12-15"
+    },
+    {
+      "standard": "ASC 842 (leases)",
+      "fiscal_year_end": "2020-06-30",
+      "required_for_years_beginning_after": "2018-12-15"
+    }
+  ],
+  "significance_test": "SEC Regulation S-X Rule 1-02(w)(1)(i): consideration >= 10% of total assets at the prior fiscal year end",
+  "filings": {
+    "2017-06-30": {
+      "accession": "0001564590-17-014900",
+      "report_date": "2017-06-30"
+    },
+    "2018-06-30": {
+      "accession": "0001564590-18-019062",
+      "report_date": "2018-06-30"
+    },
+    "2019-06-30": {
+      "accession": "0001564590-19-027952",
+      "report_date": "2019-06-30"
+    },
+    "2020-06-30": {
+      "accession": "0001564590-20-034944",
+      "report_date": "2020-06-30"
+    },
+    "2021-06-30": {
+      "accession": "0001564590-21-039151",
+      "report_date": "2021-06-30"
+    },
+    "2022-06-30": {
+      "accession": "0001564590-22-026876",
+      "report_date": "2022-06-30"
+    },
+    "2023-06-30": {
+      "accession": "0000950170-23-035122",
+      "report_date": "2023-06-30"
+    },
+    "2024-06-30": {
+      "accession": "0000950170-24-087843",
+      "report_date": "2024-06-30"
+    },
+    "2025-06-30": {
+      "accession": "0000950170-25-100235",
+      "report_date": "2025-06-30"
+    },
+    "2026-06-30": {
+      "accession": "0001193125-26-323660",
+      "report_date": "2026-06-30"
+    }
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "ticker": "JPM",
+  "company": "JPMORGAN CHASE & CO",
+  "cik": 19617,
+  "unit": "USD",
+  "period_ends": [
+    "2016-12-31",
+    "2017-12-31",
+    "2018-12-31",
+    "2019-12-31",
+    "2020-12-31",
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "revenue": {
+    "2016-12-31": 96569000000,
+    "2017-12-31": 100705000000,
+    "2018-12-31": 108783000000,
+    "2019-12-31": 115720000000,
+    "2020-12-31": 119951000000,
+    "2021-12-31": 121649000000,
+    "2022-12-31": 128695000000,
+    "2023-12-31": 158104000000,
+    "2024-12-31": 177556000000,
+    "2025-12-31": 182447000000
+  },
+  "pretax_income": {
+    "2016-12-31": 34536000000,
+    "2017-12-31": 35900000000,
+    "2018-12-31": 40764000000,
+    "2019-12-31": 44866000000,
+    "2020-12-31": 35815000000,
+    "2021-12-31": 59562000000,
+    "2022-12-31": 46166000000,
+    "2023-12-31": 61612000000,
+    "2024-12-31": 75081000000,
+    "2025-12-31": 72595000000
+  },
+  "revenue_tags": [
+    "Revenues",
+    "RevenuesNetOfInterestExpense"
+  ],
+  "pretax_tags": [
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+  ],
+  "disagreements": [
+    {
+      "item": "revenue",
+      "period_end": "2016-12-31",
+      "value": 96569000000,
+      "other_value": 95668000000,
+      "other_accession": "0000019617-18-000057",
+      "other_filed": "2018-02-27",
+      "tag": "RevenuesNetOfInterestExpense"
+    },
+    {
+      "item": "revenue",
+      "period_end": "2016-12-31",
+      "value": 96569000000,
+      "other_value": 95668000000,
+      "other_accession": "0000019617-17-000314",
+      "other_filed": "2017-02-28",
+      "tag": "RevenuesNetOfInterestExpense"
+    },
+    {
+      "item": "revenue",
+      "period_end": "2017-12-31",
+      "value": 100705000000,
+      "other_value": 99624000000,
+      "other_accession": "0000019617-18-000057",
+      "other_filed": "2018-02-27",
+      "tag": "RevenuesNetOfInterestExpense"
+    },
+    {
+      "item": "revenue",
+      "period_end": "2018-12-31",
+      "value": 108783000000,
+      "other_value": 109029000000,
+      "other_accession": "0000019617-20-000257",
+      "other_filed": "2020-02-25",
+      "tag": "RevenuesNetOfInterestExpense"
+    },
+    {
+      "item": "revenue",
+      "period_end": "2018-12-31",
+      "value": 108783000000,
+      "other_value": 109029000000,
+      "other_accession": "0000019617-19-000054",
+      "other_filed": "2019-02-26",
+      "tag": "RevenuesNetOfInterestExpense"
+    },
+    {
+      "item": "revenue",
+      "period_end": "2019-12-31",
+      "value": 115720000000,
+      "other_value": 115399000000,
+      "other_accession": "0000019617-21-000236",
+      "other_filed": "2021-02-23",
+      "tag": "RevenuesNetOfInterestExpense"
+    },
+    {
+      "item": "revenue",
+      "period_end": "2019-12-31",
+      "value": 115720000000,
+      "other_value": 115627000000,
+      "other_accession": "0000019617-20-000257",
+      "other_filed": "2020-02-25",
+      "tag": "RevenuesNetOfInterestExpense"
+    },
+    {
+      "item": "revenue",
+      "period_end": "2020-12-31",
+      "value": 119951000000,
+      "other_value": 119543000000,
+      "other_accession": "0000019617-21-000236",
+      "other_filed": "2021-02-23",
+      "tag": "RevenuesNetOfInterestExpense"
+    },
+    {
+      "item": "pre-tax income",
+      "period_end": "2019-12-31",
+      "value": 44866000000,
+      "other_value": 44545000000,
+      "other_accession": "0000019617-21-000236",
+      "other_filed": "2021-02-23",
+      "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+    },
+    {
+      "item": "pre-tax income",
+      "period_end": "2019-12-31",
+      "value": 44866000000,
+      "other_value": 44545000000,
+      "other_accession": "0000019617-20-000257",
+      "other_filed": "2020-02-25",
+      "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+    },
+    {
+      "item": "pre-tax income",
+      "period_end": "2020-12-31",
+      "value": 35815000000,
+      "other_value": 35407000000,
+      "other_accession": "0000019617-21-000236",
+      "other_filed": "2021-02-23",
+      "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+    }
+  ],
+  "differs_from_five_year_page": [],
+  "deals": [
+    {
+      "name": "First Republic Bank",
+      "member": "jpm:FirstRepublicBankMember",
+      "date": "2023-12-31",
+      "fiscal_year_end": "2023-12-31",
+      "size": 67834000000,
+      "measure": "consideration",
+      "prior_total_assets": 3665743000000,
+      "share_of_assets": 0.018504843356449155,
+      "significant": false,
+      "accession": "0000019617-24-000225"
+    }
+  ],
+  "standards": [
+    {
+      "standard": "ASC 606 (revenue)",
+      "fiscal_year_end": "2018-12-31",
+      "required_for_years_beginning_after": "2017-12-15"
+    },
+    {
+      "standard": "ASC 842 (leases)",
+      "fiscal_year_end": "2019-12-31",
+      "required_for_years_beginning_after": "2018-12-15"
+    }
+  ],
+  "significance_test": "SEC Regulation S-X Rule 1-02(w)(1)(i): consideration >= 10% of total assets at the prior fiscal year end",
+  "filings": {
+    "2016-12-31": {
+      "accession": "0000019617-17-000314",
+      "report_date": "2016-12-31"
+    },
+    "2017-12-31": {
+      "accession": "0000019617-18-000057",
+      "report_date": "2017-12-31"
+    },
+    "2018-12-31": {
+      "accession": "0000019617-19-000054",
+      "report_date": "2018-12-31"
+    },
+    "2019-12-31": {
+      "accession": "0000019617-20-000257",
+      "report_date": "2019-12-31"
+    },
+    "2020-12-31": {
+      "accession": "0000019617-21-000236",
+      "report_date": "2020-12-31"
+    },
+    "2021-12-31": {
+      "accession": "0000019617-22-000272",
+      "report_date": "2021-12-31"
+    },
+    "2022-12-31": {
+      "accession": "0000019617-23-000231",
+      "report_date": "2022-12-31"
+    },
+    "2023-12-31": {
+      "accession": "0000019617-24-000225",
+      "report_date": "2023-12-31"
+    },
+    "2024-12-31": {
+      "accession": "0000019617-25-000270",
+      "report_date": "2024-12-31"
+    },
+    "2025-12-31": {
+      "accession": "0001628280-26-008131",
+      "report_date": "2025-12-31"
+    }
+  }
+}

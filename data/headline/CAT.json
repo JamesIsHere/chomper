@@ -1,0 +1,155 @@
+{
+  "ticker": "CAT",
+  "company": "CATERPILLAR INC",
+  "cik": 18230,
+  "unit": "USD",
+  "period_ends": [
+    "2016-12-31",
+    "2017-12-31",
+    "2018-12-31",
+    "2019-12-31",
+    "2020-12-31",
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "revenue": {
+    "2016-12-31": 38537000000,
+    "2017-12-31": 45462000000,
+    "2018-12-31": 54722000000,
+    "2019-12-31": 53800000000,
+    "2020-12-31": 41748000000,
+    "2021-12-31": 50971000000,
+    "2022-12-31": 59427000000,
+    "2023-12-31": 67060000000,
+    "2024-12-31": 64809000000,
+    "2025-12-31": 67589000000
+  },
+  "pretax_income": {
+    "2016-12-31": 139000000,
+    "2017-12-31": 4082000000,
+    "2018-12-31": 7822000000,
+    "2019-12-31": 7812000000,
+    "2020-12-31": 3995000000,
+    "2021-12-31": 8204000000,
+    "2022-12-31": 8752000000,
+    "2023-12-31": 13050000000,
+    "2024-12-31": 13373000000,
+    "2025-12-31": 11541000000
+  },
+  "revenue_tags": [
+    "Revenues"
+  ],
+  "pretax_tags": [
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+  ],
+  "disagreements": [],
+  "differs_from_five_year_page": [],
+  "deals": [
+    {
+      "name": "Kemper Valve & Fittings Corp",
+      "member": "cat:KemperValveFittingsCorp.Domain",
+      "date": "2016-12-15",
+      "fiscal_year_end": "2016-12-31",
+      "size": 92000000,
+      "measure": "cash paid",
+      "prior_total_assets": 78342000000,
+      "share_of_assets": 0.0011743381583314188,
+      "significant": false,
+      "accession": "0000018230-19-000034"
+    },
+    {
+      "name": "Downer Freight Rail",
+      "member": "cat:DownerFreightRailDomain",
+      "date": "2018-01-02",
+      "fiscal_year_end": "2018-12-31",
+      "size": 97000000,
+      "measure": "cash paid net of cash acquired",
+      "prior_total_assets": 76962000000,
+      "share_of_assets": 0.0012603622566981108,
+      "significant": false,
+      "accession": "0000018230-20-000056"
+    },
+    {
+      "name": "ECM S.p.A",
+      "member": "cat:ECMS.p.A.Domain",
+      "date": "2018-01-02",
+      "fiscal_year_end": "2018-12-31",
+      "size": 249000000,
+      "measure": "cash paid",
+      "prior_total_assets": 76962000000,
+      "share_of_assets": 0.003235362906369377,
+      "significant": false,
+      "accession": "0000018230-20-000056"
+    },
+    {
+      "name": "SPM Oil & Gas",
+      "member": "cat:SPMOilGasMember",
+      "date": "2021-02-01",
+      "fiscal_year_end": "2021-12-31",
+      "size": 359000000,
+      "measure": "cash paid net of cash acquired",
+      "prior_total_assets": 78324000000,
+      "share_of_assets": 0.004583524845513508,
+      "significant": false,
+      "accession": "0000018230-24-000009"
+    }
+  ],
+  "standards": [
+    {
+      "standard": "ASC 606 (revenue)",
+      "fiscal_year_end": "2018-12-31",
+      "required_for_years_beginning_after": "2017-12-15"
+    },
+    {
+      "standard": "ASC 842 (leases)",
+      "fiscal_year_end": "2019-12-31",
+      "required_for_years_beginning_after": "2018-12-15"
+    }
+  ],
+  "significance_test": "SEC Regulation S-X Rule 1-02(w)(1)(i): consideration >= 10% of total assets at the prior fiscal year end",
+  "filings": {
+    "2016-12-31": {
+      "accession": "0000018230-17-000041",
+      "report_date": "2016-12-31"
+    },
+    "2017-12-31": {
+      "accession": "0000018230-18-000042",
+      "report_date": "2017-12-31"
+    },
+    "2018-12-31": {
+      "accession": "0000018230-19-000034",
+      "report_date": "2018-12-31"
+    },
+    "2019-12-31": {
+      "accession": "0000018230-20-000056",
+      "report_date": "2019-12-31"
+    },
+    "2020-12-31": {
+      "accession": "0000018230-21-000063",
+      "report_date": "2020-12-31"
+    },
+    "2021-12-31": {
+      "accession": "0000018230-22-000050",
+      "report_date": "2021-12-31"
+    },
+    "2022-12-31": {
+      "accession": "0000018230-23-000011",
+      "report_date": "2022-12-31"
+    },
+    "2023-12-31": {
+      "accession": "0000018230-24-000009",
+      "report_date": "2023-12-31"
+    },
+    "2024-12-31": {
+      "accession": "0000018230-25-000008",
+      "report_date": "2024-12-31"
+    },
+    "2025-12-31": {
+      "accession": "0000018230-26-000008",
+      "report_date": "2025-12-31"
+    }
+  }
+}

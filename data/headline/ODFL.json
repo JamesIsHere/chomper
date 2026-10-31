@@ -1,0 +1,107 @@
+{
+  "ticker": "ODFL",
+  "company": "OLD DOMINION FREIGHT LINE, INC.",
+  "cik": 878927,
+  "unit": "USD",
+  "period_ends": [
+    "2016-12-31",
+    "2017-12-31",
+    "2018-12-31",
+    "2019-12-31",
+    "2020-12-31",
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "revenue": {
+    "2016-12-31": 2991517000,
+    "2017-12-31": 3358112000,
+    "2018-12-31": 4043695000,
+    "2019-12-31": 4109111000,
+    "2020-12-31": 4015129000,
+    "2021-12-31": 5256328000,
+    "2022-12-31": 6260077000,
+    "2023-12-31": 5866152000,
+    "2024-12-31": 5814810000,
+    "2025-12-31": 5496389000
+  },
+  "pretax_income": {
+    "2016-12-31": 477587000,
+    "2017-12-31": 575832000,
+    "2018-12-31": 815513000,
+    "2019-12-31": 823949000,
+    "2020-12-31": 901364000,
+    "2021-12-31": 1388423000,
+    "2022-12-31": 1841349000,
+    "2023-12-31": 1647776000,
+    "2024-12-31": 1557597000,
+    "2025-12-31": 1361308000
+  },
+  "revenue_tags": [
+    "RevenueFromContractWithCustomerIncludingAssessedTax"
+  ],
+  "pretax_tags": [
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+  ],
+  "disagreements": [],
+  "differs_from_five_year_page": [],
+  "deals": [],
+  "standards": [
+    {
+      "standard": "ASC 606 (revenue)",
+      "fiscal_year_end": "2018-12-31",
+      "required_for_years_beginning_after": "2017-12-15"
+    },
+    {
+      "standard": "ASC 842 (leases)",
+      "fiscal_year_end": "2019-12-31",
+      "required_for_years_beginning_after": "2018-12-15"
+    }
+  ],
+  "significance_test": "SEC Regulation S-X Rule 1-02(w)(1)(i): consideration >= 10% of total assets at the prior fiscal year end",
+  "filings": {
+    "2016-12-31": {
+      "accession": "0000878927-17-000005",
+      "report_date": "2016-12-31"
+    },
+    "2017-12-31": {
+      "accession": "0000878927-18-000005",
+      "report_date": "2017-12-31"
+    },
+    "2018-12-31": {
+      "accession": "0001564590-19-004755",
+      "report_date": "2018-12-31"
+    },
+    "2019-12-31": {
+      "accession": "0001564590-20-006626",
+      "report_date": "2019-12-31"
+    },
+    "2020-12-31": {
+      "accession": "0001564590-21-008056",
+      "report_date": "2020-12-31"
+    },
+    "2021-12-31": {
+      "accession": "0001564590-22-006303",
+      "report_date": "2021-12-31"
+    },
+    "2022-12-31": {
+      "accession": "0000950170-23-003783",
+      "report_date": "2022-12-31"
+    },
+    "2023-12-31": {
+      "accession": "0000950170-24-020176",
+      "report_date": "2023-12-31"
+    },
+    "2024-12-31": {
+      "accession": "0000950170-25-026661",
+      "report_date": "2024-12-31"
+    },
+    "2025-12-31": {
+      "accession": "0001193125-26-067161",
+      "report_date": "2025-12-31"
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "ticker": "HD",
+  "company": "HOME DEPOT, INC.",
+  "cik": 354950,
+  "unit": "USD",
+  "period_ends": [
+    "2017-01-29",
+    "2018-01-28",
+    "2019-02-03",
+    "2020-02-02",
+    "2021-01-31",
+    "2022-01-30",
+    "2023-01-29",
+    "2024-01-28",
+    "2025-02-02",
+    "2026-02-01"
+  ],
+  "revenue": {
+    "2017-01-29": 94595000000,
+    "2018-01-28": 100904000000,
+    "2019-02-03": 108203000000,
+    "2020-02-02": 110225000000,
+    "2021-01-31": 132110000000,
+    "2022-01-30": 151157000000,
+    "2023-01-29": 157403000000,
+    "2024-01-28": 152669000000,
+    "2025-02-02": 159514000000,
+    "2026-02-01": 164683000000
+  },
+  "pretax_income": {
+    "2017-01-29": 12491000000,
+    "2018-01-28": 13698000000,
+    "2019-02-03": 14556000000,
+    "2020-02-02": 14715000000,
+    "2021-01-31": 16978000000,
+    "2022-01-30": 21737000000,
+    "2023-01-29": 22477000000,
+    "2024-01-28": 19924000000,
+    "2025-02-02": 19406000000,
+    "2026-02-01": 18602000000
+  },
+  "revenue_tags": [
+    "RevenueFromContractWithCustomerExcludingAssessedTax"
+  ],
+  "pretax_tags": [
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+  ],
+  "disagreements": [],
+  "differs_from_five_year_page": [],
+  "deals": [
+    {
+      "name": "HD Holdings Inc",
+      "member": "hd:HDHoldingsIncMember",
+      "date": "2020-12-24",
+      "fiscal_year_end": "2021-01-31",
+      "size": 8700000000,
+      "measure": "consideration",
+      "prior_total_assets": 51236000000,
+      "share_of_assets": 0.1698024826294012,
+      "significant": true,
+      "accession": "0000354950-23-000059"
+    },
+    {
+      "name": "Series of Individually Immaterial Business Acquisitions",
+      "member": "us-gaap:SeriesOfIndividuallyImmaterialBusinessAcquisitionsMember",
+      "date": "2024-01-28",
+      "fiscal_year_end": "2024-01-28",
+      "size": 1500000000,
+      "measure": "consideration",
+      "prior_total_assets": 76445000000,
+      "share_of_assets": 0.019621950421871936,
+      "significant": false,
+      "accession": "0000354950-25-000085"
+    },
+    {
+      "name": "SRS Acquisition",
+      "member": "hd:SRSAcquisitionMember",
+      "date": "2024-06-18",
+      "fiscal_year_end": "2025-02-02",
+      "size": 18028000000,
+      "measure": "consideration",
+      "prior_total_assets": 76530000000,
+      "share_of_assets": 0.23556775120867635,
+      "significant": true,
+      "accession": "0001628280-26-019436"
+    },
+    {
+      "name": "GMS Inc",
+      "member": "hd:GMSIncMember",
+      "date": "2025-09-04",
+      "fiscal_year_end": "2026-02-01",
+      "size": 5081000000,
+      "measure": "consideration",
+      "prior_total_assets": 96119000000,
+      "share_of_assets": 0.052861557028267045,
+      "significant": false,
+      "accession": "0001628280-26-019436"
+    }
+  ],
+  "standards": [
+    {
+      "standard": "ASC 606 (revenue)",
+      "fiscal_year_end": "2019-02-03",
+      "required_for_years_beginning_after": "2017-12-15"
+    },
+    {
+      "standard": "ASC 842 (leases)",
+      "fiscal_year_end": "2020-02-02",
+      "required_for_years_beginning_after": "2018-12-15"
+    }
+  ],
+  "significance_test": "SEC Regulation S-X Rule 1-02(w)(1)(i): consideration >= 10% of total assets at the prior fiscal year end",
+  "filings": {
+    "2017-01-29": {
+      "accession": "0000354950-17-000005",
+      "report_date": "2017-01-29"
+    },
+    "2018-01-28": {
+      "accession": "0000354950-18-000019",
+      "report_date": "2018-01-28"
+    },
+    "2019-02-03": {
+      "accession": "0000354950-19-000010",
+      "report_date": "2019-02-03"
+    },
+    "2020-02-02": {
+      "accession": "0000354950-20-000015",
+      "report_date": "2020-02-02"
+    },
+    "2021-01-31": {
+      "accession": "0000354950-21-000089",
+      "report_date": "2021-01-31"
+    },
+    "2022-01-30": {
+      "accession": "0000354950-22-000070",
+      "report_date": "2022-01-30"
+    },
+    "2023-01-29": {
+      "accession": "0000354950-23-000059",
+      "report_date": "2023-01-29"
+    },
+    "2024-01-28": {
+      "accession": "0000354950-24-000062",
+      "report_date": "2024-01-28"
+    },
+    "2025-02-02": {
+      "accession": "0000354950-25-000085",
+      "report_date": "2025-02-02"
+    },
+    "2026-02-01": {
+      "accession": "0001628280-26-019436",
+      "report_date": "2026-02-01"
+    }
+  }
+}

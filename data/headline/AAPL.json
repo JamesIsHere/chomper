@@ -1,0 +1,108 @@
+{
+  "ticker": "AAPL",
+  "company": "Apple Inc.",
+  "cik": 320193,
+  "unit": "USD",
+  "period_ends": [
+    "2016-09-24",
+    "2017-09-30",
+    "2018-09-29",
+    "2019-09-28",
+    "2020-09-26",
+    "2021-09-25",
+    "2022-09-24",
+    "2023-09-30",
+    "2024-09-28",
+    "2025-09-27"
+  ],
+  "revenue": {
+    "2016-09-24": 215639000000,
+    "2017-09-30": 229234000000,
+    "2018-09-29": 265595000000,
+    "2019-09-28": 260174000000,
+    "2020-09-26": 274515000000,
+    "2021-09-25": 365817000000,
+    "2022-09-24": 394328000000,
+    "2023-09-30": 383285000000,
+    "2024-09-28": 391035000000,
+    "2025-09-27": 416161000000
+  },
+  "pretax_income": {
+    "2016-09-24": 61372000000,
+    "2017-09-30": 64089000000,
+    "2018-09-29": 72903000000,
+    "2019-09-28": 65737000000,
+    "2020-09-26": 67091000000,
+    "2021-09-25": 109207000000,
+    "2022-09-24": 119103000000,
+    "2023-09-30": 113736000000,
+    "2024-09-28": 123485000000,
+    "2025-09-27": 132729000000
+  },
+  "revenue_tags": [
+    "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "Revenues",
+    "SalesRevenueNet"
+  ],
+  "pretax_tags": [
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+  ],
+  "disagreements": [],
+  "differs_from_five_year_page": [],
+  "deals": [],
+  "standards": [
+    {
+      "standard": "ASC 606 (revenue)",
+      "fiscal_year_end": "2019-09-28",
+      "required_for_years_beginning_after": "2017-12-15"
+    },
+    {
+      "standard": "ASC 842 (leases)",
+      "fiscal_year_end": "2020-09-26",
+      "required_for_years_beginning_after": "2018-12-15"
+    }
+  ],
+  "significance_test": "SEC Regulation S-X Rule 1-02(w)(1)(i): consideration >= 10% of total assets at the prior fiscal year end",
+  "filings": {
+    "2016-09-24": {
+      "accession": "0001628280-16-020309",
+      "report_date": "2016-09-24"
+    },
+    "2017-09-30": {
+      "accession": "0000320193-17-000070",
+      "report_date": "2017-09-30"
+    },
+    "2018-09-29": {
+      "accession": "0000320193-18-000145",
+      "report_date": "2018-09-29"
+    },
+    "2019-09-28": {
+      "accession": "0000320193-19-000119",
+      "report_date": "2019-09-28"
+    },
+    "2020-09-26": {
+      "accession": "0000320193-20-000096",
+      "report_date": "2020-09-26"
+    },
+    "2021-09-25": {
+      "accession": "0000320193-21-000105",
+      "report_date": "2021-09-25"
+    },
+    "2022-09-24": {
+      "accession": "0000320193-22-000108",
+      "report_date": "2022-09-24"
+    },
+    "2023-09-30": {
+      "accession": "0000320193-23-000106",
+      "report_date": "2023-09-30"
+    },
+    "2024-09-28": {
+      "accession": "0000320193-24-000123",
+      "report_date": "2024-09-28"
+    },
+    "2025-09-27": {
+      "accession": "0000320193-25-000079",
+      "report_date": "2025-09-27"
+    }
+  }
+}

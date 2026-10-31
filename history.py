@@ -57,8 +57,8 @@ def cik_for(ticker, ua):
     raise SystemExit(f"ticker {ticker} not in SEC company_tickers.json")
 
 
-def ten_ks(cik, ua):
-    """Latest original 10-K and the one whose period ends two years earlier."""
+def all_ten_ks(cik, ua):
+    """Every original 10-K, newest first."""
     sub = get_json(f"https://data.sec.gov/submissions/CIK{cik:010d}.json", f"{cik}/submissions.json", ua)
     pages = [sub["filings"]["recent"]]  # heavy filers spill older filings into extra pages
     for extra in sub["filings"].get("files", []):
@@ -69,6 +69,12 @@ def ten_ks(cik, ua):
                       if f == "10-K"), key=lambda f: f["report_date"], reverse=True)
     if not filings:
         raise SystemExit(f"CIK {cik}: no 10-K filings")
+    return filings
+
+
+def ten_ks(cik, ua):
+    """Latest original 10-K and the one whose period ends two years earlier."""
+    filings = all_ten_ks(cik, ua)
     latest = filings[0]
     # Two fiscal years back; 52/53-week years drift a few days, so match by distance, not calendar year.
     target = date.fromisoformat(latest["report_date"]).toordinal() - 730
