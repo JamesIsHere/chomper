@@ -11,10 +11,12 @@ import re
 from datetime import date
 from html import escape
 
-from build import ROOT
+import header
+from header import nav
+from pull import ROOT
 
 DATA = ROOT / "data" / "history"
-OUT = ROOT / "docs" / "history"
+OUT = ROOT / "docs"
 
 
 def m(dollars, sign=True):
@@ -150,14 +152,6 @@ def dollar_row(l, changes, scale):
     return f'<tr>{label_html(l)}{"".join(cells)}</tr>'
 
 
-MENU = [("index.html", "All"), ("decisions.html", "Decisioning")]
-
-
-def nav(current=None):
-    """Main header menu; companies are listed vertically on the All page, not here."""
-    here = ' aria-current="page"'
-    links = "".join(f'<a href="{href}"{here if href == current else ""}>{label}</a>' for href, label in MENU)
-    return f'<nav class="menu">{links}</nav>'
 
 
 DECISION = re.compile(r"^## (\d{4}-\d{2}-\d{2}) \| (.+)$")
@@ -265,7 +259,15 @@ def page(h):
     return TEMPLATE.format(company=escape(h["company"]), ticker=escape(h["ticker"]), heads=heads, top=top,
                            rows="\n".join(rows), years=years, levels=levels, trend=trend_chart(h), filings=filings,
                            disagreements=disagreements, ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
-                           last=year(h["period_ends"][-1]), nav=nav(), css=CSS)
+                           last=year(h["period_ends"][-1]), nav=nav(), bridge_link=bridge_link(h["ticker"]), css=CSS)
+
+
+def bridge_link(ticker):
+    """Link to the company's one-year bridge, only if build_bridge has written one (run it first)."""
+    if not (OUT / "bridge" / f"{ticker}.html").is_file():
+        return ""
+    return (f'<p class="crossref"><a href="bridge/{escape(ticker)}.html">One-year bridge</a>: the latest year\'s '
+            f'operating income, bar by bar, with management\'s explanations quoted from the 10-K.</p>')
 
 
 def index_row(c, h):
@@ -325,7 +327,7 @@ def main():
                                                  retrieved=escape(universe["retrieved"]), nav=nav("index.html"), css=CSS),
                                     encoding="utf-8")
     (OUT / "decisions.html").write_text(decisions_page(), encoding="utf-8")
-    print(f"docs/history/: {len(companies)} company pages, index.html and decisions.html "
+    print(f"docs/: {len(companies)} company pages, index.html and decisions.html "
           f"({len(universe['companies'])} S&P 500 companies listed)")
 
 
@@ -385,28 +387,23 @@ table.decisions .why { color: var(--ink-2); font-size: .85rem; }
 table.decisions .status { color: var(--down); font-size: .8rem; }
 tr.superseded th, tr.superseded td.text p:not(.status) { color: var(--ink-3); text-decoration: line-through; }
 table.index thead th { white-space: normal; vertical-align: bottom; }
-.menu { display: flex; flex-wrap: wrap; gap: .25rem; margin: 0 0 1.5rem; padding-bottom: .75rem;
-  border-bottom: 1px solid var(--rule); }
-.menu a { padding: .3rem .65rem; border-radius: 4px; text-decoration: none; font-size: .9rem; font-weight: 600;
-  color: var(--ink-2); }
-.menu a:hover { background: var(--rule); }
-.menu a[aria-current="page"] { background: var(--ink); color: var(--bg); }
 .note, footer { font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
 footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
-"""
+""" + header.CSS
 
 TEMPLATE = """<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{ticker} Cost Response</title>
+<title>{ticker} - chomper</title>
 <style>{css}</style>
 </head>
 <body>
 <main>
 {nav}
 <h1>{company}: which costs moved with revenue, {first} to {last}</h1>
+{bridge_link}
 {trend}
 <div class="wrap"><table>
 <thead><tr><th></th>{years}</tr></thead>
@@ -451,7 +448,7 @@ INDEX = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cost Response Pages</title>
+<title>All companies - chomper</title>
 <style>{css}</style>
 </head>
 <body>
@@ -477,7 +474,7 @@ DECISIONS = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Decisions Log</title>
+<title>Decisions - chomper</title>
 <style>{css}</style>
 </head>
 <body>

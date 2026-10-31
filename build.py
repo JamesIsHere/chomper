@@ -13,11 +13,13 @@ from html import escape
 from pathlib import Path
 from urllib.parse import quote as urlquote
 
+import header
 from pull import YEARS
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
-OUT = ROOT / "docs" / "index.html"
+OUT = ROOT / "docs" / "bridge" / "ODFL.html"
+UP = "../" * (len(OUT.relative_to(ROOT / "docs").parts) - 1)  # header links resolve from the page's folder
 
 AXIS_MIN, AXIS_MAX, TICK = 900_000, 1_600_000, 100_000  # USD thousands
 TABLE_ROW = re.compile(r"^(.*?[A-Za-z)])\s+((?:\$\s?)?[\d,.]+\s+(?:\$\s?)?[\d,.]+(?:\s+.*)?)$")
@@ -264,6 +266,7 @@ def main():
         reviewer=escape(commentary["reviewed_by"]),
         reviewed_on=escape(commentary["reviewed_on"]), axis_min=m(AXIS_MIN, False).replace(".0M", "M"),
         views=json.dumps(views(bridge["bars"], start)).replace("</", "<\\/"), script=SCRIPT,
+        nav=header.nav(prefix=UP), menu_css=header.CSS, up=UP,
     )
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(page, encoding="utf-8")
@@ -275,7 +278,7 @@ TEMPLATE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Old Dominion Operating Income Bridge</title>
+<title>ODFL bridge, FY2025 - chomper</title>
 <meta name="description" content="Why {company}'s operating income fell from FY2024 to FY2025, bar by bar, with management's explanations quoted and linked to the 10-K.">
 <style>
 :root {{
@@ -382,14 +385,17 @@ footer {{ margin-top: 3rem; font-size: .85rem; color: var(--ink-2); max-width: 4
 @media (forced-colors: active) {{
   .bar {{ border: 1px solid CanvasText; }}
 }}
+{menu_css}
 </style>
 </head>
 <body>
 <main>
+{nav}
 <h1>Why Old Dominion's operating income fell {change} in 2025</h1>
 <p class="lede">Operating income went from <b>{start}</b> in 2024 to <b>{end}</b> in 2025 ({change_pct}%).
 Shipping less freight cost <b>{volume}</b>; higher prices made back <b>{yield_}</b>; costs fell, adding <b>{cost}</b>.
 Open any row for management's explanation, quoted from the 10-K and linked to the page it came from.</p>
+<p class="crossref"><a href="{up}ODFL.html">Company page</a>: five years of Old Dominion's cost lines as a share of revenue.</p>
 
 <p class="legend"><span><i style="background:var(--up)"></i>Raised operating income</span>
 <span><i style="background:var(--down)"></i>Lowered operating income</span>

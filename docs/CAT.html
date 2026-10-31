@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CAT Cost Response</title>
+<title>CAT - chomper</title>
 <style>
 :root { color-scheme: light; --s1: #2a78d6; --s2: #eb6834; --bg: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --ink-3: #75746f;
   --rule: #e2e1dc; --up: #1f8a4c; --down: #d03b3b; --link: #1c5cab; }
@@ -60,20 +60,25 @@ table.decisions .why { color: var(--ink-2); font-size: .85rem; }
 table.decisions .status { color: var(--down); font-size: .8rem; }
 tr.superseded th, tr.superseded td.text p:not(.status) { color: var(--ink-3); text-decoration: line-through; }
 table.index thead th { white-space: normal; vertical-align: bottom; }
-.menu { display: flex; flex-wrap: wrap; gap: .25rem; margin: 0 0 1.5rem; padding-bottom: .75rem;
-  border-bottom: 1px solid var(--rule); }
+.note, footer { font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+
+.menu { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem; margin: 0 0 1.5rem;
+  padding-bottom: .75rem; border-bottom: 1px solid var(--rule); }
 .menu a { padding: .3rem .65rem; border-radius: 4px; text-decoration: none; font-size: .9rem; font-weight: 600;
   color: var(--ink-2); }
 .menu a:hover { background: var(--rule); }
 .menu a[aria-current="page"] { background: var(--ink); color: var(--bg); }
-.note, footer { font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
-footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+.menu a.brand { color: var(--ink); font-size: 1.05rem; padding-left: 0; margin-right: .75rem; }
+.menu a.brand:hover { background: none; text-decoration: underline; }
+.crossref { font-size: .9rem; color: var(--ink-2); margin: 0 0 1rem; }
 </style>
 </head>
 <body>
 <main>
-<nav class="menu"><a href="index.html">All</a><a href="decisions.html">Decisioning</a></nav>
+<nav class="menu"><a class="brand" href="index.html">chomper</a><a href="index.html">All</a><a href="decisions.html">Decisioning</a></nav>
 <h1>CATERPILLAR INC: which costs moved with revenue, 2021 to 2025</h1>
+
 <p class="legend"><span><i style="background:var(--s1)"></i>Revenue</span><span><i style="background:var(--s2)"></i>Pre-tax income</span><span class="dim">Indexed: 2021 = 100</span></p><svg class="trend" viewBox="0 0 640 220" role="img" aria-label="Revenue and pre-tax income, indexed to 2021 = 100; values in the table below"><line x1="36" x2="490" y1="194.0" y2="194.0" class="g"/><text x="30" y="198.0" class="ax" text-anchor="end">100</text><line x1="36" x2="490" y1="133.3" y2="133.3" class="g"/><text x="30" y="137.3" class="ax" text-anchor="end">125</text><line x1="36" x2="490" y1="72.7" y2="72.7" class="g"/><text x="30" y="76.7" class="ax" text-anchor="end">150</text><line x1="36" x2="490" y1="12.0" y2="12.0" class="g"/><text x="30" y="16.0" class="ax" text-anchor="end">175</text><text x="36.0" y="214" class="ax" text-anchor="middle">2021</text><text x="149.5" y="214" class="ax" text-anchor="middle">2022</text><text x="263.0" y="214" class="ax" text-anchor="middle">2023</text><text x="376.5" y="214" class="ax" text-anchor="middle">2024</text><text x="490.0" y="214" class="ax" text-anchor="middle">2025</text><polyline points="36.0,194.0 149.5,153.7 263.0,117.4 376.5,128.1 490.0,114.9" fill="none" style="stroke:var(--s1)" stroke-width="2"/><circle cx="36.0" cy="194.0" r="4" style="fill:var(--s1)" class="dot"/><circle cx="149.5" cy="153.7" r="4" style="fill:var(--s1)" class="dot"/><circle cx="263.0" cy="117.4" r="4" style="fill:var(--s1)" class="dot"/><circle cx="376.5" cy="128.1" r="4" style="fill:var(--s1)" class="dot"/><circle cx="490.0" cy="114.9" r="4" style="fill:var(--s1)" class="dot"/><polyline points="36.0,194.0 149.5,177.8 263.0,50.7 376.5,41.1 490.0,95.3" fill="none" style="stroke:var(--s2)" stroke-width="2"/><circle cx="36.0" cy="194.0" r="4" style="fill:var(--s2)" class="dot"/><circle cx="149.5" cy="177.8" r="4" style="fill:var(--s2)" class="dot"/><circle cx="263.0" cy="50.7" r="4" style="fill:var(--s2)" class="dot"/><circle cx="376.5" cy="41.1" r="4" style="fill:var(--s2)" class="dot"/><circle cx="490.0" cy="95.3" r="4" style="fill:var(--s2)" class="dot"/><text x="500.0" y="118.9" class="lab">Revenue 133</text><text x="500.0" y="99.3" class="lab">Pre-tax income 141</text><rect x="36.0" y="12" width="113.5" height="182" class="hit"><title>2021: revenue $50.97B (100), pre-tax income $8.20B (100)</title></rect><rect x="92.8" y="12" width="113.5" height="182" class="hit"><title>2022: revenue $59.43B (117), pre-tax income $8.75B (107)</title></rect><rect x="206.2" y="12" width="113.5" height="182" class="hit"><title>2023: revenue $67.06B (132), pre-tax income $13.05B (159)</title></rect><rect x="319.8" y="12" width="113.5" height="182" class="hit"><title>2024: revenue $64.81B (127), pre-tax income $13.37B (163)</title></rect><rect x="433.2" y="12" width="113.5" height="182" class="hit"><title>2025: revenue $67.59B (133), pre-tax income $11.54B (141)</title></rect></svg>
 <div class="wrap"><table>
 <thead><tr><th></th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>

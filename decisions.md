@@ -136,3 +136,9 @@ Group: Build and process
 Decision: The project is chomper, an equity research project; the GitHub repo is JamesIsHere/chomper.
 Why: The work grew from one bridge into reading any S&P 500 company's filings for what moves earnings; the name fits where it is going.
 Status: active
+
+## 2026-10-30 | One-year page approved
+Group: Evidence and review
+Decision: James reviewed the ODFL one-year bridge (wording, layout, the three findings) and approved it as it stands.
+Why: Good in its current form; work moves on to the longer windows.
+Status: active
