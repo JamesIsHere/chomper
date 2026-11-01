@@ -1,4 +1,5 @@
-"""Ten years of revenue, pre-tax income and margin, with every break marked.
+"""Ten years of revenue, operating income (where the company reports it), pre-tax income and margin, with
+every break marked.
 
 The long window of the time-windows rule: headline numbers only. Values come from SEC companyfacts
 (the facts in every 10-K the company filed). For each year the latest 10-K that reports it wins (a value
@@ -17,6 +18,10 @@ Breaks, read from each year's 10-K XBRL instance:
                 tagged fails the run.
   restatements  every disagreement between 10-Ks about the same year; years before a restated stretch are
                 on the old basis.
+
+Changes year over year are on one accounting basis: each comes from the latest 10-K that shows both years, so
+a recast (restatement, retrospective change in principle, reclassification, discontinued operations) never
+shows up as growth. Modified retrospective adoptions recast nothing and stay a marked break.
   ASC 606/842   the fiscal year each became required, from the company's fiscal year start. Early adoption
                 is not read (the XBRL tagging of adoption is inconsistent across filers); a fully
                 retrospective early adoption shows up as a restatement instead.
@@ -37,6 +42,7 @@ YEARS = 10
 SIGNIFICANT = 0.10  # S-X Rule 1-02(w)(1)(i), investment test
 FORMS = ("10-K", "10-K/A")
 REVENUE = re.compile(r"^(Revenues|RevenuesNetOfInterestExpense|RevenueFromContractWithCustomer\w*|SalesRevenue\w*)$")
+OPERATING = ["OperatingIncomeLoss"]
 PRETAX = ["IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
           "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"]
 # Deal size, best evidence first: consideration; net assets acquired including goodwill (equal to consideration
@@ -133,6 +139,35 @@ def series(g, candidates, reference, page, what):
         if not 350 <= days(a, b) <= 380:
             raise SystemExit(f"{what}: fiscal years {a} and {b} are not consecutive")
     return out, [t for t in accepted if any(e in have[t] for e in ends)], disagreements
+
+
+def pairs(g, tags, levels, what):
+    """{end: comparison} for each year after the first, on one accounting basis: the latest 10-K that reports
+    both the year and the one before it (every 10-K presents its comparative year on its own basis). basis_changed:
+    that 10-K's figures differ from the levels shown, because a later filing recast one of the two years, so the
+    change is not the ratio of the levels."""
+    by = {}  # accession: (filed, {end: {values}})
+    for t in tags:
+        for e, rows in annual(g, t).items():
+            for filed, v, a in rows:
+                by.setdefault(a, (filed, {}))[1].setdefault(e, set()).add(v)
+    ends, out = list(levels), {}
+    for prev, e in zip(ends, ends[1:]):
+        both = [(filed, a) for a, (filed, vals) in by.items() if prev in vals and e in vals]
+        if not both:
+            raise SystemExit(f"{what} {e}: no 10-K reports both {prev} and {e}")
+        filed, a = max(both)
+        vals = by[a][1]
+
+        def one(end):
+            best = min(vals[end], key=zeros)  # the most precise of the values this filing gives the year
+            if any(not same(v, best) for v in vals[end]):
+                raise SystemExit(f"{what} {end}: 10-K {a} reports {sorted(vals[end])} under {tags}")
+            return best
+        p, v = one(prev), one(e)
+        out[e] = {"prior_end": prev, "prior": p, "value": v, "accession": a, "filed": filed,
+                  "basis_changed": not (same(p, levels[prev]) and same(v, levels[e]))}
+    return out
 
 
 def instant(g, tag, near):
@@ -236,10 +271,18 @@ def main():
                                   h["pretax_income"], "pre-tax income")
     if list(revenue) != list(pretax):
         raise SystemExit(f"revenue years {list(revenue)} != pre-tax income years {list(pretax)}")
+    operating, op_tags, d3 = None, [], []
+    if h["operating_income"] is not None:  # only where the five-year page has it (banks and insurers report none)
+        operating, op_tags, d3 = series(g, OPERATING, {e: h["operating_income"][e] for e in anchor_years},
+                                        h["operating_income"], "operating income")
+        if list(operating) != list(revenue):
+            raise SystemExit(f"operating income years {list(operating)} != revenue years {list(revenue)}")
     ends = list(revenue)
     off_page = [(e, what) for e in h["period_ends"] if e in revenue
                 for what, a, b in (("revenue", revenue[e], h["revenue"][e]),
-                                   ("pre-tax income", pretax[e], h["pretax_income"][e])) if a != b]
+                                   ("pre-tax income", pretax[e], h["pretax_income"][e]))
+                + ((("operating income", operating[e], h["operating_income"][e]),) if operating else ())
+                if a != b]
 
     # One 10-K per year; deals of a fiscal year appear in that year's 10-K and the next.
     filings = {}
@@ -278,8 +321,12 @@ def main():
                                  f"of prior total assets) not explained by the deals tagged that year")
 
     out = {"ticker": ticker, "company": h["company"], "cik": cik, "unit": "USD", "period_ends": ends,
-           "revenue": revenue, "pretax_income": pretax, "revenue_tags": rev_tags, "pretax_tags": pre_tags,
-           "disagreements": d1 + d2, "differs_from_five_year_page": off_page, "deals": out_deals,
+           "revenue": revenue, "operating_income": operating, "pretax_income": pretax, "revenue_tags": rev_tags,
+           "operating_tags": op_tags, "pretax_tags": pre_tags,
+           "changes": {"revenue": pairs(g, rev_tags, revenue, "revenue"),
+                       "operating_income": pairs(g, op_tags, operating, "operating income") if operating else None,
+                       "pretax_income": pairs(g, pre_tags, pretax, "pre-tax income")},
+           "disagreements": d1 + d2 + d3, "differs_from_five_year_page": off_page, "deals": out_deals,
            "standards": standards(ends),
            "significance_test": "SEC Regulation S-X Rule 1-02(w)(1)(i): consideration >= 10% of total assets "
                                 "at the prior fiscal year end",
@@ -287,12 +334,18 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / f"{ticker}.json").write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8")
     sig = [d for d in out_deals if d["significant"]]
-    print(f"data/headline/{ticker}.json: {ends[0]} to {ends[-1]}; revenue tags {rev_tags}; pre-tax tags "
-          f"{[t[:60] for t in pre_tags]}; {len(d1 + d2)} restated value(s); {len(out_deals)} deal(s), "
+    print(f"data/headline/{ticker}.json: {ends[0]} to {ends[-1]}; revenue tags {rev_tags}; operating tags "
+          f"{op_tags or 'none (not reported)'}; pre-tax tags {[t[:60] for t in pre_tags]}; "
+          f"{len(d1 + d2 + d3)} restated value(s); {len(out_deals)} deal(s), "
           f"{len(sig)} significant: " + ", ".join(f"{d['name']} {d['date']} {d['share_of_assets']:.0%} "
                                                   f"({d['measure']})" for d in sig))
     for e, what in off_page:
         print(f"  [!] {what} {e} differs from the five-year page")
+    for what, ch in out["changes"].items():
+        for e, c in (ch or {}).items():
+            if c["basis_changed"]:
+                print(f"  basis changed: {what} {c['prior_end']} -> {e} measured in {c['accession']}: "
+                      f"{c['prior']:,} -> {c['value']:,} ({(c['value'] - c['prior']) / abs(c['prior']):+.1%})")
 
 
 if __name__ == "__main__":

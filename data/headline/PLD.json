@@ -27,6 +27,18 @@
     "2024-12-31": 8201610000,
     "2025-12-31": 8790127000
   },
+  "operating_income": {
+    "2016-12-31": 668378000,
+    "2017-12-31": 1954031000,
+    "2018-12-31": 1687998000,
+    "2019-12-31": 1849766000,
+    "2020-12-31": 2118944000,
+    "2021-12-31": 3206996000,
+    "2022-12-31": 3467538000,
+    "2023-12-31": 3707792000,
+    "2024-12-31": 4415920000,
+    "2025-12-31": 4357864000
+  },
   "pretax_income": {
     "2016-12-31": 1347104000,
     "2017-12-31": 1815568000,
@@ -42,10 +54,265 @@
   "revenue_tags": [
     "Revenues"
   ],
+  "operating_tags": [
+    "OperatingIncomeLoss"
+  ],
   "pretax_tags": [
     "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
   ],
-  "disagreements": [],
+  "changes": {
+    "revenue": {
+      "2017-12-31": {
+        "prior_end": "2016-12-31",
+        "prior": 2533135000,
+        "value": 2618134000,
+        "accession": "0001564590-19-002872",
+        "filed": "2019-02-13",
+        "basis_changed": false
+      },
+      "2018-12-31": {
+        "prior_end": "2017-12-31",
+        "prior": 2618134000,
+        "value": 2804449000,
+        "accession": "0001564590-20-004096",
+        "filed": "2020-02-11",
+        "basis_changed": false
+      },
+      "2019-12-31": {
+        "prior_end": "2018-12-31",
+        "prior": 2804449000,
+        "value": 3330621000,
+        "accession": "0001564590-21-005312",
+        "filed": "2021-02-11",
+        "basis_changed": false
+      },
+      "2020-12-31": {
+        "prior_end": "2019-12-31",
+        "prior": 3330621000,
+        "value": 4438735000,
+        "accession": "0001564590-22-004436",
+        "filed": "2022-02-09",
+        "basis_changed": false
+      },
+      "2021-12-31": {
+        "prior_end": "2020-12-31",
+        "prior": 4438735000,
+        "value": 4759440000,
+        "accession": "0001564590-23-001902",
+        "filed": "2023-02-14",
+        "basis_changed": false
+      },
+      "2022-12-31": {
+        "prior_end": "2021-12-31",
+        "prior": 4759440000,
+        "value": 5973692000,
+        "accession": "0000950170-24-014539",
+        "filed": "2024-02-13",
+        "basis_changed": false
+      },
+      "2023-12-31": {
+        "prior_end": "2022-12-31",
+        "prior": 5973692000,
+        "value": 8023469000,
+        "accession": "0000950170-25-021272",
+        "filed": "2025-02-14",
+        "basis_changed": false
+      },
+      "2024-12-31": {
+        "prior_end": "2023-12-31",
+        "prior": 8023469000,
+        "value": 8201610000,
+        "accession": "0001193125-26-051453",
+        "filed": "2026-02-13",
+        "basis_changed": false
+      },
+      "2025-12-31": {
+        "prior_end": "2024-12-31",
+        "prior": 8201610000,
+        "value": 8790127000,
+        "accession": "0001193125-26-051453",
+        "filed": "2026-02-13",
+        "basis_changed": false
+      }
+    },
+    "operating_income": {
+      "2017-12-31": {
+        "prior_end": "2016-12-31",
+        "prior": 668378000,
+        "value": 771066000,
+        "accession": "0001564590-19-002872",
+        "filed": "2019-02-13",
+        "basis_changed": true
+      },
+      "2018-12-31": {
+        "prior_end": "2017-12-31",
+        "prior": 1954031000,
+        "value": 1687998000,
+        "accession": "0001564590-20-004096",
+        "filed": "2020-02-11",
+        "basis_changed": false
+      },
+      "2019-12-31": {
+        "prior_end": "2018-12-31",
+        "prior": 1687998000,
+        "value": 1849766000,
+        "accession": "0001564590-21-005312",
+        "filed": "2021-02-11",
+        "basis_changed": false
+      },
+      "2020-12-31": {
+        "prior_end": "2019-12-31",
+        "prior": 1849766000,
+        "value": 2118944000,
+        "accession": "0001564590-22-004436",
+        "filed": "2022-02-09",
+        "basis_changed": false
+      },
+      "2021-12-31": {
+        "prior_end": "2020-12-31",
+        "prior": 2118944000,
+        "value": 3206996000,
+        "accession": "0001564590-23-001902",
+        "filed": "2023-02-14",
+        "basis_changed": false
+      },
+      "2022-12-31": {
+        "prior_end": "2021-12-31",
+        "prior": 3206996000,
+        "value": 3467538000,
+        "accession": "0000950170-24-014539",
+        "filed": "2024-02-13",
+        "basis_changed": false
+      },
+      "2023-12-31": {
+        "prior_end": "2022-12-31",
+        "prior": 3467538000,
+        "value": 3707792000,
+        "accession": "0000950170-25-021272",
+        "filed": "2025-02-14",
+        "basis_changed": false
+      },
+      "2024-12-31": {
+        "prior_end": "2023-12-31",
+        "prior": 3707792000,
+        "value": 4415920000,
+        "accession": "0001193125-26-051453",
+        "filed": "2026-02-13",
+        "basis_changed": false
+      },
+      "2025-12-31": {
+        "prior_end": "2024-12-31",
+        "prior": 4415920000,
+        "value": 4357864000,
+        "accession": "0001193125-26-051453",
+        "filed": "2026-02-13",
+        "basis_changed": false
+      }
+    },
+    "pretax_income": {
+      "2017-12-31": {
+        "prior_end": "2016-12-31",
+        "prior": 1347104000,
+        "value": 1815568000,
+        "accession": "0001564590-19-002872",
+        "filed": "2019-02-13",
+        "basis_changed": false
+      },
+      "2018-12-31": {
+        "prior_end": "2017-12-31",
+        "prior": 1815568000,
+        "value": 1886290000,
+        "accession": "0001564590-20-004096",
+        "filed": "2020-02-11",
+        "basis_changed": false
+      },
+      "2019-12-31": {
+        "prior_end": "2018-12-31",
+        "prior": 1886290000,
+        "value": 1776363000,
+        "accession": "0001564590-21-005312",
+        "filed": "2021-02-11",
+        "basis_changed": false
+      },
+      "2020-12-31": {
+        "prior_end": "2019-12-31",
+        "prior": 1776363000,
+        "value": 1747088000,
+        "accession": "0001564590-22-004436",
+        "filed": "2022-02-09",
+        "basis_changed": false
+      },
+      "2021-12-31": {
+        "prior_end": "2020-12-31",
+        "prior": 1747088000,
+        "value": 3322848000,
+        "accession": "0001564590-23-001902",
+        "filed": "2023-02-14",
+        "basis_changed": false
+      },
+      "2022-12-31": {
+        "prior_end": "2021-12-31",
+        "prior": 3322848000,
+        "value": 3690810000,
+        "accession": "0000950170-24-014539",
+        "filed": "2024-02-13",
+        "basis_changed": false
+      },
+      "2023-12-31": {
+        "prior_end": "2022-12-31",
+        "prior": 3690810000,
+        "value": 3464183000,
+        "accession": "0000950170-25-021272",
+        "filed": "2025-02-14",
+        "basis_changed": false
+      },
+      "2024-12-31": {
+        "prior_end": "2023-12-31",
+        "prior": 3464183000,
+        "value": 4114878000,
+        "accession": "0001193125-26-051453",
+        "filed": "2026-02-13",
+        "basis_changed": false
+      },
+      "2025-12-31": {
+        "prior_end": "2024-12-31",
+        "prior": 4114878000,
+        "value": 3769316000,
+        "accession": "0001193125-26-051453",
+        "filed": "2026-02-13",
+        "basis_changed": false
+      }
+    }
+  },
+  "disagreements": [
+    {
+      "item": "operating income",
+      "period_end": "2017-12-31",
+      "value": 1954031000,
+      "other_value": 771066000,
+      "other_accession": "0001564590-19-002872",
+      "other_filed": "2019-02-13",
+      "tag": "OperatingIncomeLoss"
+    },
+    {
+      "item": "operating income",
+      "period_end": "2017-12-31",
+      "value": 1954031000,
+      "other_value": 771066000,
+      "other_accession": "0001564590-18-002228",
+      "other_filed": "2018-02-15",
+      "tag": "OperatingIncomeLoss"
+    },
+    {
+      "item": "operating income",
+      "period_end": "2018-12-31",
+      "value": 1687998000,
+      "other_value": 847002000,
+      "other_accession": "0001564590-19-002872",
+      "other_filed": "2019-02-13",
+      "tag": "OperatingIncomeLoss"
+    }
+  ],
   "differs_from_five_year_page": [],
   "deals": [
     {

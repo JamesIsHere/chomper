@@ -87,7 +87,7 @@ Status: active
 Group: Presentation
 Decision: Each company page opens with revenue and income by year with growth rates, plus a small chart indexed to the first year = 100.
 Why: Start simple; one axis, and the gap between the lines shows leverage.
-Status: active
+Status: superseded by 2026-11-01 Ten years at the top
 
 ## 2026-10-30 | Anchor on pre-tax income
 Group: Method
@@ -99,7 +99,7 @@ Status: active
 Group: Presentation
 Decision: The horizontal menu is the main header: All and Decisioning. Companies are listed vertically on the All page, not in the menu.
 Why: 500 tickers do not fit across a header.
-Status: active
+Status: superseded by 2026-11-01 Menu: Chomper and Decisioning
 
 ## 2026-10-30 | Industry grouping
 Group: Scope
@@ -147,4 +147,22 @@ Status: active
 Group: Method
 Decision: An acquisition is marked when its price is at least 10% of the buyer's total assets at the prior year end (SEC Regulation S-X Rule 1-02(w), the investment test), read from each 10-K's own XBRL. ASC 606 and 842 are marked in the year they became required. Every restatement is shown with the figure as first reported.
 Why: Marking breaks must be correct, not a judgment call: the SEC's own significance test replaces a threshold of ours, and each deal's size comes from the filing.
+Status: active
+
+## 2026-11-01 | Menu: Chomper and Decisioning
+Group: Presentation
+Decision: The menu across the top has two items, Chomper (the company list) and Decisioning. The separate All item is gone; the name is capitalized.
+Why: The name and All linked to the same page.
+Status: active
+
+## 2026-11-01 | Ten years at the top
+Group: Presentation
+Decision: Each company page opens with ten years of revenue, operating income (where the company reports it), pre-tax income and pre-tax margin, then the same ten years as the indexed chart. The five-year revenue and income table is removed; the five-year section starts at the cost grids. The list of breaks sits at the bottom of the page for now.
+Why: The five-year table repeated the last five columns of the ten-year one; operating income moved up so it does not drop off the page.
+Status: active
+
+## 2026-11-01 | Ten years on one accounting basis
+Group: Method
+Decision: The ten-year headline promises the same accounting basis, with acquisitions marked; it does not promise the same business. Each year's change comes from the latest 10-K that shows both years, and the chart chains those changes. A change that does not match the dollar figures above it, because a later 10-K recast one of the years, is marked with an asterisk. Modified retrospective adoptions (most ASC 606, nearly all ASC 842) recast nothing and stay marked breaks until the adoption notes are read.
+Why: Every 10-K shows its comparative year on its own basis, so same-filing growth handles restatements, retrospective changes, reclassifications and discontinued operations for every company without reading; same business needs the pro forma notes, company by company.
 Status: active

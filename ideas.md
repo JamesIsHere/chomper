@@ -58,4 +58,35 @@ Second pass (2026-10-30 session), James adds:
   working prior is that a 40% target was announced around 2008, not in the early
   2000s, when the share ran higher. Check before it goes on any page.
 
-Status (2026-10-30): partly started. The five-year cost-response pages (docs/history/) are the first build of this idea; the 10-year headline is the next step.
+Status (2026-11-01): partly started. The five-year cost-response pages (docs/TICKER.html) are the first build of this idea; the ten-year headline is built (headline.py, commit 8aba28d). The year-by-year MD&A coverage check is not built.
+
+## I2. Aggregate up: industries, then the macroeconomy (2026-11-01)
+
+James, 2026-11-01:
+
+> Eventually I feel like we aggregate this up and we see how industries are
+> doing and then we get an idea of how the macroeconomy is doing. In a big
+> world maybe we even start comparing macroeconomic indicators to see some
+> sort of elasticities or some sort of drivers.
+
+Short form: company pages -> sub-industry and sector totals -> an S&P 500
+read of the economy -> company and industry revenue and costs against macro
+series (elasticities, drivers).
+
+Notes (proposals, not decisions):
+
+- Needs the full S&P 500 run first; the raw filings are cached in data/raw/,
+  so the run does not have to anticipate the aggregation.
+- Things an honest sum has to handle: fiscal years that do not line up
+  (52/53-week years, January year-ends); survivorship (data/sp500.json is
+  today's membership, so a sum going back ten years leaves out companies
+  that left the index); acquisitions inside the index (an acquiree that was
+  itself a member, such as Activision, counted twice or moved between
+  sectors; Activision's membership is unverified); GICS reclassifications
+  over time; foreign revenue, which a US macro series does not drive.
+- Elasticities from 10-Ks give one point a year, ten per company. Quarterly
+  10-Q data gives about forty. Any regression on annual points alone is a
+  small sample.
+- Macro series already exist in other workshop projects (pharos,
+  economy-c, the FRED_API_KEY env var). Using them from here means reading
+  their outputs, not modifying those projects.

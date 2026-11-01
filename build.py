@@ -278,7 +278,7 @@ TEMPLATE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ODFL bridge, FY2025 - chomper</title>
+<title>ODFL bridge, FY2025 - Chomper</title>
 <meta name="description" content="Why {company}'s operating income fell from FY2024 to FY2025, bar by bar, with management's explanations quoted and linked to the 10-K.">
 <style>
 :root {{

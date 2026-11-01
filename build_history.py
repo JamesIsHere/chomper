@@ -98,12 +98,18 @@ def ratios(h):
 
 
 def trend_chart(h):
-    """Revenue and pre-tax income indexed to the first year = 100, one axis, inline SVG."""
+    """Revenue and pre-tax income indexed to the first year = 100 by chaining each year's same-basis change
+    (headline.py), one axis, inline SVG."""
     ends = h["period_ends"]
     series = [("Revenue", "--s1", h["revenue"]), ("Pre-tax income", "--s2", h["pretax_income"])]
-    if any(s[ends[0]] <= 0 for _, _, s in series):
-        return '<p class="note">Trend chart omitted: the first year is zero or negative, so it cannot be indexed.</p>'
-    idx = {name: [s[e] / s[ends[0]] * 100 for e in ends] for name, _, s in series}
+    chains = {"Revenue": h["changes"]["revenue"], "Pre-tax income": h["changes"]["pretax_income"]}
+    if any(c["prior"] <= 0 or c["value"] <= 0 for ch in chains.values() for c in ch.values()):
+        return '<p class="note">Trend chart omitted: a year is zero or negative, so growth cannot be chained.</p>'
+    idx = {}
+    for name, ch in chains.items():
+        idx[name] = [100.0]
+        for e in ends[1:]:
+            idx[name].append(idx[name][-1] * ch[e]["value"] / ch[e]["prior"])
     lo = min(min(v) for v in idx.values())
     hi = max(max(v) for v in idx.values())
     step = 10 if hi - lo <= 60 else 25 if hi - lo <= 150 else 50
@@ -139,7 +145,8 @@ def trend_chart(h):
     legend = "".join(f'<span><i style="background:var({var})"></i>{name}</span>' for name, var, _ in series)
     return (f'<p class="legend">{legend}<span class="dim">Indexed: {year(ends[0])} = 100</span></p>'
             f'<svg class="trend" viewBox="0 0 {W} {H}" role="img" aria-label="Revenue and pre-tax income, '
-            f'indexed to {year(ends[0])} = 100; values in the table below">{grid}{xs}{"".join(marks)}{labels}'
+            f'indexed to {year(ends[0])} = 100, each year\'s change on one accounting basis; values in the table '
+            f'above">{grid}{xs}{"".join(marks)}{labels}'
             f'{"".join(hits)}</svg>')
 
 
@@ -236,19 +243,6 @@ def page(h):
                     f'<tr class="sub"><th colspan="99">{heading}</th></tr>')
         rows += [dollar_row(l, changes, scale) for l in ls]
     ratio_rows = ratios(h)
-    ends = h["period_ends"]
-
-    def growth(series):
-        return "<td></td>" + "".join(f"<td>{(series[b] - series[a]) / abs(series[a]) * 100:+.1f}%</td>"
-                                     for a, b in zip(ends, ends[1:]))
-    def level(label, series):
-        return (f'<tr class="strong"><th scope="row">{label}</th>'
-                + "".join(f"<td>{m(series[e], False)}</td>" for e in ends)
-                + f'</tr><tr><th scope="row">&nbsp;&nbsp;change</th>{growth(series)}</tr>')
-    levels = level("Revenue", h["revenue"])
-    if h["operating_income"] is not None:
-        levels += level("Operating income", h["operating_income"])
-    levels += level("Pre-tax income", h["pretax_income"])
     years = "".join(f"<th>{year(e)}</th>" for e in h["period_ends"])
     filings = "; ".join(f'<a href="{escape(f["document_url"])}">10-K for {year(f["report_date"])}</a> '
                         f'(accession {escape(f["accession"])})' for f in h["filings"])
@@ -258,31 +252,33 @@ def page(h):
                      + "; ".join(f"{escape(d['item'])} {m(d['latest_filing'], False)} vs "
                                  f"{m(d['earlier_filing'], False)}" for d in h["disagreements"]) + ".")
     return TEMPLATE.format(company=escape(h["company"]), ticker=escape(h["ticker"]), heads=heads, top=top,
-                           rows="\n".join(rows), years=years, levels=levels, trend=trend_chart(h), filings=filings,
+                           rows="\n".join(rows), years=years, filings=filings,
                            disagreements=disagreements, ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
                            last=year(h["period_ends"][-1]), nav=nav(), bridge_link=bridge_link(h["ticker"]),
-                           ten_years=ten_years(h["ticker"]), css=CSS)
+                           ten_years=ten_years(h["ticker"]), ten_breaks=ten_breaks(h["ticker"]), css=CSS)
 
 
-def ten_years(ticker):
-    """The long window: revenue, pre-tax income and margin for ten years, every break marked. Only if
-    headline.py has written data/headline/<TICKER>.json (run it first)."""
+def headline(ticker):
+    """data/headline/<TICKER>.json; fails if headline.py has not run for this company (run it first)."""
     path = HEADLINE / f"{ticker}.json"
     if not path.is_file():
-        return ""
-    t = json.loads(path.read_text(encoding="utf-8"))
-    ends, rev, pre = t["period_ends"], t["revenue"], t["pretax_income"]
-    marks, notes = {e: [] for e in ends}, []
+        raise SystemExit(f"{path} missing: run python headline.py {ticker} first")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def ten_breaks(ticker):
+    """The ten-year breaks, one line each, at the bottom of the page: significant acquisitions, required
+    accounting standards, restatements."""
+    t = headline(ticker)
+    notes = []
     for d in t["deals"]:
         if d["significant"]:
             e = d["fiscal_year_end"]
-            marks[e].append("Acquisition")
             notes.append((e, f"Acquired {escape(d['name'])} on {d['date']} for {m(d['size'], False)} "
                              f"({escape(d['measure'])}), {d['share_of_assets']:.0%} of total assets at the prior "
                              f"year end."))
     for s in t["standards"]:
         e = s["fiscal_year_end"]
-        marks[e].append(s["standard"].split(" (")[0])
         notes.append((e, f"{escape(s['standard'])} required: the first fiscal year beginning after "
                          f"{s['required_for_years_beginning_after']}. The company may have adopted it earlier."))
     first = {}
@@ -291,34 +287,56 @@ def ten_years(ticker):
         if k not in first or d["other_filed"] < first[k]["other_filed"]:
             first[k] = d
     for (e, item), d in sorted(first.items()):
-        if "Restated" not in marks[e]:
-            marks[e].append("Restated")
         notes.append((e, f"{escape(item[0].upper() + item[1:])} {m(d['value'], False)} as later restated; first "
                          f"reported as {m(d['other_value'], False)} "
                          f"({(d['value'] - d['other_value']) / abs(d['other_value']) * 100:+.1f}%) in the 10-K "
                          f"filed {d['other_filed']}."))
-
-    def growth(series):
-        return "<td></td>" + "".join(f"<td>{(series[b] - series[a]) / abs(series[a]) * 100:+.1f}%</td>"
-                                     for a, b in zip(ends, ends[1:]))
-    rows = "".join(f'<tr class="strong"><th scope="row">{label}</th>'
-                   + "".join(f"<td>{m(s[e], False)}</td>" for e in ends)
-                   + f'</tr><tr><th scope="row">&nbsp;&nbsp;change</th>{growth(s)}</tr>'
-                   for label, s in (("Revenue", rev), ("Pre-tax income", pre)))
-    rows += ('<tr><th scope="row">Pre-tax margin</th>'
-             + "".join(f"<td>{pre[e] / rev[e] * 100:.1f}%</td>" for e in ends) + "</tr>")
-    rows += ('<tr class="marks"><th scope="row">Breaks</th>'
-             + "".join(f"<td>{'<br>'.join(marks[e])}</td>" for e in ends) + "</tr>")
     items = "".join(f"<li><b>{year(e)}</b>: {text}</li>" for e, text in sorted(notes, key=lambda n: n[0]))
-    return (f'<h2>Ten years</h2>\n<div class="wrap"><table>\n<thead><tr><th></th>'
-            + "".join(f"<th>{year(e)}</th>" for e in ends)
-            + f'</tr></thead>\n<tbody>\n{rows}\n</tbody></table></div>\n'
+    return ('<h2>Ten-year breaks</h2>\n'
             + (f'<ul class="breaks">{items}</ul>\n' if items else "")
             + '<p class="note">Breaks are marked, never cut out: a year after a large acquisition, a new accounting '
               'standard or a restatement may not compare cleanly with the years before it. An acquisition counts '
               'when its price is at least 10% of the buyer\'s total assets (SEC Regulation S-X Rule 1-02(w), the '
               'investment test). Where a later 10-K restated a year, the restated figure is shown; years before a '
               'restated stretch stay as first reported.</p>\n')
+
+
+def ten_years(ticker):
+    """The long window at the top of the page: revenue, operating income (where reported), pre-tax income and
+    margin for ten years, then revenue and pre-tax income as a chart indexed to the first year."""
+    t = headline(ticker)
+    ends, rev, op, pre = t["period_ends"], t["revenue"], t["operating_income"], t["pretax_income"]
+
+    def growth(changes):
+        """Each year's change from the 10-K that shows both years; marked where a later 10-K recast one of them."""
+        cells = ["<td></td>"]
+        for e in ends[1:]:
+            c = changes[e]
+            pct = f"{(c['value'] - c['prior']) / abs(c['prior']) * 100:+.1f}%"
+            if c["basis_changed"]:
+                tip = (f"The 10-K filed {c['filed']} shows {year(c['prior_end'])} {m(c['prior'], False)} and "
+                       f"{year(e)} {m(c['value'], False)} on one basis; a later 10-K recast one of the two years.")
+                cells.append(f'<td title="{escape(tip)}">{pct}*</td>')
+            else:
+                cells.append(f"<td>{pct}</td>")
+        return "".join(cells)
+    lines = [(label, s, t["changes"][key]) for label, s, key in
+             (("Revenue", rev, "revenue"), ("Operating income", op, "operating_income"),
+              ("Pre-tax income", pre, "pretax_income")) if s is not None]
+    rows = "".join(f'<tr class="strong"><th scope="row">{label}</th>'
+                   + "".join(f"<td>{m(s[e], False)}</td>" for e in ends)
+                   + f'</tr><tr><th scope="row">&nbsp;&nbsp;change</th>{growth(ch)}</tr>'
+                   for label, s, ch in lines)
+    recast = any(c["basis_changed"] for _, _, ch in lines for c in ch.values())
+    rows += ('<tr><th scope="row">Pre-tax margin</th>'
+             + "".join(f"<td>{pre[e] / rev[e] * 100:.1f}%</td>" for e in ends) + "</tr>")
+    return (f'<h2>Ten years</h2>\n<div class="wrap"><table>\n<thead><tr><th></th>'
+            + "".join(f"<th>{year(e)}</th>" for e in ends)
+            + f'</tr></thead>\n<tbody>\n{rows}\n</tbody></table></div>\n'
+            + ('<p class="note">* A later 10-K recast one of the two years, so this change does not match the figures '
+               'above it: it is measured in the 10-K that shows both years on one basis. Hover for its figures.</p>\n'
+               if recast else "")
+            + trend_chart(t) + '\n')
 
 
 def bridge_link(ticker):
@@ -446,7 +464,6 @@ table.decisions .why { color: var(--ink-2); font-size: .85rem; }
 table.decisions .status { color: var(--down); font-size: .8rem; }
 tr.superseded th, tr.superseded td.text p:not(.status) { color: var(--ink-3); text-decoration: line-through; }
 table.index thead th { white-space: normal; vertical-align: bottom; }
-tr.marks td { font-size: .75rem; color: var(--ink-2); vertical-align: top; }
 ul.breaks { font-size: .85rem; color: var(--ink-2); max-width: 46rem; padding-left: 1.1rem; margin: .75rem 0; }
 ul.breaks li { margin-bottom: .2rem; }
 .note, footer { font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
@@ -458,7 +475,7 @@ TEMPLATE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{ticker} - chomper</title>
+<title>{ticker} - Chomper</title>
 <style>{css}</style>
 </head>
 <body>
@@ -468,12 +485,6 @@ TEMPLATE = """<!doctype html>
 {bridge_link}
 {ten_years}
 <h2>Five years: which costs moved with revenue, {first} to {last}</h2>
-{trend}
-<div class="wrap"><table>
-<thead><tr><th></th>{years}</tr></thead>
-<tbody>
-{levels}
-</tbody></table></div>
 
 <h2>Costs as a share of revenue</h2>
 <p class="note">Shading shows the change from the year before: green where the share moved in pre-tax
@@ -498,6 +509,7 @@ for the line's actual change and its in-step-with-revenue change.</p>
 {rows}
 </tbody></table></div>
 
+{ten_breaks}
 <footer>
 <p>Source: {filings}. Lines, labels and order come from each filing's income statement; every year foots
 to reported pre-tax income, and to operating income where the company reports it. {disagreements}</p>
@@ -512,7 +524,7 @@ INDEX = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>All companies - chomper</title>
+<title>Chomper</title>
 <style>{css}</style>
 </head>
 <body>
@@ -538,7 +550,7 @@ DECISIONS = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Decisions - chomper</title>
+<title>Decisions - Chomper</title>
 <style>{css}</style>
 </head>
 <body>
