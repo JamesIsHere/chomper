@@ -77,7 +77,7 @@ Item: "Five years: which costs moved with revenue" now sits directly on "Costs a
 Why: Reads as an empty section.
 Companies: all
 Due: the next pass on the company page layout.
-Status: open
+Status: closed 2026-11-01, the two grids became collapsed sections under the five-year heading
 
 ## 2026-11-01 | Deal names in the filer's own capitalization
 Theme: Presentation

@@ -542,7 +542,7 @@ TEMPLATE = """<!doctype html>
 {ten_years}
 <h2>Five years: which costs moved with revenue, {first} to {last}</h2>
 
-<h2>Costs as a share of revenue</h2>
+<details class="sector"><summary>Costs as a share of revenue</summary>
 <p class="note">Shading shows the change from the year before: green where the share moved in pre-tax
 income's favor, red where it moved against. A fixed cost's share falls when revenue grows and rises when
 revenue shrinks; a variable cost's share stays flat.</p>
@@ -553,8 +553,9 @@ revenue shrinks; a variable cost's share stays flat.</p>
 </tbody></table></div>
 <p class="note">Hover a cell for its change in percentage points. Revenue mixes price and volume, so a
 price cut raises every cost's share even when the cost itself did not change.</p>
+</details>
 
-<h2>In dollars</h2>
+<details class="sector"><summary>In dollars</summary>
 <p class="note">The same changes in money. Each cell is what the line did to pre-tax income beyond moving
 in step with revenue: that year's change in its share of revenue, times that year's revenue. Hover a cell
 for the line's actual change and its in-step-with-revenue change.</p>
@@ -564,6 +565,7 @@ for the line's actual change and its in-step-with-revenue change.</p>
 {top}
 {rows}
 </tbody></table></div>
+</details>
 
 {ten_breaks}
 <footer>
