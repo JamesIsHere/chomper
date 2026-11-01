@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Considerations - Chomper</title>
+<style>
+:root { color-scheme: light; --s1: #2a78d6; --s2: #eb6834; --bg: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --ink-3: #75746f;
+  --rule: #e2e1dc; --up: #1f8a4c; --down: #d03b3b; --link: #1c5cab; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: dark; --s1: #3987e5; --s2: #d95926;
+  --bg: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #9a9992; --rule: #383835;
+  --up: #3fb36b; --down: #e05252; --link: #86b6ef; } }
+:root[data-theme="dark"] { color-scheme: dark; --s1: #3987e5; --s2: #d95926; --bg: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
+  --ink-3: #9a9992; --rule: #383835; --up: #3fb36b; --down: #e05252; --link: #86b6ef; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 60rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+h1 { font-size: 1.5rem; line-height: 1.25; margin: 0 0 .5rem; }
+h2 { font-size: 1.05rem; margin: 2rem 0 .5rem; }
+.lede { color: var(--ink-2); max-width: 46rem; margin: 0 0 1.25rem; }
+a { color: var(--link); }
+.wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: .9rem; }
+th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
+thead th { font-weight: 600; color: var(--ink-3); font-size: .8rem; }
+tbody th { text-align: left; font-weight: normal; white-space: normal; min-width: 12rem; }
+tr.strong th, tr.strong td { font-weight: 600; }
+tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
+.dim { color: var(--ink-3); font-size: .8rem; }
+.legend { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; font-size: .85rem; color: var(--ink-2);
+  margin: .5rem 0 .25rem; align-items: center; }
+.legend i { display: inline-block; width: .8rem; height: .2rem; border-radius: 1px; margin-right: .4rem;
+  vertical-align: middle; }
+.trend { display: block; width: 100%; max-width: 40rem; height: auto; margin-bottom: 1rem; }
+.trend .g { stroke: var(--rule); stroke-width: 1; }
+.trend .ax { fill: var(--ink-3); font-size: 11px; }
+.trend .lab { fill: var(--ink-2); font-size: 12px; }
+.trend .dot { stroke: var(--bg); stroke-width: 2; }
+.trend .hit { fill: transparent; }
+.trend .hit:hover { fill: var(--rule); fill-opacity: .35; }
+tr.sub th { text-align: left; font-size: .8rem; font-weight: 600; color: var(--ink-3); padding-top: .9rem; }
+td.name { text-align: left; white-space: normal; }
+table.index tbody th { min-width: 4rem; width: 4rem; }
+table.index td.name { width: 16rem; }
+tr.pending th, tr.pending td { color: var(--ink-3); }
+details.sector { border-bottom: 1px solid var(--rule); }
+details.sector > summary { font-weight: 600; font-size: 1.05rem; }
+details.sub { margin-left: 1.25rem; }
+details.sub > summary { font-size: .95rem; }
+details > summary { cursor: pointer; padding: .45rem 0; }
+details > summary .dim { margin-left: .5rem; font-weight: normal; }
+details.sub[open] { margin-bottom: .75rem; }
+h2 .dim { font-weight: normal; margin-left: .4rem; }
+table.decisions td, table.decisions th { vertical-align: top; text-align: left; white-space: normal; }
+table.decisions td.date { white-space: nowrap; color: var(--ink-3); width: 6.5rem; }
+table.decisions tbody th { font-weight: 600; width: 13rem; min-width: 9rem; }
+table.decisions td.text p { margin: 0 0 .3rem; }
+table.decisions .why { color: var(--ink-2); font-size: .85rem; }
+table.decisions .status { color: var(--down); font-size: .8rem; }
+table.decisions .due { font-size: .85rem; font-weight: 600; }
+tr.superseded th, tr.superseded td.text p:not(.status) { color: var(--ink-3); text-decoration: line-through; }
+table.index thead th { white-space: normal; vertical-align: bottom; }
+ul.breaks { font-size: .85rem; color: var(--ink-2); max-width: 46rem; padding-left: 1.1rem; margin: .75rem 0; }
+ul.breaks li { margin-bottom: .2rem; }
+.note, footer { font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+
+.menu { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem; margin: 0 0 1.5rem;
+  padding-bottom: .75rem; border-bottom: 1px solid var(--rule); }
+.menu a { padding: .3rem .65rem; border-radius: 4px; text-decoration: none; font-size: .9rem; font-weight: 600;
+  color: var(--ink-2); }
+.menu a:hover { background: var(--rule); }
+.menu a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+.crossref { font-size: .9rem; color: var(--ink-2); margin: 0 0 1rem; }
+</style>
+</head>
+<body>
+<main>
+<nav class="menu"><a href="index.html">Chomper</a><a href="decisions.html">Decisioning</a><a href="considerations.html" aria-current="page">Considerations</a></nav>
+<h1>Considerations</h1>
+<p class="lede">What these pages do not yet do right, or what comes next, grouped by the question it touches,
+each with the condition that makes it due: 21 open of 21.</p>
+<details class="sector"><summary>Accounting basis <span class="dim">Is every year measured the same way; 2 open of 2</span></summary><div class="wrap"><table class="decisions"><tbody><tr><th scope="row">ASC 606 and 842 adopted without recasting<span class="dim"><br>2026-10-30</span></th><td class="text"><p>A company that adopted ASC 606 (2018) or ASC 842 (2019) by the modified retrospective method never recast earlier years, so the ten-year series changes basis that year and no 10-K shows both bases. The one-basis rule cannot detect it. The page marks each standard in the year it became required, not the year adopted, and not the method: XBRL adoption tagging is inconsistent (PGR and PLD tag none; UNH tags 606 in FY2016).</p><p class="why">The ten-year headline promises one accounting basis; in these years the change row looks clean but may not be.</p><p class="why">Companies: MSFT: 606 consistent with a fully retrospective adoption (the FY2017 recast), adoption note not read. AAPL, CAT, HD, JNJ, JPM, ODFL, PGR, PLD, UNH: method not read.</p><p class="due">Due: before the full S&amp;P 500 run, or before the headline is called complete.</p></td></tr><tr><th scope="row">A recast that coincides with a tag change is missed<span class="dim"><br>2026-10-30</span></th><td class="text"><p>When a company recasts a year and changes the XBRL tag in the same filing, the figure as first reported sits under the old tag, which the series never reads, so the recast is not listed.</p><p class="why">A restated year can go unmarked in the breaks list.</p><p class="why">Companies: MSFT: FY2017 revenue (first reported under SalesRevenueNet); the year is still marked through pre-tax income. Others: not checked.</p><p class="due">Due: before the full S&amp;P 500 run.</p></td></tr></tbody></table></div></details>
+<details class="sector"><summary>Acquisitions <span class="dim">Is it the same business; 2 open of 2</span></summary><div class="wrap"><table class="decisions"><tbody><tr><th scope="row">Acquisitions below 10% are not marked<span class="dim"><br>2026-11-01</span></th><td class="text"><p>Only deals of at least 10% of prior total assets are marked. A serial acquirer making many smaller deals reads as organic growth; the run only stops when unexplained acquisition spend in a single year reaches 10%.</p><p class="why">The headline marks acquisitions so readers know when growth is bought; many small deals add up to the same thing.</p><p class="why">Companies: all; none checked for cumulative small deals.</p><p class="due">Due: before the full S&amp;P 500 run.</p></td></tr><tr><th scope="row">Same-business (organic) growth is not measured<span class="dim"><br>2026-11-01</span></th><td class="text"><p>The ten-year headline promises the same accounting basis, not the same business. Organic growth would come from each deal&#x27;s ASC 805 pro forma disclosure (revenue and earnings as if acquired at the start of the prior year), read and approved company by company.</p><p class="why">Reported growth after a large deal mixes bought and grown revenue.</p><p class="why">Companies: MSFT, HD, JNJ, PLD (the companies with significant deals): pro formas not read.</p><p class="due">Due: when a reader needs organic growth, or when I1 starts.</p></td></tr></tbody></table></div></details>
+<details class="sector"><summary>Presentation <span class="dim">Does the page read right; 6 open of 6</span></summary><div class="wrap"><table class="decisions"><tbody><tr><th scope="row">&quot;Restated&quot; used for recasts<span class="dim"><br>2026-11-01</span></th><td class="text"><p>The breaks list calls every changed figure &quot;restated&quot;. In accounting a restatement corrects an error (ASC 250); most of these are retrospective changes in principle, presentation changes or discontinued operations.</p><p class="why">The wrong word claims an error the company never made.</p><p class="why">Companies: PLD, CAT, MSFT, JNJ, JPM: wording on the page; cause read only by inference.</p><p class="due">Due: when the breaks list gets its permanent place.</p></td></tr><tr><th scope="row">Breaks list is at the bottom for now<span class="dim"><br>2026-11-01</span></th><td class="text"><p>The ten-year breaks (acquisitions, standards, restatements) moved from the opener to the bottom of each company page as a temporary place.</p><p class="why">A reader who sees a marked change at the top has to scroll to the bottom to learn why.</p><p class="why">Companies: all</p><p class="due">Due: the next pass on the company page layout.</p></td></tr><tr><th scope="row">Two headings stacked<span class="dim"><br>2026-11-01</span></th><td class="text"><p>&quot;Five years: which costs moved with revenue&quot; now sits directly on &quot;Costs as a share of revenue&quot;, with nothing between them.</p><p class="why">Reads as an empty section.</p><p class="why">Companies: all</p><p class="due">Due: the next pass on the company page layout.</p></td></tr><tr><th scope="row">Deal names in the filer&#x27;s own capitalization<span class="dim"><br>2026-11-01</span></th><td class="text"><p>Deal names come from the filing&#x27;s documentation label as written, so some show in lowercase (&quot;liberty property trust and liberty property limited partnership&quot;).</p><p class="why">Looks like a bug on the page.</p><p class="why">Companies: PLD (Liberty, Duke). Others: not checked.</p><p class="due">Due: the next pass on the breaks list.</p></td></tr><tr><th scope="row">Phone layout unchecked<span class="dim"><br>2026-11-01</span></th><td class="text"><p>Every visual check is at desktop width; the screenshots James gets are the desktop layout. How the pages read on a phone is unchecked.</p><p class="why">Readers of a shared link will often be on a phone.</p><p class="why">Companies: all</p><p class="due">Due: before the site is shared.</p></td></tr><tr><th scope="row">Year labels for 52/53-week years<span class="dim"><br>2026-10-30</span></th><td class="text"><p>Year labels come from the period end date, so a fiscal year ending in early January shows as, for example, &quot;Jan 2022&quot;, which reads like the next fiscal year.</p><p class="why">A reader can misplace a year by one.</p><p class="why">Companies: HD, JNJ (Jan labels); AAPL (Sep), MSFT (Jun) labels read correctly but differ in style.</p><p class="due">Due: before the full S&amp;P 500 run.</p></td></tr></tbody></table></div></details>
+<details class="sector"><summary>Coverage <span class="dim">Does it hold across companies and browsers; 3 open of 3</span></summary><div class="wrap"><table class="decisions"><tbody><tr><th scope="row">Visual checks are a sample<span class="dim"><br>2026-11-01</span></th><td class="text"><p>Searches and arithmetic cover every page; screenshots cover one or two pages per change. A problem of looks on a page not screenshot can slip through.</p><p class="why">The sample covers less as the number of pages grows.</p><p class="why">Companies: all</p><p class="due">Due: the full S&amp;P 500 run.</p></td></tr><tr><th scope="row">Filer quirks at 500 companies<span class="dim"><br>2026-10-30</span></th><td class="text"><p>10 companies tested; 3 refusal modes seen (bank before the revenue fix, no pre-tax calculation link, ticker with a new CIK). The full run will meet more; each must stop the run with an error, never degrade to a wrong number.</p><p class="why">A quiet wrong number at scale is worse than a refusal.</p><p class="why">Companies: all</p><p class="due">Due: the full S&amp;P 500 run.</p></td></tr><tr><th scope="row">Sentence links tested in Chrome only<span class="dim"><br>2026-10-28</span></th><td class="text"><p>The one-year bridge links into the 10-K at the quoted sentence (text fragments). Only Chrome was tested; Safari and Firefox may just open the 10-K at the top.</p><p class="why">The one-tap citation is the bridge&#x27;s credibility.</p><p class="why">Companies: ODFL</p><p class="due">Due: before the site is shared.</p></td></tr></tbody></table></div></details>
+<details class="sector"><summary>Evidence <span class="dim">Is every claim checked; 3 open of 3</span></summary><div class="wrap"><table class="decisions"><tbody><tr><th scope="row">ODFL cost-behavior groups<span class="dim"><br>2026-10-30</span></th><td class="text"><p>The one-year bridge&#x27;s cost-behavior bar order puts each line in a group by judgment, flagged on the page. Checked against the 10-K: operating supplies holds; operating taxes and general supplies fit only partly. Not swapped.</p><p class="why">A judgment presented as an ordering.</p><p class="why">Companies: ODFL</p><p class="due">Due: the next time the one-year bridge is opened for changes.</p></td></tr><tr><th scope="row">ODFL revenue remainder split<span class="dim"><br>2026-10-28</span></th><td class="text"><p>The +$3.1M revenue remainder on the one-year bridge is attributed to non-LTL revenue, the undelivered-freight deferral and rounding of the freight statistics; the split is not verified.</p><p class="why">An unverified attribution on an approved page.</p><p class="why">Companies: ODFL. Check: the revenue disaggregation note in the 10-K.</p><p class="due">Due: the next time the one-year bridge is opened for changes, or before the site is shared.</p></td></tr><tr><th scope="row">ODFL miscellaneous expenses<span class="dim"><br>2026-10-28</span></th><td class="text"><p>Miscellaneous expenses (-$8.5M) may include the swing in gains and losses on asset sales (+3.4 to -2.9); not verified.</p><p class="why">An unverified attribution on an approved page.</p><p class="why">Companies: ODFL. Check: Note 1 and the income statement footnotes.</p><p class="due">Due: the next time the one-year bridge is opened for changes, or before the site is shared.</p></td></tr></tbody></table></div></details>
+<details class="sector"><summary>Path forward <span class="dim">What comes next; 5 open of 5</span></summary><div class="wrap"><table class="decisions"><tbody><tr><th scope="row">Industries, then the economy (I2)<span class="dim"><br>2026-11-01</span></th><td class="text"><p>Add companies up into sub-industries, sectors and the S&amp;P 500, then compare with macro series for elasticities and drivers. Must handle survivorship (today&#x27;s membership only), fiscal years that do not line up, acquisitions inside the index, GICS changes, foreign revenue, and only ten annual points per company. Long form in ideas.md, I2.</p><p class="why">Where James sees the project going.</p><p class="why">Companies: all</p><p class="due">Due: after the full S&amp;P 500 run.</p></td></tr><tr><th scope="row">Company pages link to their considerations<span class="dim"><br>2026-11-01</span></th><td class="text"><p>Each company page could list the considerations that touch it.</p><p class="why">A reader of one company would see its open items without the full list.</p><p class="why">Companies: all</p><p class="due">Due: once this list has proven useful.</p></td></tr><tr><th scope="row">Quality of earnings (I1)<span class="dim"><br>2026-10-30</span></th><td class="text"><p>Run the bridge and the MD&amp;A check every year; persistent drivers are the core trend, and lines that swing back and forth and go undiscussed are candidate cookie jars. Long form in ideas.md, I1, including the GE Capital fact to check.</p><p class="why">James&#x27;s original question: is the core growing, or is something smoothing it?</p><p class="why">Companies: ODFL first (insurance and claims, +$17.9M undiscussed in FY2025).</p><p class="due">Due: when the ten-year page is settled.</p></td></tr><tr><th scope="row">Ship: repo, Pages, README, pin<span class="dim"><br>2026-10-30</span></th><td class="text"><p>Create the GitHub repo JamesIsHere/chomper (private or public), serve docs/ on GitHub Pages, write the README in James&#x27;s words, pin it.</p><p class="why">The definition of done, and the way to open the real site on a phone.</p><p class="why">Companies: all</p><p class="due">Due: James&#x27;s call on the repo.</p></td></tr><tr><th scope="row">One-command rebuild<span class="dim"><br>2026-10-27</span></th><td class="text"><p>The definition of done names a one-command rebuild; today it is 11 separate scripts run in order.</p><p class="why">Part of done.</p><p class="why">Companies: all</p><p class="due">Due: before the site is shared.</p></td></tr></tbody></table></div></details>
+<footer>
+<p>Source: considerations.md in the project folder. To close an item, change its status there, then rebuild.</p>
+</footer>
+</main>
+</body>
+</html>

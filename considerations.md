@@ -1,0 +1,184 @@
+# Considerations
+
+Hand-edited source for the Considerations page: what the pages do not yet do right, or what comes next,
+kept so it is not lost between sessions. Not decisions (those are in decisions.md) and not a to-do list:
+each item says when it becomes due. One entry per item:
+
+    ## YYYY-MM-DD | Short title
+    Theme: Accounting basis, Acquisitions, Presentation, Coverage, Evidence, or Path forward
+    Item: what is not right yet, or what could come next
+    Why: why it matters
+    Companies: which companies it touches and where each stands (handled, found, not checked), or "all"
+    Due: the condition that makes it due
+    Status: open (or: closed YYYY-MM-DD, how)
+
+The date is when the item was first raised. Close an item by changing its status; do not delete it.
+Then run `python build_history.py`.
+
+## 2026-10-30 | ASC 606 and 842 adopted without recasting
+Theme: Accounting basis
+Item: A company that adopted ASC 606 (2018) or ASC 842 (2019) by the modified retrospective method never recast earlier years, so the ten-year series changes basis that year and no 10-K shows both bases. The one-basis rule cannot detect it. The page marks each standard in the year it became required, not the year adopted, and not the method: XBRL adoption tagging is inconsistent (PGR and PLD tag none; UNH tags 606 in FY2016).
+Why: The ten-year headline promises one accounting basis; in these years the change row looks clean but may not be.
+Companies: MSFT: 606 consistent with a fully retrospective adoption (the FY2017 recast), adoption note not read. AAPL, CAT, HD, JNJ, JPM, ODFL, PGR, PLD, UNH: method not read.
+Due: before the full S&P 500 run, or before the headline is called complete.
+Status: open
+
+## 2026-10-30 | A recast that coincides with a tag change is missed
+Theme: Accounting basis
+Item: When a company recasts a year and changes the XBRL tag in the same filing, the figure as first reported sits under the old tag, which the series never reads, so the recast is not listed.
+Why: A restated year can go unmarked in the breaks list.
+Companies: MSFT: FY2017 revenue (first reported under SalesRevenueNet); the year is still marked through pre-tax income. Others: not checked.
+Due: before the full S&P 500 run.
+Status: open
+
+## 2026-11-01 | Acquisitions below 10% are not marked
+Theme: Acquisitions
+Item: Only deals of at least 10% of prior total assets are marked. A serial acquirer making many smaller deals reads as organic growth; the run only stops when unexplained acquisition spend in a single year reaches 10%.
+Why: The headline marks acquisitions so readers know when growth is bought; many small deals add up to the same thing.
+Companies: all; none checked for cumulative small deals.
+Due: before the full S&P 500 run.
+Status: open
+
+## 2026-11-01 | Same-business (organic) growth is not measured
+Theme: Acquisitions
+Item: The ten-year headline promises the same accounting basis, not the same business. Organic growth would come from each deal's ASC 805 pro forma disclosure (revenue and earnings as if acquired at the start of the prior year), read and approved company by company.
+Why: Reported growth after a large deal mixes bought and grown revenue.
+Companies: MSFT, HD, JNJ, PLD (the companies with significant deals): pro formas not read.
+Due: when a reader needs organic growth, or when I1 starts.
+Status: open
+
+## 2026-10-30 | Year labels for 52/53-week years
+Theme: Presentation
+Item: Year labels come from the period end date, so a fiscal year ending in early January shows as, for example, "Jan 2022", which reads like the next fiscal year.
+Why: A reader can misplace a year by one.
+Companies: HD, JNJ (Jan labels); AAPL (Sep), MSFT (Jun) labels read correctly but differ in style.
+Due: before the full S&P 500 run.
+Status: open
+
+## 2026-11-01 | "Restated" used for recasts
+Theme: Presentation
+Item: The breaks list calls every changed figure "restated". In accounting a restatement corrects an error (ASC 250); most of these are retrospective changes in principle, presentation changes or discontinued operations.
+Why: The wrong word claims an error the company never made.
+Companies: PLD, CAT, MSFT, JNJ, JPM: wording on the page; cause read only by inference.
+Due: when the breaks list gets its permanent place.
+Status: open
+
+## 2026-11-01 | Breaks list is at the bottom for now
+Theme: Presentation
+Item: The ten-year breaks (acquisitions, standards, restatements) moved from the opener to the bottom of each company page as a temporary place.
+Why: A reader who sees a marked change at the top has to scroll to the bottom to learn why.
+Companies: all
+Due: the next pass on the company page layout.
+Status: open
+
+## 2026-11-01 | Two headings stacked
+Theme: Presentation
+Item: "Five years: which costs moved with revenue" now sits directly on "Costs as a share of revenue", with nothing between them.
+Why: Reads as an empty section.
+Companies: all
+Due: the next pass on the company page layout.
+Status: open
+
+## 2026-11-01 | Deal names in the filer's own capitalization
+Theme: Presentation
+Item: Deal names come from the filing's documentation label as written, so some show in lowercase ("liberty property trust and liberty property limited partnership").
+Why: Looks like a bug on the page.
+Companies: PLD (Liberty, Duke). Others: not checked.
+Due: the next pass on the breaks list.
+Status: open
+
+## 2026-11-01 | Phone layout unchecked
+Theme: Presentation
+Item: Every visual check is at desktop width; the screenshots James gets are the desktop layout. How the pages read on a phone is unchecked.
+Why: Readers of a shared link will often be on a phone.
+Companies: all
+Due: before the site is shared.
+Status: open
+
+## 2026-10-28 | Sentence links tested in Chrome only
+Theme: Coverage
+Item: The one-year bridge links into the 10-K at the quoted sentence (text fragments). Only Chrome was tested; Safari and Firefox may just open the 10-K at the top.
+Why: The one-tap citation is the bridge's credibility.
+Companies: ODFL
+Due: before the site is shared.
+Status: open
+
+## 2026-10-30 | Filer quirks at 500 companies
+Theme: Coverage
+Item: 10 companies tested; 3 refusal modes seen (bank before the revenue fix, no pre-tax calculation link, ticker with a new CIK). The full run will meet more; each must stop the run with an error, never degrade to a wrong number.
+Why: A quiet wrong number at scale is worse than a refusal.
+Companies: all
+Due: the full S&P 500 run.
+Status: open
+
+## 2026-11-01 | Visual checks are a sample
+Theme: Coverage
+Item: Searches and arithmetic cover every page; screenshots cover one or two pages per change. A problem of looks on a page not screenshot can slip through.
+Why: The sample covers less as the number of pages grows.
+Companies: all
+Due: the full S&P 500 run.
+Status: open
+
+## 2026-10-28 | ODFL revenue remainder split
+Theme: Evidence
+Item: The +$3.1M revenue remainder on the one-year bridge is attributed to non-LTL revenue, the undelivered-freight deferral and rounding of the freight statistics; the split is not verified.
+Why: An unverified attribution on an approved page.
+Companies: ODFL. Check: the revenue disaggregation note in the 10-K.
+Due: the next time the one-year bridge is opened for changes, or before the site is shared.
+Status: open
+
+## 2026-10-28 | ODFL miscellaneous expenses
+Theme: Evidence
+Item: Miscellaneous expenses (-$8.5M) may include the swing in gains and losses on asset sales (+3.4 to -2.9); not verified.
+Why: An unverified attribution on an approved page.
+Companies: ODFL. Check: Note 1 and the income statement footnotes.
+Due: the next time the one-year bridge is opened for changes, or before the site is shared.
+Status: open
+
+## 2026-10-30 | ODFL cost-behavior groups
+Theme: Evidence
+Item: The one-year bridge's cost-behavior bar order puts each line in a group by judgment, flagged on the page. Checked against the 10-K: operating supplies holds; operating taxes and general supplies fit only partly. Not swapped.
+Why: A judgment presented as an ordering.
+Companies: ODFL
+Due: the next time the one-year bridge is opened for changes.
+Status: open
+
+## 2026-10-30 | Quality of earnings (I1)
+Theme: Path forward
+Item: Run the bridge and the MD&A check every year; persistent drivers are the core trend, and lines that swing back and forth and go undiscussed are candidate cookie jars. Long form in ideas.md, I1, including the GE Capital fact to check.
+Why: James's original question: is the core growing, or is something smoothing it?
+Companies: ODFL first (insurance and claims, +$17.9M undiscussed in FY2025).
+Due: when the ten-year page is settled.
+Status: open
+
+## 2026-11-01 | Industries, then the economy (I2)
+Theme: Path forward
+Item: Add companies up into sub-industries, sectors and the S&P 500, then compare with macro series for elasticities and drivers. Must handle survivorship (today's membership only), fiscal years that do not line up, acquisitions inside the index, GICS changes, foreign revenue, and only ten annual points per company. Long form in ideas.md, I2.
+Why: Where James sees the project going.
+Companies: all
+Due: after the full S&P 500 run.
+Status: open
+
+## 2026-10-27 | One-command rebuild
+Theme: Path forward
+Item: The definition of done names a one-command rebuild; today it is 11 separate scripts run in order.
+Why: Part of done.
+Companies: all
+Due: before the site is shared.
+Status: open
+
+## 2026-10-30 | Ship: repo, Pages, README, pin
+Theme: Path forward
+Item: Create the GitHub repo JamesIsHere/chomper (private or public), serve docs/ on GitHub Pages, write the README in James's words, pin it.
+Why: The definition of done, and the way to open the real site on a phone.
+Companies: all
+Due: James's call on the repo.
+Status: open
+
+## 2026-11-01 | Company pages link to their considerations
+Theme: Path forward
+Item: Each company page could list the considerations that touch it.
+Why: A reader of one company would see its open items without the full list.
+Companies: all
+Due: once this list has proven useful.
+Status: open

@@ -1,9 +1,9 @@
-"""The site header shared by every Chomper page: the main menu, Chomper (home) then Decisioning.
+"""The site header shared by every Chomper page: the main menu, Chomper (home), Decisioning, Considerations.
 
 Pages one folder down pass prefix="../" so every link resolves from where the page lives.
 """
 
-MENU = [("index.html", "Chomper"), ("decisions.html", "Decisioning")]
+MENU = [("index.html", "Chomper"), ("decisions.html", "Decisioning"), ("considerations.html", "Considerations")]
 
 CSS = """
 .menu { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem; margin: 0 0 1.5rem;

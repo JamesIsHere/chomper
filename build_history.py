@@ -188,6 +188,60 @@ def decisions():
     return out
 
 
+# Consideration themes, in page order, with the question each answers.
+THEMES = [("Accounting basis", "Is every year measured the same way"), ("Acquisitions", "Is it the same business"),
+          ("Presentation", "Does the page read right"), ("Coverage", "Does it hold across companies and browsers"),
+          ("Evidence", "Is every claim checked"), ("Path forward", "What comes next")]
+CONSIDERATION_FIELDS = ["Theme", "Item", "Why", "Companies", "Due", "Status"]
+
+
+def considerations():
+    """[{date, title, theme, item, why, companies, due, status}] from considerations.md, in file order; fails on any
+    malformed entry."""
+    text = (ROOT / "considerations.md").read_text(encoding="utf-8")
+    themes = {t for t, _ in THEMES}
+    out = []
+    for block in re.split(r"\n(?=## )", text)[1:]:
+        lines = [l for l in block.strip().splitlines() if l.strip()]
+        head = DECISION.match(lines[0])
+        fields = dict(l.split(": ", 1) for l in lines[1:] if ": " in l)
+        if not head or list(fields) != CONSIDERATION_FIELDS or len(lines) != len(CONSIDERATION_FIELDS) + 1:
+            raise SystemExit(f"considerations.md: malformed entry starting {lines[0]!r}")
+        if fields["Theme"] not in themes:
+            raise SystemExit(f"considerations.md: {lines[0]!r} has unknown theme {fields['Theme']!r}; "
+                             f"use one of {sorted(themes)}")
+        if not (fields["Status"] == "open" or fields["Status"].startswith("closed ")):
+            raise SystemExit(f"considerations.md: {lines[0]!r} status must be open or closed YYYY-MM-DD, how")
+        out.append({"date": head.group(1), "title": head.group(2)} | {k.lower(): v for k, v in fields.items()})
+    return out
+
+
+def considerations_page():
+    items = considerations()
+    sections = []
+    for theme, question in THEMES:
+        members = [i for i in items if i["theme"] == theme]
+        members.sort(key=lambda i: i["date"], reverse=True)
+        members.sort(key=lambda i: i["status"] != "open")  # open first, newest first within each
+        rows = []
+        for i in members:
+            closed = i["status"] != "open"
+            cls = ' class="superseded"' if closed else ""
+            rows.append(f'<tr{cls}><th scope="row">{escape(i["title"])}'
+                        f'<span class="dim"><br>{i["date"]}</span></th>'
+                        f'<td class="text"><p>{escape(i["item"])}</p><p class="why">{escape(i["why"])}</p>'
+                        f'<p class="why">Companies: {escape(i["companies"])}</p>'
+                        f'<p class="due">Due: {escape(i["due"])}</p>'
+                        + (f'<p class="status">{escape(i["status"])}</p>' if closed else "") + '</td></tr>')
+        n_open = sum(i["status"] == "open" for i in members)
+        sections.append(f'<details class="sector"><summary>{theme} <span class="dim">{question}; {n_open} open of '
+                        f'{len(members)}</span></summary><div class="wrap"><table class="decisions"><tbody>'
+                        f'{"".join(rows)}</tbody></table></div></details>')
+    n_open = sum(i["status"] == "open" for i in items)
+    return CONSIDERATIONS.format(sections="\n".join(sections), count=len(items), open=n_open,
+                                 nav=nav("considerations.html"), css=CSS)
+
+
 def plural(n, noun):
     return f"{n} {noun}" if n == 1 else f"{n} {noun}s"
 
@@ -404,7 +458,8 @@ def main():
                                                  retrieved=escape(universe["retrieved"]), nav=nav("index.html"), css=CSS),
                                     encoding="utf-8")
     (OUT / "decisions.html").write_text(decisions_page(), encoding="utf-8")
-    print(f"docs/: {len(companies)} company pages, index.html and decisions.html "
+    (OUT / "considerations.html").write_text(considerations_page(), encoding="utf-8")
+    print(f"docs/: {len(companies)} company pages, index.html, decisions.html and considerations.html "
           f"({len(universe['companies'])} S&P 500 companies listed)")
 
 
@@ -462,6 +517,7 @@ table.decisions tbody th { font-weight: 600; width: 13rem; min-width: 9rem; }
 table.decisions td.text p { margin: 0 0 .3rem; }
 table.decisions .why { color: var(--ink-2); font-size: .85rem; }
 table.decisions .status { color: var(--down); font-size: .8rem; }
+table.decisions .due { font-size: .85rem; font-weight: 600; }
 tr.superseded th, tr.superseded td.text p:not(.status) { color: var(--ink-3); text-decoration: line-through; }
 table.index thead th { white-space: normal; vertical-align: bottom; }
 ul.breaks { font-size: .85rem; color: var(--ink-2); max-width: 46rem; padding-left: 1.1rem; margin: .75rem 0; }
@@ -563,6 +619,30 @@ each group: {active} active of {count}.</p>
 <footer>
 <p>Source: decisions.md in the project folder. To change a decision, add a new entry there and mark the old
 one superseded, then rebuild.</p>
+</footer>
+</main>
+</body>
+</html>
+"""
+
+
+CONSIDERATIONS = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Considerations - Chomper</title>
+<style>{css}</style>
+</head>
+<body>
+<main>
+{nav}
+<h1>Considerations</h1>
+<p class="lede">What these pages do not yet do right, or what comes next, grouped by the question it touches,
+each with the condition that makes it due: {open} open of {count}.</p>
+{sections}
+<footer>
+<p>Source: considerations.md in the project folder. To close an item, change its status there, then rebuild.</p>
 </footer>
 </main>
 </body>

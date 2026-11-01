@@ -153,7 +153,7 @@ Status: active
 Group: Presentation
 Decision: The menu across the top has two items, Chomper (the company list) and Decisioning. The separate All item is gone; the name is capitalized.
 Why: The name and All linked to the same page.
-Status: active
+Status: superseded by 2026-11-01 Considerations page
 
 ## 2026-11-01 | Ten years at the top
 Group: Presentation
@@ -165,4 +165,10 @@ Status: active
 Group: Method
 Decision: The ten-year headline promises the same accounting basis, with acquisitions marked; it does not promise the same business. Each year's change comes from the latest 10-K that shows both years, and the chart chains those changes. A change that does not match the dollar figures above it, because a later 10-K recast one of the years, is marked with an asterisk. Modified retrospective adoptions (most ASC 606, nearly all ASC 842) recast nothing and stay marked breaks until the adoption notes are read.
 Why: Every 10-K shows its comparative year on its own basis, so same-filing growth handles restatements, retrospective changes, reclassifications and discontinued operations for every company without reading; same business needs the pro forma notes, company by company.
+Status: active
+
+## 2026-11-01 | Considerations page
+Group: Build and process
+Decision: A third menu page, Considerations, lists what the pages do not yet do right or what comes next, from considerations.md: one entry per item with a theme, the companies it touches, and the condition that makes it due. The menu is Chomper, Decisioning, Considerations.
+Why: Items raised in passing (in chat, in the local notes) get lost; a due condition on each says when "done" is not done yet.
 Status: active
