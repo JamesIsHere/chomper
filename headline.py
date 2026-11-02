@@ -121,13 +121,19 @@ def series(g, candidates, reference, page, what):
 
     while True:
         ends = sorted(e for e in {e for t in accepted for e in have[t]} if FIRST[0] <= e <= last)
-        if ends and ends[0] <= FIRST[1]:
+        gaps = [(a, b) for a, b in zip(ends, ends[1:]) if not 350 <= days(a, b) <= 380]
+        if ends and ends[0] <= FIRST[1] and not gaps:
             break
-        joiners = [t for t, f in have.items() if t not in accepted and any(e < ends[0] for e in f)
+        # A tag joins when it brings a year the series lacks (further back, or inside a gap) and matches the
+        # series in a year both cover (CCL: Revenues skips 2009-2013, SalesRevenueServicesGross fills them).
+        joiners = [t for t, f in have.items() if t not in accepted
+                   and any(FIRST[0] <= e <= last and e not in ends for e in f)
                    and any(e in f and latest(f, e) == winner(e)[0] for e in ends)]
         if not joiners:
-            raise SystemExit(f"{what}: starts {ends[0] if ends else 'nowhere'}, not fiscal 2007; no other tag "
-                             f"reaches further back and matches the series in a shared year")
+            where = (f"has a gap {gaps[0][0]} to {gaps[0][1]}" if gaps and ends[0] <= FIRST[1]
+                     else f"starts {ends[0] if ends else 'nowhere'}, not fiscal 2007")
+            raise SystemExit(f"{what}: {where}; no other tag brings the missing years and matches the series in "
+                             f"a shared year")
         accepted += joiners
     out, disagreements = {}, []
     for e in ends:

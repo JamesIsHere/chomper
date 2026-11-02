@@ -317,3 +317,9 @@ Group: Presentation
 Decision: The long view shades each fiscal year that holds a quarter or more of a US recession as the NBER dates it (December 2007 to June 2009; February to April 2020), on the table's rows and on the chart as whole year slots, with a legend entry and a note naming the dates. The chart's numbered markers also appear beside their years in the table.
 Why: The question is how operating income responds when revenue falls, and the recessions are where to look (James, 2026-11-02). Whole fiscal years, not true dates, because each point is a fiscal year: a band at the true dates left CAT's 2009 trough outside the shading. A share, not a fixed three months, because the 2020 recession lasted three months and a fixed test missed HD's fiscal 2020, which starts 3 February. A slump outside the shading (CAT 2015-16) reads as the company's own, not the economy's.
 Status: active
+
+## 2026-11-02 | A tag joins to fill a gap
+Group: Method
+Decision: When the long series' revenue (or income) tags skip years inside the window, another tag joins if it brings the missing years and matches the series in a year both cover, the same evidence that already lets a tag extend the series further back. The series must reach fiscal 2007 with no gap, or the run stops and names the gap.
+Why: CCL's Revenues tag skips 2009 to 2013; SalesRevenueServicesGross covers 2008 to 2015 and matches it in 2014 and 2015 ($15,884M, $15,714M). Plumbing within the rails: no tolerance, no company-specific rule; CAT and HD unchanged.
+Status: active

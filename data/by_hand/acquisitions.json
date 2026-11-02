@@ -147,5 +147,57 @@
     }
    ]
   }
+ },
+ "CCL": {
+  "2007-11-30": {
+   "deals": [
+    {
+     "name": "Ibero Cruises",
+     "member": "by_hand:IberoCruises",
+     "date": "2007-09-30",
+     "size": 339000000,
+     "measure": "cash paid net of cash acquired"
+    }
+   ],
+   "spend": 339000000,
+   "prior_total_assets": 30552000000,
+   "note": "Fiscal 2007. Note 15 states the investment as 290 million euros (September 2007, a 75% interest with Orizonia holding 25%); the deal is sized here by the cash flow line in dollars, which the FY2008 report places in the 2007 column. Total assets at 30 Nov 2006 from the five-year table (2007, 2006, 2005, ...).",
+   "sources": [
+    {
+     "accession": "0001169232-08-000308",
+     "document": "d73197_ex13.htm",
+     "quote": "we entered into an agreement with Orizonia Corporation"
+    },
+    {
+     "accession": "0001169232-08-000308",
+     "document": "d73197_ex13.htm",
+     "quote": "Acquisition of business, net of cash acquired and sales of businesses (339 )"
+    },
+    {
+     "accession": "0001169232-08-000308",
+     "document": "d73197_ex13.htm",
+     "quote": "Total assets $ 34,181 $ 30,552 $ 28,349"
+    }
+   ]
+  },
+  "2008-11-30": {
+   "deals": [],
+   "spend": 0,
+   "spend_line": "Acquisition of business, net of cash acquired and sales of businesses",
+   "prior_total_assets": 34181000000,
+   "note": "Fiscal 2008. The cash flow line's 2008 column is blank (columns 2008, 2007, 2006; its one figure, (339), sits under 2007, aligned with Other, net's (75)). Total assets at 30 Nov 2007.",
+   "sources": [
+    {
+     "accession": "0001193125-09-013746",
+     "document": "dex13.htm",
+     "quote": "Acquisition of business, net of cash acquired and sales of businesses (339 ) Other, net 91 (75 ) 49"
+    },
+    {
+     "accession": "0001193125-09-013746",
+     "document": "dex13.htm",
+     "quote": "Total assets $ 33,400 $ 34,181 $ 30,552"
+    }
+   ]
+  }
  }
 }

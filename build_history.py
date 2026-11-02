@@ -312,7 +312,12 @@ def trend_chart(h):
     losses = [e for e in ends if h["pretax_income"][e] <= 0]
     vals = [s[e] for _, _, s in series for e in ends if s[e] > 0]
     W, L, R, T, PLOT_H, X_H, GAP, BAND_H = 800, 60, 170, 26, 280, 26, 18, 110
-    LOSS_H = 46 if losses else 0
+    # Loss labels on the strip alternate between two lines where loss years are adjacent, so they never collide.
+    lower = {}
+    for e in losses:
+        i = ends.index(e)
+        lower[e] = int(i > 0 and ends[i - 1] in lower and not lower[ends[i - 1]])
+    LOSS_H = (58 if any(lower.values()) else 46) if losses else 0
     ticks = log_ticks(min(vals), max(vals))
     lo, hi = math.log10(ticks[0]), math.log10(ticks[-1])
     step_x = (W - L - R) / len(ends)  # one slot per year, so every bar sits inside the plot
@@ -338,8 +343,8 @@ def trend_chart(h):
             f'{year(e).split()[-1]}</text>' for i, e in enumerate(ends)]
     if losses:
         out.append(f'<text x="{L - 6}" y="{T + PLOT_H + 26}" class="ax" text-anchor="end">Loss</text>')
-        out += [f'<text x="{px(ends.index(e)):.1f}" y="{T + PLOT_H + 40}" class="ax" text-anchor="middle">'
-                f'{m(h["pretax_income"][e], False)}</text>' for e in losses]
+        out += [f'<text x="{px(ends.index(e)):.1f}" y="{T + PLOT_H + 40 + 12 * lower[e]}" class="ax" '
+                f'text-anchor="middle">{m(h["pretax_income"][e], False)}</text>' for e in losses]
     b = chart_breaks(h)
     years = [e for e in ends if e in b]
     out += [f'<line x1="{px(ends.index(e)):.1f}" x2="{px(ends.index(e)):.1f}" y1="{T - 2}" y2="{T + PLOT_H}" '
