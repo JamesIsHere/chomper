@@ -41,6 +41,7 @@ from pull import ROOT, user_agent
 OUT = ROOT / "data" / "headline"
 HAND = ROOT / "data" / "by_hand" / "acquisitions.json"
 JOINS = ROOT / "data" / "by_hand" / "joins.json"
+LEVELS = ROOT / "data" / "by_hand" / "levels.json"
 # The long window starts at fiscal 2007, the pre-crisis peak (James, 2026-11-02): the fiscal year ending between
 # 1 July 2007 and 30 June 2008, the one that most nearly covers calendar 2007.
 FIRST = ("2007-07-01", "2008-06-30")
@@ -93,13 +94,16 @@ def same(a, b):
     return r(a) == r(b)
 
 
-def series(g, candidates, reference, page, what, links=None):
-    """({end: value}, [tags used], [disagreements]) back to fiscal 2007 (FIRST), ending at the reference's last year.
+def series(g, candidates, reference, page, what, links=None, extra=None):
+    """({end: value}, [tags used], [disagreements], [years read by hand]) back to fiscal 2007 (FIRST), ending at the
+    reference's last year.
     reference: the five-year page's latest-filing years, which a tag must match to anchor the series.
     page: all five years of the five-year page; in those years its value is used, so the pages agree.
     links: hand_links() for this series: a listed tag joins when every linked year shows its as-first-reported
-    value under that tag and its restated value in the series (MSFT revenue across ASC 606)."""
-    links = links or {}
+    value under that tag and its restated value in the series (MSFT revenue across ASC 606).
+    extra: {end: value} from hand_levels(), for years before the XBRL data; it fills only years the data lacks,
+    and must equal the series exactly in every year both cover (at least one), so it sits on the same basis."""
+    links, extra = links or {}, extra or {}
     have = {t: f for t in candidates if (f := annual(g, t))}
 
     def latest(f, e):
@@ -124,7 +128,8 @@ def series(g, candidates, reference, page, what, links=None):
         return min((r[1] for r in rows if same(r[1], value)), key=zeros), rows
 
     while True:
-        ends = sorted(e for e in {e for t in accepted for e in have[t]} if FIRST[0] <= e <= last)
+        xbrl = sorted(e for e in {e for t in accepted for e in have[t]} if FIRST[0] <= e <= last)
+        ends = sorted(set(xbrl) | {e for e in extra if FIRST[0] <= e <= last})
         gaps = [(a, b) for a, b in zip(ends, ends[1:]) if not 350 <= days(a, b) <= 380]
         if ends and ends[0] <= FIRST[1] and not gaps:
             break
@@ -132,8 +137,8 @@ def series(g, candidates, reference, page, what, links=None):
         # series in a year both cover (CCL: Revenues skips 2009-2013, SalesRevenueServicesGross fills them).
         joiners = [t for t, f in have.items() if t not in accepted
                    and any(FIRST[0] <= e <= last and e not in ends for e in f)
-                   and (any(e in f and latest(f, e) == winner(e)[0] for e in ends)
-                        or (t in links and all(e in f and e in ends and latest(f, e) == old and winner(e)[0] == new
+                   and (any(e in f and latest(f, e) == winner(e)[0] for e in xbrl)
+                        or (t in links and all(e in f and e in xbrl and latest(f, e) == old and winner(e)[0] == new
                                                for e, (old, new) in links[t].items())))]
         if not joiners:
             where = (f"has a gap {gaps[0][0]} to {gaps[0][1]}" if gaps and ends[0] <= FIRST[1]
@@ -141,8 +146,17 @@ def series(g, candidates, reference, page, what, links=None):
             raise SystemExit(f"{what}: {where}; no other tag brings the missing years and matches the series in "
                              f"a shared year")
         accepted += joiners
+    shared = [e for e in extra if e in xbrl]
+    if extra and not shared:
+        raise SystemExit(f"{what}: the hand record shares no year with the XBRL series")
+    for e in shared:
+        if winner(e)[0] != extra[e]:
+            raise SystemExit(f"{what} {e}: hand record {extra[e]:,} but the series has {winner(e)[0]:,}")
     out, disagreements = {}, []
     for e in ends:
+        if e not in xbrl:
+            out[e] = extra[e]
+            continue
         value, rows = winner(e)
         out[e] = value
         seen = set()
@@ -154,14 +168,16 @@ def series(g, candidates, reference, page, what, links=None):
     for a, b in zip(ends, ends[1:]):
         if not 350 <= days(a, b) <= 380:
             raise SystemExit(f"{what}: fiscal years {a} and {b} are not consecutive")
-    return out, [t for t in accepted if any(e in have[t] for e in ends)], disagreements
+    return (out, [t for t in accepted if any(e in have[t] for e in ends)], disagreements,
+            [e for e in ends if e not in xbrl])
 
 
-def pairs(g, tags, levels, what):
+def pairs(g, tags, levels, what, hand=()):
     """{end: comparison} for each year after the first, on one accounting basis: the latest 10-K that reports
     both the year and the one before it (every 10-K presents its comparative year on its own basis). basis_changed:
     that 10-K's figures differ from the levels shown, because a later filing recast one of the two years, so the
-    change is not the ratio of the levels."""
+    change is not the ratio of the levels. hand: hand_levels() records for this line, used only for a pair no XBRL
+    10-K reports."""
     by = {}  # accession: (filed, {end: {values}})
     for t in tags:
         for e, rows in annual(g, t).items():
@@ -171,7 +187,14 @@ def pairs(g, tags, levels, what):
     for prev, e in zip(ends, ends[1:]):
         both = [(filed, a) for a, (filed, vals) in by.items() if prev in vals and e in vals]
         if not both:
-            raise SystemExit(f"{what} {e}: no 10-K reports both {prev} and {e}")
+            recs = [r for r in hand if prev in r["values"] and e in r["values"]]
+            if not recs:
+                raise SystemExit(f"{what} {e}: no 10-K reports both {prev} and {e}")
+            r = max(recs, key=lambda r: r["filed"])
+            p, v = r["values"][prev], r["values"][e]
+            out[e] = {"prior_end": prev, "prior": p, "value": v, "accession": r["accession"], "filed": r["filed"],
+                      "basis_changed": not (same(p, levels[prev]) and same(v, levels[e])), "by_hand": True}
+            continue
         filed, a = max(both)
         vals = by[a][1]
 
@@ -237,6 +260,61 @@ def hand_links(ticker, what, cik, ua):
     return out
 
 
+def printed(v):
+    """The ways a filing prints a whole-dollar amount: in millions ("5,900") when it is whole millions, and in
+    thousands ("20,431") when it is whole thousands (ODFL's statements are in thousands)."""
+    return ([f"{v // 1_000_000:,}"] if v % 1_000_000 == 0 else []) + ([f"{v // 1000:,}"] if v % 1000 == 0 else [])
+
+
+def filed_on(cik, accession, ua):
+    """The date the SEC received a filing, from the company's submissions record."""
+    sub = get_json(f"https://data.sec.gov/submissions/CIK{cik:010d}.json", f"{cik}/submissions.json", ua)
+    pages = [sub["filings"]["recent"]] + [get_json(f"https://data.sec.gov/submissions/{x['name']}",
+                                                   f"{cik}/{x['name']}", ua) for x in sub["filings"].get("files", [])]
+    hits = {d for r in pages for a, d in zip(r["accessionNumber"], r["filingDate"]) if a == accession}
+    if len(hits) != 1:
+        raise SystemExit(f"{accession}: expected one filing date, found {sorted(hits)}")
+    return hits.pop()
+
+
+def hand_levels(ticker, cik, ua):
+    """[{accession, document, filed, values: {item: {end: dollars}}}] from data/by_hand/levels.json: a 10-K's
+    income statement, quoted verbatim, for years the SEC's XBRL data does not reach. Each figure is read out of the
+    quote, not typed: the row's label (found once) and then one number per column, in the unit the quote states.
+    Every footing (a - b = c) must hold in every column, as history.py foots the statements it reads."""
+    records = json.loads(LEVELS.read_text(encoding="utf-8")) if LEVELS.exists() else {}
+    out = []
+    for rec in records.get(ticker, []):
+        who = f"{ticker} levels {rec['accession']}"
+        q = verified_quotes(who, cik, [rec], ua)[0]
+        unit = {1000: "(In thousands", 1_000_000: "(In millions"}[rec["unit"]]
+        header = " ".join(c[:4] for c in rec["columns"])
+        if unit not in q or header not in q:
+            raise SystemExit(f"{who}: the quote does not state {unit!r} and the columns {header!r}")
+
+        def row(label):
+            hits = [m.end() for m in re.finditer(re.escape(label) + " ", q)]
+            if len(hits) != 1:
+                raise SystemExit(f"{who}: row {label!r} appears {len(hits)} times in the quote")
+            i, vals = hits[0], []
+            for _ in rec["columns"]:
+                m = re.match(r"(?:\$ )?(\()?([\d,]+)(?: \))? ?", q[i:])
+                if not m:
+                    raise SystemExit(f"{who}: row {label!r} has fewer than {len(rec['columns'])} numbers")
+                vals.append((-1 if m.group(1) else 1) * int(m.group(2).replace(",", "")) * rec["unit"])
+                i += m.end()
+            return dict(zip(rec["columns"], vals))
+        for a, b, c in rec["footing"]:
+            ra, rb, rc = row(a), row(b), row(c)
+            for e in rec["columns"]:
+                if ra[e] - rb[e] != rc[e]:
+                    raise SystemExit(f"{who} {e}: {a} {ra[e]:,} less {b} {rb[e]:,} is not {c} {rc[e]:,}")
+        out.append({"accession": rec["accession"], "document": rec["document"],
+                    "filed": filed_on(cik, rec["accession"], ua),
+                    "values": {item: row(label) for item, label in rec["rows"].items()}})
+    return out
+
+
 def by_hand(ticker, end, cik, filing, ua):
     """The hand record for one pre-XBRL year: {deals, spend, prior_total_assets, sources}. Every source quote must
     appear verbatim (whitespace collapsed) in the named document of a filing, and the spend and prior total assets
@@ -253,11 +331,11 @@ def by_hand(ticker, end, cik, filing, ua):
             if not rec.get("spend_line") or not any(rec["spend_line"] in q for q in quotes):
                 raise SystemExit(f"{ticker} {end}: spend 0 needs spend_line, the cash flow line quoted")
             continue
-        if v % 1_000_000 or not any(f"{v // 1_000_000:,}" in q for q in quotes):
-            raise SystemExit(f"{ticker} {end}: {what} {v:,} does not appear in millions in any quote")
+        if not any(f in q for f in printed(v) for q in quotes):
+            raise SystemExit(f"{ticker} {end}: {what} {v:,} does not appear in millions or thousands in any quote")
     for d in rec["deals"]:
-        v = d["size"]  # in millions ("5,900") or, where the filing writes it so, tenths of a billion ("$5.9 billion")
-        forms = [f"{v // 1_000_000:,}"] + ([f"${v / 1e9:.1f} billion"] if v % 100_000_000 == 0 else [])
+        v = d["size"]  # in millions ("5,900"), thousands ("20,431") or tenths of a billion ("$5.9 billion")
+        forms = printed(v) + ([f"${v / 1e9:.1f} billion"] if v % 100_000_000 == 0 else [])
         if not any(f in q for f in forms for q in quotes):
             raise SystemExit(f"{ticker} {end}: deal {d['name']} size {d['size']:,} does not appear in any quote")
     return rec
@@ -346,19 +424,39 @@ def main():
     g = get_json(f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json",
                  f"companyfacts-CIK{cik:010d}.json", ua)["facts"]["us-gaap"]
     anchor_years = h["filings"][0]["years"]  # the five-year page's latest filing
-    revenue, rev_tags, d1 = series(g, [t for t in g if REVENUE.match(t)],
-                                   {e: h["revenue"][e] for e in anchor_years}, h["revenue"], "revenue",
-                                   hand_links(ticker, "revenue", cik, ua))
-    pretax, pre_tags, d2 = series(g, PRETAX, {e: h["pretax_income"][e] for e in anchor_years},
-                                  h["pretax_income"], "pre-tax income")
+    levels = hand_levels(ticker, cik, ua)
+
+    def extra(item):
+        """{end: value} of one line across the hand-levels records; fails if two records give a year differently."""
+        out = {}
+        for r in levels:
+            for e, v in r["values"].get(item, {}).items():
+                if out.setdefault(e, v) != v:
+                    raise SystemExit(f"{item} {e}: hand records give {out[e]:,} and {v:,}")
+        return out
+
+    def hand_recs(item):
+        return [r | {"values": r["values"][item]} for r in levels if item in r["values"]]
+    revenue, rev_tags, d1, h1 = series(g, [t for t in g if REVENUE.match(t)],
+                                       {e: h["revenue"][e] for e in anchor_years}, h["revenue"], "revenue",
+                                       hand_links(ticker, "revenue", cik, ua), extra("revenue"))
+    pretax, pre_tags, d2, h2 = series(g, PRETAX, {e: h["pretax_income"][e] for e in anchor_years},
+                                      h["pretax_income"], "pre-tax income", extra=extra("pretax_income"))
     if list(revenue) != list(pretax):
         raise SystemExit(f"revenue years {list(revenue)} != pre-tax income years {list(pretax)}")
-    operating, op_tags, d3 = None, [], []
+    operating, op_tags, d3, h3 = None, [], [], h1
     if h["operating_income"] is not None:  # only where the five-year page has it (banks and insurers report none)
-        operating, op_tags, d3 = series(g, OPERATING, {e: h["operating_income"][e] for e in anchor_years},
-                                        h["operating_income"], "operating income")
+        operating, op_tags, d3, h3 = series(g, OPERATING, {e: h["operating_income"][e] for e in anchor_years},
+                                            h["operating_income"], "operating income",
+                                            extra=extra("operating_income"))
         if list(operating) != list(revenue):
             raise SystemExit(f"operating income years {list(operating)} != revenue years {list(revenue)}")
+    if not h1 == h2 == h3:
+        raise SystemExit(f"years read by hand differ by line: revenue {h1}, pre-tax {h2}, operating {h3}")
+    # Each year read by hand, its filing, and the years of that filing that series() matched to the XBRL data.
+    hand_years = {e: next({k: r[k] for k in ("accession", "document", "filed")}
+                          | {"matches_xbrl": sorted(x for x in r["values"]["revenue"] if x not in h1)}
+                          for r in levels if e in r["values"]["revenue"]) for e in h1}
     ends = list(revenue)
     off_page = [(e, what) for e in h["period_ends"] if e in revenue
                 for what, a, b in (("revenue", revenue[e], h["revenue"][e]),
@@ -425,9 +523,11 @@ def main():
     out = {"ticker": ticker, "company": h["company"], "cik": cik, "unit": "USD", "period_ends": ends,
            "revenue": revenue, "operating_income": operating, "pretax_income": pretax, "revenue_tags": rev_tags,
            "operating_tags": op_tags, "pretax_tags": pre_tags,
-           "changes": {"revenue": pairs(g, rev_tags, revenue, "revenue"),
-                       "operating_income": pairs(g, op_tags, operating, "operating income") if operating else None,
-                       "pretax_income": pairs(g, pre_tags, pretax, "pre-tax income")},
+           "changes": {"revenue": pairs(g, rev_tags, revenue, "revenue", hand_recs("revenue")),
+                       "operating_income": (pairs(g, op_tags, operating, "operating income",
+                                                  hand_recs("operating_income")) if operating else None),
+                       "pretax_income": pairs(g, pre_tags, pretax, "pre-tax income", hand_recs("pretax_income"))},
+           **({"hand_years": hand_years} if hand_years else {}),  # absent for a series wholly from XBRL
            "disagreements": d1 + d2 + d3, "differs_from_five_year_page": off_page, "deals": out_deals,
            "standards": standards(ends),
            "significance_test": "SEC Regulation S-X Rule 1-02(w)(1)(i): consideration >= 10% of total assets "

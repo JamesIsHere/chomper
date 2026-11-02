@@ -666,6 +666,21 @@ def ten_breaks(ticker):
             'already use the later figures; nothing here needs to be added back.</p>\n')
 
 
+def hand_note(t):
+    """One line under the long table for each year read by hand from a 10-K (headline.py hand_years): which
+    10-K, and the years of it that match the SEC's data. Empty when every year comes from that data."""
+    out = ""
+    for e, r in sorted(t.get("hand_years", {}).items()):
+        url = (f"https://www.sec.gov/Archives/edgar/data/{t['cik']}/{r['accession'].replace('-', '')}/"
+               f"{r['document']}")
+        first = year(min(x for x in t["period_ends"] if x not in t["hand_years"]))
+        match = " and ".join(year(x) for x in r["matches_xbrl"])
+        out += (f'<p class="note">{year(e)} is read from the income statement in the <a href="{escape(url)}">10-K '
+                f'filed {r["filed"]}</a> (accession {escape(r["accession"])}). The SEC\'s machine-readable (XBRL) '
+                f'data for this company starts with {first}, and that 10-K\'s {match} figures match it exactly.</p>\n')
+    return out
+
+
 def ten_years(ticker):
     """The long window at the top of the page: revenue, operating income (where reported), pre-tax income and
     margin for ten years, then the chart (trend_chart)."""
@@ -726,6 +741,7 @@ def ten_years(ticker):
             + ('<p class="note">* See Note 1.</p>\n' if notes else "")
             + ('<p class="note">Shaded: fiscal years holding a quarter or more of a US recession as the NBER dates it '
                '(December 2007 to June 2009; February to April 2020).</p>\n' if rec else "")
+            + hand_note(t)
             + trend_chart(t) + '\n')
 
 

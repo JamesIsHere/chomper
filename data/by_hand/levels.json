@@ -1,0 +1,16 @@
+{
+ "ODFL": [
+  {
+   "accession": "0001193125-10-044645",
+   "document": "d10k.htm",
+   "unit": 1000,
+   "columns": ["2009-12-31", "2008-12-31", "2007-12-31"],
+   "rows": {"revenue": "Revenue from operations", "operating_income": "Operating income",
+            "pretax_income": "Income before income taxes"},
+   "footing": [["Revenue from operations", "Total operating expenses", "Operating income"],
+               ["Operating income", "Total non-operating expense", "Income before income taxes"]],
+   "note": "ODFL's first XBRL 10-K is for fiscal 2010, so the SEC's data reaches back only to 2008, its earliest comparative year. Fiscal 2007 is read from the statement of operations in the 10-K for fiscal 2009, the latest 10-K that reports it; its 2008 and 2009 columns must equal the XBRL series, so 2007 sits on the same basis.",
+   "quote": "STATEMENTS OF OPERATIONS Year ended December 31, (In thousands, except share and per share data) 2009 2008 2007 Revenue from operations $ 1,245,005 $ 1,537,724 $ 1,401,542 Operating expenses: Salaries, wages and benefits 718,744 804,636 751,371 Operating supplies and expenses 181,329 305,158 238,879 General supplies and expenses 36,363 44,674 40,075 Operating taxes and licenses 50,175 52,648 50,874 Insurance and claims 23,095 34,859 33,347 Communications and utilities 14,614 15,345 15,023 Depreciation and amortization 94,784 87,083 79,863 Purchased transportation 33,786 43,035 43,889 Building and office equipment rents 13,550 14,556 11,910 Miscellaneous expenses, net 8,174 6,660 6,374 Total operating expenses 1,174,614 1,408,654 1,271,605 Operating income 70,391 129,070 129,937 Non-operating expense (income): Interest expense 13,041 14,008 14,466 Interest income (43 ) (996 ) (1,506 ) Other expense, net 228 3,392 1,182 Total non-operating expense 13,226 16,404 14,142 Income before income taxes 57,165 112,666 115,795"
+  }
+ ]
+}

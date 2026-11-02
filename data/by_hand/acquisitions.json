@@ -329,5 +329,80 @@
     }
    ]
   }
+ },
+ "ODFL": {
+  "2007-12-31": {
+   "deals": [
+    {
+     "name": "Business assets of Priority Freight Lines, Inc. and Bullocks Express Transportation, Inc.",
+     "member": "by_hand:PriorityFreightBullocksExpress",
+     "date": "2007-12-31",
+     "size": 20431000,
+     "measure": "cash paid"
+    }
+   ],
+   "spend": 20431000,
+   "prior_total_assets": 892193000,
+   "note": "The 10-K names the two sellers and gives one amount for both, with no dates: the deal is dated at the year end and sized at the cash paid. Spend is the cash flow line, 2007 column; total assets at 31 Dec 2006 from the balance sheet (columns 2007, 2006). Thousands, as the filing prints them.",
+   "sources": [
+    {
+     "accession": "0001193125-08-043137",
+     "document": "d10k.htm",
+     "quote": "paid $20,431,000 to acquire certain business assets from Priority Freight Lines, Inc. and Bullocks Express Transportation, Inc."
+    },
+    {
+     "accession": "0001193125-08-043137",
+     "document": "d10k.htm",
+     "quote": "Acquisition of business assets (20,431 ) (19,414 ) (23,113 )"
+    },
+    {
+     "accession": "0001193125-08-043137",
+     "document": "d10k.htm",
+     "quote": "Total assets $ 981,048 $ 892,193"
+    }
+   ]
+  },
+  "2008-12-31": {
+   "deals": [],
+   "spend": 7267000,
+   "prior_total_assets": 981048000,
+   "note": "The 10-K names no seller for 2008's purchases of business assets. Spend is the cash flow line, 2008 column; total assets at 31 Dec 2007 (balance sheet columns 2008, 2007).",
+   "sources": [
+    {
+     "accession": "0001193125-09-042346",
+     "document": "d10k.htm",
+     "quote": "paid $7,267,000 to acquire certain business assets through acquisitions"
+    },
+    {
+     "accession": "0001193125-09-042346",
+     "document": "d10k.htm",
+     "quote": "Acquisition of business assets (7,267 ) (20,431 ) (19,414 )"
+    },
+    {
+     "accession": "0001193125-09-042346",
+     "document": "d10k.htm",
+     "quote": "Total assets $ 1,074,905 $ 981,048"
+    }
+   ]
+  },
+  "2009-12-31": {
+   "deals": [],
+   "spend": 0,
+   "spend_line": "Acquisition of business assets — (7,267 )",
+   "prior_total_assets": 1074905000,
+   "note": "A dash in the 2009 column of the cash flow line: no business assets acquired. Total assets at 31 Dec 2008 (balance sheet columns 2009, 2008).",
+   "sources": [
+    {
+     "accession": "0001193125-10-044645",
+     "document": "d10k.htm",
+     "quote": "Acquisition of business assets — (7,267 ) (20,431 )"
+    },
+    {
+     "accession": "0001193125-10-044645",
+     "document": "d10k.htm",
+     "quote": "Total assets $ 1,159,278 $ 1,074,905"
+    }
+   ]
+  }
  }
 }
