@@ -9,6 +9,7 @@ Writes data/census.json (every record) and census.md (counts by class, signals, 
 
 Usage: python census.py            (all companies; the 11 with pages first, as a control)
        python census.py --report   (rewrite census.md from data/census.json, no downloads)
+       python census.py --fresh    (rerun every company, e.g. after a fix; cached downloads are reused)
 """
 import json
 import re
@@ -148,7 +149,8 @@ def main():
         return
     ua = user_agent()
     tickers = CONTROL + sorted(c["ticker"] for c in universe if c["ticker"] not in CONTROL)
-    todo = [t for t in tickers if t not in records or records[t]["status"] == "download"]
+    fresh = sys.argv[1:] == ["--fresh"]  # rerun every company after a fix; downloads stay cached
+    todo = [t for t in tickers if fresh or t not in records or records[t]["status"] == "download"]
     start = time.time()
     for i, t in enumerate(todo, 1):
         records[t] = run_one(t, ua)
