@@ -406,10 +406,12 @@ def page(h, name):
                         f'(accession {escape(f["accession"])})' for f in h["filings"])
     real = [d for d in h["disagreements"] if not rounding_only(d["latest_filing"], d["earlier_filing"])]
     rounded = len(h["disagreements"]) - len(real)
-    disagreements = ("No figure differs between the two filings for the year they share"
-                     + (" beyond rounding." if rounded else ".")
+    shared = year(min(f["report_date"] for f in h["filings"]))  # the earlier 10-K's latest year, in both
+    disagreements = (f"The two 10-Ks agree on every figure for {shared}, the year both show"
+                     + (", apart from rounding." if rounded else ".")
                      if not real else
-                     "Figures that differ between the two filings for the year they share (the later filing is used): "
+                     f"The two 10-Ks differ on these figures for {shared}, the year both show (the later 10-K is "
+                     f"used): "
                      + "; ".join(f"{escape(d['item'])} {m(d['latest_filing'], False)} vs "
                                  f"{m(d['earlier_filing'], False)}" for d in real)
                      + (f"; {plural(rounded, 'other figure')} {'differs' if rounded == 1 else 'differ'} only by "
