@@ -9,7 +9,7 @@ Usage: python build_history.py
 import json
 import math
 import re
-from datetime import date
+from datetime import date, timedelta
 from html import escape
 
 import header
@@ -33,7 +33,10 @@ def m(dollars, sign=True):
 
 
 def year(end):
-    d = date.fromisoformat(end)
+    """A fiscal year's label from its end date, read a week early: a 52/53-week year ends up to a week past its
+    nominal month (JNJ's 2020 ended 2021-01-03, HD's years end late January or early February), and the week
+    keeps each company's labels on one month: 2020, not Jan 2021."""
+    d = date.fromisoformat(end) - timedelta(days=7)
     return str(d.year) if d.month == 12 else d.strftime("%b %Y")
 
 
