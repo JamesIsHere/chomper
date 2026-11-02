@@ -263,3 +263,9 @@ Decision: When a line on the income statement has no tagged total in a year, and
 Why: 39 of the 55 Footing stops were one cost line tagged only by product and service; reading only totals lost the whole line (Boeing's "$70B gap" is its 2023 cost of goods and services sold, $70,070M). One summed row keeps every label a real filing label and matches how revenue, split the same way on the face, is already shown as one total; per-part rows would have carried revenue labels on cost rows (Boeing's parts are labeled "Sales of products" and "Sales of services"). Of the 55, 36 now pass, 10 stop as Member slice; the 11 built pages are unchanged (James, 2026-11-02).
 Status: active
 
+
+## 2026-11-02 | Pre-tax income found by position
+Group: Method
+Decision: When neither pre-tax income tag anchors the statement's calculation, pre-tax income is the one subtotal that income tax is subtracted from to reach net income, provided that subtotal has its own calculation; more than one such subtotal stops the build. The page footer names the line by the filing's own label. No list of further tags.
+Why: 33 companies print a pre-tax line under some other tag (Costco's "INCOME BEFORE INCOME TAXES" is IncomeLossAttributableToParent; eight different tags across the 33). Of the 52 stopped here, 29 now pass, each with a subtotal labeled as pre-tax income in the filing; the rest still stop. The 11 built pages are unchanged. Made under the standing rule that XBRL plumbing inside the rails is the agent's (James, 2026-11-02).
+Status: active

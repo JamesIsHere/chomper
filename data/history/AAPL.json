@@ -15,7 +15,8 @@
         "2024-09-28",
         "2025-09-27"
       ],
-      "stitched_from": null
+      "stitched_from": null,
+      "pretax_by_position": null
     },
     {
       "accession": "0000320193-23-000106",
@@ -28,7 +29,8 @@
         "2022-09-24",
         "2023-09-30"
       ],
-      "stitched_from": null
+      "stitched_from": null,
+      "pretax_by_position": null
     }
   ],
   "revenue_label": "Net sales",

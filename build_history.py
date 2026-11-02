@@ -68,6 +68,18 @@ def retags(h):
                         for l in rows) + ".")
 
 
+def pretax_line(h):
+    """The footer's sentence when pre-tax income is found by position rather than by its usual tag."""
+    found = [(f, f["pretax_by_position"]) for f in h["filings"] if f.get("pretax_by_position")]
+    if not found:
+        return ""
+    labels = sorted({p["label"] for _, p in found})
+    which = ("both 10-Ks" if len(found) == 2 else f"the 10-K for {year(found[0][0]['report_date'])}")
+    return (f" Pre-tax income is the line {which} label{'s' if len(found) == 1 else ''} "
+            + " / ".join(f"&ldquo;{escape(l)}&rdquo;" for l in labels)
+            + ": the statement subtracts income tax from it to reach net income.")
+
+
 def summed(h):
     """The footer's sentence for lines the filing reports only by member (BA's cost of goods and services sold, by
     product and service), shown as the members' sum."""
@@ -551,7 +563,7 @@ def page(h, name):
                         f"rounding." if rounded else "."))
     return TEMPLATE.format(company=escape(name), ticker=escape(h["ticker"]), heads=heads, top=top,
                            rows="\n".join(rows), years=years, filings=filings, cik=f"{int(h['cik']):010d}",
-                           disagreements=disagreements, footing=footing(h) + retags(h) + summed(h), loss_note=loss_note,
+                           disagreements=disagreements, footing=footing(h) + retags(h) + summed(h) + pretax_line(h), loss_note=loss_note,
                            ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
                            last=year(h["period_ends"][-1]), nav=nav(), bridge_link=bridge_link(h["ticker"]),
                            ten_years=ten_years(h["ticker"]), ten_breaks=ten_breaks(h["ticker"]), css=CSS)

@@ -35,6 +35,7 @@ OPERATING_INCOME = "us-gaap_OperatingIncomeLoss"
 # that show equity-method income below the pre-tax line.
 PRETAX = ["us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
           "us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"]
+TAX = re.compile(r"^us-gaap_IncomeTaxExpenseBenefit\w*$")
 REVENUE = re.compile(r"^us-gaap_(Revenues|RevenuesNetOfInterestExpense|RevenueFromContractWithCustomer\w*"
                      r"|SalesRevenue\w*)$")
 WHOLE = re.compile(r"-?\d+(\.0+)?")  # some filers write 349000000.0
@@ -212,6 +213,15 @@ def weights(path, role, vals):
         if stitched:
             kids[present[0]] = stitched
             anchors = [present[0]]
+    by_position = None
+    if not anchors:  # pre-tax income by position: the one subtotal income tax is subtracted from (COST, ITW)
+        hits = [x for p, cs in kids.items() if len(cs) == 2
+                for (x, wx), (t, wt) in (cs, cs[::-1])
+                if TAX.match(t) and wt == -1.0 and wx == 1.0 and x in kids and x in vals]
+        if len(hits) > 1:
+            raise SystemExit(f"more than one subtotal has income tax subtracted from it: {hits}")
+        if hits:
+            anchors, by_position = hits, hits[0]
     if not anchors:
         raise SystemExit(f"no calculation for a pre-tax income tag {PRETAX} in the income statement role")
     out, operating = {}, {}
@@ -225,7 +235,7 @@ def weights(path, role, vals):
             out[node] = out.get(node, 0) + w
             operating[node] = above_oi
     expand(anchors[0], 1.0, False)
-    return anchors[0], out, operating, [r for r, _ in stitched] if stitched else None
+    return anchors[0], out, operating, [r for r, _ in stitched] if stitched else None, by_position
 
 
 def annual_values(path):
@@ -285,7 +295,7 @@ def read_filing(cik, filing, ua):
     files = filing_files(cik, filing, ua)
     name, role = statement_role(files["summary"])
     vals, decs, dims, members = annual_values(files["instance"])
-    anchor, w, operating, stitched = weights(files["cal"], role, vals)
+    anchor, w, operating, stitched, by_position = weights(files["cal"], role, vals)
     order = presentation_order(files["pre"], role)
     labs = labels(files["lab"])
     revenue = [c for c in w if REVENUE.match(c)]
@@ -372,6 +382,7 @@ def read_filing(cik, filing, ua):
         del l["_units"]
     return {"statement": name, "role": role, "revenue_concept": revenue[0], "pretax_concept": anchor,
             "stitched_from": stitched,
+            "pretax_by_position": by_position and {"concept": by_position, "label": label(by_position)},
             "revenue_label": label(revenue[0]),
             "ends": ends, "revenue": rev, "pretax_income": pretax, "operating_income": oi, "lines": lines,
             "rounding": rounding, "rounding_operating": rounding_op, "footing_gaps": gaps}
@@ -520,7 +531,8 @@ def main():
     out = {
         "ticker": ticker, "company": company, "cik": cik, "unit": "USD",
         "filings": [{k: f[k] for k in ("accession", "report_date", "document_url", "index_url")} | {
-            "statement": r["statement"], "years": r["ends"], "stitched_from": r["stitched_from"]}
+            "statement": r["statement"], "years": r["ends"], "stitched_from": r["stitched_from"],
+            "pretax_by_position": r["pretax_by_position"]}
             for f, r in ((latest_f, latest), (older_f, older))],
         "revenue_label": latest["revenue_label"],
         "period_ends": ends, "revenue": revenue, "pretax_income": pretax, "operating_income": oi,

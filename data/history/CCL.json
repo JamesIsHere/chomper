@@ -15,7 +15,8 @@
         "2024-11-30",
         "2025-11-30"
       ],
-      "stitched_from": null
+      "stitched_from": null,
+      "pretax_by_position": null
     },
     {
       "accession": "0000815097-24-000011",
@@ -28,7 +29,8 @@
         "2022-11-30",
         "2023-11-30"
       ],
-      "stitched_from": null
+      "stitched_from": null,
+      "pretax_by_position": null
     }
   ],
   "revenue_label": "Total Revenues",

@@ -15,7 +15,8 @@
         "2024-12-31",
         "2025-12-31"
       ],
-      "stitched_from": null
+      "stitched_from": null,
+      "pretax_by_position": null
     },
     {
       "accession": "0000019617-24-000225",
@@ -28,7 +29,8 @@
         "2022-12-31",
         "2023-12-31"
       ],
-      "stitched_from": null
+      "stitched_from": null,
+      "pretax_by_position": null
     }
   ],
   "revenue_label": "Total net revenue",
