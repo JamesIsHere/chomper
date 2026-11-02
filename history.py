@@ -312,8 +312,8 @@ def read_filing(cik, filing, ua):
     def label(c):
         std = "http://www.xbrl.org/2003/role/label"
         return labs.get(c, {}).get(prefs.get(c) or std) or labs.get(c, {}).get(std) or c
-    lines = []
-    for c in sorted((c for c in w if c != revenue[0]), key=lambda c: rank.get(c, 1e9)):
+    def read_line(c):
+        """{end: value} for one line, with the years read from one dimension member or summed from parts."""
         values, from_dims, units, summed = {}, [], {}, {}
         for e in ends:
             values[e] = vals.get(c, {}).get(e)
@@ -336,10 +336,17 @@ def read_filing(cik, filing, ua):
                     values[e] = sum(h[m][0] for m in ms)
                     units[e] = sum(10 ** -h[m][1] for m in ms)
                     summed[e] = [label(m) for m in ms]
+        return values, from_dims, units, summed
+    lines = []
+    for c in sorted((c for c in w if c != revenue[0]), key=lambda c: rank.get(c, 1e9)):
+        values, from_dims, units, summed = read_line(c)
         lines.append({"concept": c, "label": label(c), "weight": w[c], "values": values,
                       "operating": operating[c], "dimensioned_years": from_dims, "summed_members": summed,
                       "_units": units})
-    rev = {e: vals[revenue[0]][e] for e in ends}
+    rev, _, rev_units, rev_summed = read_line(revenue[0])
+    missing = [e for e in ends if rev[e] is None or e in rev_summed]
+    if missing:  # revenue only in parts (WFC: three fee lines) is not summed: what counts as revenue is a ruling
+        raise SystemExit(f"{filing['accession']}: revenue {revenue[0]} has no value for {missing}")
     pretax = {e: vals[anchor][e] for e in ends}
 
     def unit(c, e):
@@ -348,7 +355,7 @@ def read_filing(cik, filing, ua):
     def slack(e, subtotal, rows):
         """Half a rounding unit (the fact's own XBRL decimals) for each summed figure and the subtotal itself:
         the most the reported figures can miss by when every true amount rounds to its reported one."""
-        return 0.5 * (unit(revenue[0], e) + unit(subtotal, e)
+        return 0.5 * (rev_units[e] + unit(subtotal, e)
                       + sum(l["_units"][e] for l in rows if l["values"][e] is not None))
     gaps = []
     rounding = {}

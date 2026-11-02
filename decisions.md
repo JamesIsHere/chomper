@@ -275,3 +275,9 @@ Group: Presentation
 Decision: The All page gives every company without a page a status in its row: "Readable" when its filings pass every check of the five-year step, or "Not readable" with the reason in one plain line (one sentence per census class: statement not identified, pre-tax income not found, revenue not one line, figures that disagree, filings not found, lines that do not add up, a line in parts against a total, or an error in the reader). The opening paragraph counts both. Status comes from data/census.json, so a census rerun updates it. The full build of pages for readable companies stays a separate decision: each page also needs ASC 606/842 adoption records read from the company's 10-Ks.
 Why: The agreed tail treatment was to exclude openly with reasons rather than add a rule per small class; with 11 pages built, a reader could not otherwise tell a company that cannot be read from one not yet built (James, 2026-11-02).
 Status: active
+
+## 2026-11-02 | Revenue in parts is not summed
+Group: Method
+Decision: Revenue is read like any line, but when the filing tags it only in parts, or leaves a year without it, the build stops with a named Revenue reason rather than summing the parts. Unlike a cost line, which parts make up "revenue" decides how the headline number is defined, so it waits for James's ruling.
+Why: Three companies crashed on revenue with no total (APA, LHX, WFC). Summing WFC's parts would have shown three fee lines (advisory, brokerage, investment banking) as Wells Fargo's revenue. All three now stop as Revenue; the 11 built pages are unchanged (agent, under the standing XBRL rule, 2026-11-02).
+Status: active

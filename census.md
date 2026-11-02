@@ -7,14 +7,13 @@
 | Outcome      | Companies |
 | ------------ | --------- |
 | Pass         | 384       |
+| Revenue      | 24        |
 | Statement    | 23        |
-| Revenue      | 21        |
 | Anchor       | 21        |
 | Values       | 16        |
 | Not found    | 13        |
 | Footing      | 11        |
 | Member slice | 11        |
-| Crash        | 3         |
 
 ## Signals on companies that pass
 
@@ -49,9 +48,6 @@
 | SPG    | Real Estate            | Anchor       | no calculation for a pre-tax income tag ['us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest', 'us-gaap_IncomeL |
 | VTR    | Real Estate            | Anchor       | no calculation for a pre-tax income tag ['us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest', 'us-gaap_IncomeL |
 | WELL   | Real Estate            | Anchor       | no calculation for a pre-tax income tag ['us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest', 'us-gaap_IncomeL |
-| APA    | Energy                 | Crash        | KeyError: 'us-gaap_Revenues'                                                                                                                                     |
-| LHX    | Industrials            | Crash        | KeyError: '2026-01-02'                                                                                                                                           |
-| WFC    | Financials             | Crash        | KeyError: 'us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax'                                                                                          |
 | AEE    | Utilities              | Footing      | 0001002910-26-000009 2023-12-31: lines foot to 520,000,000, pre-tax income 1,340,000,000 (gap 820,000,000, rounding allows 5,000,000)                            |
 | D      | Utilities              | Footing      | 0001193125-26-063120 2023-12-31: lines foot to 2,336,000,000, pre-tax income 2,731,000,000 (gap 395,000,000, rounding allows 6,000,000)                          |
 | HSIC   | Health Care            | Footing      | 0001000228-26-000013 2023-12-30: lines foot to 622,000,000, pre-tax income 542,000,000 (gap -80,000,000, rounding allows 4,000,000)                              |
@@ -472,6 +468,7 @@
 | ZBRA   | Information Technology | Pass         |                                                                                                                                                                  |
 | ZTS    | Health Care            | Pass         |                                                                                                                                                                  |
 | A      | Health Care            | Revenue      | 0001090872-25-000087: expected one revenue concept with weight +1, got []                                                                                        |
+| APA    | Energy                 | Revenue      | 0001841666-26-000015: revenue us-gaap_Revenues has no value for ['2023-12-31', '2024-12-31', '2025-12-31']                                                       |
 | AWK    | Utilities              | Revenue      | 0001410636-26-000034: expected one revenue concept with weight +1, got []                                                                                        |
 | BNY    | Financials             | Revenue      | 0001390777-26-000033: expected one revenue concept with weight +1, got []                                                                                        |
 | DUK    | Utilities              | Revenue      | 0001326160-26-000014: expected one revenue concept with weight +1, got []                                                                                        |
@@ -482,6 +479,7 @@
 | ICE    | Financials             | Revenue      | 0001571949-24-000007: expected one revenue concept with weight +1, got []                                                                                        |
 | KEY    | Financials             | Revenue      | 0001628280-26-010546: expected one revenue concept with weight +1, got []                                                                                        |
 | LEN    | Consumer Discretionary | Revenue      | 0001628280-24-002371: expected one revenue concept with weight +1, got []                                                                                        |
+| LHX    | Industrials            | Revenue      | 0000202058-26-000015: revenue us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax has no value for ['2026-01-02']                                        |
 | MTB    | Financials             | Revenue      | 0000036270-26-000010: expected one revenue concept with weight +1, got []                                                                                        |
 | NEE    | Utilities              | Revenue      | 0000753308-26-000015: expected one revenue concept with weight +1, got []                                                                                        |
 | NOC    | Industrials            | Revenue      | 0001133421-26-000003: expected one revenue concept with weight +1, got []                                                                                        |
@@ -491,6 +489,7 @@
 | SYF    | Financials             | Revenue      | 0001601712-26-000006: expected one revenue concept with weight +1, got []                                                                                        |
 | TFC    | Financials             | Revenue      | 0000092230-26-000030: expected one revenue concept with weight +1, got []                                                                                        |
 | USB    | Financials             | Revenue      | 0000036104-26-000011: expected one revenue concept with weight +1, got []                                                                                        |
+| WFC    | Financials             | Revenue      | 0000072971-26-000133: revenue us-gaap_RevenueFromContractWithCustomerExcludingAssessedTax has no value for ['2023-12-31', '2024-12-31', '2025-12-31']            |
 | XEL    | Utilities              | Revenue      | 0000072903-26-000009: expected one revenue concept with weight +1, got []                                                                                        |
 | AEP    | Utilities              | Statement    | income statement not unique among statements: ['CONSOLIDATED STATEMENTS OF INCOME', 'CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME (LOSS)', 'CONSOLIDATED STAT |
 | CEG    | Utilities              | Statement    | income statement not unique among statements: ['Consolidated Statements of Operations and Comprehensive Income, Parent', 'Consolidated Statements of Cash Flows, |

@@ -34,7 +34,7 @@ CLASSES = [
     ("Filing layout", r"expected one \*_"),
     ("Statement", r"income statement not unique|^role .* not in"),
     ("Anchor", r"no calculation for a pre-tax income tag|expected 3 years of pre-tax income"),
-    ("Revenue", r"expected one revenue concept"),
+    ("Revenue", r"expected one revenue concept|revenue \S+ has no value"),
     ("Footing", r"lines foot to"),
     ("Values", r"conflicting values"),
     ("Member slice", r"reported by member in"),
