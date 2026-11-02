@@ -380,22 +380,25 @@ def ten_breaks(ticker):
 
 def ten_years(ticker):
     """The long window at the top of the page: revenue, operating income (where reported), pre-tax income and
-    margin for ten years, then revenue and pre-tax income as a chart indexed to the first year."""
+    margin for ten years, then revenue and pre-tax income as a chart in multiples of the first year."""
     t = headline(ticker)
     ends, rev, op, pre = t["period_ends"], t["revenue"], t["operating_income"], t["pretax_income"]
 
     def growth(changes):
-        """Each year's change from the 10-K that shows both years; marked where a later 10-K recast one of them."""
+        """Each year's change from the 10-K that shows both years; marked where a later 10-K recast one of them.
+        Green when the line grew, red when it shrank (every line here is better higher), by the sign as shown."""
         cells = ["<td></td>"]
         for e in ends[1:]:
             c = changes[e]
-            pct = f"{(c['value'] - c['prior']) / abs(c['prior']) * 100:+.1f}%"
+            r = round((c["value"] - c["prior"]) / abs(c["prior"]) * 100, 1)
+            pct = f"{r:+.1f}%"
+            cls = ' class="up"' if r > 0 else ' class="down"' if r < 0 else ""
             if c["basis_changed"]:
                 tip = (f"The 10-K filed {c['filed']} shows {year(c['prior_end'])} {m(c['prior'], False)} and "
                        f"{year(e)} {m(c['value'], False)} on one basis; a later 10-K recast one of the two years.")
-                cells.append(f'<td title="{escape(tip)}">{pct}*</td>')
+                cells.append(f'<td{cls} title="{escape(tip)}">{pct}*</td>')
             else:
-                cells.append(f"<td>{pct}</td>")
+                cells.append(f"<td{cls}>{pct}</td>")
         return "".join(cells)
     lines = [(label, s, t["changes"][key]) for label, s, key in
              (("Revenue", rev, "revenue"), ("Operating income", op, "operating_income"),
@@ -487,13 +490,14 @@ def main():
 
 
 CSS = """
-:root { color-scheme: light; --s1: #2a78d6; --s2: #eb6834; --bg: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --ink-3: #75746f;
-  --rule: #e2e1dc; --up: #1f8a4c; --down: #d03b3b; --link: #1c5cab; }
+:root { color-scheme: light; --s1: #2a78d6; --s2: #eb6834; --bg: #ffffff; --ink: #0b0b0b; --ink-2: #52514e; --ink-3: #75746f;
+  --rule: #e2e1dc; --up: #1f8a4c; --down: #d03b3b; --up-text: #17703d; --down-text: #b42828; --link: #1c5cab; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: dark; --s1: #3987e5; --s2: #d95926;
   --bg: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #9a9992; --rule: #383835;
-  --up: #3fb36b; --down: #e05252; --link: #86b6ef; } }
+  --up: #3fb36b; --down: #e05252; --up-text: #3fb36b; --down-text: #e05252; --link: #86b6ef; } }
 :root[data-theme="dark"] { color-scheme: dark; --s1: #3987e5; --s2: #d95926; --bg: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
-  --ink-3: #9a9992; --rule: #383835; --up: #3fb36b; --down: #e05252; --link: #86b6ef; }
+  --ink-3: #9a9992; --rule: #383835; --up: #3fb36b; --down: #e05252; --up-text: #3fb36b; --down-text: #e05252;
+  --link: #86b6ef; }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink);
   font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
@@ -539,8 +543,10 @@ table.decisions td.date { white-space: nowrap; color: var(--ink-3); width: 6.5re
 table.decisions tbody th { font-weight: 600; width: 13rem; min-width: 9rem; }
 table.decisions td.text p { margin: 0 0 .3rem; }
 table.decisions .why { color: var(--ink-2); font-size: .85rem; }
-table.decisions .status { color: var(--down); font-size: .8rem; }
+table.decisions .status { color: var(--down-text); font-size: .8rem; }
 table.decisions .due { font-size: .85rem; font-weight: 600; }
+td.up { color: var(--up-text); }  /* text shades: darker than the cell shading, readable at regular weight */
+td.down { color: var(--down-text); }
 tr.superseded th, tr.superseded td.text p:not(.status) { color: var(--ink-3); text-decoration: line-through; }
 table.index thead th { white-space: normal; vertical-align: bottom; }
 ul.breaks { font-size: .85rem; color: var(--ink-2); max-width: 46rem; padding-left: 1.1rem; margin: .75rem 0; }
