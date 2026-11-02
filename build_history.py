@@ -361,7 +361,25 @@ def decisions_page():
                             nav=nav("decisions.html"), css=CSS)
 
 
-def page(h):
+LEGAL_SUFFIX = re.compile(r",? (?:& Company|& Co\.|Inc\.?|Incorporated|Corporation|Corp\.?|Company|Co\.|plc|PLC|"
+                          r"Ltd\.?|Limited|LLC|N\.V\.|S\.A\.|SE|AG)$")
+
+
+def display_name(name):
+    """The S&P 500 list's name (data/sp500.json, the only source) as the page shows it: a trailing legal suffix
+    dropped ("Apple Inc." -> "Apple"), except a bare "Company" that would leave one word ("Southern Company"
+    stays); words that are part of the name stay (Group, Holdings, Trust, Bancorp). Where the list files
+    "Home Depot (The)" and nothing was dropped, "The" moves to the front."""
+    the = name.endswith(" (The)")
+    base = name[:-6] if the else name
+    match = LEGAL_SUFFIX.search(base)
+    if match and not (match.group(0) == " Company" and len(base[:match.start()].split()) == 1):
+        return base[:match.start()]
+    return "The " + base if the else base
+
+
+def page(h, name):
+    """One company page; name is the S&P 500 list's (the index page uses the same), not the SEC filer name."""
     changes = h["changes"]
     for ch in changes:  # beyond-revenue effects sum exactly to the pre-tax leverage
         total = -sum(r["ratio"] for r in ch["lines"])
@@ -396,7 +414,7 @@ def page(h):
                                  f"{m(d['earlier_filing'], False)}" for d in real)
                      + (f"; {plural(rounded, 'other figure')} {'differs' if rounded == 1 else 'differ'} only by "
                         f"rounding." if rounded else "."))
-    return TEMPLATE.format(company=escape(h["company"]), ticker=escape(h["ticker"]), heads=heads, top=top,
+    return TEMPLATE.format(company=escape(name), ticker=escape(h["ticker"]), heads=heads, top=top,
                            rows="\n".join(rows), years=years, filings=filings,
                            disagreements=disagreements, ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
                            last=year(h["period_ends"][-1]), nav=nav(), bridge_link=bridge_link(h["ticker"]),
@@ -542,13 +560,14 @@ def index_body(universe, built):
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     companies = [json.loads(p.read_text(encoding="utf-8")) for p in sorted(DATA.glob("*.json"))]
-    for h in companies:
-        (OUT / f"{h['ticker']}.html").write_text(page(h), encoding="utf-8")
     universe = json.loads((ROOT / "data" / "sp500.json").read_text(encoding="utf-8"))
     built = {h["ticker"]: h for h in companies}
     outside = sorted(set(built) - {c["ticker"] for c in universe["companies"]})
     if outside:
         raise SystemExit(f"analyzed companies missing from data/sp500.json: {outside}")
+    names = {c["ticker"]: c["name"] for c in universe["companies"]}
+    for h in companies:
+        (OUT / f"{h['ticker']}.html").write_text(page(h, display_name(names[h["ticker"]])), encoding="utf-8")
     (OUT / "index.html").write_text(INDEX.format(body=index_body(universe, built), total=len(universe["companies"]),
                                                  analyzed=len(built), source=escape(universe["source"]),
                                                  retrieved=escape(universe["retrieved"]), nav=nav("index.html"), css=CSS),
