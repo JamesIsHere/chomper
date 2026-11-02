@@ -149,7 +149,7 @@ Item: history.py stops on Carnival's 10-K (0000815097-26-000007): its 2023 lines
 Why: An exact footing rule that refuses rounding will stop real companies; a loose one could hide a missing line.
 Companies: CCL
 Due: before the full S&P 500 run.
-Status: open
+Status: closed 2026-11-02, footing allows half a rounding unit per figure summed (decisions.md, "Footing allows the filing's own rounding"); CCL's four $1M gaps pass as rounding rows
 
 ## 2026-11-01 | Visual checks are a sample
 Theme: Coverage
@@ -229,4 +229,12 @@ Item: Each company page could list the considerations that touch it.
 Why: A reader of one company would see its open items without the full list.
 Companies: all
 Due: once this list has proven useful.
+Status: open
+
+## 2026-11-02 | A renamed tag splits one line into two rows
+Theme: Coverage
+Item: Carnival tags interest expense us-gaap_InterestExpense in its FY2023 10-K (0000815097-24-000011) and us-gaap_InterestExpenseNonoperating in its FY2025 10-K (0000815097-26-000007), both labeled "Interest expense, net of capitalized interest". history.py keys lines by tag, so the five-year grid shows two rows of that name, each with a value only in its own filing's years; the change columns read the switch as the line vanishing and a new one appearing (+$8.60B and -$2.07B beyond revenue in the Nov 2022 and Nov 2023 columns), which did not happen.
+Why: The grid's beyond-revenue amounts for those years are wrong on the page, and a tag change between filings will recur across 500 companies.
+Companies: CCL
+Due: before CCL's page is called settled, and before the full S&P 500 run.
 Status: open

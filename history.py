@@ -233,7 +233,9 @@ def annual_values(path):
             text = el.text.strip()
             if WHOLE.fullmatch(text):
                 uri, local = el.tag[1:].split("}")
-                dims.setdefault(f"{ns[uri]}_{local}", {}).setdefault(end, set()).add(int(float(text)))
+                d = el.get("decimals")
+                d = 0 if d in (None, "INF") else min(int(d), 0)
+                dims.setdefault(f"{ns[uri]}_{local}", {}).setdefault(end, set()).add((int(float(text)), d))
             continue
         text = el.text.strip()
         if not WHOLE.fullmatch(text):
@@ -250,13 +252,14 @@ def annual_values(path):
         if old is not None and round(new[0], old[1]) != old[0]:  # a rounded duplicate must round to the precise one
             raise SystemExit(f"{name} {end}: conflicting values {new[0]} and {old[0]} (decimals {old[1]})")
         precise[name][end] = new
-    return {n: {e: v for e, (v, _) in d.items()} for n, d in precise.items()}, dims
+    return ({n: {e: v for e, (v, _) in d.items()} for n, d in precise.items()},
+            {n: {e: k for e, (_, k) in d.items()} for n, d in precise.items()}, dims)
 
 
 def read_filing(cik, filing, ua):
     files = filing_files(cik, filing, ua)
     name, role = statement_role(files["summary"])
-    vals, dims = annual_values(files["instance"])
+    vals, decs, dims = annual_values(files["instance"])
     anchor, w, operating, stitched = weights(files["cal"], role, vals)
     order = presentation_order(files["pre"], role)
     labs = labels(files["lab"])
@@ -275,34 +278,63 @@ def read_filing(cik, filing, ua):
         return labs.get(c, {}).get(prefs.get(c) or std) or labs.get(c, {}).get(std) or c
     lines = []
     for c in sorted((c for c in w if c != revenue[0]), key=lambda c: rank.get(c, 1e9)):
-        values, from_dims = {}, []
+        values, from_dims, units = {}, [], {}
         for e in ends:
             values[e] = vals.get(c, {}).get(e)
+            units[e] = 10 ** -decs.get(c, {}).get(e, 0)
             only = dims.get(c, {}).get(e, set())
             if values[e] is None and len(only) == 1:  # face line tagged with one dimension member (CAT)
-                values[e] = next(iter(only))
+                values[e], d = next(iter(only))
+                units[e] = 10 ** -d
                 from_dims.append(e)
         lines.append({"concept": c, "label": label(c), "weight": w[c], "values": values,
-                      "operating": operating[c], "dimensioned_years": from_dims})
+                      "operating": operating[c], "dimensioned_years": from_dims, "_units": units})
     rev = {e: vals[revenue[0]][e] for e in ends}
     pretax = {e: vals[anchor][e] for e in ends}
-    for e in ends:  # foot: revenue + sum(weight x line) == pre-tax income
+
+    def unit(c, e):
+        return 10 ** -decs.get(c, {}).get(e, 0)
+
+    def slack(e, subtotal, rows):
+        """Half a rounding unit (the fact's own XBRL decimals) for each summed figure and the subtotal itself:
+        the most the reported figures can miss by when every true amount rounds to its reported one."""
+        return 0.5 * (unit(revenue[0], e) + unit(subtotal, e)
+                      + sum(l["_units"][e] for l in rows if l["values"][e] is not None))
+    gaps = []
+    rounding = {}
+    for e in ends:  # foot: revenue + sum(weight x line) == pre-tax income, within the filing's own rounding
         total = rev[e] + sum(l["weight"] * (l["values"][e] or 0) for l in lines)
-        if total != pretax[e]:
-            raise SystemExit(f"{filing['accession']} {e}: lines foot to {total:,.0f}, pre-tax income {pretax[e]:,}")
+        gap, allowed = pretax[e] - total, slack(e, anchor, lines)
+        if abs(gap) > allowed:
+            raise SystemExit(f"{filing['accession']} {e}: lines foot to {total:,.0f}, pre-tax income {pretax[e]:,}"
+                             f" (gap {gap:,.0f}, rounding allows {allowed:,.0f})")
+        rounding[e] = int(gap)
+        if gap:
+            gaps.append({"accession": filing["accession"], "period_end": e, "subtotal": "pre-tax income",
+                         "lines_total": int(total), "reported": pretax[e], "gap": int(gap), "allowed": allowed})
     # Operating income is a subtotal, kept only where the company reports it inside the same statement math.
     oi = None
+    rounding_op = {e: 0 for e in ends}
     if any(operating.values()):
         oi = {e: vals[OPERATING_INCOME][e] for e in ends}
         for e in ends:
-            total = rev[e] + sum(l["weight"] * (l["values"][e] or 0) for l in lines if l["operating"])
-            if total != oi[e]:
+            rows = [l for l in lines if l["operating"]]
+            total = rev[e] + sum(l["weight"] * (l["values"][e] or 0) for l in rows)
+            gap, allowed = oi[e] - total, slack(e, OPERATING_INCOME, rows)
+            if abs(gap) > allowed:
                 raise SystemExit(f"{filing['accession']} {e}: operating lines foot to {total:,.0f}, "
-                                 f"operating income {oi[e]:,}")
+                                 f"operating income {oi[e]:,} (gap {gap:,.0f}, rounding allows {allowed:,.0f})")
+            rounding_op[e] = int(gap)
+            if gap:
+                gaps.append({"accession": filing["accession"], "period_end": e, "subtotal": "operating income",
+                             "lines_total": int(total), "reported": oi[e], "gap": int(gap), "allowed": allowed})
+    for l in lines:
+        del l["_units"]
     return {"statement": name, "role": role, "revenue_concept": revenue[0], "pretax_concept": anchor,
             "stitched_from": stitched,
             "revenue_label": label(revenue[0]),
-            "ends": ends, "revenue": rev, "pretax_income": pretax, "operating_income": oi, "lines": lines}
+            "ends": ends, "revenue": rev, "pretax_income": pretax, "operating_income": oi, "lines": lines,
+            "rounding": rounding, "rounding_operating": rounding_op, "footing_gaps": gaps}
 
 
 def merge(latest, older):
@@ -338,6 +370,16 @@ def merge(latest, older):
             l["values"].setdefault(e, None)
     if any(l["weight"] != by[l["concept"]]["weight"] for f in (latest, older) for l in f["lines"]):
         raise SystemExit("a line changes sign between the two filings")
+    # The filing's own rounding, as its own rows, so every later check stays exact: one inside operating income,
+    # one for the rest of the gap to pre-tax income.
+    above = {e: src[e]["rounding_operating"][e] for e in ends}
+    below = {e: src[e]["rounding"][e] - above[e] for e in ends}
+    for concept, label, op, values in (("rounding_operating", "Rounding in the filing, within operating income",
+                                        True, above),
+                                       ("rounding", "Rounding in the filing", False, below)):
+        if any(values.values()):
+            lines.append({"concept": concept, "label": label, "weight": 1.0, "operating": op, "values": values,
+                          "dimensioned_years": []})
     revenue = {e: src[e]["revenue"][e] for e in ends}
     pretax = {e: src[e]["pretax_income"][e] for e in ends}
     has_oi = latest["operating_income"] is not None and older["operating_income"] is not None
@@ -354,13 +396,16 @@ def split(ends, revenue, pretax, lines):
     for prev, cur in zip(ends, ends[1:]):
         d_rev = revenue[cur] - revenue[prev]
         rows = []
+        r0 = 0  # the filing's own rounding last year: not a cost, so it does not scale with revenue
         for l in lines:
             # cost = amount that reduces pre-tax income; income items come out negative
             c0, c1 = (-l["weight"] * (l["values"][e] or 0) for e in (prev, cur))
-            flex = c0 / revenue[prev] * d_rev
+            rounding = l["concept"].startswith("rounding")
+            flex = 0.0 if rounding else c0 / revenue[prev] * d_rev
+            r0 += -c0 if rounding else 0
             rows.append({"concept": l["concept"], "actual": c1 - c0, "flex": flex, "ratio": c1 - c0 - flex,
                          "absent": [e for e in (prev, cur) if l["values"][e] is None]})
-        p_flex = pretax[prev] / revenue[prev] * d_rev
+        p_flex = (pretax[prev] - r0) / revenue[prev] * d_rev  # from the figures that foot, as the lines' flex is
         d_p = pretax[cur] - pretax[prev]
         if round(d_rev - sum(r["actual"] for r in rows)) != d_p:
             raise SystemExit(f"{prev}->{cur}: bridge does not reach pre-tax income change {d_p:,}")
@@ -389,6 +434,7 @@ def main():
         "revenue_label": latest["revenue_label"],
         "period_ends": ends, "revenue": revenue, "pretax_income": pretax, "operating_income": oi,
         "lines": lines, "disagreements": disagreements,
+        "footing_gaps": [g for f in (latest, older) for g in f["footing_gaps"] if g["period_end"] in ends],
         "changes": split(ends, revenue, pretax, lines),
     }
     OUT.mkdir(parents=True, exist_ok=True)

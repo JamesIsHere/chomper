@@ -232,3 +232,9 @@ Group: Method
 Decision: A standard gets no marker on the ten-year chart when the company's own 10-K says it falls outside the standard's scope and no adoption note follows (data/adoptions.json, out_of_scope, with that statement quoted). PGR's FY2016 10-K says insurance contracts are outside ASC 606; its FY2018 adoption section lists no revenue standard; PGR shows no 2018 marker.
 Why: Every marker cites the company's own words. A "required this year" marker on PGR asserted a break the filing never claims, while the FY2016 sentence says why there is none (James, 2026-11-02).
 Status: active
+
+## 2026-11-02 | Footing allows the filing's own rounding
+Group: Method
+Decision: A year foots when the reported lines miss pre-tax income (or operating income) by no more than half a rounding unit for each figure summed, the subtotal included, with each unit read from the fact's own XBRL decimals. Any gap allowed this way becomes its own row, "Rounding in the filing" (a second row, "within operating income", when the operating subtotal is the one off), so the five-year grid and every later check still add exactly; history.py also records each gap with both values in footing_gaps, and the page footer names each one (year, subtotal, lines against reported, in millions). Rounding rows are not costs, so they do not scale with revenue: their whole change counts as beyond revenue, and pre-tax income's in-step change is taken from the figures that foot. A gap beyond the allowance still stops the build.
+Why: Carnival's lines miss by $1M in years where every figure is rounded to the million; an exact rule stopped a real company over the filing's own rounding, while a flat dollar or percent tolerance would be arbitrary across company sizes. Boeing's $70B gap stays a hard stop (James, 2026-11-02).
+Status: active

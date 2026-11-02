@@ -1,0 +1,889 @@
+{
+  "ticker": "CCL",
+  "company": "Carnival Corp Ltd.",
+  "cik": 815097,
+  "unit": "USD",
+  "filings": [
+    {
+      "accession": "0000815097-26-000007",
+      "report_date": "2025-11-30",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/815097/000081509726000007/ccl-20251130.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/815097/000081509726000007/0000815097-26-000007-index.html",
+      "statement": "CONSOLIDATED STATEMENTS OF INCOME (LOSS)",
+      "years": [
+        "2023-11-30",
+        "2024-11-30",
+        "2025-11-30"
+      ],
+      "stitched_from": null
+    },
+    {
+      "accession": "0000815097-24-000011",
+      "report_date": "2023-11-30",
+      "document_url": "https://www.sec.gov/Archives/edgar/data/815097/000081509724000011/ccl-20231130.htm",
+      "index_url": "https://www.sec.gov/Archives/edgar/data/815097/000081509724000011/0000815097-24-000011-index.html",
+      "statement": "CONSOLIDATED STATEMENTS OF INCOME (LOSS)",
+      "years": [
+        "2021-11-30",
+        "2022-11-30",
+        "2023-11-30"
+      ],
+      "stitched_from": null
+    }
+  ],
+  "revenue_label": "Total Revenues",
+  "period_ends": [
+    "2021-11-30",
+    "2022-11-30",
+    "2023-11-30",
+    "2024-11-30",
+    "2025-11-30"
+  ],
+  "revenue": {
+    "2021-11-30": 1908000000,
+    "2022-11-30": 12168000000,
+    "2023-11-30": 21593000000,
+    "2024-11-30": 25021000000,
+    "2025-11-30": 26622000000
+  },
+  "pretax_income": {
+    "2021-11-30": -9522000000,
+    "2022-11-30": -6080000000,
+    "2023-11-30": -62000000,
+    "2024-11-30": 1915000000,
+    "2025-11-30": 2772000000
+  },
+  "operating_income": {
+    "2021-11-30": -7089000000,
+    "2022-11-30": -4379000000,
+    "2023-11-30": 1956000000,
+    "2024-11-30": 3574000000,
+    "2025-11-30": 4483000000
+  },
+  "lines": [
+    {
+      "concept": "ccl_CostsAndExpensesCommissionsTransportation",
+      "label": "Commissions, transportation and other",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-11-30": 2761000000,
+        "2024-11-30": 3232000000,
+        "2025-11-30": 3331000000,
+        "2021-11-30": 269000000,
+        "2022-11-30": 1630000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "ccl_CostsAndExpensesOnboard",
+      "label": "Onboard and other",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-11-30": 2375000000,
+        "2024-11-30": 2678000000,
+        "2025-11-30": 2816000000,
+        "2021-11-30": 272000000,
+        "2022-11-30": 1528000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "ccl_CostsAndExpensesPayrollAndOther",
+      "label": "Payroll and related",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-11-30": 2373000000,
+        "2024-11-30": 2464000000,
+        "2025-11-30": 2589000000,
+        "2021-11-30": 1309000000,
+        "2022-11-30": 2181000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "ccl_CostsAndExpensesFuel",
+      "label": "Fuel",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-11-30": 2047000000,
+        "2024-11-30": 2007000000,
+        "2025-11-30": 1808000000,
+        "2021-11-30": 680000000,
+        "2022-11-30": 2157000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "ccl_CostsAndExpensesFood",
+      "label": "Food",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-11-30": 1335000000,
+        "2024-11-30": 1457000000,
+        "2025-11-30": 1499000000,
+        "2021-11-30": 187000000,
+        "2022-11-30": 863000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "ccl_CostsAndExpensesOther",
+      "label": "Other operating",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-11-30": 3426000000,
+        "2024-11-30": 3801000000,
+        "2025-11-30": 3904000000,
+        "2021-11-30": 1346000000,
+        "2022-11-30": 2958000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+      "label": "Selling and administrative expense",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-11-30": 2950000000,
+        "2024-11-30": 3252000000,
+        "2025-11-30": 3402000000,
+        "2021-11-30": 1885000000,
+        "2022-11-30": 2515000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_DepreciationAndAmortization",
+      "label": "Depreciation and amortization expense",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2023-11-30": 2370000000,
+        "2024-11-30": 2557000000,
+        "2025-11-30": 2790000000,
+        "2021-11-30": 2233000000,
+        "2022-11-30": 2275000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InvestmentIncomeInterest",
+      "label": "Interest income",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-11-30": 233000000,
+        "2024-11-30": 93000000,
+        "2025-11-30": 51000000,
+        "2021-11-30": 12000000,
+        "2022-11-30": 74000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpenseNonoperating",
+      "label": "Interest expense, net of capitalized interest",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2023-11-30": 2066000000,
+        "2024-11-30": 1755000000,
+        "2025-11-30": 1349000000,
+        "2021-11-30": null,
+        "2022-11-30": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebtBeforeWriteOffOfDeferredDebtIssuanceCost",
+      "label": "Debt extinguishment and modification costs",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-11-30": -111000000,
+        "2024-11-30": -79000000,
+        "2025-11-30": -409000000,
+        "2021-11-30": -670000000,
+        "2022-11-30": -1000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+      "label": "Other income (expense), net",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2023-11-30": -75000000,
+        "2024-11-30": 83000000,
+        "2025-11-30": -4000000,
+        "2021-11-30": -173000000,
+        "2022-11-30": -165000000
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "ccl_CostsAndExpensesShipAndOtherImpairmentLoss",
+      "label": "Ship and other impairments",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2021-11-30": 591000000,
+        "2022-11-30": 440000000,
+        "2023-11-30": null,
+        "2024-11-30": null,
+        "2025-11-30": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_GoodwillAndIntangibleAssetImpairment",
+      "label": "Goodwill impairments",
+      "weight": -1.0,
+      "operating": true,
+      "values": {
+        "2021-11-30": 226000000,
+        "2022-11-30": 0,
+        "2023-11-30": null,
+        "2024-11-30": null,
+        "2025-11-30": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "us-gaap_InterestExpense",
+      "label": "Interest expense, net of capitalized interest",
+      "weight": -1.0,
+      "operating": false,
+      "values": {
+        "2021-11-30": 1601000000,
+        "2022-11-30": 1609000000,
+        "2023-11-30": null,
+        "2024-11-30": null,
+        "2025-11-30": null
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "rounding_operating",
+      "label": "Rounding in the filing, within operating income",
+      "weight": 1.0,
+      "operating": true,
+      "values": {
+        "2021-11-30": 1000000,
+        "2022-11-30": 0,
+        "2023-11-30": 0,
+        "2024-11-30": 1000000,
+        "2025-11-30": 0
+      },
+      "dimensioned_years": []
+    },
+    {
+      "concept": "rounding",
+      "label": "Rounding in the filing",
+      "weight": 1.0,
+      "operating": false,
+      "values": {
+        "2021-11-30": -1000000,
+        "2022-11-30": 0,
+        "2023-11-30": 1000000,
+        "2024-11-30": -1000000,
+        "2025-11-30": 0
+      },
+      "dimensioned_years": []
+    }
+  ],
+  "disagreements": [],
+  "footing_gaps": [
+    {
+      "accession": "0000815097-26-000007",
+      "period_end": "2023-11-30",
+      "subtotal": "pre-tax income",
+      "lines_total": -63000000,
+      "reported": -62000000,
+      "gap": 1000000,
+      "allowed": 7000000.0
+    },
+    {
+      "accession": "0000815097-26-000007",
+      "period_end": "2024-11-30",
+      "subtotal": "operating income",
+      "lines_total": 3573000000,
+      "reported": 3574000000,
+      "gap": 1000000,
+      "allowed": 5000000.0
+    },
+    {
+      "accession": "0000815097-24-000011",
+      "period_end": "2023-11-30",
+      "subtotal": "pre-tax income",
+      "lines_total": -63000000,
+      "reported": -62000000,
+      "gap": 1000000,
+      "allowed": 8000000.0
+    },
+    {
+      "accession": "0000815097-24-000011",
+      "period_end": "2021-11-30",
+      "subtotal": "operating income",
+      "lines_total": -7090000000,
+      "reported": -7089000000,
+      "gap": 1000000,
+      "allowed": 6000000.0
+    }
+  ],
+  "changes": [
+    {
+      "from": "2021-11-30",
+      "to": "2022-11-30",
+      "revenue_change": 10260000000,
+      "pretax_change": 3442000000,
+      "pretax_flex": -51203207547.169815,
+      "leverage": 54645207547.169815,
+      "lines": [
+        {
+          "concept": "ccl_CostsAndExpensesCommissionsTransportation",
+          "actual": 1361000000.0,
+          "flex": 1446509433.962264,
+          "ratio": -85509433.96226406,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesOnboard",
+          "actual": 1256000000.0,
+          "flex": 1462641509.433962,
+          "ratio": -206641509.4339621,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesPayrollAndOther",
+          "actual": 872000000.0,
+          "flex": 7038962264.150944,
+          "ratio": -6166962264.150944,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesFuel",
+          "actual": 1477000000.0,
+          "flex": 3656603773.5849056,
+          "ratio": -2179603773.5849056,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesFood",
+          "actual": 676000000.0,
+          "flex": 1005566037.735849,
+          "ratio": -329566037.735849,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesOther",
+          "actual": 1612000000.0,
+          "flex": 7237924528.3018875,
+          "ratio": -5625924528.3018875,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 630000000.0,
+          "flex": 10136320754.716982,
+          "ratio": -9506320754.716982,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 42000000.0,
+          "flex": 12007641509.433962,
+          "ratio": -11965641509.433962,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterest",
+          "actual": -62000000.0,
+          "flex": -64528301.88679246,
+          "ratio": 2528301.8867924586,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2021-11-30",
+            "2022-11-30"
+          ]
+        },
+        {
+          "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebtBeforeWriteOffOfDeferredDebtIssuanceCost",
+          "actual": -669000000.0,
+          "flex": 3602830188.6792455,
+          "ratio": -4271830188.6792455,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": -8000000.0,
+          "flex": 930283018.8679246,
+          "ratio": -938283018.8679246,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesShipAndOtherImpairmentLoss",
+          "actual": -151000000.0,
+          "flex": 3178018867.924528,
+          "ratio": -3329018867.924528,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GoodwillAndIntangibleAssetImpairment",
+          "actual": -226000000.0,
+          "flex": 1215283018.8679245,
+          "ratio": -1441283018.8679245,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 8000000.0,
+          "flex": 8609150943.396227,
+          "ratio": -8601150943.396227,
+          "absent": []
+        },
+        {
+          "concept": "rounding_operating",
+          "actual": 1000000.0,
+          "flex": 0.0,
+          "ratio": 1000000.0,
+          "absent": []
+        },
+        {
+          "concept": "rounding",
+          "actual": -1000000.0,
+          "flex": 0.0,
+          "ratio": -1000000.0,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2022-11-30",
+      "to": "2023-11-30",
+      "revenue_change": 9425000000,
+      "pretax_change": 6018000000,
+      "pretax_flex": -4709401709.40171,
+      "leverage": 10727401709.40171,
+      "lines": [
+        {
+          "concept": "ccl_CostsAndExpensesCommissionsTransportation",
+          "actual": 1131000000.0,
+          "flex": 1262553418.8034189,
+          "ratio": -131553418.80341887,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesOnboard",
+          "actual": 847000000.0,
+          "flex": 1183547008.5470085,
+          "ratio": -336547008.5470085,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesPayrollAndOther",
+          "actual": 192000000.0,
+          "flex": 1689342948.7179487,
+          "ratio": -1497342948.7179487,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesFuel",
+          "actual": -110000000.0,
+          "flex": 1670753205.128205,
+          "ratio": -1780753205.128205,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesFood",
+          "actual": 472000000.0,
+          "flex": 668456196.5811965,
+          "ratio": -196456196.58119655,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesOther",
+          "actual": 468000000.0,
+          "flex": 2291185897.4358974,
+          "ratio": -1823185897.4358974,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 435000000.0,
+          "flex": 1948050213.6752136,
+          "ratio": -1513050213.6752136,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 95000000.0,
+          "flex": 1762152777.777778,
+          "ratio": -1667152777.777778,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterest",
+          "actual": -159000000.0,
+          "flex": -57318376.06837607,
+          "ratio": -101681623.93162394,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": 2066000000.0,
+          "flex": 0.0,
+          "ratio": 2066000000.0,
+          "absent": [
+            "2022-11-30"
+          ]
+        },
+        {
+          "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebtBeforeWriteOffOfDeferredDebtIssuanceCost",
+          "actual": 110000000.0,
+          "flex": 774572.6495726496,
+          "ratio": 109225427.35042734,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": -90000000.0,
+          "flex": 127804487.17948718,
+          "ratio": -217804487.17948717,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesShipAndOtherImpairmentLoss",
+          "actual": -440000000.0,
+          "flex": 340811965.8119658,
+          "ratio": -780811965.8119658,
+          "absent": [
+            "2023-11-30"
+          ]
+        },
+        {
+          "concept": "us-gaap_GoodwillAndIntangibleAssetImpairment",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-11-30"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": -1609000000.0,
+          "flex": 1246287393.162393,
+          "ratio": -2855287393.162393,
+          "absent": [
+            "2023-11-30"
+          ]
+        },
+        {
+          "concept": "rounding_operating",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": []
+        },
+        {
+          "concept": "rounding",
+          "actual": -1000000.0,
+          "flex": 0.0,
+          "ratio": -1000000.0,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2023-11-30",
+      "to": "2024-11-30",
+      "revenue_change": 3428000000,
+      "pretax_change": 1977000000,
+      "pretax_flex": -10001574.584356042,
+      "leverage": 1987001574.584356,
+      "lines": [
+        {
+          "concept": "ccl_CostsAndExpensesCommissionsTransportation",
+          "actual": 471000000.0,
+          "flex": 438322975.03820676,
+          "ratio": 32677024.961793244,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesOnboard",
+          "actual": 303000000.0,
+          "flex": 377043486.3150095,
+          "ratio": -74043486.31500947,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesPayrollAndOther",
+          "actual": 91000000.0,
+          "flex": 376725976.0107442,
+          "ratio": -285725976.0107442,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesFuel",
+          "actual": -40000000.0,
+          "flex": 324971796.41550505,
+          "ratio": -364971796.41550505,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesFood",
+          "actual": 122000000.0,
+          "flex": 211938128.0970685,
+          "ratio": -89938128.09706849,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesOther",
+          "actual": 375000000.0,
+          "flex": 543895151.2064095,
+          "ratio": -168895151.20640945,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 302000000.0,
+          "flex": 468327698.7912749,
+          "ratio": -166327698.7912749,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 187000000.0,
+          "flex": 376249710.5543463,
+          "ratio": -189249710.55434632,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterest",
+          "actual": 140000000.0,
+          "flex": -36989950.44690409,
+          "ratio": 176989950.4469041,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": -311000000.0,
+          "flex": 327988144.3060251,
+          "ratio": -638988144.306025,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebtBeforeWriteOffOfDeferredDebtIssuanceCost",
+          "actual": -32000000.0,
+          "flex": 17621821.88672255,
+          "ratio": -49621821.88672255,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": -158000000.0,
+          "flex": 11906636.40994767,
+          "ratio": -169906636.40994766,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesShipAndOtherImpairmentLoss",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-11-30",
+            "2024-11-30"
+          ]
+        },
+        {
+          "concept": "us-gaap_GoodwillAndIntangibleAssetImpairment",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-11-30",
+            "2024-11-30"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2023-11-30",
+            "2024-11-30"
+          ]
+        },
+        {
+          "concept": "rounding_operating",
+          "actual": -1000000.0,
+          "flex": 0.0,
+          "ratio": -1000000.0,
+          "absent": []
+        },
+        {
+          "concept": "rounding",
+          "actual": 2000000.0,
+          "flex": 0.0,
+          "ratio": 2000000.0,
+          "absent": []
+        }
+      ]
+    },
+    {
+      "from": "2024-11-30",
+      "to": "2025-11-30",
+      "revenue_change": 1601000000,
+      "pretax_change": 857000000,
+      "pretax_flex": 122533671.71575876,
+      "leverage": 734466328.2842412,
+      "lines": [
+        {
+          "concept": "ccl_CostsAndExpensesCommissionsTransportation",
+          "actual": 99000000.0,
+          "flex": 206803565.00539547,
+          "ratio": -107803565.00539547,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesOnboard",
+          "actual": 138000000.0,
+          "flex": 171355181.64741617,
+          "ratio": -33355181.647416174,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesPayrollAndOther",
+          "actual": 125000000.0,
+          "flex": 157662123.81599456,
+          "ratio": -32662123.81599456,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesFuel",
+          "actual": -199000000.0,
+          "flex": 128420406.85823907,
+          "ratio": -327420406.85823905,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesFood",
+          "actual": 42000000.0,
+          "flex": 93227968.50645457,
+          "ratio": -51227968.50645457,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesOther",
+          "actual": 103000000.0,
+          "flex": 243211742.13660523,
+          "ratio": -140211742.13660523,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
+          "actual": 150000000.0,
+          "flex": 208083290.03636944,
+          "ratio": -58083290.03636944,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_DepreciationAndAmortization",
+          "actual": 233000000.0,
+          "flex": 163612845.21002358,
+          "ratio": 69387154.78997642,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InvestmentIncomeInterest",
+          "actual": 42000000.0,
+          "flex": -5950721.394029016,
+          "ratio": 47950721.394029014,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "actual": -406000000.0,
+          "flex": 112295871.46796691,
+          "ratio": -518295871.4679669,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebtBeforeWriteOffOfDeferredDebtIssuanceCost",
+          "actual": 330000000.0,
+          "flex": 5054913.872347228,
+          "ratio": 324945086.12765276,
+          "absent": []
+        },
+        {
+          "concept": "us-gaap_OtherNonoperatingIncomeExpense",
+          "actual": 87000000.0,
+          "flex": -5310858.878542025,
+          "ratio": 92310858.87854202,
+          "absent": []
+        },
+        {
+          "concept": "ccl_CostsAndExpensesShipAndOtherImpairmentLoss",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-11-30",
+            "2025-11-30"
+          ]
+        },
+        {
+          "concept": "us-gaap_GoodwillAndIntangibleAssetImpairment",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-11-30",
+            "2025-11-30"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpense",
+          "actual": 0.0,
+          "flex": 0.0,
+          "ratio": 0.0,
+          "absent": [
+            "2024-11-30",
+            "2025-11-30"
+          ]
+        },
+        {
+          "concept": "rounding_operating",
+          "actual": 1000000.0,
+          "flex": 0.0,
+          "ratio": 1000000.0,
+          "absent": []
+        },
+        {
+          "concept": "rounding",
+          "actual": -1000000.0,
+          "flex": 0.0,
+          "ratio": -1000000.0,
+          "absent": []
+        }
+      ]
+    }
+  ]
+}

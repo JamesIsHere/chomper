@@ -32,6 +32,26 @@ def m(dollars, sign=True):
     return ("+" if v > 0 else "-") + s if sign else ("-" + s if v < 0 else s)
 
 
+def footing(h):
+    """The footer's footing sentence; any gap allowed as the filing's own rounding is named with both values,
+    once per year and subtotal (the first filing listed is the latest, whose figures the page uses)."""
+    base = "every year foots\nto reported pre-tax income, and to operating income where the company reports it"
+    seen, parts = set(), []
+    for g in h["footing_gaps"]:
+        if (g["period_end"], g["subtotal"]) not in seen:
+            seen.add((g["period_end"], g["subtotal"]))
+            digits = max(0, -math.floor(math.log10(abs(g["gap"]) / 1e6)))  # in millions, fine enough to show the gap
+
+            def mm(v):
+                return f"{'-' if v < 0 else ''}${abs(v) / 1e6:,.{digits}f}M"
+            parts.append((g["period_end"], f"{year(g['period_end'])} {g['subtotal']}, lines {mm(g['lines_total'])} "
+                                           f"against reported {mm(g['reported'])}"))
+    if not parts:
+        return base + "."
+    return (base + ", apart from the filing's own rounding, shown in the rows headed \"Rounding in the filing\": "
+            + "; ".join(s for _, s in sorted(parts)) + ".")
+
+
 def rounding_only(a, b):
     """True when two filings' figures differ only because one rounds coarser: the coarser figure (the one with more
     trailing zeros, at most $1M) equals the finer one rounded half up to its unit. PGR's 2025 10-K reports
@@ -465,7 +485,7 @@ def page(h, name):
                         f"rounding." if rounded else "."))
     return TEMPLATE.format(company=escape(name), ticker=escape(h["ticker"]), heads=heads, top=top,
                            rows="\n".join(rows), years=years, filings=filings, cik=f"{int(h['cik']):010d}",
-                           disagreements=disagreements, ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
+                           disagreements=disagreements, footing=footing(h), ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
                            last=year(h["period_ends"][-1]), nav=nav(), bridge_link=bridge_link(h["ticker"]),
                            ten_years=ten_years(h["ticker"]), ten_breaks=ten_breaks(h["ticker"]), css=CSS)
 
@@ -745,8 +765,7 @@ TEMPLATE = """<!doctype html>
 
 {ten_breaks}
 <footer>
-<p>Source: {filings}. Lines, labels and order come from each filing's income statement; every year foots
-to reported pre-tax income, and to operating income where the company reports it. {disagreements}</p>
+<p>Source: {filings}. Lines, labels and order come from each filing's income statement; {footing} {disagreements}</p>
 <p>The ten-year table and chart come from the SEC's companyfacts data and each year's 10-K; every 10-K is in the
 company's <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK={cik}&amp;type=10-K">SEC filing
 list</a>.</p>
