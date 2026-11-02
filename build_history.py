@@ -127,7 +127,8 @@ def deal_names():
 def chart_breaks(h):
     """{end: [text]} for each year with a significant acquisition or a new accounting standard: the years numbered
     on the chart and listed in its key. A standard is marked in the year the company adopted it (data/adoptions.json);
-    one adopted with earlier years recast is not marked, since the series has no break there. With no adoption
+    one adopted with earlier years recast is not marked, since the series has no break there, nor is one the
+    company's own 10-K says does not reach its main business (out_of_scope, e.g. PGR 606). With no adoption
     note found, it stays on the year it became required. A deal is named from data/deal_names.json. Fails if a
     company has no record for a standard or a significant deal, or an adoption year is not one of its ten."""
     out = {}
@@ -145,7 +146,7 @@ def chart_breaks(h):
         a = records.get((h["ticker"], code))
         if a is None:
             raise SystemExit(f"{h['ticker']}: no ASC {code} record in data/adoptions.json")
-        if a["recast"]:
+        if a["recast"] or a.get("out_of_scope"):
             continue
         if a["year_ending"] is None:
             out.setdefault(s["fiscal_year_end"], []).append(f"{s['standard']} required this year")

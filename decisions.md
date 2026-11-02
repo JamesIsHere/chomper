@@ -226,3 +226,9 @@ Group: Presentation
 Decision: The ten-year chart stays on a log scale for every company. A year with zero or negative pre-tax income breaks the pre-tax income line and sits on a strip labeled Loss under the plot, with its amount; the line runs only through consecutive profitable years. The axis is set from the profitable years. A year with zero or negative revenue stops the build.
 Why: A log scale cannot show zero or a negative, and growth is not defined across a change of sign, so the break marks exactly where slope stops meaning growth. Chosen over a symlog axis (slopes near zero would not mean growth), a linear axis for loss companies only (two chart grammars and the first-year problem back), and a margin axis (repeats the table). Checked on test data, Caterpillar's revenue with invented losses in five patterns.
 Status: active
+
+## 2026-11-02 | No marker where the standard does not reach the business
+Group: Method
+Decision: A standard gets no marker on the ten-year chart when the company's own 10-K says it falls outside the standard's scope and no adoption note follows (data/adoptions.json, out_of_scope, with that statement quoted). PGR's FY2016 10-K says insurance contracts are outside ASC 606; its FY2018 adoption section lists no revenue standard; PGR shows no 2018 marker.
+Why: Every marker cites the company's own words. A "required this year" marker on PGR asserted a break the filing never claims, while the FY2016 sentence says why there is none (James, 2026-11-02).
+Status: active
