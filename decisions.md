@@ -190,3 +190,27 @@ Group: Method
 Decision: ASC 606 and ASC 842 are marked on the ten-year chart in the year each company adopted them, as read from its own 10-K into data/adoptions.json (year, whether earlier years were recast, accession, verbatim quote). A standard adopted with earlier years recast gets no marker, since the series has no break there. Where no adoption note was found, the marker stays on the year the standard became required; where the 10-K does not state the method, the key says only "adopted".
 Why: The required year was wrong for early adopters (MSFT, UNH), and a fully retrospective adoption (AAPL, JPM and MSFT 606, MSFT 842) is not a break; the company's own adoption note is the only source that says which.
 Status: active
+
+## 2026-11-02 | Company names: one source, one rule
+Group: Presentation
+Decision: Every company name on the site comes from the S&P 500 list (data/sp500.json) through one function, display_name: a trailing legal suffix is dropped ("Apple Inc." becomes Apple), except a bare "Company" that would leave one word ("Southern Company" stays); words that are part of the name stay (Group, Holdings, Trust, Bancorp); "Home Depot (The)" becomes The Home Depot. Company pages and the Chomper list use the same function.
+Why: SEC filer names mix capitals and suffixes ("HOME DEPOT, INC.", "PROGRESSIVE CORP/OH/"), and the list's own names are not uniform; one rule over one source can be checked against a single cell per company.
+Status: active
+
+## 2026-11-02 | Fiscal year labels
+Group: Presentation
+Decision: A fiscal year is labeled from its end date read a week early: a year ending in December shows as the year (2020), any other as month and year (Sep 2020, Jan 2025). The week keeps 52/53-week years on one month: JNJ's year ended 2021-01-03 is 2020, and HD's years all read Jan.
+Why: Labeled by the raw end date, JNJ's years jumped between "Jan 2021" and "2020" and HD's between Jan and Feb, so fiscal years looked missing or doubled.
+Status: active
+
+## 2026-11-02 | Rounding is not a disagreement
+Group: Method
+Decision: When two filings give the same figure at different precision, and the coarser one equals the finer one rounded to its unit (PGR: $62,109M against $62,108.5M), the difference is not listed as a disagreement; the footer says the filings agree apart from rounding. Any other difference is listed with both values.
+Why: Listing rounding as disagreement printed pairs like "$62.11B vs $62.11B", which reads as an error; recording real disagreements with both values still holds.
+Status: active
+
+## 2026-11-02 | Recast, not restated
+Group: Presentation
+Decision: A figure that a later 10-K changed is called recast ("Note 1 - Recast Figures", "as later recast"), never restated.
+Why: In accounting a restatement corrects an error (ASC 250); most of these changes are new standards, presentation changes or discontinued operations, and calling them restatements claims an error the company never made.
+Status: active
