@@ -32,6 +32,16 @@ def m(dollars, sign=True):
     return ("+" if v > 0 else "-") + s if sign else ("-" + s if v < 0 else s)
 
 
+def rounding_only(a, b):
+    """True when two filings' figures differ only because one rounds coarser: the coarser figure (the one with more
+    trailing zeros, at most $1M) equals the finer one rounded half up to its unit. PGR's 2025 10-K reports
+    $62,109M where its 2023 10-K reported $62,108.5M."""
+    unit = lambda v: next((u for u in (10 ** 6, 10 ** 5, 10 ** 4, 10 ** 3) if v % u == 0), 1)
+    coarse, fine = (a, b) if unit(a) > unit(b) else (b, a)
+    u = unit(coarse)
+    return u > unit(fine) and math.floor(fine / u + 0.5) * u == coarse
+
+
 def year(end):
     """A fiscal year's label from its end date, read a week early: a 52/53-week year ends up to a week past its
     nominal month (JNJ's 2020 ended 2021-01-03, HD's years end late January or early February), and the week
@@ -376,11 +386,16 @@ def page(h):
     years = "".join(f"<th>{year(e)}</th>" for e in h["period_ends"])
     filings = "; ".join(f'<a href="{escape(f["document_url"])}">10-K for {year(f["report_date"])}</a> '
                         f'(accession {escape(f["accession"])})' for f in h["filings"])
-    disagreements = ("No figure differs between the two filings for the year they share."
-                     if not h["disagreements"] else
+    real = [d for d in h["disagreements"] if not rounding_only(d["latest_filing"], d["earlier_filing"])]
+    rounded = len(h["disagreements"]) - len(real)
+    disagreements = ("No figure differs between the two filings for the year they share"
+                     + (" beyond rounding." if rounded else ".")
+                     if not real else
                      "Figures that differ between the two filings for the year they share (the later filing is used): "
                      + "; ".join(f"{escape(d['item'])} {m(d['latest_filing'], False)} vs "
-                                 f"{m(d['earlier_filing'], False)}" for d in h["disagreements"]) + ".")
+                                 f"{m(d['earlier_filing'], False)}" for d in real)
+                     + (f"; {plural(rounded, 'other figure')} {'differs' if rounded == 1 else 'differ'} only by "
+                        f"rounding." if rounded else "."))
     return TEMPLATE.format(company=escape(h["company"]), ticker=escape(h["ticker"]), heads=heads, top=top,
                            rows="\n".join(rows), years=years, filings=filings,
                            disagreements=disagreements, ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
