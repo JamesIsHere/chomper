@@ -442,7 +442,7 @@ def ten_breaks(ticker):
         if k not in first or d["other_filed"] < first[k]["other_filed"]:
             first[k] = d
     for (e, item), d in sorted(first.items()):
-        notes.append((e, f"{escape(item[0].upper() + item[1:])} {m(d['value'], False)} as later restated; first "
+        notes.append((e, f"{escape(item[0].upper() + item[1:])} {m(d['value'], False)} as later recast; first "
                          f"reported as {m(d['other_value'], False)} "
                          f"({(d['value'] - d['other_value']) / abs(d['other_value']) * 100:+.1f}%) in the 10-K "
                          f"filed {d['other_filed']}."))

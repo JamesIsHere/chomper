@@ -61,7 +61,7 @@ Item: The breaks list calls every changed figure "restated". In accounting a res
 Why: The wrong word claims an error the company never made.
 Companies: PLD, CAT, MSFT, JNJ, JPM: wording on the page; cause read only by inference.
 Due: when the breaks list gets its permanent place.
-Status: open
+Status: closed 2026-11-01, Note 1 bullets say "as later recast", matching the Recast Figures heading
 
 ## 2026-11-01 | Breaks list is at the bottom for now
 Theme: Presentation
