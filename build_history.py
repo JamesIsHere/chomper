@@ -519,12 +519,12 @@ def index_row(c, h):
     """One S&P 500 company: ticker and name; analyzed ones link to their page and carry headline numbers."""
     if h is None:
         return (f'<tr class="pending"><th scope="row">{escape(c["ticker"])}</th>'
-                f'<td class="name">{escape(c["name"])}</td><td colspan="5"></td></tr>')
+                f'<td class="name">{escape(display_name(c["name"]))}</td><td colspan="5"></td></tr>')
     ends = h["period_ends"]
     margin = lambda e: h["pretax_income"][e] / h["revenue"][e] * 100
     rev_growth = (h["revenue"][ends[-1]] / h["revenue"][ends[0]] - 1) * 100
     return (f'<tr><th scope="row"><a href="{escape(h["ticker"])}.html">{escape(h["ticker"])}</a></th>'
-            f'<td class="name">{escape(c["name"])}</td><td>{year(ends[0])} to {year(ends[-1])}</td>'
+            f'<td class="name">{escape(display_name(c["name"]))}</td><td>{year(ends[0])} to {year(ends[-1])}</td>'
             f'<td>{m(h["revenue"][ends[-1]], False)}</td><td>{rev_growth:+.1f}%</td>'
             f'<td>{margin(ends[0]):.1f}%</td><td>{margin(ends[-1]):.1f}%</td></tr>')
 
