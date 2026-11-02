@@ -215,7 +215,25 @@ def main():
             f'counts. Companies counted in each year&rsquo;s change, out of that year&rsquo;s members: {cov}. '
             f'Who was a member each month: <a href="membership.html">membership, 2016 to 2025</a>.</p>'
             f'</section>')
-    body = bias + "\n" + "\n".join(section(g, fin if g["name"] == "Financials" else "") for g in groups)
+    sector = lambda c: "Communication Services" if c["sector"].startswith("Telecommunication") else c["sector"]
+    parts = ['<h2 class="part">By sector: as it was, against today&rsquo;s members</h2>'
+             '<p class="note">Each company sits in its last sector while a member (the old Telecommunication Services '
+             'is Communication Services). Where few members are counted, the line is less sure.</p>']
+    for sname in sorted({sector(c) for c in mem["companies"]}):
+        at_s = {y: [c["ciks"] for c in mem["companies"] if sector(c) == sname and f"{y}-01" in c["months"]]
+                for y in YEARS}
+        now_s = [c["ciks"] for c in mem["companies"] if sector(c) == sname and f"{YEARS[-1]}-12" in c["months"]]
+        w = chained("As it was", at_s, figs)
+        n = chained("Today's members", {y: now_s for y in YEARS}, figs)
+        mg = lambda g, y: g["pretax_income"][y] / g["revenue"][y] * 100
+        dw, dn = mg(w, YEARS[-1]) - mg(w, YEARS[0]), mg(n, YEARS[-1]) - mg(n, YEARS[0])
+        (c0, t0), (c1, t1) = w["coverage"][YEARS[0]], w["coverage"][YEARS[-1]]
+        parts.append(f'<section class="agg"><h3>{escape(sname)}</h3><p class="lead-num">Pre-tax margin, {YEARS[0]} '
+                     f'to {YEARS[-1]}: as it was {dw:+.1f} points, today&rsquo;s members {dn:+.1f} points. Counted: '
+                     f'{c0} of {t0} members in {YEARS[0]}, {c1} of {t1} in {YEARS[-1]}.</p>'
+                     f'{margin_chart([(w["name"], w), (n["name"], n)])}</section>')
+    parts.append('<h2 class="part">Today&rsquo;s members with ten years of filings, in dollars</h2>')
+    body = bias + "\n" + "\n".join(parts) + "\n" + "\n".join(section(g, fin if g["name"] == "Financials" else "") for g in groups)
     gone = "".join(f'<li>{escape(", ".join(r["tickers"]))} ({escape(r["name"])}): {escape(r["reason"])}</li>'
                    for r in excluded)
     PAGE.write_text(PAGE_HTML.format(
