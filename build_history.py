@@ -123,7 +123,7 @@ def chart_breaks(h):
                 f"prior year end")
     for s in h["standards"]:
         out.setdefault(s["fiscal_year_end"], []).append(
-            f"{s['standard']} required this year (the company may have adopted earlier)")
+            f"{s['standard']} required this year")
     return out
 
 
