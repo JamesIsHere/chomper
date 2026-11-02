@@ -81,13 +81,30 @@
       "weight": -1.0,
       "operating": true,
       "values": {
+        "2021-12-31": 207171000,
+        "2022-12-31": 303356000,
         "2023-12-31": 385542000,
         "2024-12-31": 291856000,
-        "2025-12-31": 270517000,
-        "2021-12-31": null,
-        "2022-12-31": null
+        "2025-12-31": 270517000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "retagged": [
+        {
+          "concept": "pld_ServiceManagementCosts1",
+          "years": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "pld_ServiceManagementCosts",
+          "years": [
+            "2023-12-31",
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        }
+      ]
     },
     {
       "concept": "us-gaap_GeneralAndAdministrativeExpense",
@@ -179,13 +196,30 @@
       "weight": -1.0,
       "operating": false,
       "values": {
+        "2021-12-31": 266228000,
+        "2022-12-31": 309037000,
         "2023-12-31": 641332000,
         "2024-12-31": 863932000,
-        "2025-12-31": 1002344000,
-        "2021-12-31": null,
-        "2022-12-31": null
+        "2025-12-31": 1002344000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "retagged": [
+        {
+          "concept": "us-gaap_InterestExpense",
+          "years": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "years": [
+            "2023-12-31",
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        }
+      ]
     },
     {
       "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsLossesAndOtherIncomeExpenseNet",
@@ -212,34 +246,6 @@
         "2025-12-31": -3498000,
         "2021-12-31": -187453000,
         "2022-12-31": -20184000
-      },
-      "dimensioned_years": []
-    },
-    {
-      "concept": "pld_ServiceManagementCosts1",
-      "label": "Strategic capital",
-      "weight": -1.0,
-      "operating": true,
-      "values": {
-        "2021-12-31": 207171000,
-        "2022-12-31": 303356000,
-        "2023-12-31": null,
-        "2024-12-31": null,
-        "2025-12-31": null
-      },
-      "dimensioned_years": []
-    },
-    {
-      "concept": "us-gaap_InterestExpense",
-      "label": "Interest expense",
-      "weight": -1.0,
-      "operating": false,
-      "values": {
-        "2021-12-31": 266228000,
-        "2022-12-31": 309037000,
-        "2023-12-31": null,
-        "2024-12-31": null,
-        "2025-12-31": null
       },
       "dimensioned_years": []
     },
@@ -292,13 +298,10 @@
         },
         {
           "concept": "pld_ServiceManagementCosts",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2021-12-31",
-            "2022-12-31"
-          ]
+          "actual": 96185000.0,
+          "flex": 52854495.71630276,
+          "ratio": 43330504.28369724,
+          "absent": []
         },
         {
           "concept": "us-gaap_GeneralAndAdministrativeExpense",
@@ -344,13 +347,10 @@
         },
         {
           "concept": "us-gaap_InterestExpenseNonoperating",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2021-12-31",
-            "2022-12-31"
-          ]
+          "actual": 42809000.0,
+          "flex": 67921411.22821172,
+          "ratio": -25112411.228211716,
+          "absent": []
         },
         {
           "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsLossesAndOtherIncomeExpenseNet",
@@ -367,20 +367,6 @@
           "actual": -167269000.0,
           "flex": 47823941.50488293,
           "ratio": -215092941.50488293,
-          "absent": []
-        },
-        {
-          "concept": "pld_ServiceManagementCosts1",
-          "actual": 96185000.0,
-          "flex": 52854495.71630276,
-          "ratio": 43330504.28369724,
-          "absent": []
-        },
-        {
-          "concept": "us-gaap_InterestExpense",
-          "actual": 42809000.0,
-          "flex": 67921411.22821172,
-          "ratio": -25112411.228211716,
           "absent": []
         },
         {
@@ -419,12 +405,10 @@
         },
         {
           "concept": "pld_ServiceManagementCosts",
-          "actual": 385542000.0,
-          "flex": 0.0,
-          "ratio": 385542000.0,
-          "absent": [
-            "2022-12-31"
-          ]
+          "actual": 82186000.0,
+          "flex": 104091766.29996993,
+          "ratio": -21905766.299969926,
+          "absent": []
         },
         {
           "concept": "us-gaap_GeneralAndAdministrativeExpense",
@@ -470,12 +454,10 @@
         },
         {
           "concept": "us-gaap_InterestExpenseNonoperating",
-          "actual": 641332000.0,
-          "flex": 0.0,
-          "ratio": 641332000.0,
-          "absent": [
-            "2022-12-31"
-          ]
+          "actual": 332295000.0,
+          "flex": 106041110.71494815,
+          "ratio": 226253889.28505185,
+          "absent": []
         },
         {
           "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsLossesAndOtherIncomeExpenseNet",
@@ -492,24 +474,6 @@
           "flex": 6925817.227938769,
           "ratio": -30384817.22793877,
           "absent": []
-        },
-        {
-          "concept": "pld_ServiceManagementCosts1",
-          "actual": -303356000.0,
-          "flex": 104091766.29996993,
-          "ratio": -407447766.2999699,
-          "absent": [
-            "2023-12-31"
-          ]
-        },
-        {
-          "concept": "us-gaap_InterestExpense",
-          "actual": -309037000.0,
-          "flex": 106041110.71494815,
-          "ratio": -415078110.7149482,
-          "absent": [
-            "2023-12-31"
-          ]
         },
         {
           "concept": "pld_GainLossOnForeignCurrencyAndDerivativeAndOtherIncomeExpenseNet",
@@ -618,26 +582,6 @@
           "absent": []
         },
         {
-          "concept": "pld_ServiceManagementCosts1",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2023-12-31",
-            "2024-12-31"
-          ]
-        },
-        {
-          "concept": "us-gaap_InterestExpense",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2023-12-31",
-            "2024-12-31"
-          ]
-        },
-        {
           "concept": "pld_GainLossOnForeignCurrencyAndDerivativeAndOtherIncomeExpenseNet",
           "actual": 0.0,
           "flex": -0.0,
@@ -743,26 +687,6 @@
           "flex": -38461.364536962865,
           "ratio": 4072461.364536963,
           "absent": []
-        },
-        {
-          "concept": "pld_ServiceManagementCosts1",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2024-12-31",
-            "2025-12-31"
-          ]
-        },
-        {
-          "concept": "us-gaap_InterestExpense",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2024-12-31",
-            "2025-12-31"
-          ]
         },
         {
           "concept": "pld_GainLossOnForeignCurrencyAndDerivativeAndOtherIncomeExpenseNet",

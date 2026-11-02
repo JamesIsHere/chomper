@@ -67,13 +67,30 @@
       "weight": -1.0,
       "operating": true,
       "values": {
+        "2021-12-31": 186911000000,
+        "2022-12-31": 210842000000,
         "2023-12-31": 241894000000,
         "2024-12-31": 264185000000,
-        "2025-12-31": 313995000000,
-        "2021-12-31": null,
-        "2022-12-31": null
+        "2025-12-31": 313995000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "retagged": [
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
+          "years": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+          "years": [
+            "2023-12-31",
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        }
+      ]
     },
     {
       "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
@@ -144,20 +161,6 @@
         "2022-12-31": null
       },
       "dimensioned_years": []
-    },
-    {
-      "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
-      "label": "Medical costs",
-      "weight": -1.0,
-      "operating": true,
-      "values": {
-        "2021-12-31": 186911000000,
-        "2022-12-31": 210842000000,
-        "2023-12-31": null,
-        "2024-12-31": null,
-        "2025-12-31": null
-      },
-      "dimensioned_years": []
     }
   ],
   "disagreements": [],
@@ -173,13 +176,10 @@
       "lines": [
         {
           "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2021-12-31",
-            "2022-12-31"
-          ]
+          "actual": 23931000000.0,
+          "flex": 23763810870.767082,
+          "ratio": 167189129.2329178,
+          "absent": []
         },
         {
           "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
@@ -218,13 +218,6 @@
             "2021-12-31",
             "2022-12-31"
           ]
-        },
-        {
-          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
-          "actual": 23931000000.0,
-          "flex": 23763810870.767082,
-          "ratio": 167189129.2329178,
-          "absent": []
         }
       ]
     },
@@ -238,12 +231,10 @@
       "lines": [
         {
           "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
-          "actual": 241894000000.0,
-          "flex": 0.0,
-          "ratio": 241894000000.0,
-          "absent": [
-            "2022-12-31"
-          ]
+          "actual": 31052000000.0,
+          "flex": 30869014011.51276,
+          "ratio": 182985988.48723984,
+          "absent": []
         },
         {
           "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
@@ -280,15 +271,6 @@
           "ratio": 0.0,
           "absent": [
             "2022-12-31"
-          ]
-        },
-        {
-          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
-          "actual": -210842000000.0,
-          "flex": 30869014011.51276,
-          "ratio": -241711014011.51276,
-          "absent": [
-            "2023-12-31"
           ]
         }
       ]
@@ -342,16 +324,6 @@
           "flex": -0.0,
           "ratio": 8310000000.0,
           "absent": []
-        },
-        {
-          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2023-12-31",
-            "2024-12-31"
-          ]
         }
       ]
     },
@@ -404,16 +376,6 @@
           "flex": 981746661.070556,
           "ratio": -9026746661.070557,
           "absent": []
-        },
-        {
-          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2024-12-31",
-            "2025-12-31"
-          ]
         }
       ]
     }

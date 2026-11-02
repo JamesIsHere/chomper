@@ -61,13 +61,30 @@
       "weight": -1.0,
       "operating": false,
       "values": {
+        "2021-12-31": 33627600000,
+        "2022-12-31": 38122700000,
         "2023-12-31": 45655000000,
         "2024-12-31": 49060000000,
-        "2025-12-31": 53959000000,
-        "2021-12-31": null,
-        "2022-12-31": null
+        "2025-12-31": 53959000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "retagged": [
+        {
+          "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
+          "years": [
+            "2021-12-31",
+            "2022-12-31"
+          ]
+        },
+        {
+          "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
+          "years": [
+            "2023-12-31",
+            "2024-12-31",
+            "2025-12-31"
+          ]
+        }
+      ]
     },
     {
       "concept": "us-gaap_DeferredPolicyAcquisitionCostAmortizationExpense",
@@ -154,20 +171,6 @@
       "dimensioned_years": []
     },
     {
-      "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
-      "label": "Losses and loss adjustment expenses",
-      "weight": -1.0,
-      "operating": false,
-      "values": {
-        "2021-12-31": 33627600000,
-        "2022-12-31": 38122700000,
-        "2023-12-31": null,
-        "2024-12-31": null,
-        "2025-12-31": null
-      },
-      "dimensioned_years": []
-    },
-    {
       "concept": "us-gaap_GoodwillImpairmentLoss",
       "label": "Goodwill impairment",
       "weight": -1.0,
@@ -218,6 +221,12 @@
       "period_end": "2023-12-31",
       "latest_filing": 268000000,
       "earlier_filing": 268400000
+    },
+    {
+      "item": "Losses and loss adjustment expenses",
+      "period_end": "2023-12-31",
+      "latest_filing": 45655000000,
+      "earlier_filing": 45654600000
     }
   ],
   "footing_gaps": [],
@@ -232,13 +241,10 @@
       "lines": [
         {
           "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2021-12-31",
-            "2022-12-31"
-          ]
+          "actual": 4495100000.0,
+          "flex": 1345541069.9761016,
+          "ratio": 3149558930.023898,
+          "absent": []
         },
         {
           "concept": "us-gaap_DeferredPolicyAcquisitionCostAmortizationExpense",
@@ -286,13 +292,6 @@
           "absent": []
         },
         {
-          "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
-          "actual": 4495100000.0,
-          "flex": 1345541069.9761016,
-          "ratio": 3149558930.023898,
-          "absent": []
-        },
-        {
           "concept": "us-gaap_GoodwillImpairmentLoss",
           "actual": 224800000.0,
           "flex": 0.0,
@@ -311,12 +310,10 @@
       "lines": [
         {
           "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredNet",
-          "actual": 45655000000.0,
-          "flex": 0.0,
-          "ratio": 45655000000.0,
-          "absent": [
-            "2022-12-31"
-          ]
+          "actual": 7532300000.0,
+          "flex": 9604156792.990221,
+          "ratio": -2071856792.990221,
+          "absent": []
         },
         {
           "concept": "us-gaap_DeferredPolicyAcquisitionCostAmortizationExpense",
@@ -361,15 +358,6 @@
           "flex": 61344348.09426192,
           "ratio": -36844348.09426192,
           "absent": []
-        },
-        {
-          "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
-          "actual": -38122700000.0,
-          "flex": 9604156792.990221,
-          "ratio": -47726856792.99022,
-          "absent": [
-            "2023-12-31"
-          ]
         },
         {
           "concept": "us-gaap_GoodwillImpairmentLoss",
@@ -440,16 +428,6 @@
           "absent": []
         },
         {
-          "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2023-12-31",
-            "2024-12-31"
-          ]
-        },
-        {
           "concept": "us-gaap_GoodwillImpairmentLoss",
           "actual": 0.0,
           "flex": 0.0,
@@ -517,16 +495,6 @@
           "flex": 45526468.71517274,
           "ratio": -46526468.71517274,
           "absent": []
-        },
-        {
-          "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2024-12-31",
-            "2025-12-31"
-          ]
         },
         {
           "concept": "us-gaap_GoodwillImpairmentLoss",

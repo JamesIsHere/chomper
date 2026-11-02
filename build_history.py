@@ -52,6 +52,22 @@ def footing(h):
             + "; ".join(s for _, s in sorted(parts)) + ".")
 
 
+def retags(h):
+    """The footer's sentence for lines the company tagged differently between its two 10-Ks, shown as one row."""
+    rows = [l for l in h["lines"] if l.get("retagged")]
+    if not rows:
+        return ""
+
+    def span(ys):
+        return year(ys[0]) if len(ys) == 1 else f"{year(ys[0])} to {year(ys[-1])}"
+    return (" " + ("One line carries" if len(rows) == 1 else "These lines carry")
+            + " a different XBRL tag in the two 10-Ks and " + ("is" if len(rows) == 1 else "are each") + " shown as one row: "
+            + "; ".join(f"{escape(l['label'])}, tagged "
+                        + ", then ".join(f"{escape(t['concept'].split('_', 1)[-1])} for {span(t['years'])}"
+                                         for t in l["retagged"] if t["years"])
+                        for l in rows) + ".")
+
+
 def rounding_only(a, b):
     """True when two filings' figures differ only because one rounds coarser: the coarser figure (the one with more
     trailing zeros, at most $1M) equals the finer one rounded half up to its unit. PGR's 2025 10-K reports
@@ -513,7 +529,7 @@ def page(h, name):
                         f"rounding." if rounded else "."))
     return TEMPLATE.format(company=escape(name), ticker=escape(h["ticker"]), heads=heads, top=top,
                            rows="\n".join(rows), years=years, filings=filings, cik=f"{int(h['cik']):010d}",
-                           disagreements=disagreements, footing=footing(h), loss_note=loss_note,
+                           disagreements=disagreements, footing=footing(h) + retags(h), loss_note=loss_note,
                            ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
                            last=year(h["period_ends"][-1]), nav=nav(), bridge_link=bridge_link(h["ticker"]),
                            ten_years=ten_years(h["ticker"]), ten_breaks=ten_breaks(h["ticker"]), css=CSS)

@@ -131,13 +131,30 @@
       "weight": -1.0,
       "operating": false,
       "values": {
+        "2022-01-02": 183000000,
+        "2023-01-01": 276000000,
         "2023-12-31": 772000000,
         "2024-12-29": 755000000,
-        "2025-12-28": 971000000,
-        "2022-01-02": null,
-        "2023-01-01": null
+        "2025-12-28": 971000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "retagged": [
+        {
+          "concept": "us-gaap_InterestExpense",
+          "years": [
+            "2022-01-02",
+            "2023-01-01"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "years": [
+            "2023-12-31",
+            "2024-12-29",
+            "2025-12-28"
+          ]
+        }
+      ]
     },
     {
       "concept": "us-gaap_OtherNonoperatingIncomeExpense",
@@ -164,20 +181,6 @@
         "2025-12-28": 228000000,
         "2022-01-02": 209000000,
         "2023-01-01": 275000000
-      },
-      "dimensioned_years": []
-    },
-    {
-      "concept": "us-gaap_InterestExpense",
-      "label": "Interest expense, net of portion capitalized",
-      "weight": -1.0,
-      "operating": false,
-      "values": {
-        "2022-01-02": 183000000,
-        "2023-01-01": 276000000,
-        "2023-12-31": null,
-        "2024-12-29": null,
-        "2025-12-28": null
       },
       "dimensioned_years": []
     }
@@ -230,13 +233,10 @@
         },
         {
           "concept": "us-gaap_InterestExpenseNonoperating",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2022-01-02",
-            "2023-01-01"
-          ]
+          "actual": 93000000.0,
+          "flex": 2905130.8102616207,
+          "ratio": 90094869.18973838,
+          "absent": []
         },
         {
           "concept": "us-gaap_OtherNonoperatingIncomeExpense",
@@ -250,13 +250,6 @@
           "actual": 66000000.0,
           "flex": 3317881.6357632712,
           "ratio": 62682118.36423673,
-          "absent": []
-        },
-        {
-          "concept": "us-gaap_InterestExpense",
-          "actual": 93000000.0,
-          "flex": 2905130.8102616207,
-          "ratio": 90094869.18973838,
           "absent": []
         }
       ]
@@ -306,12 +299,10 @@
         },
         {
           "concept": "us-gaap_InterestExpenseNonoperating",
-          "actual": 772000000.0,
-          "flex": 0.0,
-          "ratio": 772000000.0,
-          "absent": [
-            "2023-01-01"
-          ]
+          "actual": 496000000.0,
+          "flex": 17835279.409926243,
+          "ratio": 478164720.59007376,
+          "absent": []
         },
         {
           "concept": "us-gaap_OtherNonoperatingIncomeExpense",
@@ -326,15 +317,6 @@
           "flex": 17770658.832354043,
           "ratio": 196229341.16764596,
           "absent": []
-        },
-        {
-          "concept": "us-gaap_InterestExpense",
-          "actual": -276000000.0,
-          "flex": 17835279.409926243,
-          "ratio": -293835279.40992624,
-          "absent": [
-            "2023-12-31"
-          ]
         }
       ]
     },
@@ -401,16 +383,6 @@
           "flex": 21027935.978581242,
           "ratio": -276027935.97858125,
           "absent": []
-        },
-        {
-          "concept": "us-gaap_InterestExpense",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2023-12-31",
-            "2024-12-29"
-          ]
         }
       ]
     },
@@ -477,16 +449,6 @@
           "flex": 14152599.047522545,
           "ratio": -20152599.047522545,
           "absent": []
-        },
-        {
-          "concept": "us-gaap_InterestExpense",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2024-12-29",
-            "2025-12-28"
-          ]
         }
       ]
     }

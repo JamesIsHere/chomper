@@ -337,6 +337,47 @@ def read_filing(cik, filing, ua):
             "rounding": rounding, "rounding_operating": rounding_op, "footing_gaps": gaps}
 
 
+def retag(lines, older, ends, disagreements):
+    """One line the company tagged differently in its two 10-Ks (CCL's interest expense: InterestExpense through
+    2022, InterestExpenseNonoperating from 2023) arrives as two rows, each jumping to or from nothing. Rows become
+    one only when the filing's label is identical, every tag carries figures, the years never overlap, and weight and
+    section agree; the row
+    keeps the latest tag and records every tag with its years. Anything short of that stays as two rows."""
+    groups = {}
+    for l in lines:
+        groups.setdefault(l["label"], []).append(l)
+    out = []
+    for l in lines:
+        group = groups[l["label"]]
+        if len(group) == 1:
+            out.append(l)
+            continue
+        if l is not group[0]:
+            continue
+        years = [{e for e in ends if g["values"][e] is not None} for g in group]
+        if (not all(years) or any(a & b for i, a in enumerate(years) for b in years[i + 1:])
+                or len({(g["weight"], g["operating"]) for g in group}) != 1):
+            out += group
+            continue
+        row = dict(group[0], values={e: next((g["values"][e] for g in group if g["values"][e] is not None), None)
+                                     for e in ends},
+                   dimensioned_years=sorted(e for g in group for e in g["dimensioned_years"]),
+                   retagged=sorted(({"concept": g["concept"], "years": sorted(y)} for g, y in zip(group, years)),
+                                   key=lambda t: t["years"][0] if t["years"] else ""))
+        # The year both 10-Ks show, compared across the tag change as merge() compares a line under one tag.
+        old = {o["concept"]: o for o in older["lines"]}
+        for e in sorted(set(older["ends"]) & set(ends)):
+            later = row["values"][e]
+            for g in group:
+                o = old.get(g["concept"])
+                if o and o["concept"] != row["concept"] and o["values"].get(e) is not None and later is not None \
+                        and o["values"][e] != later:
+                    disagreements.append({"item": row["label"], "period_end": e,
+                                          "latest_filing": later, "earlier_filing": o["values"][e]})
+        out.append(row)
+    return out
+
+
 def merge(latest, older):
     """Five years; overlap year taken from the latest filing, disagreements recorded."""
     ends = sorted(set(older["ends"]) | set(latest["ends"]))
@@ -370,6 +411,7 @@ def merge(latest, older):
             l["values"].setdefault(e, None)
     if any(l["weight"] != by[l["concept"]]["weight"] for f in (latest, older) for l in f["lines"]):
         raise SystemExit("a line changes sign between the two filings")
+    lines = retag(lines, older, ends, disagreements)
     # The filing's own rounding, as its own rows, so every later check stays exact: one inside operating income,
     # one for the rest of the gap to pre-tax income.
     above = {e: src[e]["rounding_operating"][e] for e in ends}

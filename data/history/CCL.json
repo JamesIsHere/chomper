@@ -193,13 +193,30 @@
       "weight": -1.0,
       "operating": false,
       "values": {
+        "2021-11-30": 1601000000,
+        "2022-11-30": 1609000000,
         "2023-11-30": 2066000000,
         "2024-11-30": 1755000000,
-        "2025-11-30": 1349000000,
-        "2021-11-30": null,
-        "2022-11-30": null
+        "2025-11-30": 1349000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "retagged": [
+        {
+          "concept": "us-gaap_InterestExpense",
+          "years": [
+            "2021-11-30",
+            "2022-11-30"
+          ]
+        },
+        {
+          "concept": "us-gaap_InterestExpenseNonoperating",
+          "years": [
+            "2023-11-30",
+            "2024-11-30",
+            "2025-11-30"
+          ]
+        }
+      ]
     },
     {
       "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebtBeforeWriteOffOfDeferredDebtIssuanceCost",
@@ -251,20 +268,6 @@
       "values": {
         "2021-11-30": 226000000,
         "2022-11-30": 0,
-        "2023-11-30": null,
-        "2024-11-30": null,
-        "2025-11-30": null
-      },
-      "dimensioned_years": []
-    },
-    {
-      "concept": "us-gaap_InterestExpense",
-      "label": "Interest expense, net of capitalized interest",
-      "weight": -1.0,
-      "operating": false,
-      "values": {
-        "2021-11-30": 1601000000,
-        "2022-11-30": 1609000000,
         "2023-11-30": null,
         "2024-11-30": null,
         "2025-11-30": null
@@ -413,13 +416,10 @@
         },
         {
           "concept": "us-gaap_InterestExpenseNonoperating",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2021-11-30",
-            "2022-11-30"
-          ]
+          "actual": 8000000.0,
+          "flex": 8609150943.396227,
+          "ratio": -8601150943.396227,
+          "absent": []
         },
         {
           "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebtBeforeWriteOffOfDeferredDebtIssuanceCost",
@@ -447,13 +447,6 @@
           "actual": -226000000.0,
           "flex": 1215283018.8679245,
           "ratio": -1441283018.8679245,
-          "absent": []
-        },
-        {
-          "concept": "us-gaap_InterestExpense",
-          "actual": 8000000.0,
-          "flex": 8609150943.396227,
-          "ratio": -8601150943.396227,
           "absent": []
         },
         {
@@ -545,12 +538,10 @@
         },
         {
           "concept": "us-gaap_InterestExpenseNonoperating",
-          "actual": 2066000000.0,
-          "flex": 0.0,
-          "ratio": 2066000000.0,
-          "absent": [
-            "2022-11-30"
-          ]
+          "actual": 457000000.0,
+          "flex": 1246287393.162393,
+          "ratio": -789287393.1623931,
+          "absent": []
         },
         {
           "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebtBeforeWriteOffOfDeferredDebtIssuanceCost",
@@ -580,15 +571,6 @@
           "actual": 0.0,
           "flex": 0.0,
           "ratio": 0.0,
-          "absent": [
-            "2023-11-30"
-          ]
-        },
-        {
-          "concept": "us-gaap_InterestExpense",
-          "actual": -1609000000.0,
-          "flex": 1246287393.162393,
-          "ratio": -2855287393.162393,
           "absent": [
             "2023-11-30"
           ]
@@ -722,16 +704,6 @@
           ]
         },
         {
-          "concept": "us-gaap_InterestExpense",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2023-11-30",
-            "2024-11-30"
-          ]
-        },
-        {
           "concept": "rounding_operating",
           "actual": -1000000.0,
           "flex": 0.0,
@@ -851,16 +823,6 @@
         },
         {
           "concept": "us-gaap_GoodwillAndIntangibleAssetImpairment",
-          "actual": 0.0,
-          "flex": 0.0,
-          "ratio": 0.0,
-          "absent": [
-            "2024-11-30",
-            "2025-11-30"
-          ]
-        },
-        {
-          "concept": "us-gaap_InterestExpense",
           "actual": 0.0,
           "flex": 0.0,
           "ratio": 0.0,
