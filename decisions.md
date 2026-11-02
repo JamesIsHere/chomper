@@ -117,7 +117,7 @@ Status: active
 Group: Method
 Decision: A window must contain at least one revenue contraction and no undisclosed regime break. Long: 10-year headline only. Medium: 5-year line-by-line detail. Short: 1-year bridge. Acquisitions and accounting changes are marked, never used to shorten a window.
 Why: Settles the recurring 10-year question: give each time frame its own window instead of forcing all three into one table.
-Status: active
+Status: amended 2026-11-02 (Long window from fiscal 2007)
 
 ## 2026-10-30 | Decisioning page
 Group: Presentation
@@ -298,4 +298,22 @@ Status: active
 Group: Presentation
 Decision: The S&P 500 page shows, for each sector, the pre-tax margin of the sector as it was (members on 1 January of each year) against today's members, chained the same way as the total, with the number of members counted in the first and last year under each chart. Each company sits in its last sector while a member; the old Telecommunication Services is Communication Services. The ten-year dollar charts of today's members stay below, under their own heading.
 Why: Split by sector, survivorship is not a uniform haircut: it reverses the decade in Utilities (-2.1 points as it was, +2.6 for today's members) and Consumer Discretionary, and runs through named companies; PG&E was out of the index 2020 to 2022 while it recovered from its wildfire losses, and Vistra turned around two years before joining, so only today's line counts their rebounds (James, 2026-11-02).
+Status: active
+
+## 2026-11-02 | Long window from fiscal 2007
+Group: Method
+Decision: The long view starts at fiscal 2007, the pre-crisis peak (the fiscal year ending between 1 July 2007 and 30 June 2008), instead of the last ten years. The medium and short windows are unchanged.
+Why: The question is how a company's costs respond when revenue falls, and the downturns are the evidence; ten years from 2016 hold only 2020 and 2023. From 2007 the view holds the financial crisis, the 2015-16 industrial and energy slump, 2020 and 2023, and starting at a cycle peak measures growth over full cycles instead of from an arbitrary base year (James, 2026-11-02). CAT's FY2009 10-K reports 2007 and 2008 in the SEC's data.
+Status: active
+
+## 2026-11-02 | Company pages are finished by hand
+Group: Scope
+Decision: Company pages are finished one at a time for a short list chosen for variety in cost structure, not run in bulk. The scripts stay the instrument (pulling, footing, flags, verbatim checks); where they cannot decide (acquisitions before deals were tagged in the SEC's data, a year the data does not reach), the filing is read and a record is written with its source, checked as the scripts check their own. Peer and economy comparisons stay automated and are labelled approximate.
+Why: Every company-specific case was becoming a general rule (eleven on 2026-11-02 alone), and the batch run was setting the agenda instead of the reader's question. The project's promise is that every number is traced to the filing, which a hand record with its source keeps; the reader is served by a few deep pages, not five hundred shallow ones (James, 2026-11-02).
+Status: active
+
+## 2026-11-02 | US recessions shaded
+Group: Presentation
+Decision: The long view shades each fiscal year that holds a quarter or more of a US recession as the NBER dates it (December 2007 to June 2009; February to April 2020), on the table's rows and on the chart as whole year slots, with a legend entry and a note naming the dates. The chart's numbered markers also appear beside their years in the table.
+Why: The question is how operating income responds when revenue falls, and the recessions are where to look (James, 2026-11-02). Whole fiscal years, not true dates, because each point is a fiscal year: a band at the true dates left CAT's 2009 trough outside the shading. A share, not a fixed three months, because the 2020 recession lasted three months and a fixed test missed HD's fiscal 2020, which starts 3 February. A slump outside the shading (CAT 2015-16) reads as the company's own, not the economy's.
 Status: active

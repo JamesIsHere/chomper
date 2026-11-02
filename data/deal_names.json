@@ -8,6 +8,7 @@
     {"member": "msft:ActivisionBlizzardIncMember", "name": "Activision Blizzard", "accession": "0000950170-24-087843", "quote": "On October 13, 2023 , we completed our acquisition of Activision Blizzard, Inc."},
     {"member": "pld:DCTIndustrialTrustIncAndDCTIndustrialOperatingPartnershipLPMember", "name": "DCT Industrial Trust", "accession": "0001564590-21-005312", "quote": "acquired DCT Industrial Trust Inc."},
     {"member": "pld:LibertyPropertyTrustAndLibertyPropertyLimitedPartnershipMember", "name": "Liberty Property Trust", "accession": "0001564590-21-005312", "quote": "On February 4, 2020, we acquired Liberty Property Trust and Liberty Property Limited Partnership"},
-    {"member": "pld:DukeRealtyCorporationAndDukeRealtyLimitedPartnershipMember", "name": "Duke Realty", "accession": "0000950170-25-021272", "quote": "On October 3, 2022 , we acquired Duke Realty Corporation and Duke Realty Limited Partnership"}
+    {"member": "pld:DukeRealtyCorporationAndDukeRealtyLimitedPartnershipMember", "name": "Duke Realty", "accession": "0000950170-25-021272", "quote": "On October 3, 2022 , we acquired Duke Realty Corporation and Duke Realty Limited Partnership"},
+    {"member": "cat:BucyrusInternationalIncMember", "name": "Bucyrus", "accession": "0001104659-12-011331", "quote": "Our Resource Industries business was transformed by the acquisition of Bucyrus International, Inc. (Bucyrus) in July 2011, and now offers mining customers the broadest product range in the industry."}
   ]
 }

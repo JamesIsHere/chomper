@@ -207,10 +207,11 @@ def chart_breaks(h):
     names = deal_names()
     for d in h["deals"]:
         if d["significant"]:
-            if d["member"] not in names:
+            name = names.get(d["member"]) or (d["name"] if d.get("by_hand") else None)  # hand records carry it
+            if name is None:
                 raise SystemExit(f"{h['ticker']}: no name for {d['member']} in data/deal_names.json")
             out.setdefault(d["fiscal_year_end"], []).append(
-                f"Acquired {names[d['member']]}, {m(d['size'], False)}, {d['share_of_assets']:.0%} of total assets at the "
+                f"Acquired {name}, {m(d['size'], False)}, {d['share_of_assets']:.0%} of total assets at the "
                 f"prior year end")
     records = adoptions()
     for s in h["standards"]:
@@ -224,7 +225,7 @@ def chart_breaks(h):
             out.setdefault(s["fiscal_year_end"], []).append(f"{s['standard']} required this year")
             continue
         if a["year_ending"] not in h["period_ends"]:
-            raise SystemExit(f"{h['ticker']} ASC {code}: adoption year {a['year_ending']} is not one of the ten")
+            raise SystemExit(f"{h['ticker']} ASC {code}: adoption year {a['year_ending']} is not one of its years")
         out.setdefault(a["year_ending"], []).append(
             f"{s['standard']} adopted" + ("; earlier years not recast" if a["recast"] is False else ""))
     return out
@@ -273,6 +274,32 @@ def cost_gaps(h):
     return out
 
 
+# US recessions as the NBER dates them (peak month to trough month), the official US business-cycle dates:
+# https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions
+RECESSIONS = [("2007-12-01", "2009-06-30"), ("2020-02-01", "2020-04-30")]
+RECESSION_SHARE = 0.25  # a fiscal year is a recession year when it holds a quarter or more of a recession's days
+
+
+def fiscal_start(ends, i):
+    """The first day of fiscal year i: the day after the prior year's end (a year before the end for the first)."""
+    prev = ends[i - 1] if i else str(int(ends[i][:4]) - 1) + ends[i][4:]
+    return (date.fromisoformat(prev) + timedelta(days=1)).isoformat()
+
+
+def recession_years(ends):
+    """Fiscal years holding RECESSION_SHARE or more of a US recession's days. A share, not a fixed length, because
+    the 2020 recession lasted three months: a fixed three-month test missed a fiscal year starting 3 February."""
+    out = set()
+    for i, e in enumerate(ends):
+        a = date.fromisoformat(fiscal_start(ends, i))
+        for s, t in RECESSIONS:
+            s, t = date.fromisoformat(s), date.fromisoformat(t)
+            lo, hi = max(a, s), min(date.fromisoformat(e), t)
+            if ((hi - lo).days + 1) / ((t - s).days + 1) >= RECESSION_SHARE:
+                out.add(e)
+    return out
+
+
 def trend_chart(h):
     """Revenue and pre-tax income in dollars on a log scale (the table's figures), each year with a break numbered
     at the top and explained in a key; under it, a band of bars for each year's cost gap (cost_gaps). A log scale
@@ -297,7 +324,13 @@ def trend_chart(h):
     by = lambda v: b0 + (bt[-1] - v) / (bt[-1] - bt[0]) * BAND_H
     H = b0 + BAND_H + 8
 
-    out = [f'<line x1="{L}" x2="{W - R}" y1="{py(v):.1f}" y2="{py(v):.1f}" class="g"/>'
+    # Recession years shaded as whole year slots, the same years the table shades: each point is a fiscal year,
+    # so the shading covers the points the recession falls in.
+    rec = recession_years(ends)
+    out = [f'<rect x="{px(i) - step_x / 2:.1f}" y="{T}" width="{step_x:.1f}" height="{H - 8 - T}" class="rec">'
+           f'<title>{escape(year(e))}: fiscal year in a US recession (NBER)</title></rect>'
+           for i, e in enumerate(ends) if e in rec]
+    out += [f'<line x1="{L}" x2="{W - R}" y1="{py(v):.1f}" y2="{py(v):.1f}" class="g"/>'
            f'<text x="{L - 6}" y="{py(v) + 4:.1f}" class="ax" text-anchor="end">{money_tick(v)}</text>'
            for v in ticks]
     out += [f'<text x="{px(i):.1f}" y="{T + PLOT_H + LOSS_H + 18}" class="ax" text-anchor="middle">{year(e)}</text>'
@@ -354,6 +387,8 @@ def trend_chart(h):
     legend = "".join(f'<span><i style="background:var({var})"></i>{name}</span>' for name, var, _ in series)
     legend += ('<span><i class="sw bar-down-sw"></i>Costs ran ahead of revenue</span>'
                '<span><i class="sw bar-up-sw"></i>Revenue ran ahead of costs</span>')
+    if rec:
+        legend += '<span><i class="sw rec-sw"></i>Fiscal year in a US recession (NBER)</span>'
     return (f'<p class="legend">{legend}</p>'
             f'<svg class="trend wide" viewBox="0 0 {W} {H}" role="img" aria-label="Revenue and pre-tax income in '
             f'dollars on a log scale{", loss years on a strip under the plot" if losses else ""}, with each year\'s '
@@ -644,20 +679,26 @@ def ten_years(ticker):
                 cells.append(f'<td{cls}>{pct}*</td>')
             else:
                 cells.append(f"<td{cls}>{pct}</td>")
-        return "".join(cells)
+        return cells
     lines = [(label, s, t["changes"][key]) for label, s, key in
              (("Revenue", rev, "revenue"), ("Operating income", op, "operating_income"),
               ("Pre-tax income", pre, "pretax_income")) if s is not None]
-    rows = "".join(f'<tr class="strong"><th scope="row">{label}</th>'
-                   + "".join(f"<td>{m(s[e], False)}</td>" for e in ends)
-                   + f'</tr><tr><th scope="row">&nbsp;&nbsp;change</th>{growth(label, s, ch)}</tr>'
-                   for label, s, ch in lines)
-    rows += ('<tr><th scope="row">Pre-tax margin</th>'
-             + "".join(f"<td>{pre[e] / rev[e] * 100:.1f}%</td>" for e in ends) + "</tr>")
-    return (f'<h2>Ten years</h2>\n<div class="wrap"><table class="ten">\n<thead><tr><th></th>'
-            + "".join(f"<th>{year(e)}</th>" for e in ends)
-            + f'</tr></thead>\n<tbody>\n{rows}\n</tbody></table></div>\n'
+    # Years run down the rows, so the table keeps its width however long the window is.
+    cols = [([f'<td class="strong">{m(s[e], False)}</td>' for e in ends], growth(label, s, ch))
+            for label, s, ch in lines]
+    rec = recession_years(ends)
+    breaks = chart_breaks(t)  # the chart's numbered markers, numbered the same way (trend_chart)
+    num = {e: n for n, e in enumerate((e for e in ends if e in breaks), 1)}
+    rows = "\n".join(f'<tr{" class=\"rec\"" if e in rec else ""}><th scope="row">{year(e)}'
+                     + (f'<span class="num">{num[e]}</span>' if e in num else "") + '</th>'
+                     + "".join(v[i] + c[i] for v, c in cols)
+                     + f"<td>{pre[e] / rev[e] * 100:.1f}%</td></tr>" for i, e in enumerate(ends))
+    head = "".join(f'<th>{label}</th><th class="dim">change</th>' for label, _, _ in lines)
+    return (f'<h2>{year(ends[0])} to {year(ends[-1])}</h2>\n<div class="wrap"><table class="ten long">\n'
+            f'<thead><tr><th></th>{head}<th>Pre-tax margin</th></tr></thead>\n<tbody>\n{rows}\n</tbody></table></div>\n'
             + ('<p class="note">* See Note 1.</p>\n' if notes else "")
+            + ('<p class="note">Shaded: fiscal years holding a quarter or more of a US recession as the NBER dates it '
+               '(December 2007 to June 2009; February to April 2020).</p>\n' if rec else "")
             + trend_chart(t) + '\n')
 
 
@@ -788,7 +829,8 @@ thead th { font-weight: 600; color: var(--ink-3); font-size: .8rem; }
 tbody th { text-align: left; font-weight: normal; white-space: normal; min-width: 12rem; }
 table.ten tbody th { min-width: 9rem; } /* ten columns of figures must fit the page width */
 table.ten th, table.ten td { padding: .4rem .5rem; }
-tr.strong th, tr.strong td { font-weight: 600; }
+table.long tbody th { min-width: 0; } /* years down the rows: the row label is just the year */
+tr.strong th, tr.strong td, td.strong { font-weight: 600; }
 tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
 .dim { color: var(--ink-3); font-size: .8rem; }
 .legend { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; font-size: .85rem; color: var(--ink-2);
@@ -809,14 +851,18 @@ tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
 .legend .sw { width: .8rem; height: .8rem; }
 .bar-down-sw { background: var(--down); opacity: .55; }
 .bar-up-sw { background: var(--up); opacity: .55; }
+.trend .rec { fill: var(--ink-3); fill-opacity: .14; }
+.rec-sw { background: var(--ink-3); opacity: .3; }
+tr.rec th, tr.rec td { background: color-mix(in srgb, var(--ink-3) 10%, transparent); }
 .trend .guide { stroke: var(--ink-3); stroke-dasharray: 2 3; stroke-width: 1; }
 .trend .mark { fill: var(--ink); }
 .trend .marknum { fill: var(--bg); font-size: 11px; font-weight: 700; }
 ol.key { list-style: none; padding: 0; margin: .5rem 0 1rem; font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
 ol.key li { margin: 0 0 .3rem; }
-ol.key .num { display: inline-block; width: 1.3rem; height: 1.3rem; line-height: 1.3rem; border-radius: 50%;
+ol.key .num, table.long .num { display: inline-block; width: 1.3rem; height: 1.3rem; line-height: 1.3rem; border-radius: 50%;
   background: var(--ink); color: var(--bg); text-align: center; font-size: .75rem; font-weight: 700;
   margin-right: .5rem; }
+table.long .num { width: 1.15rem; height: 1.15rem; line-height: 1.15rem; font-size: .7rem; margin: 0 0 0 .4rem; }
 tr.sub th { text-align: left; font-size: .8rem; font-weight: 600; color: var(--ink-3); padding-top: .9rem; }
 td.name { text-align: left; white-space: normal; }
 table.index tbody th { min-width: 4rem; width: 4rem; }
@@ -884,7 +930,7 @@ TEMPLATE = """<!doctype html>
 {ten_breaks}
 <footer>
 <p>Source: {filings}. Lines, labels and order come from each filing's income statement; {footing} {disagreements}</p>
-<p>The ten-year table and chart come from the SEC's companyfacts data and each year's 10-K; every 10-K is in the
+<p>The table and chart at the top come from the SEC's companyfacts data and each year's 10-K; every 10-K is in the
 company's <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK={cik}&amp;type=10-K">SEC filing
 list</a>.</p>
 </footer>

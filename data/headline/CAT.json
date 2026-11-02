@@ -4,6 +4,15 @@
   "cik": 18230,
   "unit": "USD",
   "period_ends": [
+    "2007-12-31",
+    "2008-12-31",
+    "2009-12-31",
+    "2010-12-31",
+    "2011-12-31",
+    "2012-12-31",
+    "2013-12-31",
+    "2014-12-31",
+    "2015-12-31",
     "2016-12-31",
     "2017-12-31",
     "2018-12-31",
@@ -16,6 +25,15 @@
     "2025-12-31"
   ],
   "revenue": {
+    "2007-12-31": 44958000000,
+    "2008-12-31": 51324000000,
+    "2009-12-31": 32396000000,
+    "2010-12-31": 42588000000,
+    "2011-12-31": 60138000000,
+    "2012-12-31": 65875000000,
+    "2013-12-31": 55656000000,
+    "2014-12-31": 55184000000,
+    "2015-12-31": 47011000000,
     "2016-12-31": 38537000000,
     "2017-12-31": 45462000000,
     "2018-12-31": 54722000000,
@@ -28,6 +46,15 @@
     "2025-12-31": 67589000000
   },
   "operating_income": {
+    "2007-12-31": 4921000000,
+    "2008-12-31": 4448000000,
+    "2009-12-31": 577000000,
+    "2010-12-31": 3963000000,
+    "2011-12-31": 7153000000,
+    "2012-12-31": 8573000000,
+    "2013-12-31": 5628000000,
+    "2014-12-31": 3314000000,
+    "2015-12-31": 3785000000,
     "2016-12-31": 1162000000,
     "2017-12-31": 4460000000,
     "2018-12-31": 8293000000,
@@ -40,6 +67,15 @@
     "2025-12-31": 11151000000
   },
   "pretax_income": {
+    "2007-12-31": 4990000000,
+    "2008-12-31": 4501000000,
+    "2009-12-31": 569000000,
+    "2010-12-31": 3750000000,
+    "2011-12-31": 6725000000,
+    "2012-12-31": 8236000000,
+    "2013-12-31": 5128000000,
+    "2014-12-31": 3152000000,
+    "2015-12-31": 3439000000,
     "2016-12-31": 139000000,
     "2017-12-31": 4082000000,
     "2018-12-31": 7822000000,
@@ -62,6 +98,78 @@
   ],
   "changes": {
     "revenue": {
+      "2008-12-31": {
+        "prior_end": "2007-12-31",
+        "prior": 44958000000,
+        "value": 51324000000,
+        "accession": "0000018230-10-000092",
+        "filed": "2010-02-19",
+        "basis_changed": false
+      },
+      "2009-12-31": {
+        "prior_end": "2008-12-31",
+        "prior": 51324000000,
+        "value": 32396000000,
+        "accession": "0001104659-11-008938",
+        "filed": "2011-02-22",
+        "basis_changed": false
+      },
+      "2010-12-31": {
+        "prior_end": "2009-12-31",
+        "prior": 32396000000,
+        "value": 42588000000,
+        "accession": "0001104659-12-011331",
+        "filed": "2012-02-21",
+        "basis_changed": false
+      },
+      "2011-12-31": {
+        "prior_end": "2010-12-31",
+        "prior": 42588000000,
+        "value": 60138000000,
+        "accession": "0000018230-13-000075",
+        "filed": "2013-02-19",
+        "basis_changed": false
+      },
+      "2012-12-31": {
+        "prior_end": "2011-12-31",
+        "prior": 60138000000,
+        "value": 65875000000,
+        "accession": "0000018230-14-000058",
+        "filed": "2014-02-18",
+        "basis_changed": false
+      },
+      "2013-12-31": {
+        "prior_end": "2012-12-31",
+        "prior": 65875000000,
+        "value": 55656000000,
+        "accession": "0000018230-15-000061",
+        "filed": "2015-02-17",
+        "basis_changed": false
+      },
+      "2014-12-31": {
+        "prior_end": "2013-12-31",
+        "prior": 55656000000,
+        "value": 55184000000,
+        "accession": "0000018230-16-000410",
+        "filed": "2016-02-16",
+        "basis_changed": false
+      },
+      "2015-12-31": {
+        "prior_end": "2014-12-31",
+        "prior": 55184000000,
+        "value": 47011000000,
+        "accession": "0000018230-17-000041",
+        "filed": "2017-02-15",
+        "basis_changed": false
+      },
+      "2016-12-31": {
+        "prior_end": "2015-12-31",
+        "prior": 47011000000,
+        "value": 38537000000,
+        "accession": "0000018230-18-000042",
+        "filed": "2018-02-15",
+        "basis_changed": false
+      },
       "2017-12-31": {
         "prior_end": "2016-12-31",
         "prior": 38537000000,
@@ -136,6 +244,78 @@
       }
     },
     "operating_income": {
+      "2008-12-31": {
+        "prior_end": "2007-12-31",
+        "prior": 4921000000,
+        "value": 4448000000,
+        "accession": "0000018230-10-000092",
+        "filed": "2010-02-19",
+        "basis_changed": false
+      },
+      "2009-12-31": {
+        "prior_end": "2008-12-31",
+        "prior": 4448000000,
+        "value": 577000000,
+        "accession": "0001104659-11-008938",
+        "filed": "2011-02-22",
+        "basis_changed": false
+      },
+      "2010-12-31": {
+        "prior_end": "2009-12-31",
+        "prior": 577000000,
+        "value": 3963000000,
+        "accession": "0001104659-12-011331",
+        "filed": "2012-02-21",
+        "basis_changed": false
+      },
+      "2011-12-31": {
+        "prior_end": "2010-12-31",
+        "prior": 3963000000,
+        "value": 7153000000,
+        "accession": "0000018230-13-000075",
+        "filed": "2013-02-19",
+        "basis_changed": false
+      },
+      "2012-12-31": {
+        "prior_end": "2011-12-31",
+        "prior": 7153000000,
+        "value": 8573000000,
+        "accession": "0000018230-14-000058",
+        "filed": "2014-02-18",
+        "basis_changed": false
+      },
+      "2013-12-31": {
+        "prior_end": "2012-12-31",
+        "prior": 8573000000,
+        "value": 5628000000,
+        "accession": "0000018230-15-000061",
+        "filed": "2015-02-17",
+        "basis_changed": false
+      },
+      "2014-12-31": {
+        "prior_end": "2013-12-31",
+        "prior": 5628000000,
+        "value": 5328000000,
+        "accession": "0000018230-16-000410",
+        "filed": "2016-02-16",
+        "basis_changed": true
+      },
+      "2015-12-31": {
+        "prior_end": "2014-12-31",
+        "prior": 3314000000,
+        "value": 3785000000,
+        "accession": "0000018230-17-000041",
+        "filed": "2017-02-15",
+        "basis_changed": false
+      },
+      "2016-12-31": {
+        "prior_end": "2015-12-31",
+        "prior": 3785000000,
+        "value": 498000000,
+        "accession": "0000018230-18-000042",
+        "filed": "2018-02-15",
+        "basis_changed": true
+      },
       "2017-12-31": {
         "prior_end": "2016-12-31",
         "prior": 1162000000,
@@ -210,6 +390,78 @@
       }
     },
     "pretax_income": {
+      "2008-12-31": {
+        "prior_end": "2007-12-31",
+        "prior": 4990000000,
+        "value": 4501000000,
+        "accession": "0000018230-10-000092",
+        "filed": "2010-02-19",
+        "basis_changed": false
+      },
+      "2009-12-31": {
+        "prior_end": "2008-12-31",
+        "prior": 4501000000,
+        "value": 569000000,
+        "accession": "0001104659-11-008938",
+        "filed": "2011-02-22",
+        "basis_changed": false
+      },
+      "2010-12-31": {
+        "prior_end": "2009-12-31",
+        "prior": 569000000,
+        "value": 3750000000,
+        "accession": "0001104659-12-011331",
+        "filed": "2012-02-21",
+        "basis_changed": false
+      },
+      "2011-12-31": {
+        "prior_end": "2010-12-31",
+        "prior": 3750000000,
+        "value": 6725000000,
+        "accession": "0000018230-13-000075",
+        "filed": "2013-02-19",
+        "basis_changed": false
+      },
+      "2012-12-31": {
+        "prior_end": "2011-12-31",
+        "prior": 6725000000,
+        "value": 8236000000,
+        "accession": "0000018230-14-000058",
+        "filed": "2014-02-18",
+        "basis_changed": false
+      },
+      "2013-12-31": {
+        "prior_end": "2012-12-31",
+        "prior": 8236000000,
+        "value": 5128000000,
+        "accession": "0000018230-15-000061",
+        "filed": "2015-02-17",
+        "basis_changed": false
+      },
+      "2014-12-31": {
+        "prior_end": "2013-12-31",
+        "prior": 5128000000,
+        "value": 5083000000,
+        "accession": "0000018230-16-000410",
+        "filed": "2016-02-16",
+        "basis_changed": true
+      },
+      "2015-12-31": {
+        "prior_end": "2014-12-31",
+        "prior": 3152000000,
+        "value": 3439000000,
+        "accession": "0000018230-17-000041",
+        "filed": "2017-02-15",
+        "basis_changed": false
+      },
+      "2016-12-31": {
+        "prior_end": "2015-12-31",
+        "prior": 3439000000,
+        "value": 139000000,
+        "accession": "0000018230-18-000042",
+        "filed": "2018-02-15",
+        "basis_changed": false
+      },
       "2017-12-31": {
         "prior_end": "2016-12-31",
         "prior": 139000000,
@@ -286,6 +538,60 @@
   },
   "disagreements": [
     {
+      "item": "pre-tax income",
+      "period_end": "2014-12-31",
+      "value": 3152000000,
+      "other_value": 5083000000,
+      "other_accession": "0000018230-16-000410",
+      "other_filed": "2016-02-16",
+      "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+    },
+    {
+      "item": "pre-tax income",
+      "period_end": "2014-12-31",
+      "value": 3152000000,
+      "other_value": 5083000000,
+      "other_accession": "0000018230-15-000061",
+      "other_filed": "2015-02-17",
+      "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+    },
+    {
+      "item": "pre-tax income",
+      "period_end": "2015-12-31",
+      "value": 3439000000,
+      "other_value": 2855000000,
+      "other_accession": "0000018230-16-000410",
+      "other_filed": "2016-02-16",
+      "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+    },
+    {
+      "item": "operating income",
+      "period_end": "2014-12-31",
+      "value": 3314000000,
+      "other_value": 5328000000,
+      "other_accession": "0000018230-16-000410",
+      "other_filed": "2016-02-16",
+      "tag": "OperatingIncomeLoss"
+    },
+    {
+      "item": "operating income",
+      "period_end": "2014-12-31",
+      "value": 3314000000,
+      "other_value": 5328000000,
+      "other_accession": "0000018230-15-000061",
+      "other_filed": "2015-02-17",
+      "tag": "OperatingIncomeLoss"
+    },
+    {
+      "item": "operating income",
+      "period_end": "2015-12-31",
+      "value": 3785000000,
+      "other_value": 3256000000,
+      "other_accession": "0000018230-16-000410",
+      "other_filed": "2016-02-16",
+      "tag": "OperatingIncomeLoss"
+    },
+    {
       "item": "operating income",
       "period_end": "2016-12-31",
       "value": 1162000000,
@@ -315,6 +621,275 @@
   ],
   "differs_from_five_year_page": [],
   "deals": [
+    {
+      "name": "Franklin Power Products and International Fuel Systems",
+      "member": "by_hand:FranklinPowerProducts",
+      "date": "2007-02-28",
+      "size": 165000000,
+      "measure": "consideration",
+      "fiscal_year_end": "2007-12-31",
+      "prior_total_assets": 51449000000,
+      "share_of_assets": 0.003207059418064491,
+      "significant": false,
+      "accession": "0000018230-08-000052",
+      "by_hand": true
+    },
+    {
+      "name": "Blount International's Forestry Division",
+      "member": "by_hand:BlountForestryDivision",
+      "date": "2007-11-30",
+      "size": 82000000,
+      "measure": "consideration",
+      "fiscal_year_end": "2007-12-31",
+      "prior_total_assets": 51449000000,
+      "share_of_assets": 0.0015938113471593229,
+      "significant": false,
+      "accession": "0000018230-08-000052",
+      "by_hand": true
+    },
+    {
+      "name": "Lovat Inc.",
+      "member": "cat:LovatIncMember",
+      "date": "2008-04-30",
+      "size": 49000000,
+      "measure": "consideration",
+      "fiscal_year_end": "2008-12-31",
+      "prior_total_assets": 56132000000,
+      "share_of_assets": 0.0008729423501745885,
+      "significant": false,
+      "accession": "0000018230-09-000063",
+      "by_hand": true
+    },
+    {
+      "name": "Gremada Industries, Inc.",
+      "member": "cat:GremadaIndustriesIncMember",
+      "date": "2008-07-31",
+      "size": 62000000,
+      "measure": "consideration",
+      "fiscal_year_end": "2008-12-31",
+      "prior_total_assets": 56132000000,
+      "share_of_assets": 0.001104539300220908,
+      "significant": false,
+      "accession": "0000018230-09-000063",
+      "by_hand": true
+    },
+    {
+      "name": "Shin Caterpillar Mitsubishi (Caterpillar Japan), 50 to 67 percent",
+      "member": "by_hand:ShinCaterpillarMitsubishi",
+      "date": "2008-08-01",
+      "size": 464000000,
+      "measure": "consideration",
+      "fiscal_year_end": "2008-12-31",
+      "prior_total_assets": 56132000000,
+      "share_of_assets": 0.008266229601653246,
+      "significant": false,
+      "accession": "0000018230-09-000063",
+      "by_hand": true
+    },
+    {
+      "name": "This element represents the information relating to equity investment made in GE Transportation's Inspection Products Business",
+      "member": "cat:GETransportationInspectionProductsBusinessMember",
+      "date": "2010-03-31",
+      "fiscal_year_end": "2010-12-31",
+      "size": 46000000,
+      "measure": "consideration",
+      "prior_total_assets": 60038000000,
+      "share_of_assets": 0.0007661814184349912,
+      "significant": false,
+      "accession": "0001104659-12-011331"
+    },
+    {
+      "name": "This element represents the information relating to equity investment made in JCS Company, Ltd",
+      "member": "cat:JCSCompanyLtdMember",
+      "date": "2010-03-31",
+      "fiscal_year_end": "2010-12-31",
+      "size": 34000000,
+      "measure": "consideration",
+      "prior_total_assets": 60038000000,
+      "share_of_assets": 0.0005663080049302108,
+      "significant": false,
+      "accession": "0001104659-12-011331"
+    },
+    {
+      "name": "This element represents the information relating to equity investment made in GE Transportation's Inspection Products Business",
+      "member": "cat:GeTransportationInspectionProductsBusinessMember",
+      "date": "2010-03-31",
+      "fiscal_year_end": "2010-12-31",
+      "size": 46000000,
+      "measure": "consideration",
+      "prior_total_assets": 60038000000,
+      "share_of_assets": 0.0007661814184349912,
+      "significant": false,
+      "accession": "0000018230-13-000075"
+    },
+    {
+      "name": "This element represents the information relating to equity investment made in JCS Company, Ltd",
+      "member": "cat:JcsCompanyLtdMember",
+      "date": "2010-03-31",
+      "fiscal_year_end": "2010-12-31",
+      "size": 34000000,
+      "measure": "consideration",
+      "prior_total_assets": 60038000000,
+      "share_of_assets": 0.0005663080049302108,
+      "significant": false,
+      "accession": "0000018230-13-000075"
+    },
+    {
+      "name": "This element represents the information relating to equity investment made in FCM Rail Ltd",
+      "member": "cat:FCMRailLtdMember",
+      "date": "2010-05-31",
+      "fiscal_year_end": "2010-12-31",
+      "size": 97000000,
+      "measure": "consideration",
+      "prior_total_assets": 60038000000,
+      "share_of_assets": 0.0016156434258303074,
+      "significant": false,
+      "accession": "0001104659-12-011331"
+    },
+    {
+      "name": "This element represents the information relating to equity investment made in FCM Rail Ltd",
+      "member": "cat:FcmRailLtdMember",
+      "date": "2010-05-31",
+      "fiscal_year_end": "2010-12-31",
+      "size": 97000000,
+      "measure": "consideration",
+      "prior_total_assets": 60038000000,
+      "share_of_assets": 0.0016156434258303074,
+      "significant": false,
+      "accession": "0000018230-13-000075"
+    },
+    {
+      "name": "This element represents information relating to equity investment made in Electro-Motive Diesel",
+      "member": "cat:ElectroMotiveDieselMember",
+      "date": "2010-08-31",
+      "fiscal_year_end": "2010-12-31",
+      "size": 901000000,
+      "measure": "consideration",
+      "prior_total_assets": 60038000000,
+      "share_of_assets": 0.015007162130650589,
+      "significant": false,
+      "accession": "0000018230-13-000075"
+    },
+    {
+      "name": "The details pertaining to the acquisition of assets and certain liabilities of United Kingdom trackwork business from Balfour Beatty Rail Limited",
+      "member": "cat:BalfourBeattyTrackworkBusinessMember",
+      "date": "2011-05-31",
+      "fiscal_year_end": "2011-12-31",
+      "size": 60000000,
+      "measure": "consideration",
+      "prior_total_assets": 64020000000,
+      "share_of_assets": 0.0009372071227741331,
+      "significant": false,
+      "accession": "0000018230-13-000075"
+    },
+    {
+      "name": "Represents the information pertaining to Bucyrus International Inc",
+      "member": "cat:BucyrusInternationalIncMember",
+      "date": "2011-07-08",
+      "fiscal_year_end": "2011-12-31",
+      "size": 8800000000,
+      "measure": "consideration",
+      "prior_total_assets": 64020000000,
+      "share_of_assets": 0.13745704467353953,
+      "significant": true,
+      "accession": "0000018230-13-000075"
+    },
+    {
+      "name": "Details pertaining to Pyroban Group Limited",
+      "member": "cat:PyrobanGroupLimitedMember",
+      "date": "2011-08-31",
+      "fiscal_year_end": "2011-12-31",
+      "size": 69000000,
+      "measure": "consideration",
+      "prior_total_assets": 64020000000,
+      "share_of_assets": 0.001077788191190253,
+      "significant": false,
+      "accession": "0000018230-13-000075"
+    },
+    {
+      "name": "This element represents the information relating to acquisition of MWM Holding GmbH",
+      "member": "cat:MWMHoldingMember",
+      "date": "2011-10-31",
+      "fiscal_year_end": "2011-12-31",
+      "size": 774000000,
+      "measure": "consideration",
+      "prior_total_assets": 64020000000,
+      "share_of_assets": 0.012089971883786316,
+      "significant": false,
+      "accession": "0001104659-12-011331"
+    },
+    {
+      "name": "This element represents the information relating to acquisition of MWM Holding GmbH",
+      "member": "cat:MwmHoldingMember",
+      "date": "2011-10-31",
+      "fiscal_year_end": "2011-12-31",
+      "size": 774000000,
+      "measure": "consideration",
+      "prior_total_assets": 64020000000,
+      "share_of_assets": 0.012089971883786316,
+      "significant": false,
+      "accession": "0000018230-13-000075"
+    },
+    {
+      "name": "This element represents the information relating to acquisition of Caterpillar Tohoku Limited",
+      "member": "cat:CaterpillarTohokuLimitedMember",
+      "date": "2012-03-31",
+      "fiscal_year_end": "2012-12-31",
+      "size": 206000000,
+      "measure": "consideration",
+      "prior_total_assets": 81218000000,
+      "share_of_assets": 0.002536383560294516,
+      "significant": false,
+      "accession": "0000018230-13-000075"
+    },
+    {
+      "name": "This element represents the information relating to acquisition of ERA Mining Machinery Limited",
+      "member": "cat:EraMiningMachineryLimitedMember",
+      "date": "2012-05-31",
+      "fiscal_year_end": "2012-12-31",
+      "size": 677000000,
+      "measure": "consideration",
+      "prior_total_assets": 81218000000,
+      "share_of_assets": 0.008335590632618385,
+      "significant": false,
+      "accession": "0000018230-13-000075"
+    },
+    {
+      "name": "Johan Walter Berg AB",
+      "member": "cat:JohanWalterBergABMember",
+      "date": "2013-09-30",
+      "fiscal_year_end": "2013-12-31",
+      "size": 169000000,
+      "measure": "cash paid net of cash acquired",
+      "prior_total_assets": 88970000000,
+      "share_of_assets": 0.0018995166910194448,
+      "significant": false,
+      "accession": "0000018230-16-000410"
+    },
+    {
+      "name": "Rail Product Solutions Inc",
+      "member": "cat:RailProductSolutionsInc.Member",
+      "date": "2015-10-31",
+      "fiscal_year_end": "2015-12-31",
+      "size": 166000000,
+      "measure": "cash paid",
+      "prior_total_assets": 84498000000,
+      "share_of_assets": 0.001964543539492059,
+      "significant": false,
+      "accession": "0000018230-16-000410"
+    },
+    {
+      "name": "RDS Manufacturing Inc",
+      "member": "cat:RDSManufacturingInc.Member",
+      "date": "2015-12-31",
+      "fiscal_year_end": "2015-12-31",
+      "size": 74000000,
+      "measure": "cash paid",
+      "prior_total_assets": 84498000000,
+      "share_of_assets": 0.0008757603730265805,
+      "significant": false,
+      "accession": "0000018230-18-000042"
+    },
     {
       "name": "Kemper Valve & Fittings Corp",
       "member": "cat:KemperValveFittingsCorp.Domain",
@@ -378,6 +953,42 @@
   ],
   "significance_test": "SEC Regulation S-X Rule 1-02(w)(1)(i): consideration >= 10% of total assets at the prior fiscal year end",
   "filings": {
+    "2007-12-31": {
+      "accession": "0000018230-08-000052",
+      "report_date": "2007-12-31"
+    },
+    "2008-12-31": {
+      "accession": "0000018230-09-000063",
+      "report_date": "2008-12-31"
+    },
+    "2009-12-31": {
+      "accession": "0000018230-10-000092",
+      "report_date": "2009-12-31"
+    },
+    "2010-12-31": {
+      "accession": "0001104659-11-008938",
+      "report_date": "2010-12-31"
+    },
+    "2011-12-31": {
+      "accession": "0001104659-12-011331",
+      "report_date": "2011-12-31"
+    },
+    "2012-12-31": {
+      "accession": "0000018230-13-000075",
+      "report_date": "2012-12-31"
+    },
+    "2013-12-31": {
+      "accession": "0000018230-14-000058",
+      "report_date": "2013-12-31"
+    },
+    "2014-12-31": {
+      "accession": "0000018230-15-000061",
+      "report_date": "2014-12-31"
+    },
+    "2015-12-31": {
+      "accession": "0000018230-16-000410",
+      "report_date": "2015-12-31"
+    },
     "2016-12-31": {
       "accession": "0000018230-17-000041",
       "report_date": "2016-12-31"

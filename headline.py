@@ -28,6 +28,7 @@ shows up as growth. Modified retrospective adoptions recast nothing and stay a m
 
 Usage: python headline.py TICKER   (run history.py TICKER first)
 """
+import html
 import json
 import re
 import sys
@@ -38,7 +39,10 @@ from history import OUT as HISTORY, X, all_ten_ks, get, get_json, labels
 from pull import ROOT, user_agent
 
 OUT = ROOT / "data" / "headline"
-YEARS = 10
+HAND = ROOT / "data" / "by_hand" / "acquisitions.json"
+# The long window starts at fiscal 2007, the pre-crisis peak (James, 2026-11-02): the fiscal year ending between
+# 1 July 2007 and 30 June 2008, the one that most nearly covers calendar 2007.
+FIRST = ("2007-07-01", "2008-06-30")
 SIGNIFICANT = 0.10  # S-X Rule 1-02(w)(1)(i), investment test
 FORMS = ("10-K", "10-K/A")
 REVENUE = re.compile(r"^(Revenues|RevenuesNetOfInterestExpense|RevenueFromContractWithCustomer\w*|SalesRevenue\w*)$")
@@ -89,7 +93,7 @@ def same(a, b):
 
 
 def series(g, candidates, reference, page, what):
-    """({end: value}, [tags used], [disagreements]) back to YEARS years ending at the reference's last year.
+    """({end: value}, [tags used], [disagreements]) back to fiscal 2007 (FIRST), ending at the reference's last year.
     reference: the five-year page's latest-filing years, which a tag must match to anchor the series.
     page: all five years of the five-year page; in those years its value is used, so the pages agree."""
     have = {t: f for t in candidates if (f := annual(g, t))}
@@ -116,14 +120,14 @@ def series(g, candidates, reference, page, what):
         return min((r[1] for r in rows if same(r[1], value)), key=zeros), rows
 
     while True:
-        ends = sorted(e for e in {e for t in accepted for e in have[t]} if e <= last)[-YEARS:]
-        if len(ends) == YEARS:
+        ends = sorted(e for e in {e for t in accepted for e in have[t]} if FIRST[0] <= e <= last)
+        if ends and ends[0] <= FIRST[1]:
             break
         joiners = [t for t, f in have.items() if t not in accepted and any(e < ends[0] for e in f)
                    and any(e in f and latest(f, e) == winner(e)[0] for e in ends)]
         if not joiners:
-            raise SystemExit(f"{what}: only {len(ends)} years ({ends[0]} on); no other tag reaches further back "
-                             f"and matches the series in a shared year")
+            raise SystemExit(f"{what}: starts {ends[0] if ends else 'nowhere'}, not fiscal 2007; no other tag "
+                             f"reaches further back and matches the series in a shared year")
         accepted += joiners
     out, disagreements = {}, []
     for e in ends:
@@ -179,14 +183,50 @@ def instant(g, tag, near):
     return max(rows)[2]
 
 
-def instance(cik, filing, ua):
-    """Local path to a 10-K's XBRL instance (inline filings: *_htm.xml; older: the one plain .xml)."""
+def instance_names(cik, filing, ua):
+    """Candidate XBRL instance files in a 10-K (inline filings: *_htm.xml; older: plain .xml); [] before XBRL."""
     acc = filing["accession"].replace("-", "")
     base = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc}"
     names = [i["name"] for i in get_json(f"{base}/index.json", f"{cik}/{acc}/index.json", ua)["directory"]["item"]]
-    hits = [n for n in names if n.endswith("_htm.xml")] or [
+    return [n for n in names if n.endswith("_htm.xml")] or [
         n for n in names if n.endswith(".xml") and n != "FilingSummary.xml"
-        and not re.search(r"_(cal|def|lab|pre)\.xml$", n)]
+        and not re.search(r"(_(cal|def|lab|pre)|^R\d+|^defnref)\.xml$", n)]  # early filings: rendering files
+
+
+def by_hand(ticker, end, cik, filing, ua):
+    """The hand record for one pre-XBRL year: {deals, spend, prior_total_assets, sources}. Every source quote must
+    appear verbatim (whitespace collapsed) in the named document of a filing, and the spend and prior total assets
+    must each appear, in millions as the filing prints them, in one of the quotes."""
+    records = json.loads(HAND.read_text(encoding="utf-8")) if HAND.exists() else {}
+    rec = records.get(ticker, {}).get(end)
+    if rec is None:
+        raise SystemExit(f"{end}: 10-K {filing['accession']} predates XBRL; read its acquisitions and the prior "
+                         f"year's total assets and record them in {HAND.relative_to(ROOT)} under {ticker} {end}")
+    quotes = []
+    for s in rec["sources"]:
+        acc = s["accession"].replace("-", "")
+        page = get(f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc}/{s['document']}",
+                   f"{cik}/{acc}/{s['document']}", ua).read_text(encoding="utf-8", errors="replace")
+        text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", page)))
+        if s["quote"] not in text:
+            raise SystemExit(f"{ticker} {end}: quote not found verbatim in {s['accession']} {s['document']}: "
+                             f"{s['quote']!r}")
+        quotes.append(s["quote"])
+    for what in ("spend", "prior_total_assets"):
+        v = rec[what]
+        if v % 1_000_000 or not any(f"{v // 1_000_000:,}" in q for q in quotes):
+            raise SystemExit(f"{ticker} {end}: {what} {v:,} does not appear in millions in any quote")
+    for d in rec["deals"]:
+        if not any(f"{d['size'] // 1_000_000:,}" in q for q in quotes):
+            raise SystemExit(f"{ticker} {end}: deal {d['name']} size {d['size']:,} does not appear in any quote")
+    return rec
+
+
+def instance(cik, filing, ua):
+    """Local path to a 10-K's XBRL instance."""
+    acc = filing["accession"].replace("-", "")
+    base = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc}"
+    hits = instance_names(cik, filing, ua)
     if len(hits) != 1:
         raise SystemExit(f"{filing['accession']}: expected one XBRL instance, found {hits}")
     return get(f"{base}/{hits[0]}", f"{cik}/{acc}/{hits[0]}", ua)
@@ -292,30 +332,50 @@ def main():
         if len(hits) != 1:
             raise SystemExit(f"{e}: expected one 10-K, found {[f['accession'] for f in hits]}")
         filings[e] = hits[0]
+    # A 10-K filed before the company's first XBRL filing has no instance: that year's acquisitions come from a
+    # record written by hand from the filing (data/by_hand/acquisitions.json), its quotes checked verbatim.
+    hand = {e: by_hand(ticker, e, cik, filings[e], ua) for e in ends if not instance_names(cik, filings[e], ua)}
     found = {}
     for e in ends:  # oldest first: for the same deal, measure and date, the later filing's value wins
+        if e in hand:
+            continue
         for member, (r, when, v, measure) in deals(instance(cik, filings[e], ua)).items():
             have = found.get(member)
             if have is None or (r, when) <= have[:2]:
                 found[member] = (r, when, v, measure, filings[e]["accession"])
     # A fiscal year runs from the day after the prior year's end through its own end.
     prior_end = dict(zip(ends[1:], ends[:-1])) | {ends[0]: str(int(ends[0][:4]) - 1) + ends[0][4:]}
+    def prior_assets(e):
+        if e in hand:
+            return hand[e]["prior_total_assets"]
+        return instant(g, "Assets", date.fromordinal(date.fromisoformat(e).toordinal() - 365).isoformat())
     out_deals = []
     for member, (_, when, v, measure, acc) in sorted(found.items(), key=lambda kv: kv[1][1]):
         year = next((e for e in ends if prior_end[e] < when <= e), None)
         if year is None:
-            continue  # outside the ten years
-        prior = date.fromordinal(date.fromisoformat(year).toordinal() - 365).isoformat()
-        assets = instant(g, "Assets", prior)
+            continue  # outside the window
+        if year in hand:  # a later filing tags a deal of a hand-recorded year: the record must hold it, same size
+            rec = {d["member"]: d for d in hand[year]["deals"]}
+            if member not in rec or not same(rec[member]["size"], v):
+                raise SystemExit(f"{member} {when}: tagged in {acc} at {v:,} but the hand record for {year} "
+                                 f"{'has ' + format(rec[member]['size'], ',') if member in rec else 'lacks it'}")
+            continue
+        assets = prior_assets(year)
         out_deals.append({"name": member_name(cik, acc, member, ua), "member": member, "date": when, "fiscal_year_end": year,
                           "size": v, "measure": measure, "prior_total_assets": assets, "share_of_assets": v / assets,
                           "significant": v / assets >= SIGNIFICANT, "accession": acc})
+    for e, rec in hand.items():
+        a = rec["prior_total_assets"]
+        out_deals += [d | {"fiscal_year_end": e, "prior_total_assets": a, "share_of_assets": d["size"] / a,
+                           "significant": d["size"] / a >= SIGNIFICANT, "accession": filings[e]["accession"],
+                           "by_hand": True} for d in rec["deals"]]
+    out_deals.sort(key=lambda d: d["date"])
     for e in ends:  # spend the tagged deals leave unexplained, large enough to be a significant deal of its own
-        assets = instant(g, "Assets", date.fromordinal(date.fromisoformat(e).toordinal() - 365).isoformat())
+        assets = prior_assets(e)
         tagged = sum(d["size"] for d in out_deals if d["fiscal_year_end"] == e)
-        for tag in SPEND:
-            f = annual(g, tag)
-            spend = max(f[e])[1] if e in f else 0
+        spends = ([("spend recorded by hand", hand[e]["spend"])] if e in hand else
+                  [(t, max(f[e])[1] if e in (f := annual(g, t)) else 0) for t in SPEND])
+        for tag, spend in spends:
             if (spend - tagged) / assets >= SIGNIFICANT:
                 raise SystemExit(f"{e}: {tag} {spend:,} leaves {spend - tagged:,} ({(spend - tagged) / assets:.0%} "
                                  f"of prior total assets) not explained by the deals tagged that year")
