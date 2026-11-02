@@ -73,6 +73,73 @@ def collect(universe, ua):
     return used, excluded
 
 
+def figures(ua):
+    """{cik: ({year: revenue}, {year: pre-tax income})} for every filer in the frames, read as collect() reads them."""
+    rev = {t: {y: frame(t, y, ua) for y in YEARS} for t in REVENUE}
+    pre = {t: {y: frame(t, y, ua) for y in YEARS} for t in PRETAX + PARTS}
+    ciks = {c for d in list(rev.values()) + list(pre.values()) for f in d.values() for c in f}
+    out = {}
+    for cik in ciks:
+        r = {y: max((rev[t][y][cik] for t in REVENUE if cik in rev[t][y]), default=None) for y in YEARS}
+        p = {y: next((pre[t][y][cik] for t in PRETAX if cik in pre[t][y]), None) for y in YEARS}
+        p = {y: v if v is not None or not all(cik in pre[t][y] for t in PARTS)
+             else sum(pre[t][y][cik] for t in PARTS) for y, v in p.items()}
+        out[cik] = (r, p)
+    return out
+
+
+def chained(name, members, figs):
+    """Revenue and pre-tax income for a membership that may change every year, chain-linked: each year's change
+    is measured only on companies that were members on 1 January of that year and report both years, each company
+    against itself, so joiners and leavers never show as jumps. members: {year: [[cik, ...] per company]}.
+    The first year's level is the sum over its members. Costs are revenue less pre-tax income."""
+    def pick(ciks, y):
+        for c in ciks:
+            r, p = figs.get(c, ({}, {}))
+            if r.get(y) is not None and p.get(y) is not None and r[y] > 0:
+                return r[y], p[y]
+        return None
+    y0 = YEARS[0]
+    base = [v for v in (pick(m, y0) for m in members[y0]) if v]
+    R, C = {y0: sum(r for r, _ in base)}, {y0: sum(r - p for r, p in base)}
+    cover = {y0: (len(base), len(members[y0]))}
+    for a, b in zip(YEARS, YEARS[1:]):
+        both = [(pa, pb) for pa, pb in ((pick(m, a), pick(m, b)) for m in members[b]) if pa and pb]
+        ra, rb = sum(x[0] for x, _ in both), sum(y[0] for _, y in both)
+        ca, cb = sum(x[0] - x[1] for x, _ in both), sum(y[0] - y[1] for _, y in both)
+        R[b], C[b] = R[a] * rb / ra, C[a] * cb / ca
+        cover[b] = (len(both), len(members[b]))
+    return {"name": name, "companies": max(n for n, _ in cover.values()),
+            "revenue": R, "pretax_income": {y: R[y] - C[y] for y in YEARS}, "coverage": cover}
+
+
+def margin_chart(lines):
+    """Pre-tax margin by year, one line per population: the gap between them is the survivorship bias."""
+    W, L, R, T, H = 800, 60, 170, 14, 180
+    ms = {n: {y: g["pretax_income"][y] / g["revenue"][y] * 100 for y in YEARS} for n, g in lines}
+    lo = min(min(v.values()) for v in ms.values()) // 2 * 2
+    hi = -(-max(max(v.values()) for v in ms.values()) // 2) * 2
+    px = lambda i: L + (i + 0.5) * (W - L - R) / len(YEARS)
+    py = lambda v: T + (hi - v) / (hi - lo) * H
+    out = [f'<line x1="{L}" x2="{W - R}" y1="{py(v):.1f}" y2="{py(v):.1f}" class="g"/>'
+           f'<text x="{L - 6}" y="{py(v) + 4:.1f}" class="ax" text-anchor="end">{v:.0f}%</text>'
+           for v in range(int(lo), int(hi) + 1, 2)]
+    out += [f'<text x="{px(i):.1f}" y="{T + H + 18}" class="ax" text-anchor="middle">{y}</text>'
+            for i, y in enumerate(YEARS)]
+    for (n, _), var in zip(lines, ("--s1", "--s2")):
+        pts = " ".join(f"{px(i):.1f},{py(ms[n][y]):.1f}" for i, y in enumerate(YEARS))
+        out.append(f'<polyline points="{pts}" fill="none" style="stroke:var({var})" stroke-width="2"/>')
+        out += [f'<circle cx="{px(i):.1f}" cy="{py(ms[n][y]):.1f}" r="3.5" style="fill:var({var})" class="dot">'
+                f'<title>{y}: {escape(n)}, pre-tax margin {ms[n][y]:.1f}%</title></circle>'
+                for i, y in enumerate(YEARS)]
+        out.append(f'<text x="{W - R + 10}" y="{py(ms[n][YEARS[-1]]) + 4:.1f}" class="lab">{escape(n)} '
+                   f'{ms[n][YEARS[-1]]:.1f}%</text>')
+    legend = "".join(f'<span><i style="background:var({v})"></i>{escape(n)}</span>'
+                     for (n, _), v in zip(lines, ("--s1", "--s2")))
+    return (f'<p class="legend">{legend}</p><svg class="trend wide" viewBox="0 0 {W} {T + H + 26}" role="img" '
+            f'aria-label="Pre-tax margin by year for the two populations">{"".join(out)}</svg>')
+
+
 def total(rows, name):
     return {"name": name, "companies": len(rows),
             "revenue": {y: sum(r["revenue"][y] for r in rows) for y in YEARS},
@@ -118,6 +185,12 @@ def main():
     ua = user_agent()
     universe = json.loads((ROOT / "data" / "sp500.json").read_text(encoding="utf-8"))
     used, excluded = collect(universe, ua)
+    mem = json.loads((ROOT / "data" / "membership.json").read_text(encoding="utf-8"))
+    figs = figures(ua)
+    at = {y: [c["ciks"] for c in mem["companies"] if f"{y}-01" in c["months"]] for y in YEARS}
+    today = [c["ciks"] for c in mem["companies"] if f"{YEARS[-1]}-12" in c["months"]]
+    was = chained("As it was", at, figs)
+    now = chained("Today's members", {y: today for y in YEARS}, figs)
     groups = [total(used, "S&P 500")]
     for s in sorted({r["sector"] for r in used}):
         groups.append(total([r for r in used if r["sector"] == s], s))
@@ -129,7 +202,20 @@ def main():
                               indent=1) + "\n", encoding="utf-8")
     fin = ('<p class="note">Banks and insurers report revenue differently (interest income, premiums), so this '
            "sector's revenue and costs are not comparable with the others.</p>")
-    body = "\n".join(section(g, fin if g["name"] == "Financials" else "") for g in groups)
+    rg_w, cg_w = growth(was)
+    rg_n, cg_n = growth(now)
+    cov = "; ".join(f"{y} {n} of {t}" for y, (n, t) in was["coverage"].items())
+    bias = (f'<section class="agg"><h2>The S&amp;P 500 as it was, against today&rsquo;s members</h2>'
+            f'<p class="lead-num">As it was (the members on 1 January of each year): revenue {rg_w:+.1f}% a year, '
+            f'costs {cg_w:+.1f}% a year. Today&rsquo;s members traced back: revenue {rg_n:+.1f}% a year, costs '
+            f'{cg_n:+.1f}% a year. The chart shows each one&rsquo;s pre-tax margin (pre-tax income as a share of '
+            f'revenue).</p>{margin_chart([(was["name"], was), (now["name"], now)])}'
+            f'<p class="note">Both lines link each year to the next using only companies that report both years, '
+            f'each against itself, so a company joining or leaving never shows as a jump; they differ only in who '
+            f'counts. Companies counted in each year&rsquo;s change, out of that year&rsquo;s members: {cov}. '
+            f'Who was a member each month: <a href="membership.html">membership, 2016 to 2025</a>.</p>'
+            f'</section>')
+    body = bias + "\n" + "\n".join(section(g, fin if g["name"] == "Financials" else "") for g in groups)
     gone = "".join(f'<li>{escape(", ".join(r["tickers"]))} ({escape(r["name"])}): {escape(r["reason"])}</li>'
                    for r in excluded)
     PAGE.write_text(PAGE_HTML.format(
