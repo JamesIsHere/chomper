@@ -666,11 +666,38 @@ def bridge_link(ticker):
             f'operating income, bar by bar, with management\'s explanations quoted from the 10-K.</p>')
 
 
-def index_row(c, h):
-    """One S&P 500 company: ticker and name; analyzed ones link to their page and carry headline numbers."""
+# Why a company's filings cannot be read yet, in a reader's words, by census class (census.py).
+NOT_READABLE = {
+    "Not found": "Its two 10-Ks two years apart could not be found on SEC EDGAR.",
+    "Filing layout": "Its 10-K's XBRL files are not laid out in a way the reader handles.",
+    "Statement": "Its income statement could not be told apart from its other statements.",
+    "Anchor": "Pre-tax income could not be found in its income statement's arithmetic.",
+    "Revenue": "Its revenue is not tagged as a single line in the income statement's arithmetic.",
+    "Footing": "Its income statement lines do not add up to its reported pre-tax income.",
+    "Member slice": "A line is reported in parts in one 10-K and as a single total in the other.",
+    "Values": "Its 10-K reports the same figure twice with values that do not agree.",
+    "Structure": "Its two 10-Ks do not line up into five years.",
+}
+
+
+def status(t, census):
+    """A company without a page: readable (passes every check) or why not."""
+    r = census.get(t)
+    if r is None:
+        return "Not yet checked."
+    if r["status"] == "pass":
+        return "Readable: its filings pass every check; page not built yet."
+    why = NOT_READABLE.get(r.get("class"), "The reader stopped on an error in its filings.")
+    return "Not readable: " + why[0].lower() + why[1:]
+
+
+def index_row(c, h, census):
+    """One S&P 500 company: ticker and name; analyzed ones link to their page and carry headline numbers, the rest
+    say whether their filings can be read."""
     if h is None:
         return (f'<tr class="pending"><th scope="row">{escape(c["ticker"])}</th>'
-                f'<td class="name">{escape(display_name(c["name"]))}</td><td colspan="5"></td></tr>')
+                f'<td class="name">{escape(display_name(c["name"]))}</td>'
+                f'<td colspan="5" class="why">{escape(status(c["ticker"], census))}</td></tr>')
     ends = h["period_ends"]
     margin = lambda e: h["pretax_income"][e] / h["revenue"][e] * 100
     rev_growth = (h["revenue"][ends[-1]] / h["revenue"][ends[0]] - 1) * 100
@@ -686,7 +713,7 @@ def counts(cs, built):
     return f'<span class="dim">{len(cs)} {noun}{f", {done} analyzed" if done else ""}</span>'
 
 
-def index_body(universe, built):
+def index_body(universe, built, census):
     """Sector, then sub-industry, then companies; every level collapses behind a caret."""
     head = ('<thead><tr><th></th><th></th><th>Years</th><th>Revenue, latest</th><th>Revenue change</th>'
             '<th>Pre-tax margin, first year</th><th>Pre-tax margin, last year</th></tr></thead>')
@@ -699,7 +726,7 @@ def index_body(universe, built):
         inner = []
         for sub in sorted(subs):
             cs = sorted(subs[sub], key=lambda c: c["ticker"])
-            rows = "\n".join(index_row(c, built.get(c["ticker"])) for c in cs)
+            rows = "\n".join(index_row(c, built.get(c["ticker"]), census) for c in cs)
             inner.append(f'<details class="sub"><summary>{escape(sub)} {counts(cs, built)}</summary>'
                          f'<div class="wrap"><table class="index">{head}<tbody>{rows}</tbody></table></div></details>')
         all_cs = [c for cs in subs.values() for c in cs]
@@ -719,8 +746,13 @@ def main():
     names = {c["ticker"]: c["name"] for c in universe["companies"]}
     for h in companies:
         (OUT / f"{h['ticker']}.html").write_text(page(h, display_name(names[h["ticker"]])), encoding="utf-8")
-    (OUT / "index.html").write_text(INDEX.format(body=index_body(universe, built), total=len(universe["companies"]),
-                                                 analyzed=len(built), source=escape(universe["source"]),
+    census = json.loads((ROOT / "data" / "census.json").read_text(encoding="utf-8"))
+    rest = [c["ticker"] for c in universe["companies"] if c["ticker"] not in built]
+    readable = sum(census.get(t, {}).get("status") == "pass" for t in rest)
+    (OUT / "index.html").write_text(INDEX.format(body=index_body(universe, built, census),
+                                                 total=len(universe["companies"]),
+                                                 analyzed=len(built), readable=readable,
+                                                 unreadable=len(rest) - readable, source=escape(universe["source"]),
                                                  retrieved=escape(universe["retrieved"]), nav=nav("index.html"), css=CSS),
                                     encoding="utf-8")
     (OUT / "decisions.html").write_text(decisions_page(), encoding="utf-8")
@@ -787,6 +819,7 @@ td.name { text-align: left; white-space: normal; }
 table.index tbody th { min-width: 4rem; width: 4rem; }
 table.index td.name { width: 16rem; }
 tr.pending th, tr.pending td { color: var(--ink-3); }
+td.why { text-align: left; white-space: normal; }
 details.sector { border-bottom: 1px solid var(--rule); }
 details.sector > summary { font-weight: 600; font-size: 1.05rem; }
 details.sub { margin-left: 1.25rem; }
@@ -870,7 +903,8 @@ INDEX = """<!doctype html>
 {nav}
 <h1>Which costs moved with revenue</h1>
 <p class="lede">The S&amp;P 500 by sector and sub-industry: {total} companies, {analyzed} analyzed so far.
-Linked tickers open five years of cost lines from the company's own 10-K filings.</p>
+Linked tickers open five years of cost lines from the company's own 10-K filings. Of the rest, {readable} have
+filings that pass every check and {unreadable} cannot be read yet; each row says which, and why.</p>
 {body}
 <footer>
 <p>Sectors and sub-industries are GICS, a taxonomy owned by S&amp;P and MSCI, taken from Wikipedia's

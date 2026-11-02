@@ -269,3 +269,9 @@ Group: Method
 Decision: When neither pre-tax income tag anchors the statement's calculation, pre-tax income is the one subtotal that income tax is subtracted from to reach net income, provided that subtotal has its own calculation; more than one such subtotal stops the build. The page footer names the line by the filing's own label. No list of further tags.
 Why: 33 companies print a pre-tax line under some other tag (Costco's "INCOME BEFORE INCOME TAXES" is IncomeLossAttributableToParent; eight different tags across the 33). Of the 52 stopped here, 29 now pass, each with a subtotal labeled as pre-tax income in the filing; the rest still stop. The 11 built pages are unchanged. Made under the standing rule that XBRL plumbing inside the rails is the agent's (James, 2026-11-02).
 Status: active
+
+## 2026-11-02 | Every company says whether it can be read
+Group: Presentation
+Decision: The All page gives every company without a page a status in its row: "Readable" when its filings pass every check of the five-year step, or "Not readable" with the reason in one plain line (one sentence per census class: statement not identified, pre-tax income not found, revenue not one line, figures that disagree, filings not found, lines that do not add up, a line in parts against a total, or an error in the reader). The opening paragraph counts both. Status comes from data/census.json, so a census rerun updates it. The full build of pages for readable companies stays a separate decision: each page also needs ASC 606/842 adoption records read from the company's 10-Ks.
+Why: The agreed tail treatment was to exclude openly with reasons rather than add a rule per small class; with 11 pages built, a reader could not otherwise tell a company that cannot be read from one not yet built (James, 2026-11-02).
+Status: active
