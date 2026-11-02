@@ -323,3 +323,9 @@ Group: Method
 Decision: When the long series' revenue (or income) tags skip years inside the window, another tag joins if it brings the missing years and matches the series in a year both cover, the same evidence that already lets a tag extend the series further back. The series must reach fiscal 2007 with no gap, or the run stops and names the gap.
 Why: CCL's Revenues tag skips 2009 to 2013; SalesRevenueServicesGross covers 2008 to 2015 and matches it in 2014 and 2015 ($15,884M, $15,714M). Plumbing within the rails: no tolerance, no company-specific rule; CAT and HD unchanged.
 Status: active
+
+## 2026-11-02 | A full restatement joins by its own table, and its break is marked
+Group: Method
+Decision: Where a company restated earlier years fully retrospectively under a new tag (MSFT's ASC 606 in its FY2018 10-K), the old tag joins the long series only through a hand record (data/by_hand/joins.json) whose as-first-reported and as-restated pairs appear in a verbatim quote of the 10-K's own restatement table, and match the two tags exactly. Each recast adoption records recast_from, the earliest year its 10-K reports on the new basis; a series reaching before it gets a chart marker there ("adopted in ... with this year and after recast; earlier years as first reported"), and the build stops if a recast adoption lacks recast_from where the series reaches further back. Note 1 says "earlier reported", not "first reported", and shows millions where a recast is smaller than the page's rounding.
+Why: MSFT's 2016-17 revenue was restated ($85,320M to $91,154M; $89,950M to $96,571M), so no shared year can match. A recast adoption was treated as no break, true only while the series began inside the recast years; the new check found AAPL's page had carried an unmarked break at Sep 2017 (James, 2026-11-02, approved with MSFT and AAPL from 2007).
+Status: active

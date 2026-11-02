@@ -40,6 +40,7 @@ from pull import ROOT, user_agent
 
 OUT = ROOT / "data" / "headline"
 HAND = ROOT / "data" / "by_hand" / "acquisitions.json"
+JOINS = ROOT / "data" / "by_hand" / "joins.json"
 # The long window starts at fiscal 2007, the pre-crisis peak (James, 2026-11-02): the fiscal year ending between
 # 1 July 2007 and 30 June 2008, the one that most nearly covers calendar 2007.
 FIRST = ("2007-07-01", "2008-06-30")
@@ -92,10 +93,13 @@ def same(a, b):
     return r(a) == r(b)
 
 
-def series(g, candidates, reference, page, what):
+def series(g, candidates, reference, page, what, links=None):
     """({end: value}, [tags used], [disagreements]) back to fiscal 2007 (FIRST), ending at the reference's last year.
     reference: the five-year page's latest-filing years, which a tag must match to anchor the series.
-    page: all five years of the five-year page; in those years its value is used, so the pages agree."""
+    page: all five years of the five-year page; in those years its value is used, so the pages agree.
+    links: hand_links() for this series: a listed tag joins when every linked year shows its as-first-reported
+    value under that tag and its restated value in the series (MSFT revenue across ASC 606)."""
+    links = links or {}
     have = {t: f for t in candidates if (f := annual(g, t))}
 
     def latest(f, e):
@@ -128,7 +132,9 @@ def series(g, candidates, reference, page, what):
         # series in a year both cover (CCL: Revenues skips 2009-2013, SalesRevenueServicesGross fills them).
         joiners = [t for t, f in have.items() if t not in accepted
                    and any(FIRST[0] <= e <= last and e not in ends for e in f)
-                   and any(e in f and latest(f, e) == winner(e)[0] for e in ends)]
+                   and (any(e in f and latest(f, e) == winner(e)[0] for e in ends)
+                        or (t in links and all(e in f and e in ends and latest(f, e) == old and winner(e)[0] == new
+                                               for e, (old, new) in links[t].items())))]
         if not joiners:
             where = (f"has a gap {gaps[0][0]} to {gaps[0][1]}" if gaps and ends[0] <= FIRST[1]
                      else f"starts {ends[0] if ends else 'nowhere'}, not fiscal 2007")
@@ -199,6 +205,38 @@ def instance_names(cik, filing, ua):
         and not re.search(r"(_(cal|def|lab|pre)|^R\d+|^defnref)\.xml$", n)]  # early filings: rendering files
 
 
+def verified_quotes(who, cik, sources, ua):
+    """The quotes of hand-record sources, each found verbatim (whitespace collapsed) in its filing's document."""
+    quotes = []
+    for s in sources:
+        acc = s["accession"].replace("-", "")
+        page = get(f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc}/{s['document']}",
+                   f"{cik}/{acc}/{s['document']}", ua).read_text(encoding="utf-8", errors="replace")
+        text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", page)))
+        if s["quote"] not in text:
+            raise SystemExit(f"{who}: quote not found verbatim in {s['accession']} {s['document']}: {s['quote']!r}")
+        quotes.append(s["quote"])
+    return quotes
+
+
+def hand_links(ticker, what, cik, ua):
+    """{tag: {end: (as first reported, as restated)}} from data/by_hand/joins.json: a tag that may join the series
+    across a full retrospective restatement, where no shared year can match because the filing restated them.
+    Each pair must appear, in millions, in a quote of the filing's own restatement table."""
+    records = json.loads(JOINS.read_text(encoding="utf-8")) if JOINS.exists() else {}
+    out = {}
+    for rec in records.get(ticker, []):
+        if rec["item"] != what:
+            continue
+        quotes = verified_quotes(f"{ticker} {what} join", cik, rec["sources"], ua)
+        for end, (old, new) in rec["links"].items():
+            for v in (old, new):
+                if v % 1_000_000 or not any(f"{v // 1_000_000:,}" in q for q in quotes):
+                    raise SystemExit(f"{ticker} {what} join {end}: {v:,} does not appear in millions in any quote")
+        out[rec["tag"]] = {e: tuple(p) for e, p in rec["links"].items()}
+    return out
+
+
 def by_hand(ticker, end, cik, filing, ua):
     """The hand record for one pre-XBRL year: {deals, spend, prior_total_assets, sources}. Every source quote must
     appear verbatim (whitespace collapsed) in the named document of a filing, and the spend and prior total assets
@@ -208,16 +246,7 @@ def by_hand(ticker, end, cik, filing, ua):
     if rec is None:
         raise SystemExit(f"{end}: 10-K {filing['accession']} predates XBRL; read its acquisitions and the prior "
                          f"year's total assets and record them in {HAND.relative_to(ROOT)} under {ticker} {end}")
-    quotes = []
-    for s in rec["sources"]:
-        acc = s["accession"].replace("-", "")
-        page = get(f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc}/{s['document']}",
-                   f"{cik}/{acc}/{s['document']}", ua).read_text(encoding="utf-8", errors="replace")
-        text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", page)))
-        if s["quote"] not in text:
-            raise SystemExit(f"{ticker} {end}: quote not found verbatim in {s['accession']} {s['document']}: "
-                             f"{s['quote']!r}")
-        quotes.append(s["quote"])
+    quotes = verified_quotes(f"{ticker} {end}", cik, rec["sources"], ua)
     for what in ("spend", "prior_total_assets"):
         v = rec[what]
         if what == "spend" and v == 0:  # a dash in the filing's column: the record must name the line it read
@@ -227,7 +256,9 @@ def by_hand(ticker, end, cik, filing, ua):
         if v % 1_000_000 or not any(f"{v // 1_000_000:,}" in q for q in quotes):
             raise SystemExit(f"{ticker} {end}: {what} {v:,} does not appear in millions in any quote")
     for d in rec["deals"]:
-        if not any(f"{d['size'] // 1_000_000:,}" in q for q in quotes):
+        v = d["size"]  # in millions ("5,900") or, where the filing writes it so, tenths of a billion ("$5.9 billion")
+        forms = [f"{v // 1_000_000:,}"] + ([f"${v / 1e9:.1f} billion"] if v % 100_000_000 == 0 else [])
+        if not any(f in q for f in forms for q in quotes):
             raise SystemExit(f"{ticker} {end}: deal {d['name']} size {d['size']:,} does not appear in any quote")
     return rec
 
@@ -316,7 +347,8 @@ def main():
                  f"companyfacts-CIK{cik:010d}.json", ua)["facts"]["us-gaap"]
     anchor_years = h["filings"][0]["years"]  # the five-year page's latest filing
     revenue, rev_tags, d1 = series(g, [t for t in g if REVENUE.match(t)],
-                                   {e: h["revenue"][e] for e in anchor_years}, h["revenue"], "revenue")
+                                   {e: h["revenue"][e] for e in anchor_years}, h["revenue"], "revenue",
+                                   hand_links(ticker, "revenue", cik, ua))
     pretax, pre_tags, d2 = series(g, PRETAX, {e: h["pretax_income"][e] for e in anchor_years},
                                   h["pretax_income"], "pre-tax income")
     if list(revenue) != list(pretax):

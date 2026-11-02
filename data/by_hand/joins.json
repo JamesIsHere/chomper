@@ -1,0 +1,16 @@
+{
+ "MSFT": [
+  {
+   "item": "revenue",
+   "tag": "SalesRevenueNet",
+   "links": {"2016-06-30": [85320000000, 91154000000], "2017-06-30": [89950000000, 96571000000]},
+   "note": "MSFT adopted ASC 606 fully retrospectively in its FY2018 10-K, restating fiscal 2016 and 2017 under RevenueFromContractWithCustomerExcludingAssessedTax; the years before stay as first reported under SalesRevenueNet. The 10-K's own table links the two: as previously reported, the adjustment, as restated.",
+   "sources": [
+    {"accession": "0001564590-18-019062", "document": "msft-10k_20180630.htm",
+     "quote": "As Previously Reported New Revenue Standard Adjustment As Restated Income Statements Year Ended June 30, 2017 Revenue $ 89,950 $ 6,621 $ 96,571"},
+    {"accession": "0001564590-18-019062", "document": "msft-10k_20180630.htm",
+     "quote": "Year Ended June 30, 2016 Revenue $ 85,320 $ 5,834 $ 91,154"}
+   ]
+  }
+ ]
+}

@@ -219,7 +219,25 @@ def chart_breaks(h):
         a = records.get((h["ticker"], code))
         if a is None:
             raise SystemExit(f"{h['ticker']}: no ASC {code} record in data/adoptions.json")
-        if a["recast"] or a.get("out_of_scope"):
+        if a.get("out_of_scope"):
+            continue
+        if a["recast"]:
+            # A full retrospective adoption recasts only the years its 10-K presents (that year and the two
+            # before). A series reaching further back has a break where the recast starts: the record names that
+            # year (recast_from), or the build stops.
+            ends = h["period_ends"]
+            first_recast = a.get("recast_from")
+            if first_recast is None:
+                if a["year_ending"] in ends and ends.index(a["year_ending"]) > 2:
+                    raise SystemExit(f"{h['ticker']} ASC {code}: recast, but the series starts before the years the "
+                                     f"adoption 10-K presents; add recast_from to data/adoptions.json")
+                continue
+            if first_recast not in ends:
+                raise SystemExit(f"{h['ticker']} ASC {code}: recast_from {first_recast} is not one of its years")
+            if ends.index(first_recast) > 0:
+                out.setdefault(first_recast, []).append(
+                    f"{s['standard']} adopted in {year(a['year_ending'])} with this year and after recast; earlier "
+                    f"years as first reported")
             continue
         if a["year_ending"] is None:
             out.setdefault(s["fiscal_year_end"], []).append(f"{s['standard']} required this year")
@@ -632,10 +650,13 @@ def ten_breaks(ticker):
         if k not in first or d["other_filed"] < first[k]["other_filed"]:
             first[k] = d
     for (e, item), d in sorted(first.items()):
-        notes.append((e, f"{escape(item[0].upper() + item[1:])} {m(d['value'], False)} as later recast; first "
-                         f"reported as {m(d['other_value'], False)} "
-                         f"({(d['value'] - d['other_value']) / abs(d['other_value']) * 100:+.1f}%) in the 10-K "
-                         f"filed {d['other_filed']}."))
+        # "Earlier", not "first": for a year before XBRL, the earliest value in the SEC's data is a later 10-K's.
+        a, b = m(d["value"], False), m(d["other_value"], False)
+        pct = (d["value"] - d["other_value"]) / abs(d["other_value"]) * 100
+        if a == b:  # a recast smaller than the page's rounding: show millions so the two figures differ
+            a, b = f"${d['value'] / 1e6:,.0f}M", f"${d['other_value'] / 1e6:,.0f}M"
+        notes.append((e, f"{escape(item[0].upper() + item[1:])} {a} as later recast; earlier reported as {b} "
+                         f"({pct:+.{2 if abs(pct) < 0.05 else 1}f}%) in the 10-K filed {d['other_filed']}."))
     items = "".join(f"<li><b>{year(e)}</b>: {text}</li>" for e, text in sorted(notes, key=lambda n: n[0]))
     if not items:
         return ""

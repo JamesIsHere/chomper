@@ -4,6 +4,15 @@
   "cik": 320193,
   "unit": "USD",
   "period_ends": [
+    "2007-09-29",
+    "2008-09-27",
+    "2009-09-26",
+    "2010-09-25",
+    "2011-09-24",
+    "2012-09-29",
+    "2013-09-28",
+    "2014-09-27",
+    "2015-09-26",
     "2016-09-24",
     "2017-09-30",
     "2018-09-29",
@@ -16,6 +25,15 @@
     "2025-09-27"
   ],
   "revenue": {
+    "2007-09-29": 24578000000,
+    "2008-09-27": 37491000000,
+    "2009-09-26": 42905000000,
+    "2010-09-25": 65225000000,
+    "2011-09-24": 108249000000,
+    "2012-09-29": 156508000000,
+    "2013-09-28": 170910000000,
+    "2014-09-27": 182795000000,
+    "2015-09-26": 233715000000,
     "2016-09-24": 215639000000,
     "2017-09-30": 229234000000,
     "2018-09-29": 265595000000,
@@ -28,6 +46,15 @@
     "2025-09-27": 416161000000
   },
   "operating_income": {
+    "2007-09-29": 4407000000,
+    "2008-09-27": 8327000000,
+    "2009-09-26": 11740000000,
+    "2010-09-25": 18385000000,
+    "2011-09-24": 33790000000,
+    "2012-09-29": 55241000000,
+    "2013-09-28": 48999000000,
+    "2014-09-27": 52503000000,
+    "2015-09-26": 71230000000,
     "2016-09-24": 60024000000,
     "2017-09-30": 61344000000,
     "2018-09-29": 70898000000,
@@ -40,6 +67,15 @@
     "2025-09-27": 133050000000
   },
   "pretax_income": {
+    "2007-09-29": 5006000000,
+    "2008-09-27": 8947000000,
+    "2009-09-26": 12066000000,
+    "2010-09-25": 18540000000,
+    "2011-09-24": 34205000000,
+    "2012-09-29": 55763000000,
+    "2013-09-28": 50155000000,
+    "2014-09-27": 53483000000,
+    "2015-09-26": 72515000000,
     "2016-09-24": 61372000000,
     "2017-09-30": 64089000000,
     "2018-09-29": 72903000000,
@@ -60,10 +96,83 @@
     "OperatingIncomeLoss"
   ],
   "pretax_tags": [
-    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
   ],
   "changes": {
     "revenue": {
+      "2008-09-27": {
+        "prior_end": "2007-09-29",
+        "prior": 24578000000,
+        "value": 37491000000,
+        "accession": "0001193125-10-012091",
+        "filed": "2010-01-25",
+        "basis_changed": false
+      },
+      "2009-09-26": {
+        "prior_end": "2008-09-27",
+        "prior": 37491000000,
+        "value": 42905000000,
+        "accession": "0001193125-10-238044",
+        "filed": "2010-10-27",
+        "basis_changed": false
+      },
+      "2010-09-25": {
+        "prior_end": "2009-09-26",
+        "prior": 42905000000,
+        "value": 65225000000,
+        "accession": "0001193125-11-282113",
+        "filed": "2011-10-26",
+        "basis_changed": false
+      },
+      "2011-09-24": {
+        "prior_end": "2010-09-25",
+        "prior": 65225000000,
+        "value": 108249000000,
+        "accession": "0001193125-12-444068",
+        "filed": "2012-10-31",
+        "basis_changed": false
+      },
+      "2012-09-29": {
+        "prior_end": "2011-09-24",
+        "prior": 108249000000,
+        "value": 156508000000,
+        "accession": "0001193125-13-416534",
+        "filed": "2013-10-30",
+        "basis_changed": false
+      },
+      "2013-09-28": {
+        "prior_end": "2012-09-29",
+        "prior": 156508000000,
+        "value": 170910000000,
+        "accession": "0001193125-14-383437",
+        "filed": "2014-10-27",
+        "basis_changed": false
+      },
+      "2014-09-27": {
+        "prior_end": "2013-09-28",
+        "prior": 170910000000,
+        "value": 182795000000,
+        "accession": "0001193125-15-356351",
+        "filed": "2015-10-28",
+        "basis_changed": false
+      },
+      "2015-09-26": {
+        "prior_end": "2014-09-27",
+        "prior": 182795000000,
+        "value": 233715000000,
+        "accession": "0001628280-16-020309",
+        "filed": "2016-10-26",
+        "basis_changed": false
+      },
+      "2016-09-24": {
+        "prior_end": "2015-09-26",
+        "prior": 233715000000,
+        "value": 215639000000,
+        "accession": "0000320193-17-000070",
+        "filed": "2017-11-03",
+        "basis_changed": false
+      },
       "2017-09-30": {
         "prior_end": "2016-09-24",
         "prior": 215639000000,
@@ -138,6 +247,78 @@
       }
     },
     "operating_income": {
+      "2008-09-27": {
+        "prior_end": "2007-09-29",
+        "prior": 4407000000,
+        "value": 8327000000,
+        "accession": "0001193125-10-012091",
+        "filed": "2010-01-25",
+        "basis_changed": false
+      },
+      "2009-09-26": {
+        "prior_end": "2008-09-27",
+        "prior": 8327000000,
+        "value": 11740000000,
+        "accession": "0001193125-10-238044",
+        "filed": "2010-10-27",
+        "basis_changed": false
+      },
+      "2010-09-25": {
+        "prior_end": "2009-09-26",
+        "prior": 11740000000,
+        "value": 18385000000,
+        "accession": "0001193125-11-282113",
+        "filed": "2011-10-26",
+        "basis_changed": false
+      },
+      "2011-09-24": {
+        "prior_end": "2010-09-25",
+        "prior": 18385000000,
+        "value": 33790000000,
+        "accession": "0001193125-12-444068",
+        "filed": "2012-10-31",
+        "basis_changed": false
+      },
+      "2012-09-29": {
+        "prior_end": "2011-09-24",
+        "prior": 33790000000,
+        "value": 55241000000,
+        "accession": "0001193125-13-416534",
+        "filed": "2013-10-30",
+        "basis_changed": false
+      },
+      "2013-09-28": {
+        "prior_end": "2012-09-29",
+        "prior": 55241000000,
+        "value": 48999000000,
+        "accession": "0001193125-14-383437",
+        "filed": "2014-10-27",
+        "basis_changed": false
+      },
+      "2014-09-27": {
+        "prior_end": "2013-09-28",
+        "prior": 48999000000,
+        "value": 52503000000,
+        "accession": "0001193125-15-356351",
+        "filed": "2015-10-28",
+        "basis_changed": false
+      },
+      "2015-09-26": {
+        "prior_end": "2014-09-27",
+        "prior": 52503000000,
+        "value": 71230000000,
+        "accession": "0001628280-16-020309",
+        "filed": "2016-10-26",
+        "basis_changed": false
+      },
+      "2016-09-24": {
+        "prior_end": "2015-09-26",
+        "prior": 71230000000,
+        "value": 60024000000,
+        "accession": "0000320193-17-000070",
+        "filed": "2017-11-03",
+        "basis_changed": false
+      },
       "2017-09-30": {
         "prior_end": "2016-09-24",
         "prior": 60024000000,
@@ -212,6 +393,78 @@
       }
     },
     "pretax_income": {
+      "2008-09-27": {
+        "prior_end": "2007-09-29",
+        "prior": 5006000000,
+        "value": 8947000000,
+        "accession": "0001193125-10-012091",
+        "filed": "2010-01-25",
+        "basis_changed": false
+      },
+      "2009-09-26": {
+        "prior_end": "2008-09-27",
+        "prior": 8947000000,
+        "value": 12066000000,
+        "accession": "0001193125-10-238044",
+        "filed": "2010-10-27",
+        "basis_changed": false
+      },
+      "2010-09-25": {
+        "prior_end": "2009-09-26",
+        "prior": 12066000000,
+        "value": 18540000000,
+        "accession": "0001193125-11-282113",
+        "filed": "2011-10-26",
+        "basis_changed": false
+      },
+      "2011-09-24": {
+        "prior_end": "2010-09-25",
+        "prior": 18540000000,
+        "value": 34205000000,
+        "accession": "0001193125-12-444068",
+        "filed": "2012-10-31",
+        "basis_changed": false
+      },
+      "2012-09-29": {
+        "prior_end": "2011-09-24",
+        "prior": 34205000000,
+        "value": 55763000000,
+        "accession": "0001193125-13-416534",
+        "filed": "2013-10-30",
+        "basis_changed": false
+      },
+      "2013-09-28": {
+        "prior_end": "2012-09-29",
+        "prior": 55763000000,
+        "value": 50155000000,
+        "accession": "0001193125-14-383437",
+        "filed": "2014-10-27",
+        "basis_changed": false
+      },
+      "2014-09-27": {
+        "prior_end": "2013-09-28",
+        "prior": 50155000000,
+        "value": 53483000000,
+        "accession": "0001193125-15-356351",
+        "filed": "2015-10-28",
+        "basis_changed": false
+      },
+      "2015-09-26": {
+        "prior_end": "2014-09-27",
+        "prior": 53483000000,
+        "value": 72515000000,
+        "accession": "0001628280-16-020309",
+        "filed": "2016-10-26",
+        "basis_changed": false
+      },
+      "2016-09-24": {
+        "prior_end": "2015-09-26",
+        "prior": 72515000000,
+        "value": 61372000000,
+        "accession": "0000320193-17-000070",
+        "filed": "2017-11-03",
+        "basis_changed": false
+      },
       "2017-09-30": {
         "prior_end": "2016-09-24",
         "prior": 61372000000,
@@ -286,9 +539,129 @@
       }
     }
   },
-  "disagreements": [],
+  "disagreements": [
+    {
+      "item": "revenue",
+      "period_end": "2007-09-29",
+      "value": 24578000000,
+      "other_value": 24006000000,
+      "other_accession": "0001193125-09-214859",
+      "other_filed": "2009-10-27",
+      "tag": "SalesRevenueNet"
+    },
+    {
+      "item": "revenue",
+      "period_end": "2008-09-27",
+      "value": 37491000000,
+      "other_value": 32479000000,
+      "other_accession": "0001193125-09-214859",
+      "other_filed": "2009-10-27",
+      "tag": "SalesRevenueNet"
+    },
+    {
+      "item": "revenue",
+      "period_end": "2009-09-26",
+      "value": 42905000000,
+      "other_value": 36537000000,
+      "other_accession": "0001193125-09-214859",
+      "other_filed": "2009-10-27",
+      "tag": "SalesRevenueNet"
+    },
+    {
+      "item": "pre-tax income",
+      "period_end": "2007-09-29",
+      "value": 5006000000,
+      "other_value": 5008000000,
+      "other_accession": "0001193125-09-214859",
+      "other_filed": "2009-10-27",
+      "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+    },
+    {
+      "item": "pre-tax income",
+      "period_end": "2008-09-27",
+      "value": 8947000000,
+      "other_value": 6895000000,
+      "other_accession": "0001193125-09-214859",
+      "other_filed": "2009-10-27",
+      "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+    },
+    {
+      "item": "pre-tax income",
+      "period_end": "2009-09-26",
+      "value": 12066000000,
+      "other_value": 7984000000,
+      "other_accession": "0001193125-09-214859",
+      "other_filed": "2009-10-27",
+      "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"
+    },
+    {
+      "item": "operating income",
+      "period_end": "2007-09-29",
+      "value": 4407000000,
+      "other_value": 4409000000,
+      "other_accession": "0001193125-09-214859",
+      "other_filed": "2009-10-27",
+      "tag": "OperatingIncomeLoss"
+    },
+    {
+      "item": "operating income",
+      "period_end": "2008-09-27",
+      "value": 8327000000,
+      "other_value": 6275000000,
+      "other_accession": "0001193125-09-214859",
+      "other_filed": "2009-10-27",
+      "tag": "OperatingIncomeLoss"
+    },
+    {
+      "item": "operating income",
+      "period_end": "2009-09-26",
+      "value": 11740000000,
+      "other_value": 7658000000,
+      "other_accession": "0001193125-09-214859",
+      "other_filed": "2009-10-27",
+      "tag": "OperatingIncomeLoss"
+    }
+  ],
   "differs_from_five_year_page": [],
-  "deals": [],
+  "deals": [
+    {
+      "name": "an unnamed business (June 2008)",
+      "member": "by_hand:AAPLJune2008",
+      "date": "2008-06-30",
+      "size": 220000000,
+      "measure": "cash paid net of cash acquired",
+      "fiscal_year_end": "2008-09-27",
+      "prior_total_assets": 25347000000,
+      "share_of_assets": 0.008679528149287885,
+      "significant": false,
+      "accession": "0001193125-08-224958",
+      "by_hand": true
+    },
+    {
+      "name": "Various Other Business Acquisitions",
+      "member": "us-gaap:SeriesOfIndividuallyImmaterialBusinessAcquisitionsMember",
+      "date": "2013-09-28",
+      "fiscal_year_end": "2013-09-28",
+      "size": 496000000,
+      "measure": "cash paid net of cash acquired",
+      "prior_total_assets": 176064000000,
+      "share_of_assets": 0.002817157397310069,
+      "significant": false,
+      "accession": "0001193125-14-383437"
+    },
+    {
+      "name": "Beats",
+      "member": "aapl:BeatsMember",
+      "date": "2014-07-31",
+      "fiscal_year_end": "2014-09-27",
+      "size": 2600000000,
+      "measure": "consideration",
+      "prior_total_assets": 207000000000,
+      "share_of_assets": 0.012560386473429951,
+      "significant": false,
+      "accession": "0001193125-15-356351"
+    }
+  ],
   "standards": [
     {
       "standard": "ASC 606 (revenue)",
@@ -303,6 +676,42 @@
   ],
   "significance_test": "SEC Regulation S-X Rule 1-02(w)(1)(i): consideration >= 10% of total assets at the prior fiscal year end",
   "filings": {
+    "2007-09-29": {
+      "accession": "0001047469-07-009340",
+      "report_date": "2007-09-29"
+    },
+    "2008-09-27": {
+      "accession": "0001193125-08-224958",
+      "report_date": "2008-09-27"
+    },
+    "2009-09-26": {
+      "accession": "0001193125-09-214859",
+      "report_date": "2009-09-26"
+    },
+    "2010-09-25": {
+      "accession": "0001193125-10-238044",
+      "report_date": "2010-09-25"
+    },
+    "2011-09-24": {
+      "accession": "0001193125-11-282113",
+      "report_date": "2011-09-24"
+    },
+    "2012-09-29": {
+      "accession": "0001193125-12-444068",
+      "report_date": "2012-09-29"
+    },
+    "2013-09-28": {
+      "accession": "0001193125-13-416534",
+      "report_date": "2013-09-28"
+    },
+    "2014-09-27": {
+      "accession": "0001193125-14-383437",
+      "report_date": "2014-09-27"
+    },
+    "2015-09-26": {
+      "accession": "0001193125-15-356351",
+      "report_date": "2015-09-26"
+    },
     "2016-09-24": {
       "accession": "0001628280-16-020309",
       "report_date": "2016-09-24"
