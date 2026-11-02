@@ -447,7 +447,7 @@ def page(h, name):
                      + (f"; {plural(rounded, 'other figure')} {'differs' if rounded == 1 else 'differ'} only by "
                         f"rounding." if rounded else "."))
     return TEMPLATE.format(company=escape(name), ticker=escape(h["ticker"]), heads=heads, top=top,
-                           rows="\n".join(rows), years=years, filings=filings,
+                           rows="\n".join(rows), years=years, filings=filings, cik=f"{int(h['cik']):010d}",
                            disagreements=disagreements, ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
                            last=year(h["period_ends"][-1]), nav=nav(), bridge_link=bridge_link(h["ticker"]),
                            ten_years=ten_years(h["ticker"]), ten_breaks=ten_breaks(h["ticker"]), css=CSS)
@@ -730,6 +730,9 @@ TEMPLATE = """<!doctype html>
 <footer>
 <p>Source: {filings}. Lines, labels and order come from each filing's income statement; every year foots
 to reported pre-tax income, and to operating income where the company reports it. {disagreements}</p>
+<p>The ten-year table and chart come from the SEC's companyfacts data and each year's 10-K; every 10-K is in the
+company's <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK={cik}&amp;type=10-K">SEC filing
+list</a>.</p>
 </footer>
 </main>
 </body>
