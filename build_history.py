@@ -205,13 +205,17 @@ def cost_gaps(h):
     """{end: dollars} for each year after the first: the pre-tax income the company would have earned at the prior
     year's pre-tax margin, minus what it earned. Both years come from the one 10-K that shows them together
     (headline.py's same-basis changes), so a recast never mixes two bases in one bar. Above zero, costs grew
-    faster than revenue that year. Fails if revenue and pre-tax income took that pair from different filings."""
+    faster than revenue that year. No bar for a year whose prior year was a loss or zero: a negative margin scaled
+    by revenue is not a cost gap (Carnival, Nov 2022: -499% on 6.4x revenue gave $54.6B). Fails if revenue and
+    pre-tax income took that pair from different filings."""
     rev, pre = h["changes"]["revenue"], h["changes"]["pretax_income"]
     out = {}
     for e in h["period_ends"][1:]:
         r, p = rev[e], pre[e]
         if (r["filed"], r["prior_end"]) != (p["filed"], p["prior_end"]):
             raise SystemExit(f"{h['ticker']} {e}: revenue and pre-tax income changes come from different filings")
+        if p["prior"] <= 0:
+            continue
         out[e] = r["value"] * p["prior"] / r["prior"] - p["value"]
     return out
 
@@ -283,6 +287,8 @@ def trend_chart(h):
     out += [f'<text x="{L - 6}" y="{by(v) + 4:.1f}" class="ax" text-anchor="end">{money_tick(v)}</text>'
             for v in bt]
     for i, e in enumerate(ends[1:], 1):
+        if e not in g:  # prior year a loss: no cost gap (cost_gaps)
+            continue
         v = g[e]
         top, bot = sorted((by(v), by(0)))
         out.append(f'<rect x="{px(i) - step_x / 4:.1f}" y="{top:.1f}" width="{step_x / 2:.1f}" '

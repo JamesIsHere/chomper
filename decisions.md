@@ -238,3 +238,9 @@ Group: Method
 Decision: A year foots when the reported lines miss pre-tax income (or operating income) by no more than half a rounding unit for each figure summed, the subtotal included, with each unit read from the fact's own XBRL decimals. Any gap allowed this way becomes its own row, "Rounding in the filing" (a second row, "within operating income", when the operating subtotal is the one off), so the five-year grid and every later check still add exactly; history.py also records each gap with both values in footing_gaps, and the page footer names each one (year, subtotal, lines against reported, in millions). Rounding rows are not costs, so they do not scale with revenue: their whole change counts as beyond revenue, and pre-tax income's in-step change is taken from the figures that foot. A gap beyond the allowance still stops the build.
 Why: Carnival's lines miss by $1M in years where every figure is rounded to the million; an exact rule stopped a real company over the filing's own rounding, while a flat dollar or percent tolerance would be arbitrary across company sizes. Boeing's $70B gap stays a hard stop (James, 2026-11-02).
 Status: active
+
+## 2026-11-02 | No cost-gap bar after a loss year
+Group: Presentation
+Decision: The ten-year chart draws no cost-gap bar for a year whose prior year had zero or negative pre-tax income (prior year as shown in the 10-K that reports both). The Loss strip above already marks those years.
+Why: The bar is the pre-tax income at last year's margin minus what was earned; after a loss, last year's margin is negative and scaling it by revenue is not a cost gap. Carnival's Nov 2022 bar read $54.6B "revenue ran ahead of costs" from a -499% margin on 6.4x revenue, against an actual pre-tax change of +$3.44B (James, 2026-11-02).
+Status: active

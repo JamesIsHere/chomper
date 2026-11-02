@@ -238,3 +238,19 @@ Why: The grid's beyond-revenue amounts for those years are wrong on the page, an
 Companies: CCL
 Due: before CCL's page is called settled, and before the full S&P 500 run.
 Status: open
+
+## 2026-11-02 | Five-year in-step split after a loss year
+Theme: Presentation
+Item: The five-year grid splits each change into what would have happened if every cost moved in step with revenue, and the rest. After a loss year that split scales a negative margin, as the ten-year bars did before they were dropped after loss years: Carnival's Nov 2022 column shows -$51.20B in step and +$54.65B beyond revenue against a +$3.44B pre-tax change, and its line effects (payroll +$6.17B, depreciation +$11.97B beyond revenue) inherit the same scaling.
+Why: The grid's beyond-revenue amounts after a loss year do not mean what the page says; the ten-year bars now skip such years, and the grid does not.
+Companies: CCL; any company with a loss year in its five.
+Due: before CCL's page is called settled, and before the full S&P 500 run.
+Status: open
+
+## 2026-11-02 | Percent change on a loss base in the ten-year table
+Theme: Presentation
+Item: The ten-year table's change rows print a percent even when the prior year is a loss or the sign flips: Carnival's pre-tax income shows +3188.7% for Nov 2024 (-$62.0M to $1.92B) and +7.1% for Nov 2021 (-$10.25B to -$9.52B), and its operating income -370.6% for Nov 2020. Growth is not defined across a change of sign, which is why the chart's income line already breaks there.
+Why: The table states growth the chart refuses to draw; a reader comparing the two sees the contradiction.
+Companies: CCL; any company with a loss year in its ten.
+Due: before CCL's page is called settled, and before the full S&P 500 run.
+Status: open
