@@ -26,6 +26,8 @@ table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nu
 th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
 thead th { font-weight: 600; color: var(--ink-3); font-size: .8rem; }
 tbody th { text-align: left; font-weight: normal; white-space: normal; min-width: 12rem; }
+table.ten tbody th { min-width: 9rem; } /* ten columns of figures must fit the page width */
+table.ten th, table.ten td { padding: .4rem .5rem; }
 tr.strong th, tr.strong td { font-weight: 600; }
 tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
 .dim { color: var(--ink-3); font-size: .8rem; }
@@ -99,7 +101,7 @@ footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1re
 <h1>PROGRESSIVE CORP/OH/</h1>
 
 <h2>Ten years</h2>
-<div class="wrap"><table>
+<div class="wrap"><table class="ten">
 <thead><tr><th></th><th>2016</th><th>2017</th><th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
 <tbody>
 <tr class="strong"><th scope="row">Revenue</th><td>$23.44B</td><td>$26.84B</td><td>$31.98B</td><td>$39.02B</td><td>$42.66B</td><td>$47.70B</td><td>$49.61B</td><td>$62.11B</td><td>$75.37B</td><td>$87.67B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+14.5%</td><td class="up">+19.2%</td><td class="up">+22.0%</td><td class="up">+9.3%</td><td class="up">+11.8%</td><td class="up">+4.0%</td><td class="up">+25.2%</td><td class="up">+21.4%</td><td class="up">+16.3%</td></tr><tr class="strong"><th scope="row">Pre-tax income</th><td>$1.47B</td><td>$2.14B</td><td>$3.16B</td><td>$5.16B</td><td>$7.17B</td><td>$4.21B</td><td>$922.1M</td><td>$4.90B</td><td>$10.71B</td><td>$14.22B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+45.4%</td><td class="up">+47.9%</td><td class="up">+63.1%</td><td class="up">+39.0%</td><td class="down">-41.3%</td><td class="down">-78.1%</td><td class="up">+431.9%</td><td class="up">+118.5%</td><td class="up">+32.8%</td></tr><tr><th scope="row">Pre-tax margin</th><td>6.3%</td><td>8.0%</td><td>9.9%</td><td>13.2%</td><td>16.8%</td><td>8.8%</td><td>1.9%</td><td>7.9%</td><td>14.2%</td><td>16.2%</td></tr>

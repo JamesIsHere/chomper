@@ -26,6 +26,8 @@ table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nu
 th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
 thead th { font-weight: 600; color: var(--ink-3); font-size: .8rem; }
 tbody th { text-align: left; font-weight: normal; white-space: normal; min-width: 12rem; }
+table.ten tbody th { min-width: 9rem; } /* ten columns of figures must fit the page width */
+table.ten th, table.ten td { padding: .4rem .5rem; }
 tr.strong th, tr.strong td { font-weight: 600; }
 tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
 .dim { color: var(--ink-3); font-size: .8rem; }
@@ -99,7 +101,7 @@ footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1re
 <h1>OLD DOMINION FREIGHT LINE, INC.</h1>
 <p class="crossref"><a href="bridge/ODFL.html">One-year bridge</a>: the latest year's operating income, bar by bar, with management's explanations quoted from the 10-K.</p>
 <h2>Ten years</h2>
-<div class="wrap"><table>
+<div class="wrap"><table class="ten">
 <thead><tr><th></th><th>2016</th><th>2017</th><th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
 <tbody>
 <tr class="strong"><th scope="row">Revenue</th><td>$2.99B</td><td>$3.36B</td><td>$4.04B</td><td>$4.11B</td><td>$4.02B</td><td>$5.26B</td><td>$6.26B</td><td>$5.87B</td><td>$5.81B</td><td>$5.50B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+12.3%</td><td class="up">+20.4%</td><td class="up">+1.6%</td><td class="down">-2.3%</td><td class="up">+30.9%</td><td class="up">+19.1%</td><td class="down">-6.3%</td><td class="down">-0.9%</td><td class="down">-5.5%</td></tr><tr class="strong"><th scope="row">Operating income</th><td>$483.8M</td><td>$575.9M</td><td>$817.1M</td><td>$818.7M</td><td>$906.9M</td><td>$1.39B</td><td>$1.84B</td><td>$1.64B</td><td>$1.54B</td><td>$1.36B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+19.0%</td><td class="up">+41.9%</td><td class="up">+0.2%</td><td class="up">+10.8%</td><td class="up">+53.4%</td><td class="up">+32.3%</td><td class="down">-10.9%</td><td class="down">-5.9%</td><td class="down">-11.8%</td></tr><tr class="strong"><th scope="row">Pre-tax income</th><td>$477.6M</td><td>$575.8M</td><td>$815.5M</td><td>$823.9M</td><td>$901.4M</td><td>$1.39B</td><td>$1.84B</td><td>$1.65B</td><td>$1.56B</td><td>$1.36B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+20.6%</td><td class="up">+41.6%</td><td class="up">+1.0%</td><td class="up">+9.4%</td><td class="up">+54.0%</td><td class="up">+32.6%</td><td class="down">-10.5%</td><td class="down">-5.5%</td><td class="down">-12.6%</td></tr><tr><th scope="row">Pre-tax margin</th><td>16.0%</td><td>17.1%</td><td>20.2%</td><td>20.1%</td><td>22.4%</td><td>26.4%</td><td>29.4%</td><td>28.1%</td><td>26.8%</td><td>24.8%</td></tr>

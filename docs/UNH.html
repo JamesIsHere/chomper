@@ -26,6 +26,8 @@ table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nu
 th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
 thead th { font-weight: 600; color: var(--ink-3); font-size: .8rem; }
 tbody th { text-align: left; font-weight: normal; white-space: normal; min-width: 12rem; }
+table.ten tbody th { min-width: 9rem; } /* ten columns of figures must fit the page width */
+table.ten th, table.ten td { padding: .4rem .5rem; }
 tr.strong th, tr.strong td { font-weight: 600; }
 tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
 .dim { color: var(--ink-3); font-size: .8rem; }
@@ -99,7 +101,7 @@ footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1re
 <h1>UNITEDHEALTH GROUP INC</h1>
 
 <h2>Ten years</h2>
-<div class="wrap"><table>
+<div class="wrap"><table class="ten">
 <thead><tr><th></th><th>2016</th><th>2017</th><th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
 <tbody>
 <tr class="strong"><th scope="row">Revenue</th><td>$184.84B</td><td>$201.16B</td><td>$226.25B</td><td>$242.16B</td><td>$257.14B</td><td>$287.60B</td><td>$324.16B</td><td>$371.62B</td><td>$400.28B</td><td>$447.57B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+8.8%</td><td class="up">+12.5%</td><td class="up">+7.0%</td><td class="up">+6.2%</td><td class="up">+11.8%</td><td class="up">+12.7%</td><td class="up">+14.6%</td><td class="up">+7.7%</td><td class="up">+11.8%</td></tr><tr class="strong"><th scope="row">Operating income</th><td>$12.93B</td><td>$15.21B</td><td>$17.34B</td><td>$19.68B</td><td>$22.41B</td><td>$23.97B</td><td>$28.43B</td><td>$32.36B</td><td>$32.29B</td><td>$18.96B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+17.6%</td><td class="up">+14.0%</td><td class="up">+13.5%</td><td class="up">+13.8%</td><td class="up">+7.0%</td><td class="up">+18.6%</td><td class="up">+13.8%</td><td class="down">-0.2%</td><td class="down">-41.3%</td></tr><tr class="strong"><th scope="row">Pre-tax income</th><td>$11.86B</td><td>$14.02B</td><td>$15.94B</td><td>$17.98B</td><td>$20.74B</td><td>$22.31B</td><td>$26.34B</td><td>$29.11B</td><td>$20.07B</td><td>$14.70B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+18.2%</td><td class="up">+13.7%</td><td class="up">+12.8%</td><td class="up">+15.4%</td><td class="up">+7.6%</td><td class="up">+18.1%</td><td class="up">+10.5%</td><td class="down">-31.1%</td><td class="down">-26.8%</td></tr><tr><th scope="row">Pre-tax margin</th><td>6.4%</td><td>7.0%</td><td>7.0%</td><td>7.4%</td><td>8.1%</td><td>7.8%</td><td>8.1%</td><td>7.8%</td><td>5.0%</td><td>3.3%</td></tr>

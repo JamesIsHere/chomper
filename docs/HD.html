@@ -26,6 +26,8 @@ table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nu
 th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
 thead th { font-weight: 600; color: var(--ink-3); font-size: .8rem; }
 tbody th { text-align: left; font-weight: normal; white-space: normal; min-width: 12rem; }
+table.ten tbody th { min-width: 9rem; } /* ten columns of figures must fit the page width */
+table.ten th, table.ten td { padding: .4rem .5rem; }
 tr.strong th, tr.strong td { font-weight: 600; }
 tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
 .dim { color: var(--ink-3); font-size: .8rem; }
@@ -99,7 +101,7 @@ footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1re
 <h1>HOME DEPOT, INC.</h1>
 
 <h2>Ten years</h2>
-<div class="wrap"><table>
+<div class="wrap"><table class="ten">
 <thead><tr><th></th><th>Jan 2017</th><th>Jan 2018</th><th>Feb 2019</th><th>Feb 2020</th><th>Jan 2021</th><th>Jan 2022</th><th>Jan 2023</th><th>Jan 2024</th><th>Feb 2025</th><th>Feb 2026</th></tr></thead>
 <tbody>
 <tr class="strong"><th scope="row">Revenue</th><td>$94.59B</td><td>$100.90B</td><td>$108.20B</td><td>$110.22B</td><td>$132.11B</td><td>$151.16B</td><td>$157.40B</td><td>$152.67B</td><td>$159.51B</td><td>$164.68B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+6.7%</td><td class="up">+7.2%</td><td class="up">+1.9%</td><td class="up">+19.9%</td><td class="up">+14.4%</td><td class="up">+4.1%</td><td class="down">-3.0%</td><td class="up">+4.5%</td><td class="up">+3.2%</td></tr><tr class="strong"><th scope="row">Operating income</th><td>$13.43B</td><td>$14.68B</td><td>$15.53B</td><td>$15.84B</td><td>$18.28B</td><td>$23.04B</td><td>$24.04B</td><td>$21.69B</td><td>$21.53B</td><td>$20.89B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+9.3%</td><td class="up">+5.8%</td><td class="up">+2.0%</td><td class="up">+15.4%</td><td class="up">+26.1%</td><td class="up">+4.3%</td><td class="down">-9.8%</td><td class="down">-0.8%</td><td class="down">-3.0%</td></tr><tr class="strong"><th scope="row">Pre-tax income</th><td>$12.49B</td><td>$13.70B</td><td>$14.56B</td><td>$14.71B</td><td>$16.98B</td><td>$21.74B</td><td>$22.48B</td><td>$19.92B</td><td>$19.41B</td><td>$18.60B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+9.7%</td><td class="up">+6.3%</td><td class="up">+1.1%</td><td class="up">+15.4%</td><td class="up">+28.0%</td><td class="up">+3.4%</td><td class="down">-11.4%</td><td class="down">-2.6%</td><td class="down">-4.1%</td></tr><tr><th scope="row">Pre-tax margin</th><td>13.2%</td><td>13.6%</td><td>13.5%</td><td>13.3%</td><td>12.9%</td><td>14.4%</td><td>14.3%</td><td>13.1%</td><td>12.2%</td><td>11.3%</td></tr>

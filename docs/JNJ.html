@@ -26,6 +26,8 @@ table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nu
 th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
 thead th { font-weight: 600; color: var(--ink-3); font-size: .8rem; }
 tbody th { text-align: left; font-weight: normal; white-space: normal; min-width: 12rem; }
+table.ten tbody th { min-width: 9rem; } /* ten columns of figures must fit the page width */
+table.ten th, table.ten td { padding: .4rem .5rem; }
 tr.strong th, tr.strong td { font-weight: 600; }
 tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
 .dim { color: var(--ink-3); font-size: .8rem; }
@@ -99,7 +101,7 @@ footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1re
 <h1>JOHNSON &amp; JOHNSON</h1>
 
 <h2>Ten years</h2>
-<div class="wrap"><table>
+<div class="wrap"><table class="ten">
 <thead><tr><th></th><th>Jan 2017</th><th>2017</th><th>2018</th><th>2019</th><th>Jan 2021</th><th>Jan 2022</th><th>Jan 2023</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
 <tbody>
 <tr class="strong"><th scope="row">Revenue</th><td>$71.89B</td><td>$76.45B</td><td>$81.58B</td><td>$82.06B</td><td>$82.58B</td><td>$78.74B</td><td>$79.99B</td><td>$85.16B</td><td>$88.82B</td><td>$94.19B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="up">+6.3%</td><td class="up">+6.7%</td><td class="up">+0.6%</td><td class="up">+0.6%</td><td class="up">+13.6%*</td><td class="up">+1.6%</td><td class="up">+6.5%</td><td class="up">+4.3%</td><td class="up">+6.0%</td></tr><tr class="strong"><th scope="row">Pre-tax income</th><td>$19.80B</td><td>$17.67B</td><td>$18.00B</td><td>$17.33B</td><td>$16.50B</td><td>$19.18B</td><td>$19.36B</td><td>$15.06B</td><td>$16.69B</td><td>$32.58B</td></tr><tr><th scope="row">&nbsp;&nbsp;change</th><td></td><td class="down">-10.8%</td><td class="up">+1.8%</td><td class="down">-3.7%</td><td class="down">-4.8%</td><td class="up">+38.1%*</td><td class="up">+0.9%</td><td class="down">-22.2%</td><td class="up">+10.8%</td><td class="up">+95.2%</td></tr><tr><th scope="row">Pre-tax margin</th><td>27.5%</td><td>23.1%</td><td>22.1%</td><td>21.1%</td><td>20.0%</td><td>24.4%</td><td>24.2%</td><td>17.7%</td><td>18.8%</td><td>34.6%</td></tr>

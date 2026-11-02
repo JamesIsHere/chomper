@@ -464,7 +464,7 @@ def ten_years(ticker):
                    for label, s, ch in lines)
     rows += ('<tr><th scope="row">Pre-tax margin</th>'
              + "".join(f"<td>{pre[e] / rev[e] * 100:.1f}%</td>" for e in ends) + "</tr>")
-    return (f'<h2>Ten years</h2>\n<div class="wrap"><table>\n<thead><tr><th></th>'
+    return (f'<h2>Ten years</h2>\n<div class="wrap"><table class="ten">\n<thead><tr><th></th>'
             + "".join(f"<th>{year(e)}</th>" for e in ends)
             + f'</tr></thead>\n<tbody>\n{rows}\n</tbody></table></div>\n'
             + ('<p class="note">* See Note 1.</p>\n' if notes else "")
@@ -563,6 +563,8 @@ table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nu
 th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
 thead th { font-weight: 600; color: var(--ink-3); font-size: .8rem; }
 tbody th { text-align: left; font-weight: normal; white-space: normal; min-width: 12rem; }
+table.ten tbody th { min-width: 9rem; } /* ten columns of figures must fit the page width */
+table.ten th, table.ten td { padding: .4rem .5rem; }
 tr.strong th, tr.strong td { font-weight: 600; }
 tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
 .dim { color: var(--ink-3); font-size: .8rem; }
