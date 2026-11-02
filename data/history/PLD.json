@@ -73,7 +73,8 @@
         "2021-12-31": 1041316000,
         "2022-12-31": 1205738000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "pld_ServiceManagementCosts",
@@ -88,6 +89,7 @@
         "2025-12-31": 270517000
       },
       "dimensioned_years": [],
+      "summed_members": {},
       "retagged": [
         {
           "concept": "pld_ServiceManagementCosts1",
@@ -118,7 +120,8 @@
         "2021-12-31": 293167000,
         "2022-12-31": 331083000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_DepreciationAndAmortization",
@@ -132,7 +135,8 @@
         "2021-12-31": 1577942000,
         "2022-12-31": 1812777000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_OtherCostAndExpenseOperating",
@@ -146,7 +150,8 @@
         "2021-12-31": 22435000,
         "2022-12-31": 40336000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "pld_GainsOnDispositionsOfDevelopmentPropertiesAndLandNet",
@@ -160,7 +165,8 @@
         "2021-12-31": 817017000,
         "2022-12-31": 597745000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "pld_GainsOnOtherDispositionsOfInvestmentsInRealEstateNet",
@@ -174,7 +180,8 @@
         "2021-12-31": 772570000,
         "2022-12-31": 589391000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_IncomeLossFromEquityMethodInvestments",
@@ -188,7 +195,8 @@
         "2021-12-31": 404255000,
         "2022-12-31": 310872000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InterestExpenseNonoperating",
@@ -203,6 +211,7 @@
         "2025-12-31": 1002344000
       },
       "dimensioned_years": [],
+      "summed_members": {},
       "retagged": [
         {
           "concept": "us-gaap_InterestExpense",
@@ -233,7 +242,8 @@
         "2021-12-31": null,
         "2022-12-31": null
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_GainsLossesOnExtinguishmentOfDebt",
@@ -247,7 +257,8 @@
         "2021-12-31": -187453000,
         "2022-12-31": -20184000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "pld_GainLossOnForeignCurrencyAndDerivativeAndOtherIncomeExpenseNet",
@@ -261,7 +272,8 @@
         "2024-12-31": null,
         "2025-12-31": null
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "pld_GainLossOnForeignCurrencyDerivativeAndOtherGainsAndOtherIncomeExpenseNet",
@@ -275,7 +287,8 @@
         "2024-12-31": null,
         "2025-12-31": null
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     }
   ],
   "disagreements": [],

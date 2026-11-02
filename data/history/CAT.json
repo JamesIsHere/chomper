@@ -73,7 +73,8 @@
         "2021-12-31": 35513000000,
         "2022-12-31": 41350000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
@@ -87,7 +88,8 @@
         "2021-12-31": 5365000000,
         "2022-12-31": 5651000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_ResearchAndDevelopmentExpense",
@@ -101,7 +103,8 @@
         "2021-12-31": 1686000000,
         "2022-12-31": 1814000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_FinancingInterestExpense",
@@ -121,7 +124,8 @@
         "2025-12-31",
         "2021-12-31",
         "2022-12-31"
-      ]
+      ],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_OtherOperatingIncomeExpenseNet",
@@ -135,7 +139,8 @@
         "2021-12-31": -1074000000,
         "2022-12-31": -1218000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InterestExpenseNonoperating",
@@ -156,6 +161,7 @@
         "2024-12-31",
         "2025-12-31"
       ],
+      "summed_members": {},
       "retagged": [
         {
           "concept": "us-gaap_InterestExpense",
@@ -186,7 +192,8 @@
         "2021-12-31": 1814000000,
         "2022-12-31": 1291000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_GoodwillImpairmentLoss",
@@ -200,7 +207,8 @@
         "2024-12-31": null,
         "2025-12-31": null
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     }
   ],
   "disagreements": [],

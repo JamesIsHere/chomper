@@ -67,7 +67,8 @@
         "2021-12-31": -9256000000,
         "2022-12-31": 6389000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_LaborAndRelatedExpense",
@@ -81,7 +82,8 @@
         "2021-12-31": 38567000000,
         "2022-12-31": 41636000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_OccupancyNet",
@@ -95,7 +97,8 @@
         "2021-12-31": 4516000000,
         "2022-12-31": 4696000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_CommunicationsAndInformationTechnology",
@@ -109,7 +112,8 @@
         "2021-12-31": 9941000000,
         "2022-12-31": 9358000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_ProfessionalAndContractServicesExpense",
@@ -123,7 +127,8 @@
         "2021-12-31": 9814000000,
         "2022-12-31": 10174000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_MarketingAndAdvertisingExpense",
@@ -137,7 +142,8 @@
         "2021-12-31": 3036000000,
         "2022-12-31": 3911000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_OtherNoninterestExpense",
@@ -151,7 +157,8 @@
         "2021-12-31": 5469000000,
         "2022-12-31": 6365000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     }
   ],
   "disagreements": [],

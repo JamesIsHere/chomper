@@ -73,7 +73,8 @@
         "2021-11-30": 269000000,
         "2022-11-30": 1630000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "ccl_CostsAndExpensesOnboard",
@@ -87,7 +88,8 @@
         "2021-11-30": 272000000,
         "2022-11-30": 1528000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "ccl_CostsAndExpensesPayrollAndOther",
@@ -101,7 +103,8 @@
         "2021-11-30": 1309000000,
         "2022-11-30": 2181000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "ccl_CostsAndExpensesFuel",
@@ -115,7 +118,8 @@
         "2021-11-30": 680000000,
         "2022-11-30": 2157000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "ccl_CostsAndExpensesFood",
@@ -129,7 +133,8 @@
         "2021-11-30": 187000000,
         "2022-11-30": 863000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "ccl_CostsAndExpensesOther",
@@ -143,7 +148,8 @@
         "2021-11-30": 1346000000,
         "2022-11-30": 2958000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
@@ -157,7 +163,8 @@
         "2021-11-30": 1885000000,
         "2022-11-30": 2515000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_DepreciationAndAmortization",
@@ -171,7 +178,8 @@
         "2021-11-30": 2233000000,
         "2022-11-30": 2275000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InvestmentIncomeInterest",
@@ -185,7 +193,8 @@
         "2021-11-30": 12000000,
         "2022-11-30": 74000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InterestExpenseNonoperating",
@@ -200,6 +209,7 @@
         "2025-11-30": 1349000000
       },
       "dimensioned_years": [],
+      "summed_members": {},
       "retagged": [
         {
           "concept": "us-gaap_InterestExpense",
@@ -230,7 +240,8 @@
         "2021-11-30": -670000000,
         "2022-11-30": -1000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_OtherNonoperatingIncomeExpense",
@@ -244,7 +255,8 @@
         "2021-11-30": -173000000,
         "2022-11-30": -165000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "ccl_CostsAndExpensesShipAndOtherImpairmentLoss",
@@ -258,7 +270,8 @@
         "2024-11-30": null,
         "2025-11-30": null
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_GoodwillAndIntangibleAssetImpairment",
@@ -272,7 +285,8 @@
         "2024-11-30": null,
         "2025-11-30": null
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "rounding_operating",
@@ -286,7 +300,8 @@
         "2024-11-30": 1000000,
         "2025-11-30": 0
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "rounding",
@@ -300,7 +315,8 @@
         "2024-11-30": -1000000,
         "2025-11-30": 0
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     }
   ],
   "disagreements": [],

@@ -73,7 +73,8 @@
         "2021-12-31": 2467985000,
         "2022-12-31": 2716835000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_OperatingCostsAndExpenses",
@@ -87,7 +88,8 @@
         "2021-12-31": 567615000,
         "2022-12-31": 852955000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "odfl_OtherSellingAndGeneralExpense",
@@ -101,7 +103,8 @@
         "2021-12-31": 136059000,
         "2022-12-31": 159998000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_DirectTaxesAndLicensesCosts",
@@ -115,7 +118,8 @@
         "2021-12-31": 133452000,
         "2022-12-31": 141239000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_OperatingInsuranceAndClaimsCostsProduction",
@@ -129,7 +133,8 @@
         "2021-12-31": 53549000,
         "2022-12-31": 58301000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_DirectCommunicationsAndUtilitiesCosts",
@@ -143,7 +148,8 @@
         "2021-12-31": 34149000,
         "2022-12-31": 40584000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_DepreciationAndAmortization",
@@ -157,7 +163,8 @@
         "2021-12-31": 259883000,
         "2022-12-31": 276050000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "odfl_PurchasedTransportation",
@@ -171,7 +178,8 @@
         "2021-12-31": 185785000,
         "2022-12-31": 158111000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_OtherCostAndExpenseOperating",
@@ -185,7 +193,8 @@
         "2021-12-31": 26249000,
         "2022-12-31": 15372000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InterestAndDebtExpense",
@@ -199,7 +208,8 @@
         "2021-12-31": 1727000,
         "2022-12-31": 1563000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InvestmentIncomeNet",
@@ -213,7 +223,8 @@
         "2021-12-31": 786000,
         "2022-12-31": 4884000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_OtherNonoperatingIncomeExpense",
@@ -227,7 +238,8 @@
         "2021-12-31": -2238000,
         "2022-12-31": -2604000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     }
   ],
   "disagreements": [],

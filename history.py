@@ -29,6 +29,7 @@ OUT = ROOT / "data" / "history"
 X = "{http://www.xbrl.org/2003/instance}"
 LINK = "{http://www.xbrl.org/2003/linkbase}"
 XLINK = "{http://www.w3.org/1999/xlink}"
+XDI = "{http://xbrl.org/2006/xbrldi}"
 OPERATING_INCOME = "us-gaap_OperatingIncomeLoss"
 # Anchor: pre-tax income, reported by every industry. Preferred tag first; the second is used by filers
 # that show equity-method income below the pre-tax line.
@@ -151,6 +152,23 @@ def presentation_order(path, role):
     return out
 
 
+def face_members(path, role):
+    """{axis: [members in printed order]} for each axis the statement's presentation shows; domains excluded."""
+    children = {}
+    for p, c, a in arcs(path, role, "presentationArc"):
+        children.setdefault(p, []).append((float(a.get("order", 0)), c))
+    out = {}
+    for axis in (n for n in children if n.endswith("Axis")):
+        ms, stack = [], [c for _, c in sorted(children[axis], reverse=True)]
+        while stack:
+            n = stack.pop()
+            if not n.endswith("Domain"):
+                ms.append(n)
+            stack += [c for _, c in sorted(children.get(n, []), reverse=True)]
+        out[axis] = ms
+    return out
+
+
 def labels(path):
     """{concept: {label role: text}}."""
     root = ET.parse(path).getroot()
@@ -216,15 +234,19 @@ def annual_values(path):
     ns = {}
     for _, (prefix, uri) in ET.iterparse(path, events=["start-ns"]):
         ns.setdefault(uri, prefix)
-    periods, dimensioned = {}, set()
+    periods, dimensioned, member_of = {}, set(), {}
     for c in root.iter(X + "context"):
         p = c.find(X + "period")
         s, e = p.findtext(X + "startDate"), p.findtext(X + "endDate")
         if s and e and 350 <= (date.fromisoformat(e) - date.fromisoformat(s)).days <= 380:
             periods[c.get("id")] = e
-            if c.find(f"{X}entity/{X}segment") is not None:
+            seg = c.find(f"{X}entity/{X}segment")
+            if seg is not None:
                 dimensioned.add(c.get("id"))
-    precise, dims = {}, {}
+                ms = [(m.get("dimension"), (m.text or "").strip()) for m in seg]
+                if len(ms) == 1 and all(m.tag == XDI + "explicitMember" for m in seg):
+                    member_of[c.get("id")] = tuple(x.replace(":", "_") for x in ms[0])
+    precise, dims, members = {}, {}, {}
     for el in root:
         end = periods.get(el.get("contextRef"))
         if end is None or el.text is None or not el.tag.startswith("{"):
@@ -236,6 +258,9 @@ def annual_values(path):
                 d = el.get("decimals")
                 d = 0 if d in (None, "INF") else min(int(d), 0)
                 dims.setdefault(f"{ns[uri]}_{local}", {}).setdefault(end, set()).add((int(float(text)), d))
+                if el.get("contextRef") in member_of:  # {concept: {end: {(axis, member): (value, decimals)}}}
+                    members.setdefault(f"{ns[uri]}_{local}", {}).setdefault(end, {})[
+                        member_of[el.get("contextRef")]] = (int(float(text)), d)
             continue
         text = el.text.strip()
         if not WHOLE.fullmatch(text):
@@ -253,13 +278,13 @@ def annual_values(path):
             raise SystemExit(f"{name} {end}: conflicting values {new[0]} and {old[0]} (decimals {old[1]})")
         precise[name][end] = new
     return ({n: {e: v for e, (v, _) in d.items()} for n, d in precise.items()},
-            {n: {e: k for e, (_, k) in d.items()} for n, d in precise.items()}, dims)
+            {n: {e: k for e, (_, k) in d.items()} for n, d in precise.items()}, dims, members)
 
 
 def read_filing(cik, filing, ua):
     files = filing_files(cik, filing, ua)
     name, role = statement_role(files["summary"])
-    vals, decs, dims = annual_values(files["instance"])
+    vals, decs, dims, members = annual_values(files["instance"])
     anchor, w, operating, stitched = weights(files["cal"], role, vals)
     order = presentation_order(files["pre"], role)
     labs = labels(files["lab"])
@@ -271,6 +296,7 @@ def read_filing(cik, filing, ua):
     if len(ends) != 3:
         raise SystemExit(f"{filing['accession']}: expected 3 years of pre-tax income, found {ends}")
     rank = {c: i for i, (c, _) in enumerate(order)}
+    face = face_members(files["pre"], role)
     prefs = dict(order)
 
     def label(c):
@@ -278,7 +304,7 @@ def read_filing(cik, filing, ua):
         return labs.get(c, {}).get(prefs.get(c) or std) or labs.get(c, {}).get(std) or c
     lines = []
     for c in sorted((c for c in w if c != revenue[0]), key=lambda c: rank.get(c, 1e9)):
-        values, from_dims, units = {}, [], {}
+        values, from_dims, units, summed = {}, [], {}, {}
         for e in ends:
             values[e] = vals.get(c, {}).get(e)
             units[e] = 10 ** -decs.get(c, {}).get(e, 0)
@@ -287,8 +313,22 @@ def read_filing(cik, filing, ua):
                 values[e], d = next(iter(only))
                 units[e] = 10 ** -d
                 from_dims.append(e)
+            elif values[e] is None:  # reported only by member on an axis the statement shows (BA: product, service)
+                hits = {a: {m: v for (ax, m), v in members.get(c, {}).get(e, {}).items() if ax == a and m in ms}
+                        for a, ms in face.items()}
+                hits = {a: h for a, h in hits.items() if h}
+                if len(hits) > 1:
+                    raise SystemExit(f"{filing['accession']} {c} {e}: reported by member on more than one axis "
+                                     f"the statement shows: {sorted(hits)}")
+                if hits:
+                    (a, h), = hits.items()
+                    ms = [m for m in face[a] if m in h]
+                    values[e] = sum(h[m][0] for m in ms)
+                    units[e] = sum(10 ** -h[m][1] for m in ms)
+                    summed[e] = [label(m) for m in ms]
         lines.append({"concept": c, "label": label(c), "weight": w[c], "values": values,
-                      "operating": operating[c], "dimensioned_years": from_dims, "_units": units})
+                      "operating": operating[c], "dimensioned_years": from_dims, "summed_members": summed,
+                      "_units": units})
     rev = {e: vals[revenue[0]][e] for e in ends}
     pretax = {e: vals[anchor][e] for e in ends}
 
@@ -362,6 +402,7 @@ def retag(lines, older, ends, disagreements):
         row = dict(group[0], values={e: next((g["values"][e] for g in group if g["values"][e] is not None), None)
                                      for e in ends},
                    dimensioned_years=sorted(e for g in group for e in g["dimensioned_years"]),
+                   summed_members={e: m for g in group for e, m in g["summed_members"].items()},
                    retagged=sorted(({"concept": g["concept"], "years": sorted(y)} for g, y in zip(group, years)),
                                    key=lambda t: t["years"][0] if t["years"] else ""))
         # The year both 10-Ks show, compared across the tag change as merge() compares a line under one tag.
@@ -399,12 +440,15 @@ def merge(latest, older):
     for f in (latest, older):  # latest first, so its label and weight win
         for l in f["lines"]:
             row = by.setdefault(l["concept"], {"concept": l["concept"], "label": l["label"], "weight": l["weight"],
-                                               "operating": l["operating"], "values": {}, "dimensioned_years": []})
+                                               "operating": l["operating"], "values": {}, "dimensioned_years": [],
+                                               "summed_members": {}})
             for e in f["ends"]:
                 if src[e] is f:
                     row["values"][e] = l["values"][e]
                     if e in l["dimensioned_years"]:
                         row["dimensioned_years"].append(e)
+                    if e in l["summed_members"]:
+                        row["summed_members"][e] = l["summed_members"][e]
     lines = list(by.values())
     for l in lines:
         for e in ends:
@@ -412,6 +456,11 @@ def merge(latest, older):
     if any(l["weight"] != by[l["concept"]]["weight"] for f in (latest, older) for l in f["lines"]):
         raise SystemExit("a line changes sign between the two filings")
     lines = retag(lines, older, ends, disagreements)
+    for l in lines:  # a line summed from members in some years and whole in others may be a slice against a total
+        whole = [e for e in ends if l["values"][e] is not None and e not in l["summed_members"]]
+        if l["summed_members"] and whole:
+            raise SystemExit(f"{l['label']}: reported by member in {sorted(l['summed_members'])} "
+                             f"and whole in {whole}")
     # The filing's own rounding, as its own rows, so every later check stays exact: one inside operating income,
     # one for the rest of the gap to pre-tax income.
     above = {e: src[e]["rounding_operating"][e] for e in ends}
@@ -421,7 +470,7 @@ def merge(latest, older):
                                        ("rounding", "Rounding in the filing", False, below)):
         if any(values.values()):
             lines.append({"concept": concept, "label": label, "weight": 1.0, "operating": op, "values": values,
-                          "dimensioned_years": []})
+                          "dimensioned_years": [], "summed_members": {}})
     revenue = {e: src[e]["revenue"][e] for e in ends}
     pretax = {e: src[e]["pretax_income"][e] for e in ends}
     has_oi = latest["operating_income"] is not None and older["operating_income"] is not None

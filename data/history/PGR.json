@@ -68,6 +68,7 @@
         "2025-12-31": 53959000000
       },
       "dimensioned_years": [],
+      "summed_members": {},
       "retagged": [
         {
           "concept": "us-gaap_IncurredClaimsPropertyCasualtyAndLiability",
@@ -98,7 +99,8 @@
         "2021-12-31": 3712800000,
         "2022-12-31": 3917000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_OtherUnderwritingExpense",
@@ -112,7 +114,8 @@
         "2021-12-31": 5654700000,
         "2022-12-31": 5859600000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "pgr_PolicyholderCreditExpenseProfitLimit",
@@ -126,7 +129,8 @@
         "2021-12-31": null,
         "2022-12-31": null
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InvestmentIncomeInvestmentExpense",
@@ -140,7 +144,8 @@
         "2021-12-31": 25500000,
         "2022-12-31": 24300000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "pgr_NonInsuranceServiceExpenses",
@@ -154,7 +159,8 @@
         "2021-12-31": 252800000,
         "2022-12-31": 296700000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InterestExpenseDebt",
@@ -168,7 +174,8 @@
         "2021-12-31": 218600000,
         "2022-12-31": 243500000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_GoodwillImpairmentLoss",
@@ -182,7 +189,8 @@
         "2024-12-31": null,
         "2025-12-31": null
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     }
   ],
   "disagreements": [

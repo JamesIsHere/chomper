@@ -141,7 +141,7 @@ Item: history.py stops on Boeing's FY2025 10-K (0001628280-26-004357): its 2023 
 Why: Boeing is a loss company the loss-year chart needs; it cannot reach the chart until it foots.
 Companies: BA
 Due: before the full S&P 500 run.
-Status: open
+Status: closed 2026-11-02, the cost line is tagged only in parts (product and service) with no total; history.py now sums the parts (decisions.md, "A line tagged only in parts is shown summed") and BA foots in every year. Its page still needs ASC 606/842 adoption records before it can be built
 
 ## 2026-11-02 | CCL statement off by $1M
 Theme: Coverage
@@ -261,4 +261,20 @@ Item: The loss-base rule blanks every split and percent whose base year is zero 
 Why: The broad rule is safe but hides some columns that could carry meaning.
 Companies: CCL; every company with a loss year.
 Due: after the failure census shows how many loss cases there are.
+Status: open
+
+## 2026-11-02 | A line summed from parts in some years, whole in others
+Theme: Coverage
+Item: On 10 companies a line is tagged only in parts in one 10-K and as a single total in the other, and the parts are often one segment ("Insurance and Other", "Truck, Parts and Other"), so their sum may be only a slice of the line. history.py stops on these ("reported by member in ... and whole in ...", census class Member slice) rather than show a jump that is not real.
+Why: Summing a slice against a total would put a false change on the page.
+Companies: APO BRK-B CTAS DE EL KKR PCAR PSA T WAT
+Due: when the census works through Member slice by frequency.
+Status: open
+
+## 2026-11-02 | A line printed whole in one 10-K, broken out in the other
+Theme: Coverage
+Item: Some companies change the statement's layout between the two 10-Ks: RTX prints one "Total costs and expenses" for 2021 and 2022, then Cost of Sales, R&D and SG&A from 2023; FANG's cost of goods and services sold becomes two separate lines. Every year still foots, but the five-year grid shows the old row falling to nothing and the new rows rising from nothing in the column that crosses the change. The census does not count this yet (its split-row signal only catches identical labels).
+Why: The crossing column shows changes that are layout, not business.
+Companies: RTX FANG (seen); size unknown
+Due: before the full S&P 500 run.
 Status: open

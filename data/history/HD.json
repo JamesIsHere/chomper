@@ -76,7 +76,8 @@
         "2022-01-30": 100325000000,
         "2023-01-29": 104625000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
@@ -90,7 +91,8 @@
         "2022-01-30": 25406000000,
         "2023-01-29": 26284000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_DepreciationAndAmortization",
@@ -104,7 +106,8 @@
         "2022-01-30": 2386000000,
         "2023-01-29": 2455000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InvestmentIncomeInterestAndDividend",
@@ -118,7 +121,8 @@
         "2022-01-30": 44000000,
         "2023-01-29": 55000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InterestExpenseNonoperating",
@@ -133,6 +137,7 @@
         "2026-02-01": 2412000000
       },
       "dimensioned_years": [],
+      "summed_members": {},
       "retagged": [
         {
           "concept": "us-gaap_InterestExpense",

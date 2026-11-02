@@ -74,6 +74,7 @@
         "2025-12-31": 313995000000
       },
       "dimensioned_years": [],
+      "summed_members": {},
       "retagged": [
         {
           "concept": "us-gaap_PolicyholderBenefitsAndClaimsIncurredHealthCare",
@@ -104,7 +105,8 @@
         "2021-12-31": 42579000000,
         "2022-12-31": 47782000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_CostOfGoodsAndServicesSold",
@@ -118,7 +120,8 @@
         "2021-12-31": 31034000000,
         "2022-12-31": 33703000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_DepreciationAndAmortization",
@@ -132,7 +135,8 @@
         "2021-12-31": 3103000000,
         "2022-12-31": 3400000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InterestExpense",
@@ -146,7 +150,8 @@
         "2021-12-31": 1660000000,
         "2022-12-31": 2092000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "unh_LossOnSaleOfSubsidiaryAndSubsidiariesHeldForSale",
@@ -160,7 +165,8 @@
         "2021-12-31": null,
         "2022-12-31": null
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     }
   ],
   "disagreements": [],

@@ -36,6 +36,7 @@ CLASSES = [
     ("Revenue", r"expected one revenue concept"),
     ("Footing", r"lines foot to"),
     ("Values", r"conflicting values"),
+    ("Member slice", r"reported by member in"),
     ("Structure", r"changes sign between the two filings|expected five fiscal years|bridge does not reach"),
 ]
 

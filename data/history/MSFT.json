@@ -73,7 +73,8 @@
         "2022-06-30": 62650000000,
         "2023-06-30": 65863000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_ResearchAndDevelopmentExpense",
@@ -87,7 +88,8 @@
         "2022-06-30": 24512000000,
         "2023-06-30": 27195000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_SellingAndMarketingExpense",
@@ -101,7 +103,8 @@
         "2022-06-30": 21825000000,
         "2023-06-30": 22759000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_GeneralAndAdministrativeExpense",
@@ -115,7 +118,8 @@
         "2022-06-30": 5900000000,
         "2023-06-30": 7575000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_NonoperatingIncomeExpense",
@@ -129,7 +133,8 @@
         "2022-06-30": 333000000,
         "2023-06-30": 788000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     }
   ],
   "disagreements": [],

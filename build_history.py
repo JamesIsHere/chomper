@@ -68,6 +68,28 @@ def retags(h):
                         for l in rows) + ".")
 
 
+def summed(h):
+    """The footer's sentence for lines the filing reports only by member (BA's cost of goods and services sold, by
+    product and service), shown as the members' sum."""
+    rows = [l for l in h["lines"] if l.get("summed_members")]
+    if not rows:
+        return ""
+    parts = []
+    for l in rows:
+        ys = sorted(l["summed_members"])
+        groups = []  # consecutive years with the same members
+        for e in ys:
+            if groups and groups[-1][1] == l["summed_members"][e]:
+                groups[-1][0].append(e)
+            else:
+                groups.append(([e], l["summed_members"][e]))
+        parts.append(f"{escape(l['label'])}, " + "; ".join(
+            (year(es[0]) if len(es) == 1 else f"{year(es[0])} to {year(es[-1])}") + ", the sum of the parts labeled "
+            + " and ".join(f"&ldquo;{escape(m.removesuffix(' [Member]'))}&rdquo;" for m in ms) for es, ms in groups))
+    return (" The filing tags " + ("one line" if len(rows) == 1 else "these lines")
+            + " only in parts, with no total, shown here summed: " + "; ".join(parts) + ".")
+
+
 def rounding_only(a, b):
     """True when two filings' figures differ only because one rounds coarser: the coarser figure (the one with more
     trailing zeros, at most $1M) equals the finer one rounded half up to its unit. PGR's 2025 10-K reports
@@ -529,7 +551,7 @@ def page(h, name):
                         f"rounding." if rounded else "."))
     return TEMPLATE.format(company=escape(name), ticker=escape(h["ticker"]), heads=heads, top=top,
                            rows="\n".join(rows), years=years, filings=filings, cik=f"{int(h['cik']):010d}",
-                           disagreements=disagreements, footing=footing(h) + retags(h), loss_note=loss_note,
+                           disagreements=disagreements, footing=footing(h) + retags(h) + summed(h), loss_note=loss_note,
                            ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
                            last=year(h["period_ends"][-1]), nav=nav(), bridge_link=bridge_link(h["ticker"]),
                            ten_years=ten_years(h["ticker"]), ten_breaks=ten_breaks(h["ticker"]), css=CSS)

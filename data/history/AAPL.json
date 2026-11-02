@@ -73,7 +73,8 @@
         "2021-09-25": 212981000000,
         "2022-09-24": 223546000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_ResearchAndDevelopmentExpense",
@@ -87,7 +88,8 @@
         "2021-09-25": 21914000000,
         "2022-09-24": 26251000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
@@ -101,7 +103,8 @@
         "2021-09-25": 21973000000,
         "2022-09-24": 25094000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_NonoperatingIncomeExpense",
@@ -115,7 +118,8 @@
         "2021-09-25": 258000000,
         "2022-09-24": -334000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     }
   ],
   "disagreements": [],

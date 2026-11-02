@@ -67,7 +67,8 @@
         "2022-01-02": 23402000000,
         "2023-01-01": 24596000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_SellingGeneralAndAdministrativeExpense",
@@ -81,7 +82,8 @@
         "2022-01-02": 20118000000,
         "2023-01-01": 20246000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
@@ -95,7 +97,8 @@
         "2022-01-02": 14277000000,
         "2023-01-01": 14135000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "jnj_ResearchAndDevelopmentInProcess1",
@@ -109,7 +112,8 @@
         "2022-01-02": 900000000,
         "2023-01-01": 783000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InvestmentIncomeInterest",
@@ -123,7 +127,8 @@
         "2022-01-02": 53000000,
         "2023-01-01": 490000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_InterestExpenseNonoperating",
@@ -138,6 +143,7 @@
         "2025-12-28": 971000000
       },
       "dimensioned_years": [],
+      "summed_members": {},
       "retagged": [
         {
           "concept": "us-gaap_InterestExpense",
@@ -168,7 +174,8 @@
         "2022-01-02": -526000000,
         "2023-01-01": -810000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     },
     {
       "concept": "us-gaap_RestructuringCharges",
@@ -182,7 +189,8 @@
         "2022-01-02": 209000000,
         "2023-01-01": 275000000
       },
-      "dimensioned_years": []
+      "dimensioned_years": [],
+      "summed_members": {}
     }
   ],
   "disagreements": [],
