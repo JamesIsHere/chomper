@@ -309,13 +309,21 @@ def trend_chart(h):
             + (f'<ol class="key">{key}</ol>' if key else ""))
 
 
+def shown(ch, r):
+    """The amount a five-year dollar cell shows: the line's effect beyond revenue, or, in a column that starts
+    from a loss year (ch["loss_base"]), its whole change, since scaling a loss by revenue means nothing."""
+    return -r["actual"] if ch["loss_base"] else -r["ratio"]
+
+
 def dollar_row(l, changes, scale):
     cells = []
     for ch in changes:
         r = next(r for r in ch["lines"] if r["concept"] == l["concept"])
         note = " (line not reported that year)" if r["absent"] else ""
-        cells.append(cell(-r["ratio"], scale, f"Line changed {m(r['actual'])}; in step with revenue it would "
-                                              f"have changed {m(r['flex'])}{note}"))
+        title = (f"Line changed {m(r['actual'])}; no split in step with revenue, since {year(ch['from'])} was a loss"
+                 if ch["loss_base"] else
+                 f"Line changed {m(r['actual'])}; in step with revenue it would have changed {m(r['flex'])}")
+        cells.append(cell(shown(ch, r), scale, title + note))
     return f'<tr>{label_html(l)}{"".join(cells)}</tr>'
 
 
@@ -453,21 +461,35 @@ def display_name(name):
 
 def page(h, name):
     """One company page; name is the S&P 500 list's (the index page uses the same), not the SEC filer name."""
-    changes = h["changes"]
+    # A column that starts from a loss year gets no split in step with revenue (a loss scaled by revenue means
+    # nothing); its lines show their whole change, which sums to revenue change less pre-tax income change.
+    changes = [ch | {"loss_base": h["pretax_income"][ch["from"]] <= 0} for ch in h["changes"]]
     for ch in changes:  # beyond-revenue effects sum exactly to the pre-tax leverage
         total = -sum(r["ratio"] for r in ch["lines"])
         if abs(total - ch["leverage"]) > 1:
             raise SystemExit(f"{h['ticker']} {ch['to']}: line effects {total:,.0f} != leverage {ch['leverage']:,.0f}")
-    scale = max(abs(r["ratio"]) for ch in changes for r in ch["lines"])
+        whole = -sum(r["actual"] for r in ch["lines"])
+        if abs(whole - (ch["pretax_change"] - ch["revenue_change"])) > 1:
+            raise SystemExit(f"{h['ticker']} {ch['to']}: line changes {whole:,.0f} != pre-tax less revenue change")
+    scale = max(abs(shown(ch, r)) for ch in changes for r in ch["lines"])
     heads = "".join(f"<th>{year(ch['from'])} to {year(ch['to'])}</th>" for ch in changes)
 
-    def plain(label, key, cls=""):
+    def plain(label, key, cls="", split=False):
         return (f'<tr class="{cls}"><th scope="row">{label}</th>'
-                + "".join(f"<td>{m(ch[key])}</td>" for ch in changes) + "</tr>")
+                + "".join("<td></td>" if split and ch["loss_base"] else f"<td>{m(ch[key])}</td>" for ch in changes)
+                + "</tr>")
     top = (plain("Revenue change", "revenue_change")
            + plain("Pre-tax income change", "pretax_change", "strong")
-           + plain("&nbsp;&nbsp;if every cost moved in step with revenue", "pretax_flex")
-           + plain("&nbsp;&nbsp;beyond revenue (sum of lines below)", "leverage"))
+           + plain("&nbsp;&nbsp;if every cost moved in step with revenue", "pretax_flex", split=True)
+           + plain("&nbsp;&nbsp;beyond revenue (sum of lines below)", "leverage", split=True))
+    from_loss = [ch for ch in changes if ch["loss_base"]]
+    loss_note = ("" if not from_loss else
+                 '\n<p class="note">'
+                 + ("The column" if len(from_loss) == 1 else "The columns")
+                 + " starting from a loss year ("
+                 + ", ".join(f"{year(ch['from'])} to {year(ch['to'])}" for ch in from_loss)
+                 + ") show each line's whole change, and leave the split in step with revenue blank: scaling a "
+                 "loss by revenue does not mean anything.</p>")
     rows = []
     for heading, ls in sections(h):
         rows.append('<tr class="sep"><td colspan="99"></td></tr>' if heading is None else
@@ -491,7 +513,8 @@ def page(h, name):
                         f"rounding." if rounded else "."))
     return TEMPLATE.format(company=escape(name), ticker=escape(h["ticker"]), heads=heads, top=top,
                            rows="\n".join(rows), years=years, filings=filings, cik=f"{int(h['cik']):010d}",
-                           disagreements=disagreements, footing=footing(h), ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
+                           disagreements=disagreements, footing=footing(h), loss_note=loss_note,
+                           ratio_rows=ratio_rows, first=year(h["period_ends"][0]),
                            last=year(h["period_ends"][-1]), nav=nav(), bridge_link=bridge_link(h["ticker"]),
                            ten_years=ten_years(h["ticker"]), ten_breaks=ten_breaks(h["ticker"]), css=CSS)
 
@@ -557,6 +580,9 @@ def ten_years(ticker):
         cells = ["<td></td>"]
         for e in ends[1:]:
             c = changes[e]
+            if c["prior"] <= 0:  # no percent change on a base at or below zero
+                cells.append("<td></td>")
+                continue
             r = round((c["value"] - c["prior"]) / abs(c["prior"]) * 100, 1)
             pct = f"{r:+.1f}%"
             cls = ' class="up"' if r > 0 else ' class="down"' if r < 0 else ""
@@ -766,7 +792,7 @@ TEMPLATE = """<!doctype html>
 <tbody>
 {top}
 {rows}
-</tbody></table></div>
+</tbody></table></div>{loss_note}
 </details>
 
 {ten_breaks}

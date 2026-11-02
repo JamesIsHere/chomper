@@ -244,3 +244,9 @@ Group: Presentation
 Decision: The ten-year chart draws no cost-gap bar for a year whose prior year had zero or negative pre-tax income (prior year as shown in the 10-K that reports both). The Loss strip above already marks those years.
 Why: The bar is the pre-tax income at last year's margin minus what was earned; after a loss, last year's margin is negative and scaling it by revenue is not a cost gap. Carnival's Nov 2022 bar read $54.6B "revenue ran ahead of costs" from a -499% margin on 6.4x revenue, against an actual pre-tax change of +$3.44B (James, 2026-11-02).
 Status: active
+
+## 2026-11-02 | No ratio or growth on a loss base
+Group: Method
+Decision: Nothing on a company page divides or scales by a base at or below zero. The ten-year table leaves the percent change blank when the prior year is zero or negative (a fall from a positive year into a loss still shows, e.g. Carnival Nov 2020 -435.1%). The five-year dollar grid, in a column that starts from a loss year, leaves "if every cost moved in step with revenue" and "beyond revenue" blank and shows each line's whole change instead; a note under the grid names those columns. Together with "No cost-gap bar after a loss year", this is one rule. James will look through the loss cases for a tighter rule later.
+Why: Scaling a loss by revenue gave Carnival -$51.20B "in step" against a +$3.44B change in Nov 2022, and percent changes like +3188.7% across a sign flip; the chart's income line already breaks at losses (James, 2026-11-02: "If you get a loss on the base here, I think we need to do something").
+Status: active

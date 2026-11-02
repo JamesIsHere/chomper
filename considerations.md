@@ -245,7 +245,7 @@ Item: The five-year grid splits each change into what would have happened if eve
 Why: The grid's beyond-revenue amounts after a loss year do not mean what the page says; the ten-year bars now skip such years, and the grid does not.
 Companies: CCL; any company with a loss year in its five.
 Due: before CCL's page is called settled, and before the full S&P 500 run.
-Status: open
+Status: closed 2026-11-02, decisions.md "No ratio or growth on a loss base"
 
 ## 2026-11-02 | Percent change on a loss base in the ten-year table
 Theme: Presentation
@@ -253,4 +253,12 @@ Item: The ten-year table's change rows print a percent even when the prior year 
 Why: The table states growth the chart refuses to draw; a reader comparing the two sees the contradiction.
 Companies: CCL; any company with a loss year in its ten.
 Due: before CCL's page is called settled, and before the full S&P 500 run.
+Status: closed 2026-11-02, decisions.md "No ratio or growth on a loss base"
+
+## 2026-11-02 | A tighter rule for a loss base
+Theme: Presentation
+Item: The loss-base rule blanks every split and percent whose base year is zero or a loss. That is broad: a near-zero loss (Carnival Nov 2023, -$62.0M on $21.59B revenue) loses its whole column split, though its scaling barely moves anything. James will look through the loss cases for a tighter rule.
+Why: The broad rule is safe but hides some columns that could carry meaning.
+Companies: CCL; every company with a loss year.
+Due: after the failure census shows how many loss cases there are.
 Status: open
