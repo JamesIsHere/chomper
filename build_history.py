@@ -98,79 +98,129 @@ def ratios(h):
     return "\n".join(rows)
 
 
-def multiples(h):
-    """{name: [multiple of the first year]} for revenue and pre-tax income, chaining each year's same-basis change
-    (headline.py), or None if a year is zero or negative (growth cannot be chained)."""
-    chains = {"Revenue": h["changes"]["revenue"], "Pre-tax income": h["changes"]["pretax_income"]}
-    if any(c["prior"] <= 0 or c["value"] <= 0 for ch in chains.values() for c in ch.values()):
-        return None
+def chart_breaks(h):
+    """{end: [text]} for each year with a significant acquisition or a newly required accounting standard: the
+    years numbered on the chart and listed in its key. Restatements are not marked: the chart chains same-basis
+    growth, so a recast makes no spike in its lines (the table's asterisks carry them)."""
     out = {}
-    for name, ch in chains.items():
-        out[name] = [1.0]
-        for e in h["period_ends"][1:]:
-            out[name].append(out[name][-1] * ch[e]["value"] / ch[e]["prior"])
+    for d in h["deals"]:
+        if d["significant"]:
+            out.setdefault(d["fiscal_year_end"], []).append(
+                f"Acquired {d['name']}, {m(d['size'], False)}, {d['share_of_assets']:.0%} of total assets at the "
+                f"prior year end")
+    for s in h["standards"]:
+        out.setdefault(s["fiscal_year_end"], []).append(
+            f"{s['standard']} required this year (the company may have adopted earlier)")
     return out
 
 
-def axis(values):
-    """(ticks, low, high) for a multiples axis: a round step, at most six intervals, covering every value."""
-    lo, hi = min(values), max(values)
-    steps = [0.1, 0.25, 0.5] + [k * 10 ** p for p in range(4) for k in (1, 2, 5)]
-    step = next(s for s in steps if (hi - lo) / s <= 6)
-    lo, hi = math.floor(lo / step) * step, math.ceil(hi / step) * step
-    return [lo + k * step for k in range(round((hi - lo) / step) + 1)], lo, hi
+def money_tick(v):
+    """An axis label: $0, $500M, $2B, -$1B."""
+    if v == 0:
+        return "$0"
+    s = f"${abs(v) / 1e9:g}B" if abs(v) >= 1e9 else f"${abs(v) / 1e6:g}M"
+    return ("-" if v < 0 else "") + s
 
 
-def times(v):
-    """A multiple as the page writes it: 1x, 1.5x, 3.47x."""
-    return f"{v:.2f}".rstrip("0").rstrip(".") + "x"
+def log_ticks(lo, hi):
+    """1-2-5 dollar ticks covering lo..hi, widened to the tick just below and just above."""
+    all_ticks = [k * 10 ** p for p in range(5, 15) for k in (1, 2, 5)]
+    below = max(v for v in all_ticks if v <= lo)
+    above = min(v for v in all_ticks if v >= hi)
+    return [v for v in all_ticks if below <= v <= above]
+
+
+def bar_ticks(values):
+    """Round dollar ticks through zero covering every bar, at most five intervals."""
+    lo, hi = min(min(values), 0), max(max(values), 0)
+    step = next(k * 10 ** p for p in range(5, 15) for k in (1, 2, 5) if (hi - lo) / (k * 10 ** p) <= 5)
+    return [k * step for k in range(math.floor(lo / step), math.ceil(hi / step) + 1)]
+
+
+def cost_gaps(h):
+    """{end: dollars} for each year after the first: the pre-tax income the company would have earned at the prior
+    year's pre-tax margin, minus what it earned. Both years come from the one 10-K that shows them together
+    (headline.py's same-basis changes), so a recast never mixes two bases in one bar. Above zero, costs grew
+    faster than revenue that year. Fails if revenue and pre-tax income took that pair from different filings."""
+    rev, pre = h["changes"]["revenue"], h["changes"]["pretax_income"]
+    out = {}
+    for e in h["period_ends"][1:]:
+        r, p = rev[e], pre[e]
+        if (r["filed"], r["prior_end"]) != (p["filed"], p["prior_end"]):
+            raise SystemExit(f"{h['ticker']} {e}: revenue and pre-tax income changes come from different filings")
+        out[e] = r["value"] * p["prior"] / r["prior"] - p["value"]
+    return out
 
 
 def trend_chart(h):
-    """Revenue and pre-tax income as multiples of the first year (first year = 1x), chaining each year's
-    same-basis change (headline.py), one axis, inline SVG."""
+    """Revenue and pre-tax income in dollars on a log scale (the table's figures), each year with a break numbered
+    at the top and explained in a key; under it, a band of bars for each year's cost gap (cost_gaps)."""
     ends = h["period_ends"]
     series = [("Revenue", "--s1", h["revenue"]), ("Pre-tax income", "--s2", h["pretax_income"])]
-    idx = multiples(h)
-    if idx is None:
-        return '<p class="note">Trend chart omitted: a year is zero or negative, so growth cannot be chained.</p>'
-    ticks, lo, hi = axis([v for vs in idx.values() for v in vs])
-    W, H, L, R, T, B = 640, 220, 40, 170, 12, 26
-    px = lambda i: L + i * (W - L - R) / (len(ends) - 1)
-    py = lambda v: T + (hi - v) / (hi - lo) * (H - T - B)
-    grid = "".join(f'<line x1="{L}" x2="{W - R}" y1="{py(v):.1f}" y2="{py(v):.1f}" class="g"/>'
-                   f'<text x="{L - 6}" y="{py(v) + 4:.1f}" class="ax" text-anchor="end">{times(v)}</text>'
-                   for v in ticks)
-    xs = "".join(f'<text x="{px(i):.1f}" y="{H - 6}" class="ax" text-anchor="middle">{year(e)}</text>'
-                 for i, e in enumerate(ends))
-    marks, label_y = [], {}
-    for name, var, _ in series:
-        pts = " ".join(f"{px(i):.1f},{py(v):.1f}" for i, v in enumerate(idx[name]))
-        marks.append(f'<polyline points="{pts}" fill="none" style="stroke:var({var})" stroke-width="2"/>')
-        marks += [f'<circle cx="{px(i):.1f}" cy="{py(v):.1f}" r="4" style="fill:var({var})" class="dot"/>'
-                  for i, v in enumerate(idx[name])]
-        label_y[name] = py(idx[name][-1])
-    a, b = (label_y[n] for n, _, _ in series)  # keep the two end labels from colliding
-    if abs(a - b) < 14:
-        mid = (a + b) / 2
-        a, b = (mid - 7, mid + 7) if a <= b else (mid + 7, mid - 7)
-    labels = "".join(f'<text x="{px(len(ends) - 1) + 10:.1f}" y="{y + 4:.1f}" class="lab">{name} '
-                     f'{times(idx[name][-1])}</text>' for (name, _, _), y in zip(series, (a, b)))
-    hits = []
+    vals = [s[e] for _, _, s in series for e in ends]
+    if min(vals) <= 0:
+        return ('<p class="note">Chart omitted: a year\'s pre-tax income is zero or negative, so it cannot go on a '
+                'log scale.</p>')
+    W, L, R, T, PLOT_H, X_H, GAP, BAND_H = 800, 60, 170, 26, 280, 26, 18, 110
+    ticks = log_ticks(min(vals), max(vals))
+    lo, hi = math.log10(ticks[0]), math.log10(ticks[-1])
+    step_x = (W - L - R) / len(ends)  # one slot per year, so every bar sits inside the plot
+    px = lambda i: L + (i + 0.5) * step_x
+    py = lambda v: T + (hi - math.log10(v)) / (hi - lo) * PLOT_H
+    g = cost_gaps(h)
+    bt = bar_ticks(list(g.values()))
+    b0 = T + PLOT_H + X_H + GAP
+    by = lambda v: b0 + (bt[-1] - v) / (bt[-1] - bt[0]) * BAND_H
+    H = b0 + BAND_H + 8
+
+    out = [f'<line x1="{L}" x2="{W - R}" y1="{py(v):.1f}" y2="{py(v):.1f}" class="g"/>'
+           f'<text x="{L - 6}" y="{py(v) + 4:.1f}" class="ax" text-anchor="end">{money_tick(v)}</text>'
+           for v in ticks]
+    out += [f'<text x="{px(i):.1f}" y="{T + PLOT_H + 18}" class="ax" text-anchor="middle">{year(e)}</text>'
+            for i, e in enumerate(ends)]
+    b = chart_breaks(h)
+    years = [e for e in ends if e in b]
+    out += [f'<line x1="{px(ends.index(e)):.1f}" x2="{px(ends.index(e)):.1f}" y1="{T - 2}" y2="{T + PLOT_H}" '
+            f'class="guide"/><circle cx="{px(ends.index(e)):.1f}" cy="{T - 10}" r="9" class="mark"/>'
+            f'<text x="{px(ends.index(e)):.1f}" y="{T - 6}" class="marknum" text-anchor="middle">{n}</text>'
+            for n, e in enumerate(years, 1)]
+    label_y = []
+    for name, var, s in series:
+        pts = " ".join(f"{px(i):.1f},{py(s[e]):.1f}" for i, e in enumerate(ends))
+        out.append(f'<polyline points="{pts}" fill="none" style="stroke:var({var})" stroke-width="2"/>')
+        out += [f'<circle cx="{px(i):.1f}" cy="{py(s[e]):.1f}" r="4" style="fill:var({var})" class="dot"/>'
+                for i, e in enumerate(ends)]
+        label_y.append(py(s[ends[-1]]))
+    a, c = label_y  # keep the two end labels from colliding
+    if abs(a - c) < 14:
+        mid = (a + c) / 2
+        a, c = (mid - 7, mid + 7) if a <= c else (mid + 7, mid - 7)
+    out += [f'<text x="{W - R + 10}" y="{y + 4:.1f}" class="lab">{name} {m(s[ends[-1]], False)}</text>'
+            for (name, _, s), y in zip(series, (a, c))]
     for i, e in enumerate(ends):
-        x0 = px(i) - (W - L - R) / (len(ends) - 1) / 2
-        first = year(ends[0])
-        tip = (f"{year(e)}: revenue {m(h['revenue'][e], False)} ({times(idx['Revenue'][i])} {first}), pre-tax "
-               f"income {m(h['pretax_income'][e], False)} ({times(idx['Pre-tax income'][i])} {first})")
-        hits.append(f'<rect x="{max(x0, L):.1f}" y="{T}" width="{(W - L - R) / (len(ends) - 1):.1f}" '
-                    f'height="{H - T - B}" class="hit"><title>{escape(tip)}</title></rect>')
+        tip = f"{year(e)}: revenue {m(h['revenue'][e], False)}, pre-tax income {m(h['pretax_income'][e], False)}"
+        out.append(f'<rect x="{px(i) - step_x / 2:.1f}" y="{T}" width="{step_x:.1f}" height="{PLOT_H}" '
+                   f'class="hit"><title>{escape(tip)}</title></rect>')
+    out += [f'<text x="{L - 6}" y="{by(v) + 4:.1f}" class="ax" text-anchor="end">{money_tick(v)}</text>'
+            for v in bt]
+    for i, e in enumerate(ends[1:], 1):
+        v = g[e]
+        top, bot = sorted((by(v), by(0)))
+        out.append(f'<rect x="{px(i) - step_x / 4:.1f}" y="{top:.1f}" width="{step_x / 2:.1f}" '
+                   f'height="{max(bot - top, 0.5):.1f}" class="{"bar-down" if v > 0 else "bar-up"}"><title>'
+                   f'{escape(year(e))}: {escape(m(abs(v), False))} '
+                   f'{"costs ran ahead of revenue" if v > 0 else "revenue ran ahead of costs"}</title></rect>')
+    out.append(f'<line x1="{L}" x2="{W - R}" y1="{by(0):.1f}" y2="{by(0):.1f}" class="zero"/>')
+    key = "".join(f'<li><span class="num">{n}</span><b>{year(e)}</b>: '
+                  + "; ".join(escape(d) for d in b[e]) + "</li>" for n, e in enumerate(years, 1))
     legend = "".join(f'<span><i style="background:var({var})"></i>{name}</span>' for name, var, _ in series)
-    return (f'<p class="legend">{legend}<span class="dim">Times {year(ends[0])}: 1x = the {year(ends[0])} '
-            f'figure; growth on one accounting basis</span></p>'
-            f'<svg class="trend" viewBox="0 0 {W} {H}" role="img" aria-label="Revenue and pre-tax income as '
-            f'multiples of {year(ends[0])}, each year\'s change on one accounting basis; values in the table '
-            f'above">{grid}{xs}{"".join(marks)}{labels}'
-            f'{"".join(hits)}</svg>')
+    legend += ('<span><i class="sw bar-down-sw"></i>Costs ran ahead of revenue</span>'
+               '<span><i class="sw bar-up-sw"></i>Revenue ran ahead of costs</span>')
+    return (f'<p class="legend">{legend}</p>'
+            f'<svg class="trend wide" viewBox="0 0 {W} {H}" role="img" aria-label="Revenue and pre-tax income in '
+            f'dollars on a log scale, with each year\'s cost gap as bars below; values in the table above">'
+            f'{"".join(out)}</svg>'
+            + (f'<ol class="key">{key}</ol>' if key else ""))
 
 
 def dollar_row(l, changes, scale):
@@ -344,20 +394,10 @@ def headline(ticker):
 
 
 def ten_breaks(ticker):
-    """The ten-year breaks, one line each, at the bottom of the page: significant acquisitions, required
-    accounting standards, restatements."""
+    """Recast figures, one line each, at the bottom of the page: every figure a later 10-K changed. Acquisitions
+    and accounting standards are not listed here; the chart's numbered key carries them."""
     t = headline(ticker)
     notes = []
-    for d in t["deals"]:
-        if d["significant"]:
-            e = d["fiscal_year_end"]
-            notes.append((e, f"Acquired {escape(d['name'])} on {d['date']} for {m(d['size'], False)} "
-                             f"({escape(d['measure'])}), {d['share_of_assets']:.0%} of total assets at the prior "
-                             f"year end."))
-    for s in t["standards"]:
-        e = s["fiscal_year_end"]
-        notes.append((e, f"{escape(s['standard'])} required: the first fiscal year beginning after "
-                         f"{s['required_for_years_beginning_after']}. The company may have adopted it earlier."))
     first = {}
     for d in t["disagreements"]:  # the earliest-filed other value is the figure as first reported
         k = (d["period_end"], d["item"])
@@ -369,24 +409,40 @@ def ten_breaks(ticker):
                          f"({(d['value'] - d['other_value']) / abs(d['other_value']) * 100:+.1f}%) in the 10-K "
                          f"filed {d['other_filed']}."))
     items = "".join(f"<li><b>{year(e)}</b>: {text}</li>" for e, text in sorted(notes, key=lambda n: n[0]))
-    return ('<h2>Ten-year breaks</h2>\n'
-            + (f'<ul class="breaks">{items}</ul>\n' if items else "")
-            + '<p class="note">Breaks are marked, never cut out: a year after a large acquisition, a new accounting '
-              'standard or a restatement may not compare cleanly with the years before it. An acquisition counts '
-              'when its price is at least 10% of the buyer\'s total assets (SEC Regulation S-X Rule 1-02(w), the '
-              'investment test). Where a later 10-K restated a year, the restated figure is shown; years before a '
-              'restated stretch stay as first reported.</p>\n')
+    if not items:
+        return ""
+    return ('<h2>Note 1 - Recast Figures</h2>\n'
+            f'<ul class="breaks">{items}</ul>\n'
+            '<p class="note">A later 10-K changed these figures. The table and the chart\'s lines above '
+            'already use the later figures; nothing here needs to be added back.</p>\n')
 
 
 def ten_years(ticker):
     """The long window at the top of the page: revenue, operating income (where reported), pre-tax income and
-    margin for ten years, then revenue and pre-tax income as a chart in multiples of the first year."""
+    margin for ten years, then the chart (trend_chart)."""
     t = headline(ticker)
     ends, rev, op, pre = t["period_ends"], t["revenue"], t["operating_income"], t["pretax_income"]
 
-    def growth(changes):
-        """Each year's change from the 10-K that shows both years; marked where a later 10-K recast one of them.
-        Green when the line grew, red when it shrank (every line here is better higher), by the sign as shown."""
+    notes = []
+
+    def star_note(label, s, e, c, pct):
+        """One line under the table for a starred change, naming its line, its years and the figures it compares.
+        Fails if neither year in the table differs from the one-filing figures (the star would explain nothing)."""
+        y0, y1 = year(c["prior_end"]), year(e)
+        recast = [(y, m(s[end], False)) for y, end, v in ((y0, c["prior_end"], c["prior"]), (y1, e, c["value"]))
+                  if s[end] != v]
+        if not recast:
+            raise SystemExit(f"{ticker} {label} {y1}: starred change, but both years match the table")
+        figs = recast[0][1] if len(recast) == 1 and recast[0][0] == y1 else " and ".join(f"{y} {f}" for y, f in recast)
+        verb, pron = ("is", "it") if len(recast) == 1 else ("are", "them")
+        notes.append(f"* {label}, {y1}: the {figs} above {verb} from a later 10-K that recast {pron}. The 10-K filed "
+                     f"{c['filed']} reports {y0} and {y1} the same way, {m(c['prior'], False)} and "
+                     f"{m(c['value'], False)}; the {pct} compares those two.")
+
+    def growth(label, s, changes):
+        """Each year's change from the 10-K that shows both years; starred, with a line under the table, where a
+        later 10-K recast one of them. Green when the line grew, red when it shrank (every line here is better
+        higher), by the sign as shown."""
         cells = ["<td></td>"]
         for e in ends[1:]:
             c = changes[e]
@@ -394,9 +450,8 @@ def ten_years(ticker):
             pct = f"{r:+.1f}%"
             cls = ' class="up"' if r > 0 else ' class="down"' if r < 0 else ""
             if c["basis_changed"]:
-                tip = (f"The 10-K filed {c['filed']} shows {year(c['prior_end'])} {m(c['prior'], False)} and "
-                       f"{year(e)} {m(c['value'], False)} on one basis; a later 10-K recast one of the two years.")
-                cells.append(f'<td{cls} title="{escape(tip)}">{pct}*</td>')
+                star_note(label, s, e, c, pct)
+                cells.append(f'<td{cls}>{pct}*</td>')
             else:
                 cells.append(f"<td{cls}>{pct}</td>")
         return "".join(cells)
@@ -405,17 +460,14 @@ def ten_years(ticker):
               ("Pre-tax income", pre, "pretax_income")) if s is not None]
     rows = "".join(f'<tr class="strong"><th scope="row">{label}</th>'
                    + "".join(f"<td>{m(s[e], False)}</td>" for e in ends)
-                   + f'</tr><tr><th scope="row">&nbsp;&nbsp;change</th>{growth(ch)}</tr>'
+                   + f'</tr><tr><th scope="row">&nbsp;&nbsp;change</th>{growth(label, s, ch)}</tr>'
                    for label, s, ch in lines)
-    recast = any(c["basis_changed"] for _, _, ch in lines for c in ch.values())
     rows += ('<tr><th scope="row">Pre-tax margin</th>'
              + "".join(f"<td>{pre[e] / rev[e] * 100:.1f}%</td>" for e in ends) + "</tr>")
     return (f'<h2>Ten years</h2>\n<div class="wrap"><table>\n<thead><tr><th></th>'
             + "".join(f"<th>{year(e)}</th>" for e in ends)
             + f'</tr></thead>\n<tbody>\n{rows}\n</tbody></table></div>\n'
-            + ('<p class="note">* A later 10-K recast one of the two years, so this change does not match the figures '
-               'above it: it is measured in the 10-K that shows both years on one basis. Hover for its figures.</p>\n'
-               if recast else "")
+            + ('<p class="note">* See Note 1.</p>\n' if notes else "")
             + trend_chart(t) + '\n')
 
 
@@ -525,6 +577,21 @@ tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
 .trend .dot { stroke: var(--bg); stroke-width: 2; }
 .trend .hit { fill: transparent; }
 .trend .hit:hover { fill: var(--rule); fill-opacity: .35; }
+.trend.wide { max-width: 50rem; }
+.trend .zero { stroke: var(--ink-3); stroke-width: 1; }
+.trend .bar-down { fill: var(--down); fill-opacity: .55; }
+.trend .bar-up { fill: var(--up); fill-opacity: .55; }
+.legend .sw { width: .8rem; height: .8rem; }
+.bar-down-sw { background: var(--down); opacity: .55; }
+.bar-up-sw { background: var(--up); opacity: .55; }
+.trend .guide { stroke: var(--ink-3); stroke-dasharray: 2 3; stroke-width: 1; }
+.trend .mark { fill: var(--ink); }
+.trend .marknum { fill: var(--bg); font-size: 11px; font-weight: 700; }
+ol.key { list-style: none; padding: 0; margin: .5rem 0 1rem; font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
+ol.key li { margin: 0 0 .3rem; }
+ol.key .num { display: inline-block; width: 1.3rem; height: 1.3rem; line-height: 1.3rem; border-radius: 50%;
+  background: var(--ink); color: var(--bg); text-align: center; font-size: .75rem; font-weight: 700;
+  margin-right: .5rem; }
 tr.sub th { text-align: left; font-size: .8rem; font-weight: 600; color: var(--ink-3); padding-top: .9rem; }
 td.name { text-align: left; white-space: normal; }
 table.index tbody th { min-width: 4rem; width: 4rem; }
@@ -572,22 +639,14 @@ TEMPLATE = """<!doctype html>
 <h2>Five years: which costs moved with revenue, {first} to {last}</h2>
 
 <details class="sector"><summary>Costs as a share of revenue</summary>
-<p class="note">Shading shows the change from the year before: green where the share moved in pre-tax
-income's favor, red where it moved against. A fixed cost's share falls when revenue grows and rises when
-revenue shrinks; a variable cost's share stays flat.</p>
 <div class="wrap"><table>
 <thead><tr><th></th>{years}</tr></thead>
 <tbody>
 {ratio_rows}
 </tbody></table></div>
-<p class="note">Hover a cell for its change in percentage points. Revenue mixes price and volume, so a
-price cut raises every cost's share even when the cost itself did not change.</p>
 </details>
 
 <details class="sector"><summary>In dollars</summary>
-<p class="note">The same changes in money. Each cell is what the line did to pre-tax income beyond moving
-in step with revenue: that year's change in its share of revenue, times that year's revenue. Hover a cell
-for the line's actual change and its in-step-with-revenue change.</p>
 <div class="wrap"><table>
 <thead><tr><th></th>{heads}</tr></thead>
 <tbody>

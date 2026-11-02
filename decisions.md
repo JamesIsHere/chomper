@@ -159,7 +159,7 @@ Status: superseded by 2026-11-01 Considerations page
 Group: Presentation
 Decision: Each company page opens with ten years of revenue, operating income (where the company reports it), pre-tax income and pre-tax margin, then the same ten years as the indexed chart. The five-year revenue and income table is removed; the five-year section starts at the cost grids. The list of breaks sits at the bottom of the page for now.
 Why: The five-year table repeated the last five columns of the ten-year one; operating income moved up so it does not drop off the page.
-Status: active
+Status: superseded by 2026-11-01 Ten years at the top, charted in log dollars
 
 ## 2026-11-01 | Ten years on one accounting basis
 Group: Method
@@ -171,4 +171,10 @@ Status: active
 Group: Build and process
 Decision: A third menu page, Considerations, lists what the pages do not yet do right or what comes next, from considerations.md: one entry per item with a theme, the companies it touches, and the condition that makes it due. The menu is Chomper, Decisioning, Considerations.
 Why: Items raised in passing (in chat, in the local notes) get lost; a due condition on each says when "done" is not done yet.
+Status: active
+
+## 2026-11-01 | Ten years at the top, charted in log dollars
+Group: Presentation
+Decision: Each company page opens with ten years of revenue, operating income (where the company reports it), pre-tax income and pre-tax margin, then a chart of revenue and pre-tax income in dollars on a log scale. Each year with a significant acquisition or a newly required accounting standard gets a numbered marker on the chart, explained in a numbered key under it. Under the lines, a band of bars shows each year's cost gap: pre-tax income at the prior year's pre-tax margin minus actual pre-tax income, both years from the same 10-K; red when costs grew faster than revenue, green when revenue grew faster. Figures a later 10-K changed are listed at the bottom as Note 1 - Recast Figures, and a starred change in the table reads "See Note 1". The chart and the five-year grids carry no explanatory notes. The five-year revenue and income table stays removed.
+Why: A chart in multiples of the first year depends on that year (CAT's small 2016 pre-tax income made it read 83x); a log scale keeps one axis, and equal slopes still mean equal growth, without a base year. The bars put a dollar size on costs outrunning revenue. The numbered markers were chosen from four trial displays (markers, shaded bands, labels, swim lanes).
 Status: active
