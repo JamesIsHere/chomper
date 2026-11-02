@@ -61,7 +61,7 @@ Item: Year labels come from the period end date, so a fiscal year ending in earl
 Why: A reader can misplace a year by one.
 Companies: HD, JNJ (Jan labels); AAPL (Sep), MSFT (Jun) labels read correctly but differ in style.
 Due: before the full S&P 500 run.
-Status: open
+Status: closed 2026-11-02, labels read a week before the period end (JNJ now 2016 to 2025); HD keeps end-month labels by James's choice ("Jan 2025" is the year HD calls fiscal 2024)
 
 ## 2026-11-01 | "Restated" used for recasts
 Theme: Presentation

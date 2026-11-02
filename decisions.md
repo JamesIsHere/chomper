@@ -199,7 +199,7 @@ Status: active
 
 ## 2026-11-02 | Fiscal year labels
 Group: Presentation
-Decision: A fiscal year is labeled from its end date read a week early: a year ending in December shows as the year (2020), any other as month and year (Sep 2020, Jan 2025). The week keeps 52/53-week years on one month: JNJ's year ended 2021-01-03 is 2020, and HD's years all read Jan.
+Decision: A fiscal year is labeled from its end date read a week early: a year ending in December shows as the year (2020), any other as month and year (Sep 2020, Jan 2025). The week keeps 52/53-week years on one month: JNJ's year ended 2021-01-03 is 2020, and HD's years all read Jan. Labels name the month a year ends in, not the company's own fiscal-year name (James, 2026-11-02): HD's "Jan 2025" is the year HD calls fiscal 2024.
 Why: Labeled by the raw end date, JNJ's years jumped between "Jan 2021" and "2020" and HD's between Jan and Feb, so fiscal years looked missing or doubled.
 Status: active
 
