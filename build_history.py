@@ -23,7 +23,9 @@ OUT = ROOT / "docs"
 
 def m(dollars, sign=True):
     v = dollars / 1e6
-    if abs(v) >= 1000:
+    if abs(v) >= 1_000_000:  # the S&P 500 page's sums
+        s = f"${abs(v) / 1_000_000:,.2f}T"
+    elif abs(v) >= 1000:
         s = f"${abs(v) / 1000:,.2f}B"
     else:
         s = f"${abs(v):,.1f}M"
@@ -232,7 +234,8 @@ def money_tick(v):
     """An axis label: $0, $500M, $2B, -$1B."""
     if v == 0:
         return "$0"
-    s = f"${abs(v) / 1e9:g}B" if abs(v) >= 1e9 else f"${abs(v) / 1e6:g}M"
+    s = (f"${abs(v) / 1e12:g}T" if abs(v) >= 1e12 else f"${abs(v) / 1e9:g}B" if abs(v) >= 1e9
+         else f"${abs(v) / 1e6:g}M")
     return ("-" if v < 0 else "") + s
 
 

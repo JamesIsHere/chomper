@@ -3,7 +3,8 @@
 Pages one folder down pass prefix="../" so every link resolves from where the page lives.
 """
 
-MENU = [("index.html", "Chomper"), ("decisions.html", "Decisioning"), ("considerations.html", "Considerations")]
+MENU = [("index.html", "Chomper"), ("aggregate.html", "S&amp;P 500"), ("decisions.html", "Decisioning"),
+        ("considerations.html", "Considerations")]
 
 CSS = """
 .menu { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem; margin: 0 0 1.5rem;
