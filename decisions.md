@@ -165,7 +165,7 @@ Status: superseded by 2026-11-01 Ten years at the top, charted in log dollars
 Group: Method
 Decision: The ten-year headline promises the same accounting basis, with acquisitions marked; it does not promise the same business. Each year's change comes from the latest 10-K that shows both years, and the chart chains those changes. A change that does not match the dollar figures above it, because a later 10-K recast one of the years, is marked with an asterisk. Modified retrospective adoptions (most ASC 606, nearly all ASC 842) recast nothing and stay marked breaks until the adoption notes are read.
 Why: Every 10-K shows its comparative year on its own basis, so same-filing growth handles restatements, retrospective changes, reclassifications and discontinued operations for every company without reading; same business needs the pro forma notes, company by company.
-Status: active
+Status: superseded by 2026-11-01 Ten years on one accounting basis, chart in dollars
 
 ## 2026-11-01 | Considerations page
 Group: Build and process
@@ -177,4 +177,10 @@ Status: active
 Group: Presentation
 Decision: Each company page opens with ten years of revenue, operating income (where the company reports it), pre-tax income and pre-tax margin, then a chart of revenue and pre-tax income in dollars on a log scale. Each year with a significant acquisition or a newly required accounting standard gets a numbered marker on the chart, explained in a numbered key under it. Under the lines, a band of bars shows each year's cost gap: pre-tax income at the prior year's pre-tax margin minus actual pre-tax income, both years from the same 10-K; red when costs grew faster than revenue, green when revenue grew faster. Figures a later 10-K changed are listed at the bottom as Note 1 - Recast Figures, and a starred change in the table reads "See Note 1". The chart and the five-year grids carry no explanatory notes. The five-year revenue and income table stays removed.
 Why: A chart in multiples of the first year depends on that year (CAT's small 2016 pre-tax income made it read 83x); a log scale keeps one axis, and equal slopes still mean equal growth, without a base year. The bars put a dollar size on costs outrunning revenue. The numbered markers were chosen from four trial displays (markers, shaded bands, labels, swim lanes).
+Status: active
+
+## 2026-11-01 | Ten years on one accounting basis, chart in dollars
+Group: Method
+Decision: The ten-year headline promises the same accounting basis, with acquisitions marked; it does not promise the same business. Each year's change comes from the latest 10-K that shows both years. The dollar figures and the chart's lines are the latest reported; the cost-gap bars take both years from that same 10-K. A change that does not match the dollar figures above it, because a later 10-K recast one of the years, is starred and points to Note 1. Modified retrospective adoptions (most ASC 606, nearly all ASC 842) recast nothing and stay marked breaks until the adoption notes are read.
+Why: Every 10-K shows its comparative year on its own basis, so same-filing growth handles restatements, retrospective changes, reclassifications and discontinued operations for every company without reading; same business needs the pro forma notes, company by company. The chart moved to dollars on a log scale, so it no longer chains the changes.
 Status: active

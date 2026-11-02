@@ -69,7 +69,7 @@ Item: The ten-year breaks (acquisitions, standards, restatements) moved from the
 Why: A reader who sees a marked change at the top has to scroll to the bottom to learn why.
 Companies: all
 Due: the next pass on the company page layout.
-Status: open
+Status: closed 2026-11-01, acquisitions and standards are numbered on the chart with a key under it; only recasts stay at the bottom, as Note 1
 
 ## 2026-11-01 | Two headings stacked
 Theme: Presentation
@@ -92,6 +92,14 @@ Theme: Presentation
 Item: The chart shows each line as a multiple of the first year. When that year is unusually small, the line explodes and the other line goes flat: CAT's 2016 pre-tax income was $139.0M, so pre-tax income reads 83x by 2025 and revenue (1.75x) is a flat line at the bottom. A negative first year drops the chart entirely.
 Why: The chart's shape then reflects one odd year, not the decade.
 Companies: CAT (83x); PGR (pre-tax 0.63x to 9.67x) stretched; others read normally. At 500 companies, more.
+Due: before the full S&P 500 run.
+Status: closed 2026-11-01, the chart now plots dollars on a log scale, which has no first year to depend on
+
+## 2026-11-01 | Log chart drops on a loss year
+Theme: Presentation
+Item: A log scale cannot show zero or a negative number, so a company with any year of zero or negative pre-tax income gets a one-line note instead of the ten-year chart. None of the 10 companies has one; across the S&P 500 over ten years, many will (2020 alone).
+Why: The companies whose decade most needs a picture, the ones with a loss year, would lose it.
+Companies: none of the 10; at 500 companies, many.
 Due: before the full S&P 500 run.
 Status: open
 
