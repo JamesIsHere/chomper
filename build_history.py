@@ -111,19 +111,39 @@ def ratios(h):
     return "\n".join(rows)
 
 
+def adoptions():
+    """{(ticker, "606" or "842"): record} from data/adoptions.json, read by hand from each company's 10-K."""
+    d = json.loads((ROOT / "data" / "adoptions.json").read_text(encoding="utf-8"))
+    return {(a["ticker"], a["standard"]): a for a in d["adoptions"]}
+
+
 def chart_breaks(h):
-    """{end: [text]} for each year with a significant acquisition or a newly required accounting standard: the
-    years numbered on the chart and listed in its key. Restatements are not marked: the chart chains same-basis
-    growth, so a recast makes no spike in its lines (the table's asterisks carry them)."""
+    """{end: [text]} for each year with a significant acquisition or a new accounting standard: the years numbered
+    on the chart and listed in its key. A standard is marked in the year the company adopted it (data/adoptions.json);
+    one adopted with earlier years recast is not marked, since the series has no break there. With no adoption
+    note found, it stays on the year it became required. Fails if a company has no record for a standard, or an
+    adoption year is not one of its ten."""
     out = {}
     for d in h["deals"]:
         if d["significant"]:
             out.setdefault(d["fiscal_year_end"], []).append(
                 f"Acquired {d['name']}, {m(d['size'], False)}, {d['share_of_assets']:.0%} of total assets at the "
                 f"prior year end")
+    records = adoptions()
     for s in h["standards"]:
-        out.setdefault(s["fiscal_year_end"], []).append(
-            f"{s['standard']} required this year")
+        code = s["standard"].split()[1]  # "ASC 606 (revenue)" -> "606"
+        a = records.get((h["ticker"], code))
+        if a is None:
+            raise SystemExit(f"{h['ticker']}: no ASC {code} record in data/adoptions.json")
+        if a["recast"]:
+            continue
+        if a["year_ending"] is None:
+            out.setdefault(s["fiscal_year_end"], []).append(f"{s['standard']} required this year")
+            continue
+        if a["year_ending"] not in h["period_ends"]:
+            raise SystemExit(f"{h['ticker']} ASC {code}: adoption year {a['year_ending']} is not one of the ten")
+        out.setdefault(a["year_ending"], []).append(
+            f"{s['standard']} adopted" + ("; earlier years not recast" if a["recast"] is False else ""))
     return out
 
 

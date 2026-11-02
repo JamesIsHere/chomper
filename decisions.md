@@ -184,3 +184,9 @@ Group: Method
 Decision: The ten-year headline promises the same accounting basis, with acquisitions marked; it does not promise the same business. Each year's change comes from the latest 10-K that shows both years. The dollar figures and the chart's lines are the latest reported; the cost-gap bars take both years from that same 10-K. A change that does not match the dollar figures above it, because a later 10-K recast one of the years, is starred and points to Note 1. Modified retrospective adoptions (most ASC 606, nearly all ASC 842) recast nothing and stay marked breaks until the adoption notes are read.
 Why: Every 10-K shows its comparative year on its own basis, so same-filing growth handles restatements, retrospective changes, reclassifications and discontinued operations for every company without reading; same business needs the pro forma notes, company by company. The chart moved to dollars on a log scale, so it no longer chains the changes.
 Status: active
+
+## 2026-11-02 | Standards marked in the year adopted
+Group: Method
+Decision: ASC 606 and ASC 842 are marked on the ten-year chart in the year each company adopted them, as read from its own 10-K into data/adoptions.json (year, whether earlier years were recast, accession, verbatim quote). A standard adopted with earlier years recast gets no marker, since the series has no break there. Where no adoption note was found, the marker stays on the year the standard became required; where the 10-K does not state the method, the key says only "adopted".
+Why: The required year was wrong for early adopters (MSFT, UNH), and a fully retrospective adoption (AAPL, JPM and MSFT 606, MSFT 842) is not a break; the company's own adoption note is the only source that says which.
+Status: active

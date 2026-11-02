@@ -21,6 +21,14 @@ Item: A company that adopted ASC 606 (2018) or ASC 842 (2019) by the modified re
 Why: The ten-year headline promises one accounting basis; in these years the change row looks clean but may not be.
 Companies: MSFT: 606 consistent with a fully retrospective adoption (the FY2017 recast), adoption note not read. AAPL, CAT, HD, JNJ, JPM, ODFL, PGR, PLD, UNH: method not read.
 Due: before the full S&P 500 run, or before the headline is called complete.
+Status: closed 2026-11-02, all 20 adoption notes read into data/adoptions.json; the chart marks each standard in the year adopted and drops it where earlier years were recast
+
+## 2026-11-02 | Adoption record is hand-read and has two gaps
+Theme: Accounting basis
+Item: data/adoptions.json was read by hand from the 10 companies' 10-Ks. PGR's ASC 606 adoption note was not found in any cached 10-K (insurance contracts are mostly outside ASC 606, so there may be nothing to adopt; inference, not read), so its marker stays on the required year. JPM's 10-K does not state its ASC 842 method, so its key says only "adopted". The full S&P 500 run needs about 1,000 such reads.
+Why: The key's adoption years and "not recast" claims are only as good as a reading that does not yet scale.
+Companies: PGR (606), JPM (842); at 500 companies, all.
+Due: before the full S&P 500 run.
 Status: open
 
 ## 2026-10-30 | A recast that coincides with a tag change is missed
