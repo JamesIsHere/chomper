@@ -553,7 +553,8 @@ def main():
           f"{len(disagreements)} overlap disagreement(s); every year foots to pre-tax income"
           + ("" if oi is None else " and operating income"))
     for d in disagreements:
-        print(f"  {d['item']} {d['period_end']}: latest {d['latest_filing']:,} vs earlier {d['earlier_filing']:,}")
+        a, b = (f"{v:,}" if v is not None else "none" for v in (d["latest_filing"], d["earlier_filing"]))
+        print(f"  {d['item']} {d['period_end']}: latest {a} vs earlier {b}")
 
 
 if __name__ == "__main__":
