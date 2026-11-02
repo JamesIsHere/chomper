@@ -2,52 +2,149 @@
  "CAT": {
   "2007-12-31": {
    "deals": [
-    {"name": "Franklin Power Products and International Fuel Systems", "member": "by_hand:FranklinPowerProducts",
-     "date": "2007-02-28", "size": 165000000, "measure": "consideration"},
-    {"name": "Blount International's Forestry Division", "member": "by_hand:BlountForestryDivision",
-     "date": "2007-11-30", "size": 82000000, "measure": "consideration"}
+    {
+     "name": "Franklin Power Products and International Fuel Systems",
+     "member": "by_hand:FranklinPowerProducts",
+     "date": "2007-02-28",
+     "size": 165000000,
+     "measure": "consideration"
+    },
+    {
+     "name": "Blount International's Forestry Division",
+     "member": "by_hand:BlountForestryDivision",
+     "date": "2007-11-30",
+     "size": 82000000,
+     "measure": "consideration"
+    }
    ],
    "spend": 229000000,
    "prior_total_assets": 51449000000,
    "note": "Note 25 gives months, not days: dates are month ends. Spend is the consolidated cash flow line, 2007 column (the MD&A's $244 million is Machinery and Engines alone). Total assets at 31 Dec 2006 from the balance sheet (columns 2007, 2006, 2005).",
    "sources": [
-    {"accession": "0000018230-08-000052", "document": "ex_13.htm",
-     "quote": "In June 2007, pursuant to the acquisition agreement, additional assets were purchased from Remy International for $7 million which increased the total purchase price to approximately $165 million"},
-    {"accession": "0000018230-08-000052", "document": "ex_13.htm",
-     "quote": "In November 2007, we acquired substantially all of the assets and assumed certain liabilities of Blount International"},
-    {"accession": "0000018230-08-000052", "document": "ex_13.htm",
-     "quote": "The cost of the acquisition was $82 million, consisting of $79 million in cash and a net employee benefit liability incurred of $3 million."},
-    {"accession": "0000018230-08-000052", "document": "ex_13.htm",
-     "quote": "Investments and acquisitions (net of cash acquired) (229 ) (513 ) (13 )"},
-    {"accession": "0000018230-08-000052", "document": "ex_13.htm",
-     "quote": "Total assets $ 56,132 $ 51,449 $ 47,553"}
+    {
+     "accession": "0000018230-08-000052",
+     "document": "ex_13.htm",
+     "quote": "In June 2007, pursuant to the acquisition agreement, additional assets were purchased from Remy International for $7 million which increased the total purchase price to approximately $165 million"
+    },
+    {
+     "accession": "0000018230-08-000052",
+     "document": "ex_13.htm",
+     "quote": "In November 2007, we acquired substantially all of the assets and assumed certain liabilities of Blount International"
+    },
+    {
+     "accession": "0000018230-08-000052",
+     "document": "ex_13.htm",
+     "quote": "The cost of the acquisition was $82 million, consisting of $79 million in cash and a net employee benefit liability incurred of $3 million."
+    },
+    {
+     "accession": "0000018230-08-000052",
+     "document": "ex_13.htm",
+     "quote": "Investments and acquisitions (net of cash acquired) (229 ) (513 ) (13 )"
+    },
+    {
+     "accession": "0000018230-08-000052",
+     "document": "ex_13.htm",
+     "quote": "Total assets $ 56,132 $ 51,449 $ 47,553"
+    }
    ]
   },
   "2008-12-31": {
    "deals": [
-    {"name": "Lovat Inc.", "member": "cat:LovatIncMember",
-     "date": "2008-04-30", "size": 49000000, "measure": "consideration"},
-    {"name": "Gremada Industries, Inc.", "member": "cat:GremadaIndustriesIncMember",
-     "date": "2008-07-31", "size": 62000000, "measure": "consideration"},
-    {"name": "Shin Caterpillar Mitsubishi (Caterpillar Japan), 50 to 67 percent", "member": "by_hand:ShinCaterpillarMitsubishi",
-     "date": "2008-08-01", "size": 464000000, "measure": "consideration"}
+    {
+     "name": "Lovat Inc.",
+     "member": "cat:LovatIncMember",
+     "date": "2008-04-30",
+     "size": 49000000,
+     "measure": "consideration"
+    },
+    {
+     "name": "Gremada Industries, Inc.",
+     "member": "cat:GremadaIndustriesIncMember",
+     "date": "2008-07-31",
+     "size": 62000000,
+     "measure": "consideration"
+    },
+    {
+     "name": "Shin Caterpillar Mitsubishi (Caterpillar Japan), 50 to 67 percent",
+     "member": "by_hand:ShinCaterpillarMitsubishi",
+     "date": "2008-08-01",
+     "size": 464000000,
+     "measure": "consideration"
+    }
    ],
    "spend": 117000000,
    "prior_total_assets": 56132000000,
    "note": "Lovat and Gremada carry the dates and members CAT's FY2010 10-K tags them with. The Cat Japan share redemption was paid by Cat Japan itself and accounted for as a business combination; its consolidation added $2,396 million of assets from the fourth quarter of 2008. Spend is the consolidated cash flow line, 2008 column; total assets at 31 Dec 2007 (balance sheet columns 2008, 2007, 2006).",
    "sources": [
-    {"accession": "0000018230-09-000063", "document": "ex_13.htm",
-     "quote": "In April 2008, we acquired 100 percent of the equity in privately held Lovat Inc. (Lovat) for approximately $49 million."},
-    {"accession": "0000018230-09-000063", "document": "ex_13.htm",
-     "quote": "The cost of the acquisition was $62 million, consisting of $60 million paid at closing and an additional $2 million post-closing adjustment paid in August 2008."},
-    {"accession": "0000018230-09-000063", "document": "ex_13.htm",
-     "quote": "On August 1, 2008, SCM completed the first phase of a share redemption plan whereby SCM redeemed half of MHI"},
-    {"accession": "0000018230-09-000063", "document": "ex_13.htm",
-     "quote": "The $464 million redemption price was assigned to 17 percent of Cat Japan"},
-    {"accession": "0000018230-09-000063", "document": "ex_13.htm",
-     "quote": "Investments and acquisitions (net of cash acquired) (117 ) (229 ) (513 )"},
-    {"accession": "0000018230-09-000063", "document": "ex_13.htm",
-     "quote": "Total assets $ 67,782 $ 56,132 $ 51,449"}
+    {
+     "accession": "0000018230-09-000063",
+     "document": "ex_13.htm",
+     "quote": "In April 2008, we acquired 100 percent of the equity in privately held Lovat Inc. (Lovat) for approximately $49 million."
+    },
+    {
+     "accession": "0000018230-09-000063",
+     "document": "ex_13.htm",
+     "quote": "The cost of the acquisition was $62 million, consisting of $60 million paid at closing and an additional $2 million post-closing adjustment paid in August 2008."
+    },
+    {
+     "accession": "0000018230-09-000063",
+     "document": "ex_13.htm",
+     "quote": "On August 1, 2008, SCM completed the first phase of a share redemption plan whereby SCM redeemed half of MHI"
+    },
+    {
+     "accession": "0000018230-09-000063",
+     "document": "ex_13.htm",
+     "quote": "The $464 million redemption price was assigned to 17 percent of Cat Japan"
+    },
+    {
+     "accession": "0000018230-09-000063",
+     "document": "ex_13.htm",
+     "quote": "Investments and acquisitions (net of cash acquired) (117 ) (229 ) (513 )"
+    },
+    {
+     "accession": "0000018230-09-000063",
+     "document": "ex_13.htm",
+     "quote": "Total assets $ 67,782 $ 56,132 $ 51,449"
+    }
+   ]
+  }
+ },
+ "HD": {
+  "2008-02-03": {
+   "deals": [],
+   "spend": 13000000,
+   "prior_total_assets": 52263000000,
+   "note": "Fiscal 2007. Cash flow columns fiscal 2007, 2006, 2005; total assets at 28 Jan 2007 (balance sheet columns fiscal 2007, 2006). HD Supply was sold in fiscal 2007, a divestiture; the 10-K names no business acquired that year.",
+   "sources": [
+    {
+     "accession": "0001047469-08-004077",
+     "document": "a2183971z10-k.htm",
+     "quote": "Businesses Acquired, net (13 ) (4,268 ) (2,546 )"
+    },
+    {
+     "accession": "0001047469-08-004077",
+     "document": "a2183971z10-k.htm",
+     "quote": "Total Assets $ 44,324 $ 52,263"
+    }
+   ]
+  },
+  "2009-02-01": {
+   "deals": [],
+   "spend": 0,
+   "spend_line": "Payments for Businesses Acquired, net",
+   "prior_total_assets": 44324000000,
+   "note": "Fiscal 2008. The cash flow line shows a dash for fiscal 2008 (columns fiscal 2008, 2007, 2006: dash, 13, 4,268); total assets at 3 Feb 2008.",
+   "sources": [
+    {
+     "accession": "0000950144-09-002875",
+     "document": "x17422e10vk.htm",
+     "quote": "Payments for Businesses Acquired, net"
+    },
+    {
+     "accession": "0000950144-09-002875",
+     "document": "x17422e10vk.htm",
+     "quote": "Total Assets $ 41,164 $ 44,324"
+    }
    ]
   }
  }

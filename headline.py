@@ -214,6 +214,10 @@ def by_hand(ticker, end, cik, filing, ua):
         quotes.append(s["quote"])
     for what in ("spend", "prior_total_assets"):
         v = rec[what]
+        if what == "spend" and v == 0:  # a dash in the filing's column: the record must name the line it read
+            if not rec.get("spend_line") or not any(rec["spend_line"] in q for q in quotes):
+                raise SystemExit(f"{ticker} {end}: spend 0 needs spend_line, the cash flow line quoted")
+            continue
         if v % 1_000_000 or not any(f"{v // 1_000_000:,}" in q for q in quotes):
             raise SystemExit(f"{ticker} {end}: {what} {v:,} does not appear in millions in any quote")
     for d in rec["deals"]:

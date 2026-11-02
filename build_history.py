@@ -333,8 +333,9 @@ def trend_chart(h):
     out += [f'<line x1="{L}" x2="{W - R}" y1="{py(v):.1f}" y2="{py(v):.1f}" class="g"/>'
            f'<text x="{L - 6}" y="{py(v) + 4:.1f}" class="ax" text-anchor="end">{money_tick(v)}</text>'
            for v in ticks]
-    out += [f'<text x="{px(i):.1f}" y="{T + PLOT_H + LOSS_H + 18}" class="ax" text-anchor="middle">{year(e)}</text>'
-            for i, e in enumerate(ends)]
+    # The axis shows the year alone ("Jan 2009" -> 2009); the table's rows carry the month.
+    out += [f'<text x="{px(i):.1f}" y="{T + PLOT_H + LOSS_H + 18}" class="ax" text-anchor="middle">'
+            f'{year(e).split()[-1]}</text>' for i, e in enumerate(ends)]
     if losses:
         out.append(f'<text x="{L - 6}" y="{T + PLOT_H + 26}" class="ax" text-anchor="end">Loss</text>')
         out += [f'<text x="{px(ends.index(e)):.1f}" y="{T + PLOT_H + 40}" class="ax" text-anchor="middle">'
