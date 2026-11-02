@@ -7,6 +7,7 @@ ratio effect, sign flipped so a cost that outran revenue shows as a loss).
 Usage: python build_history.py
 """
 import json
+import math
 import re
 from datetime import date
 from html import escape
@@ -97,29 +98,49 @@ def ratios(h):
     return "\n".join(rows)
 
 
-def trend_chart(h):
-    """Revenue and pre-tax income indexed to the first year = 100 by chaining each year's same-basis change
-    (headline.py), one axis, inline SVG."""
-    ends = h["period_ends"]
-    series = [("Revenue", "--s1", h["revenue"]), ("Pre-tax income", "--s2", h["pretax_income"])]
+def multiples(h):
+    """{name: [multiple of the first year]} for revenue and pre-tax income, chaining each year's same-basis change
+    (headline.py), or None if a year is zero or negative (growth cannot be chained)."""
     chains = {"Revenue": h["changes"]["revenue"], "Pre-tax income": h["changes"]["pretax_income"]}
     if any(c["prior"] <= 0 or c["value"] <= 0 for ch in chains.values() for c in ch.values()):
-        return '<p class="note">Trend chart omitted: a year is zero or negative, so growth cannot be chained.</p>'
-    idx = {}
+        return None
+    out = {}
     for name, ch in chains.items():
-        idx[name] = [100.0]
-        for e in ends[1:]:
-            idx[name].append(idx[name][-1] * ch[e]["value"] / ch[e]["prior"])
-    lo = min(min(v) for v in idx.values())
-    hi = max(max(v) for v in idx.values())
-    step = 10 if hi - lo <= 60 else 25 if hi - lo <= 150 else 50
-    lo, hi = (int(lo // step) * step), (int(-(-hi // step)) * step)
-    W, H, L, R, T, B = 640, 220, 36, 150, 12, 26
+        out[name] = [1.0]
+        for e in h["period_ends"][1:]:
+            out[name].append(out[name][-1] * ch[e]["value"] / ch[e]["prior"])
+    return out
+
+
+def axis(values):
+    """(ticks, low, high) for a multiples axis: a round step, at most six intervals, covering every value."""
+    lo, hi = min(values), max(values)
+    steps = [0.1, 0.25, 0.5] + [k * 10 ** p for p in range(4) for k in (1, 2, 5)]
+    step = next(s for s in steps if (hi - lo) / s <= 6)
+    lo, hi = math.floor(lo / step) * step, math.ceil(hi / step) * step
+    return [lo + k * step for k in range(round((hi - lo) / step) + 1)], lo, hi
+
+
+def times(v):
+    """A multiple as the page writes it: 1x, 1.5x, 3.47x."""
+    return f"{v:.2f}".rstrip("0").rstrip(".") + "x"
+
+
+def trend_chart(h):
+    """Revenue and pre-tax income as multiples of the first year (first year = 1x), chaining each year's
+    same-basis change (headline.py), one axis, inline SVG."""
+    ends = h["period_ends"]
+    series = [("Revenue", "--s1", h["revenue"]), ("Pre-tax income", "--s2", h["pretax_income"])]
+    idx = multiples(h)
+    if idx is None:
+        return '<p class="note">Trend chart omitted: a year is zero or negative, so growth cannot be chained.</p>'
+    ticks, lo, hi = axis([v for vs in idx.values() for v in vs])
+    W, H, L, R, T, B = 640, 220, 40, 170, 12, 26
     px = lambda i: L + i * (W - L - R) / (len(ends) - 1)
     py = lambda v: T + (hi - v) / (hi - lo) * (H - T - B)
     grid = "".join(f'<line x1="{L}" x2="{W - R}" y1="{py(v):.1f}" y2="{py(v):.1f}" class="g"/>'
-                   f'<text x="{L - 6}" y="{py(v) + 4:.1f}" class="ax" text-anchor="end">{v}</text>'
-                   for v in range(lo, hi + 1, step))
+                   f'<text x="{L - 6}" y="{py(v) + 4:.1f}" class="ax" text-anchor="end">{times(v)}</text>'
+                   for v in ticks)
     xs = "".join(f'<text x="{px(i):.1f}" y="{H - 6}" class="ax" text-anchor="middle">{year(e)}</text>'
                  for i, e in enumerate(ends))
     marks, label_y = [], {}
@@ -134,18 +155,20 @@ def trend_chart(h):
         mid = (a + b) / 2
         a, b = (mid - 7, mid + 7) if a <= b else (mid + 7, mid - 7)
     labels = "".join(f'<text x="{px(len(ends) - 1) + 10:.1f}" y="{y + 4:.1f}" class="lab">{name} '
-                     f'{idx[name][-1]:.0f}</text>' for (name, _, _), y in zip(series, (a, b)))
+                     f'{times(idx[name][-1])}</text>' for (name, _, _), y in zip(series, (a, b)))
     hits = []
     for i, e in enumerate(ends):
         x0 = px(i) - (W - L - R) / (len(ends) - 1) / 2
-        tip = f"{year(e)}: revenue {m(h['revenue'][e], False)} ({idx['Revenue'][i]:.0f}), pre-tax income " \
-              f"{m(h['pretax_income'][e], False)} ({idx['Pre-tax income'][i]:.0f})"
+        first = year(ends[0])
+        tip = (f"{year(e)}: revenue {m(h['revenue'][e], False)} ({times(idx['Revenue'][i])} {first}), pre-tax "
+               f"income {m(h['pretax_income'][e], False)} ({times(idx['Pre-tax income'][i])} {first})")
         hits.append(f'<rect x="{max(x0, L):.1f}" y="{T}" width="{(W - L - R) / (len(ends) - 1):.1f}" '
                     f'height="{H - T - B}" class="hit"><title>{escape(tip)}</title></rect>')
     legend = "".join(f'<span><i style="background:var({var})"></i>{name}</span>' for name, var, _ in series)
-    return (f'<p class="legend">{legend}<span class="dim">Indexed: {year(ends[0])} = 100</span></p>'
-            f'<svg class="trend" viewBox="0 0 {W} {H}" role="img" aria-label="Revenue and pre-tax income, '
-            f'indexed to {year(ends[0])} = 100, each year\'s change on one accounting basis; values in the table '
+    return (f'<p class="legend">{legend}<span class="dim">Times {year(ends[0])}: 1x = the {year(ends[0])} '
+            f'figure; growth on one accounting basis</span></p>'
+            f'<svg class="trend" viewBox="0 0 {W} {H}" role="img" aria-label="Revenue and pre-tax income as '
+            f'multiples of {year(ends[0])}, each year\'s change on one accounting basis; values in the table '
             f'above">{grid}{xs}{"".join(marks)}{labels}'
             f'{"".join(hits)}</svg>')
 

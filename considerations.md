@@ -87,6 +87,14 @@ Companies: PLD (Liberty, Duke). Others: not checked.
 Due: the next pass on the breaks list.
 Status: open
 
+## 2026-11-01 | Ten-year chart depends on the first year
+Theme: Presentation
+Item: The chart shows each line as a multiple of the first year. When that year is unusually small, the line explodes and the other line goes flat: CAT's 2016 pre-tax income was $139.0M, so pre-tax income reads 83x by 2025 and revenue (1.75x) is a flat line at the bottom. A negative first year drops the chart entirely.
+Why: The chart's shape then reflects one odd year, not the decade.
+Companies: CAT (83x); PGR (pre-tax 0.63x to 9.67x) stretched; others read normally. At 500 companies, more.
+Due: before the full S&P 500 run.
+Status: open
+
 ## 2026-11-01 | Phone layout unchecked
 Theme: Presentation
 Item: Every visual check is at desktop width; the screenshots James gets are the desktop layout. How the pages read on a phone is unchecked.
@@ -173,6 +181,14 @@ Item: Create the GitHub repo JamesIsHere/chomper (private or public), serve docs
 Why: The definition of done, and the way to open the real site on a phone.
 Companies: all
 Due: James's call on the repo.
+Status: open
+
+## 2026-11-01 | Breaks on a stock price chart
+Theme: Path forward
+Item: Event markers (deals announced and closed, recasts, accounting changes, 10-K filing dates) read most naturally on a chart of the share price, where the market's reaction sits next to the event. Needs a price source; none is in the project today.
+Why: James's read while comparing the four break renderings: these markers look better on a price chart than on revenue and income.
+Companies: all
+Due: after the ten-year breaks have a settled design on the company page.
 Status: open
 
 ## 2026-11-01 | Company pages link to their considerations
