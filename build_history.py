@@ -197,30 +197,37 @@ def cost_gaps(h):
 
 def trend_chart(h):
     """Revenue and pre-tax income in dollars on a log scale (the table's figures), each year with a break numbered
-    at the top and explained in a key; under it, a band of bars for each year's cost gap (cost_gaps)."""
+    at the top and explained in a key; under it, a band of bars for each year's cost gap (cost_gaps). A log scale
+    has no zero or negative, so a year with zero or negative pre-tax income breaks the income line and sits on a
+    loss strip under the plot, labeled with its amount. Fails if a year's revenue is zero or negative."""
     ends = h["period_ends"]
     series = [("Revenue", "--s1", h["revenue"]), ("Pre-tax income", "--s2", h["pretax_income"])]
-    vals = [s[e] for _, _, s in series for e in ends]
-    if min(vals) <= 0:
-        return ('<p class="note">Chart omitted: a year\'s pre-tax income is zero or negative, so it cannot go on a '
-                'log scale.</p>')
+    if min(h["revenue"][e] for e in ends) <= 0:
+        raise SystemExit(f"{h['ticker']}: a year's revenue is zero or negative")
+    losses = [e for e in ends if h["pretax_income"][e] <= 0]
+    vals = [s[e] for _, _, s in series for e in ends if s[e] > 0]
     W, L, R, T, PLOT_H, X_H, GAP, BAND_H = 800, 60, 170, 26, 280, 26, 18, 110
+    LOSS_H = 46 if losses else 0
     ticks = log_ticks(min(vals), max(vals))
     lo, hi = math.log10(ticks[0]), math.log10(ticks[-1])
     step_x = (W - L - R) / len(ends)  # one slot per year, so every bar sits inside the plot
     px = lambda i: L + (i + 0.5) * step_x
-    py = lambda v: T + (hi - math.log10(v)) / (hi - lo) * PLOT_H
+    py = lambda v: T + (hi - math.log10(v)) / (hi - lo) * PLOT_H if v > 0 else T + PLOT_H + 22
     g = cost_gaps(h)
     bt = bar_ticks(list(g.values()))
-    b0 = T + PLOT_H + X_H + GAP
+    b0 = T + PLOT_H + LOSS_H + X_H + GAP
     by = lambda v: b0 + (bt[-1] - v) / (bt[-1] - bt[0]) * BAND_H
     H = b0 + BAND_H + 8
 
     out = [f'<line x1="{L}" x2="{W - R}" y1="{py(v):.1f}" y2="{py(v):.1f}" class="g"/>'
            f'<text x="{L - 6}" y="{py(v) + 4:.1f}" class="ax" text-anchor="end">{money_tick(v)}</text>'
            for v in ticks]
-    out += [f'<text x="{px(i):.1f}" y="{T + PLOT_H + 18}" class="ax" text-anchor="middle">{year(e)}</text>'
+    out += [f'<text x="{px(i):.1f}" y="{T + PLOT_H + LOSS_H + 18}" class="ax" text-anchor="middle">{year(e)}</text>'
             for i, e in enumerate(ends)]
+    if losses:
+        out.append(f'<text x="{L - 6}" y="{T + PLOT_H + 26}" class="ax" text-anchor="end">Loss</text>')
+        out += [f'<text x="{px(ends.index(e)):.1f}" y="{T + PLOT_H + 40}" class="ax" text-anchor="middle">'
+                f'{m(h["pretax_income"][e], False)}</text>' for e in losses]
     b = chart_breaks(h)
     years = [e for e in ends if e in b]
     out += [f'<line x1="{px(ends.index(e)):.1f}" x2="{px(ends.index(e)):.1f}" y1="{T - 2}" y2="{T + PLOT_H}" '
@@ -229,20 +236,28 @@ def trend_chart(h):
             for n, e in enumerate(years, 1)]
     label_y = []
     for name, var, s in series:
-        pts = " ".join(f"{px(i):.1f},{py(s[e]):.1f}" for i, e in enumerate(ends))
-        out.append(f'<polyline points="{pts}" fill="none" style="stroke:var({var})" stroke-width="2"/>')
+        runs, run = [], []  # the line runs only through consecutive years above zero
+        for i, e in enumerate(ends):
+            if s[e] > 0:
+                run.append(f"{px(i):.1f},{py(s[e]):.1f}")
+            elif run:
+                runs.append(run)
+                run = []
+        runs += [run] if run else []
+        out += [f'<polyline points="{" ".join(r)}" fill="none" style="stroke:var({var})" stroke-width="2"/>'
+                for r in runs if len(r) > 1]
         out += [f'<circle cx="{px(i):.1f}" cy="{py(s[e]):.1f}" r="4" style="fill:var({var})" class="dot"/>'
                 for i, e in enumerate(ends)]
         label_y.append(py(s[ends[-1]]))
     a, c = label_y  # keep the two end labels from colliding
-    if abs(a - c) < 14:
+    if abs(a - c) < 14 and h["pretax_income"][ends[-1]] > 0:
         mid = (a + c) / 2
         a, c = (mid - 7, mid + 7) if a <= c else (mid + 7, mid - 7)
     out += [f'<text x="{W - R + 10}" y="{y + 4:.1f}" class="lab">{name} {m(s[ends[-1]], False)}</text>'
             for (name, _, s), y in zip(series, (a, c))]
     for i, e in enumerate(ends):
         tip = f"{year(e)}: revenue {m(h['revenue'][e], False)}, pre-tax income {m(h['pretax_income'][e], False)}"
-        out.append(f'<rect x="{px(i) - step_x / 2:.1f}" y="{T}" width="{step_x:.1f}" height="{PLOT_H}" '
+        out.append(f'<rect x="{px(i) - step_x / 2:.1f}" y="{T}" width="{step_x:.1f}" height="{PLOT_H + LOSS_H}" '
                    f'class="hit"><title>{escape(tip)}</title></rect>')
     out += [f'<text x="{L - 6}" y="{by(v) + 4:.1f}" class="ax" text-anchor="end">{money_tick(v)}</text>'
             for v in bt]
@@ -261,7 +276,8 @@ def trend_chart(h):
                '<span><i class="sw bar-up-sw"></i>Revenue ran ahead of costs</span>')
     return (f'<p class="legend">{legend}</p>'
             f'<svg class="trend wide" viewBox="0 0 {W} {H}" role="img" aria-label="Revenue and pre-tax income in '
-            f'dollars on a log scale, with each year\'s cost gap as bars below; values in the table above">'
+            f'dollars on a log scale{", loss years on a strip under the plot" if losses else ""}, with each year\'s '
+            f'cost gap as bars below; values in the table above">'
             f'{"".join(out)}</svg>'
             + (f'<ol class="key">{key}</ol>' if key else ""))
 

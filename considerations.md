@@ -109,7 +109,7 @@ Item: A log scale cannot show zero or a negative number, so a company with any y
 Why: The companies whose decade most needs a picture, the ones with a loss year, would lose it.
 Companies: none of the 10; at 500 companies, many.
 Due: before the full S&P 500 run.
-Status: open
+Status: closed 2026-11-02, the income line now breaks at a loss year and the year sits on a loss strip under the plot with its amount; checked on test data only, since no real loss company has passed history.py yet
 
 ## 2026-11-01 | Phone layout unchecked
 Theme: Presentation
@@ -133,6 +133,22 @@ Item: 10 companies tested; 3 refusal modes seen (bank before the revenue fix, no
 Why: A quiet wrong number at scale is worse than a refusal.
 Companies: all
 Due: the full S&P 500 run.
+Status: open
+
+## 2026-11-02 | BA statement does not foot
+Theme: Coverage
+Item: history.py stops on Boeing's FY2025 10-K (0001628280-26-004357): its 2023 lines foot to +$68.07B against pre-tax income of -$2.005B. About $70B of costs are missing, so a whole branch of the statement is not being read. Cause not yet looked at.
+Why: Boeing is a loss company the loss-year chart needs; it cannot reach the chart until it foots.
+Companies: BA
+Due: before the full S&P 500 run.
+Status: open
+
+## 2026-11-02 | CCL statement off by $1M
+Theme: Coverage
+Item: history.py stops on Carnival's 10-K (0000815097-26-000007): its 2023 lines foot to -$63M against pre-tax income of -$62M. Footing demands an exact match; a $1M gap looks like the filing's own rounding. Whether to allow rounding slack, and how much, is James's ruling.
+Why: An exact footing rule that refuses rounding will stop real companies; a loose one could hide a missing line.
+Companies: CCL
+Due: before the full S&P 500 run.
 Status: open
 
 ## 2026-11-01 | Visual checks are a sample

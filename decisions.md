@@ -220,3 +220,9 @@ Group: Presentation
 Decision: The chart key names each significant acquisition as the buyer's own 10-K prose names the acquired company, with a trailing legal suffix dropped (HD Supply, SRS, Liberty Property Trust, Duke Realty), read by hand into data/deal_names.json with a verbatim quote and the accession. A significant deal with no record stops the build.
 Why: The XBRL member label is not the company's name: HD tags HD Supply as "HD Holdings Inc", and PLD's labels came out lowercase and doubled ("Liberty property trust and liberty property limited partnership").
 Status: active
+
+## 2026-11-02 | Loss years break the income line
+Group: Presentation
+Decision: The ten-year chart stays on a log scale for every company. A year with zero or negative pre-tax income breaks the pre-tax income line and sits on a strip labeled Loss under the plot, with its amount; the line runs only through consecutive profitable years. The axis is set from the profitable years. A year with zero or negative revenue stops the build.
+Why: A log scale cannot show zero or a negative, and growth is not defined across a change of sign, so the break marks exactly where slope stops meaning growth. Chosen over a symlog axis (slopes near zero would not mean growth), a linear axis for loss companies only (two chart grammars and the first-year problem back), and a margin axis (repeats the table). Checked on test data, Caterpillar's revenue with invented losses in five patterns.
+Status: active
