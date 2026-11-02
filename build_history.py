@@ -117,17 +117,27 @@ def adoptions():
     return {(a["ticker"], a["standard"]): a for a in d["adoptions"]}
 
 
+def deal_names():
+    """{XBRL member: name} from data/deal_names.json, the acquired company's name read by hand from the buyer's
+    10-K prose."""
+    d = json.loads((ROOT / "data" / "deal_names.json").read_text(encoding="utf-8"))
+    return {r["member"]: r["name"] for r in d["deals"]}
+
+
 def chart_breaks(h):
     """{end: [text]} for each year with a significant acquisition or a new accounting standard: the years numbered
     on the chart and listed in its key. A standard is marked in the year the company adopted it (data/adoptions.json);
     one adopted with earlier years recast is not marked, since the series has no break there. With no adoption
-    note found, it stays on the year it became required. Fails if a company has no record for a standard, or an
-    adoption year is not one of its ten."""
+    note found, it stays on the year it became required. A deal is named from data/deal_names.json. Fails if a
+    company has no record for a standard or a significant deal, or an adoption year is not one of its ten."""
     out = {}
+    names = deal_names()
     for d in h["deals"]:
         if d["significant"]:
+            if d["member"] not in names:
+                raise SystemExit(f"{h['ticker']}: no name for {d['member']} in data/deal_names.json")
             out.setdefault(d["fiscal_year_end"], []).append(
-                f"Acquired {d['name']}, {m(d['size'], False)}, {d['share_of_assets']:.0%} of total assets at the "
+                f"Acquired {names[d['member']]}, {m(d['size'], False)}, {d['share_of_assets']:.0%} of total assets at the "
                 f"prior year end")
     records = adoptions()
     for s in h["standards"]:

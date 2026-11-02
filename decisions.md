@@ -214,3 +214,9 @@ Group: Presentation
 Decision: A figure that a later 10-K changed is called recast ("Note 1 - Recast Figures", "as later recast"), never restated.
 Why: In accounting a restatement corrects an error (ASC 250); most of these changes are new standards, presentation changes or discontinued operations, and calling them restatements claims an error the company never made.
 Status: active
+
+## 2026-11-02 | Deal names from the buyer's 10-K
+Group: Presentation
+Decision: The chart key names each significant acquisition as the buyer's own 10-K prose names the acquired company, with a trailing legal suffix dropped (HD Supply, SRS, Liberty Property Trust, Duke Realty), read by hand into data/deal_names.json with a verbatim quote and the accession. A significant deal with no record stops the build.
+Why: The XBRL member label is not the company's name: HD tags HD Supply as "HD Holdings Inc", and PLD's labels came out lowercase and doubled ("Liberty property trust and liberty property limited partnership").
+Status: active

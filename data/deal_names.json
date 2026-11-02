@@ -1,0 +1,13 @@
+{
+  "about": "The name the chart key shows for each significant acquisition, keyed by the XBRL member headline.py finds it under. Read by hand 2026-11-02: the acquired company's name as the buyer's own 10-K prose writes it, with a trailing legal suffix dropped (as for company names). Quotes are verbatim from the filing named by accession.",
+  "deals": [
+    {"member": "hd:HDHoldingsIncMember", "name": "HD Supply", "accession": "0000354950-21-000089", "quote": "We believe the acquisition of HD Supply will help position the Company to accelerate sales growth by better serving both existing and new MRO customers."},
+    {"member": "hd:SRSAcquisitionMember", "name": "SRS", "accession": "0000354950-25-000085", "quote": "During the second quarter of fiscal 2024, we completed the acquisition of SRS, a leading residential specialty trade distribution company that sells roofing and complementary building products, landscape, and pool products to professional contractors."},
+    {"member": "jnj:ActelionMember", "name": "Actelion", "accession": "0000200406-18-000005", "quote": "During 2017, the Company completed the acquisition of Actelion Ltd through an all cash tender offer in Switzerland for $280 per share"},
+    {"member": "msft:LinkedInCorporationMember", "name": "LinkedIn", "accession": "0001564590-17-014900", "quote": "On December 8, 2016, we acquired LinkedIn Corporation."},
+    {"member": "msft:ActivisionBlizzardIncMember", "name": "Activision Blizzard", "accession": "0000950170-24-087843", "quote": "On October 13, 2023 , we completed our acquisition of Activision Blizzard, Inc."},
+    {"member": "pld:DCTIndustrialTrustIncAndDCTIndustrialOperatingPartnershipLPMember", "name": "DCT Industrial Trust", "accession": "0001564590-21-005312", "quote": "acquired DCT Industrial Trust Inc."},
+    {"member": "pld:LibertyPropertyTrustAndLibertyPropertyLimitedPartnershipMember", "name": "Liberty Property Trust", "accession": "0001564590-21-005312", "quote": "On February 4, 2020, we acquired Liberty Property Trust and Liberty Property Limited Partnership"},
+    {"member": "pld:DukeRealtyCorporationAndDukeRealtyLimitedPartnershipMember", "name": "Duke Realty", "accession": "0000950170-25-021272", "quote": "On October 3, 2022 , we acquired Duke Realty Corporation and Duke Realty Limited Partnership"}
+  ]
+}

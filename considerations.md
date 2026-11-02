@@ -93,7 +93,7 @@ Item: Deal names come from the filing's documentation label as written, so some 
 Why: Looks like a bug on the page.
 Companies: PLD (Liberty, Duke). Others: not checked.
 Due: the next pass on the breaks list.
-Status: open
+Status: closed 2026-11-02, deal names come from data/deal_names.json, read from each buyer's 10-K prose
 
 ## 2026-11-01 | Ten-year chart depends on the first year
 Theme: Presentation
