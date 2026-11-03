@@ -552,6 +552,49 @@ def plural(n, noun):
     return f"{n} {noun}" if n == 1 else f"{n} {noun}s"
 
 
+def readme_page():
+    """README.md as a page: the same words, the same order. The README's small Markdown (headings, paragraphs,
+    bullet lists, one indented code block, an image, inline code, bare links) is converted here; anything else in
+    the file is a hard stop, so the page never silently drops a line."""
+    src = (ROOT / "README.md").read_text(encoding="utf-8")
+
+    def inline(s):
+        s = escape(s)
+        if "**" in s or "](" in s and "![" not in s:
+            raise SystemExit(f"README.md: construct not rendered: {s[:60]}")
+        s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
+        return re.sub(r"(https?://[^\s<]+?)([.,;)]?)(?=\s|$)", r'<a href="\1">\1</a>\2', s)
+
+    out = []
+    for block in re.split(r"\n\s*\n", src.strip()):
+        lines = block.split("\n")
+        if block.startswith("# "):
+            out.append(f"<h1>{inline(block[2:])}</h1>")
+        elif block.startswith("## "):
+            out.append(f"<h2>{inline(block[3:])}</h2>")
+        elif block.startswith("!["):
+            alt, path = re.fullmatch(r"!\[(.*?)\]\((.*?)\)", block.strip()).groups()
+            if not path.startswith("docs/"):
+                raise SystemExit(f"README.md: image outside docs/: {path}")
+            out.append(f'<figure><img src="{escape(path[5:])}" alt="{escape(alt)}"><figcaption>{inline(alt)}</figcaption></figure>')
+        elif all(l.startswith("    ") for l in lines):
+            out.append("<pre>" + escape("\n".join(l[4:] for l in lines)) + "</pre>")
+        elif block.startswith("- "):
+            items, cur = [], None
+            for l in lines:
+                if l.startswith("- "):
+                    cur = [l[2:]]
+                    items.append(cur)
+                elif l.startswith("  ") and cur is not None:
+                    cur.append(l.strip())
+                else:
+                    raise SystemExit(f"README.md: list line not understood: {l!r}")
+            out.append("<ul>" + "".join(f"<li>{inline(' '.join(i))}</li>" for i in items) + "</ul>")
+        else:
+            out.append(f"<p>{inline(' '.join(l.strip() for l in lines))}</p>")
+    return README.format(body="\n".join(out), nav=nav("readme.html"), css=CSS)
+
+
 def decisions_page():
     items = decisions()
     sections = []
@@ -897,8 +940,9 @@ def main():
                                                  retrieved=escape(universe["retrieved"]), nav=nav("index.html"), css=CSS),
                                     encoding="utf-8")
     (OUT / "decisions.html").write_text(decisions_page(), encoding="utf-8")
+    (OUT / "readme.html").write_text(readme_page(), encoding="utf-8")
     (OUT / "considerations.html").write_text(considerations_page(), encoding="utf-8")
-    print(f"docs/: {len(companies)} company pages, index.html, decisions.html and considerations.html "
+    print(f"docs/: {len(companies)} company pages, index.html, readme.html, decisions.html and considerations.html "
           f"({len(universe['companies'])} S&P 500 companies listed)")
 
 
@@ -1048,6 +1092,35 @@ filings that pass every check and {unreadable} cannot be read yet; each row says
 <p>Sectors and sub-industries are GICS, a taxonomy owned by S&amp;P and MSCI, taken from Wikipedia's
 <a href="{source}">list of S&amp;P 500 companies</a> (retrieved {retrieved}); an unofficial copy. Every company's
 SEC identifier was checked against the SEC's own ticker file.</p>
+</footer>
+</main>
+</body>
+</html>
+"""
+
+
+README = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Readme - Chomper</title>
+<style>{css}
+.readme p, .readme li {{ max-width: 46rem; }}
+.readme li {{ margin-bottom: .4rem; }}
+.readme figure {{ margin: 1.5rem 0; }}
+.readme img {{ max-width: 100%; height: auto; border: 1px solid var(--rule); }}
+.readme figcaption {{ font-size: .85rem; color: var(--ink-2); margin-top: .4rem; }}
+.readme pre {{ background: var(--rule); padding: .6rem .8rem; border-radius: 4px; font-size: .9rem; overflow-x: auto; }}
+.readme code {{ font-size: .9em; }}
+</style>
+</head>
+<body>
+<main class="readme">
+{nav}
+{body}
+<footer>
+<p>Source: README.md in the repository, rendered as this page by the build.</p>
 </footer>
 </main>
 </body>

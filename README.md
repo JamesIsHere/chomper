@@ -18,7 +18,7 @@ living.
 
 Live: https://jamesishere.github.io/chomper/
 
-![Old Dominion's one-year bridge: why operating income fell $183.0M in 2025](readme/odfl-bridge.png)
+![Old Dominion's one-year bridge: why operating income fell $183.0M in 2025](docs/readme/odfl-bridge.png)
 
 ## What is on the site
 

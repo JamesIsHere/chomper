@@ -16,7 +16,7 @@ import build_history as B
 from pull import ROOT
 
 DOCS = ROOT / "docs"
-SITE_PAGES = {"index.html", "aggregate.html", "decisions.html", "considerations.html", "membership.html"}
+SITE_PAGES = {"index.html", "aggregate.html", "decisions.html", "considerations.html", "membership.html", "readme.html"}
 WORDS = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine",
          10: "ten", 11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen", 15: "fifteen", 16: "sixteen",
          17: "seventeen", 18: "eighteen", 19: "nineteen", 20: "twenty"}
@@ -148,7 +148,15 @@ def main():
     check("Membership page: span", ("lede", one(r"from ([A-Z][a-z]+ \d{4} to [A-Z][a-z]+ \d{4})", text(mem_page), "membership span")),
           ("membership.json", f"{MONTHS[int(months[0][5:]) - 1]} {months[0][:4]} to {MONTHS[int(months[-1][5:]) - 1]} {months[-1][:4]}"))
 
-    # 6. The same menu on every page
+    # 6. The Readme page carries every paragraph of README.md
+    rp = text(page("readme.html"))
+    paras = [re.sub(r"\s+", " ", b).strip() for b in re.split(r"\n\s*\n", readme.strip())
+             if not b.startswith(("#", "![", "    ", "- "))]
+    plain = re.sub(r"\s+", " ", rp)
+    check("Readme page: every README paragraph present", ("README.md paragraphs", len(paras)),
+          ("found on the page", sum(re.sub(r"`", "", p_) in plain for p_ in paras)))
+
+    # 7. The same menu on every page
     navs = {}
     for f in sorted(DOCS.glob("*.html")) + sorted((DOCS / "bridge").glob("*.html")):
         nav = one(r'(<nav class="menu">.*?</nav>)', f.read_text(encoding="utf-8"), f"{f.name} menu")

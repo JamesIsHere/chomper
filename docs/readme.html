@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Readme - Chomper</title>
+<style>
+:root { color-scheme: light; --bg: #ffffff; --ink: #0b0b0b; --ink-2: #52514e; --ink-3: #75746f; --rule: #e2e1dc;
+  --up: #1f8a4c; --down: #d03b3b; --link: #1c5cab; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: dark; --bg: #1a1a19;
+  --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #9a9992; --rule: #383835; --up: #3fb36b; --down: #e05252;
+  --link: #86b6ef; } }
+:root[data-theme="dark"] { color-scheme: dark; --bg: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #9a9992;
+  --rule: #383835; --up: #3fb36b; --down: #e05252; --link: #86b6ef; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 60rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+a { color: var(--link); }
+
+.menu { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem; margin: 0 0 1.5rem;
+  padding-bottom: .75rem; border-bottom: 1px solid var(--rule); }
+.menu a { padding: .3rem .65rem; border-radius: 4px; text-decoration: none; font-size: .9rem; font-weight: 600;
+  color: var(--ink-2); }
+.menu a:hover { background: var(--rule); }
+.menu a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+.crossref { font-size: .9rem; color: var(--ink-2); margin: 0 0 1rem; }
+
+:root { --s1: #2a78d6; --s2: #eb6834; --up-text: #17703d; --down-text: #b42828; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --s1: #3987e5; --s2: #d95926;
+  --up-text: #3fb36b; --down-text: #e05252; } }
+:root[data-theme="dark"] { --s1: #3987e5; --s2: #d95926; --up-text: #3fb36b; --down-text: #e05252; }
+h1 { font-size: 1.5rem; line-height: 1.25; margin: 0 0 .5rem; }
+h2 { font-size: 1.05rem; margin: 2rem 0 .5rem; }
+.lede { color: var(--ink-2); max-width: 46rem; margin: 0 0 1.25rem; }
+.wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: .9rem; }
+th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
+thead th { font-weight: 600; color: var(--ink-3); font-size: .8rem; }
+tbody th { text-align: left; font-weight: normal; white-space: normal; min-width: 12rem; }
+table.ten tbody th { min-width: 9rem; } /* ten columns of figures must fit the page width */
+table.ten th, table.ten td { padding: .4rem .5rem; }
+table.long tbody th { min-width: 0; } /* years down the rows: the row label is just the year */
+tr.strong th, tr.strong td, td.strong { font-weight: 600; }
+tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
+.dim { color: var(--ink-3); font-size: .8rem; }
+.legend { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; font-size: .85rem; color: var(--ink-2);
+  margin: .5rem 0 .25rem; align-items: center; }
+.legend i { display: inline-block; width: .8rem; height: .2rem; border-radius: 1px; margin-right: .4rem;
+  vertical-align: middle; }
+.trend { display: block; width: 100%; max-width: 40rem; height: auto; margin-bottom: 1rem; }
+.trend .g { stroke: var(--rule); stroke-width: 1; }
+.trend .ax { fill: var(--ink-3); font-size: 11px; }
+.trend .lab { fill: var(--ink-2); font-size: 12px; }
+.trend .dot { stroke: var(--bg); stroke-width: 2; }
+.trend .hit { fill: transparent; }
+.trend .hit:hover { fill: var(--rule); fill-opacity: .35; }
+.trend.wide { max-width: 50rem; }
+.trend .zero { stroke: var(--ink-3); stroke-width: 1; }
+.trend .bar-down { fill: var(--down); fill-opacity: .55; }
+.trend .bar-up { fill: var(--up); fill-opacity: .55; }
+.legend .sw { width: .8rem; height: .8rem; }
+.bar-down-sw { background: var(--down); opacity: .55; }
+.bar-up-sw { background: var(--up); opacity: .55; }
+.trend .rec { fill: var(--ink-3); fill-opacity: .14; }
+.rec-sw { background: var(--ink-3); opacity: .3; }
+tr.rec th, tr.rec td { background: color-mix(in srgb, var(--ink-3) 10%, transparent); }
+.trend .guide { stroke: var(--ink-3); stroke-dasharray: 2 3; stroke-width: 1; }
+.trend .mark { fill: var(--ink); }
+.trend .marknum { fill: var(--bg); font-size: 11px; font-weight: 700; }
+ol.key { list-style: none; padding: 0; margin: .5rem 0 1rem; font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
+ol.key li { margin: 0 0 .3rem; }
+ol.key .num, table.long .num { display: inline-block; width: 1.3rem; height: 1.3rem; line-height: 1.3rem; border-radius: 50%;
+  background: var(--ink); color: var(--bg); text-align: center; font-size: .75rem; font-weight: 700;
+  margin-right: .5rem; }
+table.long .num { width: 1.15rem; height: 1.15rem; line-height: 1.15rem; font-size: .7rem; margin: 0 0 0 .4rem; }
+tr.sub th { text-align: left; font-size: .8rem; font-weight: 600; color: var(--ink-3); padding-top: .9rem; }
+td.name { text-align: left; white-space: normal; }
+table.index tbody th { min-width: 4rem; width: 4rem; }
+table.index td.name { width: 16rem; }
+tr.pending th, tr.pending td { color: var(--ink-3); }
+td.why { text-align: left; white-space: normal; }
+details.sector { border-bottom: 1px solid var(--rule); }
+details.sector > summary { font-weight: 600; font-size: 1.05rem; }
+details.sub { margin-left: 1.25rem; }
+details.sub > summary { font-size: .95rem; }
+details > summary { cursor: pointer; padding: .45rem 0; }
+details > summary .dim { margin-left: .5rem; font-weight: normal; }
+details.sub[open] { margin-bottom: .75rem; }
+h2 .dim { font-weight: normal; margin-left: .4rem; }
+table.decisions td, table.decisions th { vertical-align: top; text-align: left; white-space: normal; }
+table.decisions td.date { white-space: nowrap; color: var(--ink-3); width: 6.5rem; }
+table.decisions tbody th { font-weight: 600; width: 13rem; min-width: 9rem; }
+table.decisions td.text p { margin: 0 0 .3rem; }
+table.decisions .why { color: var(--ink-2); font-size: .85rem; }
+table.decisions .status { color: var(--down-text); font-size: .8rem; }
+table.decisions .due { font-size: .85rem; font-weight: 600; }
+td.up { color: var(--up-text); }  /* text shades: darker than the cell shading, readable at regular weight */
+td.down { color: var(--down-text); }
+tr.superseded th, tr.superseded td.text p:not(.status) { color: var(--ink-3); text-decoration: line-through; }
+table.index thead th { white-space: normal; vertical-align: bottom; }
+ul.breaks { font-size: .85rem; color: var(--ink-2); max-width: 46rem; padding-left: 1.1rem; margin: .75rem 0; }
+ul.breaks li { margin-bottom: .2rem; }
+.note, footer { font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+
+.readme p, .readme li { max-width: 46rem; }
+.readme li { margin-bottom: .4rem; }
+.readme figure { margin: 1.5rem 0; }
+.readme img { max-width: 100%; height: auto; border: 1px solid var(--rule); }
+.readme figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .4rem; }
+.readme pre { background: var(--rule); padding: .6rem .8rem; border-radius: 4px; font-size: .9rem; overflow-x: auto; }
+.readme code { font-size: .9em; }
+</style>
+</head>
+<body>
+<main class="readme">
+<nav class="menu"><a href="readme.html" aria-current="page">Readme</a><a href="index.html">Chomper</a><a href="aggregate.html">S&amp;P 500</a><a href="decisions.html">Decisioning</a><a href="considerations.html">Considerations</a></nav>
+<h1>chomper</h1>
+<p>After 2008, a friend from my master&#x27;s in accounting, where we were studying bond analysis together, told me that if you had just looked at Apple you would have seen it blow right through the crisis with its margins expanding. It has made me wonder ever since which companies hold their margins when revenue turns, which cannot, and whether the income statement shows it.</p>
+<p>chomper is my attempt to look. It reads a company&#x27;s 10-K filings the way an analyst would, at the highest level: a three-line income statement (revenue, pre-tax income, margin) traced back to fiscal 2007, the last peak before the crisis, then five years of cost lines under it, and for one company a one-year bridge that walks operating income bar by bar against what management said in its own filing. It is a measure of elasticities: how costs respond when revenue moves, company by company, across the business cycle. I built it for my own portfolio and for the kind of financial planning and analysis I did for a living.</p>
+<p>Live: <a href="https://jamesishere.github.io/chomper/">https://jamesishere.github.io/chomper/</a></p>
+<figure><img src="readme/odfl-bridge.png" alt="Old Dominion&#x27;s one-year bridge: why operating income fell $183.0M in 2025"><figcaption>Old Dominion&#x27;s one-year bridge: why operating income fell $183.0M in 2025</figcaption></figure>
+<h2>What is on the site</h2>
+<ul><li>The front page lists the S&amp;P 500 by sector and sub-industry and says, for every company, whether its filings can be read yet and why not when they cannot.</li><li>A company page (eleven so far) shows revenue, pre-tax income and margin by year since 2007, with recessions shaded and acquisitions and accounting changes marked, then five years of the income statement line by line as a share of revenue.</li><li>Old Dominion Freight Line&#x27;s one-year bridge walks operating income from fiscal 2024 to 2025. Each bar opens to management&#x27;s explanation, quoted verbatim from the 10-K and linked to the sentence it came from. Where the 10-K does not account for a change, the bar says so.</li><li>The S&amp;P 500 page adds the index up: revenue and costs for the members as they were each year against today&#x27;s members traced back, with a page of who was a member each month.</li><li>Decisioning records every decision behind the numbers, with dates. Considerations records what is unsure or unfinished, and what would make it due.</li></ul>
+<h2>How it was built</h2>
+<p>Every number comes from the SEC. The scripts read each 10-K&#x27;s own XBRL, keep the filing&#x27;s labels and line order, and stop unless every year foots to the pre-tax income the company reported. Where the SEC&#x27;s structured data does not reach (the earliest years for some companies, a few acquisitions), a figure is read by hand from the filing, with the sentence it came from quoted beside it. A disagreement between two sources is recorded as a disagreement, never averaged away.</p>
+<p>The words on the bridge page were drafted by a language model, run from the command line on a subscription rather than an API, from the filing&#x27;s MD&amp;A and the computed bars. Code then checks every quote verbatim against the filing and every number in the draft against the bridge, and I review and approve the result before the page is built. The page build never calls a model, and the &quot;not explained by management&quot; flags come from arithmetic, not from the model.</p>
+<p>To rebuild every page from the committed data, with no network and no model:</p>
+<pre>python rebuild.py</pre>
+<p>The reading scripts (<code>pull.py</code>, <code>history.py</code>, <code>headline.py</code>, <code>universe.py</code>, <code>aggregate.py</code>, <code>membership.py</code>) fetch from the SEC and Wikipedia and need a <code>.env</code> file with <code>SEC_USER_AGENT=&quot;Your Name you@example.com&quot;</code>, which the SEC requires.</p>
+<h2>Status</h2>
+<p>Version 1, November 2026: one bridge, eleven company pages, the index pages. Four company pages stop at fiscal 2016 and say so. Next is a cost measure for every company, how far costs fall when revenue falls, and the working sample to test it on. The open items are on the Considerations page; parked ideas are in <code>ideas.md</code>.</p>
+<footer>
+<p>Source: README.md in the repository, rendered as this page by the build.</p>
+</footer>
+</main>
+</body>
+</html>
