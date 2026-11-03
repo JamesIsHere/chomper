@@ -266,7 +266,7 @@ def main():
         reviewer=escape(commentary["reviewed_by"]),
         reviewed_on=escape(commentary["reviewed_on"]), axis_min=m(AXIS_MIN, False).replace(".0M", "M"),
         views=json.dumps(views(bridge["bars"], start)).replace("</", "<\\/"), script=SCRIPT,
-        nav=header.nav(prefix=UP), menu_css=header.CSS, up=UP,
+        nav=header.nav(prefix=UP), site_css=header.CSS, up=UP,
     )
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(page, encoding="utf-8")
@@ -281,35 +281,18 @@ TEMPLATE = """<!doctype html>
 <title>ODFL bridge, FY2025 - Chomper</title>
 <meta name="description" content="Why {company}'s operating income fell from FY2024 to FY2025, bar by bar, with management's explanations quoted and linked to the 10-K.">
 <style>
-:root {{
-  color-scheme: light;
-  --bg: #ffffff; --panel: #f4f3f0; --ink: #0b0b0b; --ink-2: #52514e; --ink-3: #75746f;
-  --rule: #e2e1dc; --grid: #ecebe7; --up: #1f8a4c; --down: #d03b3b; --total: #8b8a85;
-  --flag-bg: #fdf1e7; --flag-ink: #8a3d0f; --link: #1c5cab;
-}}
+{site_css}
+:root {{ --panel: #f4f3f0; --grid: #ecebe7; --total: #8b8a85; --flag-bg: #fdf1e7; --flag-ink: #8a3d0f; }}
 @media (prefers-color-scheme: dark) {{
-  :root:not([data-theme="light"]) {{
-    color-scheme: dark;
-    --bg: #1a1a19; --panel: #232322; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #9a9992;
-    --rule: #383835; --grid: #2a2a28; --up: #3fb36b; --down: #e05252; --total: #8b8a85;
-    --flag-bg: #3a2a1e; --flag-ink: #f2b48c; --link: #86b6ef;
-  }}
+  :root:not([data-theme="light"]) {{ --panel: #232322; --grid: #2a2a28; --total: #8b8a85; --flag-bg: #3a2a1e;
+    --flag-ink: #f2b48c; }}
 }}
-:root[data-theme="dark"] {{
-  color-scheme: dark;
-  --bg: #1a1a19; --panel: #232322; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #9a9992;
-  --rule: #383835; --grid: #2a2a28; --up: #3fb36b; --down: #e05252; --total: #8b8a85;
-  --flag-bg: #3a2a1e; --flag-ink: #f2b48c; --link: #86b6ef;
-}}
-* {{ box-sizing: border-box; }}
-body {{ margin: 0; background: var(--bg); color: var(--ink);
-  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }}
-main {{ max-width: 60rem; margin: 0 auto; padding: 2rem 1rem 4rem; }}
+:root[data-theme="dark"] {{ --panel: #232322; --grid: #2a2a28; --total: #8b8a85; --flag-bg: #3a2a1e;
+  --flag-ink: #f2b48c; }}
 h1 {{ font-size: 1.6rem; line-height: 1.25; margin: 0 0 .5rem; }}
 h2 {{ font-size: 1.1rem; margin: 2.5rem 0 .75rem; }}
 .lede {{ font-size: 1.1rem; color: var(--ink-2); margin: 0 0 1.5rem; max-width: 46rem; }}
 .lede b {{ color: var(--ink); font-weight: 600; }}
-a {{ color: var(--link); }}
 .chart {{ border-top: 1px solid var(--rule); }}
 .head, summary {{ display: grid; grid-template-columns: minmax(8rem, 15rem) 1fr 5.5rem; gap: 0 .75rem;
   align-items: center; }}
@@ -385,7 +368,6 @@ footer {{ margin-top: 3rem; font-size: .85rem; color: var(--ink-2); max-width: 4
 @media (forced-colors: active) {{
   .bar {{ border: 1px solid CanvasText; }}
 }}
-{menu_css}
 </style>
 </head>
 <body>

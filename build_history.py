@@ -902,23 +902,14 @@ def main():
           f"({len(universe['companies'])} S&P 500 companies listed)")
 
 
-CSS = """
-:root { color-scheme: light; --s1: #2a78d6; --s2: #eb6834; --bg: #ffffff; --ink: #0b0b0b; --ink-2: #52514e; --ink-3: #75746f;
-  --rule: #e2e1dc; --up: #1f8a4c; --down: #d03b3b; --up-text: #17703d; --down-text: #b42828; --link: #1c5cab; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: dark; --s1: #3987e5; --s2: #d95926;
-  --bg: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #9a9992; --rule: #383835;
-  --up: #3fb36b; --down: #e05252; --up-text: #3fb36b; --down-text: #e05252; --link: #86b6ef; } }
-:root[data-theme="dark"] { color-scheme: dark; --s1: #3987e5; --s2: #d95926; --bg: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
-  --ink-3: #9a9992; --rule: #383835; --up: #3fb36b; --down: #e05252; --up-text: #3fb36b; --down-text: #e05252;
-  --link: #86b6ef; }
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-main { max-width: 60rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+CSS = header.CSS + """
+:root { --s1: #2a78d6; --s2: #eb6834; --up-text: #17703d; --down-text: #b42828; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --s1: #3987e5; --s2: #d95926;
+  --up-text: #3fb36b; --down-text: #e05252; } }
+:root[data-theme="dark"] { --s1: #3987e5; --s2: #d95926; --up-text: #3fb36b; --down-text: #e05252; }
 h1 { font-size: 1.5rem; line-height: 1.25; margin: 0 0 .5rem; }
 h2 { font-size: 1.05rem; margin: 2rem 0 .5rem; }
 .lede { color: var(--ink-2); max-width: 46rem; margin: 0 0 1.25rem; }
-a { color: var(--link); }
 .wrap { overflow-x: auto; }
 table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: .9rem; }
 th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
@@ -989,7 +980,7 @@ ul.breaks { font-size: .85rem; color: var(--ink-2); max-width: 46rem; padding-le
 ul.breaks li { margin-bottom: .2rem; }
 .note, footer { font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
 footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
-""" + header.CSS
+"""
 
 TEMPLATE = """<!doctype html>
 <html lang="en">

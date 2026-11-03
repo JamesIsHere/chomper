@@ -13,7 +13,7 @@ import urllib.parse
 import urllib.request
 from html import escape, unescape
 
-from header import nav
+from header import CSS, nav
 from pull import RAW, ROOT
 
 UA = {"User-Agent": "chomper research jamesphilipmccoy@yahoo.com"}
@@ -145,7 +145,7 @@ def page(companies, months):
                    f'text-anchor="end">{escape(c["tickers"][-1])}</text>{"".join(cells)}</g>')
     svg = (f'<svg viewBox="0 0 {W} {H}" width="100%" role="img" aria-label="S&amp;P 500 membership by month, '
            f'2016 to 2025, one row per company">{"".join(out)}</svg>')
-    return PAGE_HTML.format(nav=nav(), svg=svg, n=len(rows), table=table(rows))
+    return PAGE_HTML.format(css=CSS, nav=nav(), svg=svg, n=len(rows), table=table(rows))
 
 
 def month_name(m):
@@ -174,14 +174,11 @@ PAGE_HTML = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Membership - Chomper</title>
 <style>
-:root {{ --bg: #fff; --ink: #1a1a1a; --ink-2: #555; --rule: #e3e3e3; --on: #2f6fd1; }}
-@media (prefers-color-scheme: dark) {{ :root:not([data-theme="light"]) {{ --bg: #141414; --ink: #eee; --ink-2: #aaa;
-  --rule: #333; --on: #6ea0f0; }} }}
-body {{ background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, sans-serif; margin: 0; }}
-main {{ max-width: 980px; margin: 0 auto; padding: 1.5rem 16px; }}
-.menu {{ display: flex; gap: .25rem; margin: 0 0 1.5rem; padding-bottom: .75rem; border-bottom: 1px solid var(--rule); }}
-.menu a {{ padding: .3rem .65rem; border-radius: 4px; text-decoration: none; font-size: .9rem; font-weight: 600;
-  color: var(--ink-2); }}
+{css}
+:root {{ --on: #2f6fd1; }}
+@media (prefers-color-scheme: dark) {{ :root:not([data-theme="light"]) {{ --on: #6ea0f0; }} }}
+:root[data-theme="dark"] {{ --on: #6ea0f0; }}
+h1 {{ font-size: 1.5rem; line-height: 1.25; margin: 0 0 .5rem; }}
 .wrap {{ overflow-x: auto; }}
 svg rect {{ fill: var(--on); }}
 svg .yr {{ stroke: var(--rule); }}
