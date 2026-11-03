@@ -353,3 +353,9 @@ Group: Presentation
 Decision: On a phone the 2007-2025 table on each company page scrolls sideways inside its box, so pre-tax income and margin start off-screen. It ships that way; a phone column order is version 2.
 Why: Nothing is wrong and the page itself does not scroll sideways; the ship list is frozen and a reorder is a change to what every reader sees first (James, 2026-11-02; audit.md, F3).
 Status: active
+
+## 2026-11-02 | The All page names what is built
+Group: Presentation
+Decision: One sentence after the All page's opening paragraph names what is built, each linked: every one-year bridge in docs/bridge/ (its company and years read from the bridge data, which must be that company's) and every company page. It is generated from the pages on disk, never a hand list.
+Why: The ship-surface audit (audit.md, F5) found the ODFL bridge, the one page that argues rather than presents, two clicks down inside Industrials with nothing above the fold pointing to it; a stranger from the GitHub profile saw a directory, not the product (James, 2026-11-02, approved the wording).
+Status: active

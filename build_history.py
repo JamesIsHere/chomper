@@ -773,6 +773,31 @@ def ten_years(ticker):
             + trend_chart(t) + '\n')
 
 
+def built_line(built, universe):
+    """One sentence on the All page naming what is built: every one-year bridge in docs/bridge/ (its company and
+    years read from data/bridge.json, which must be that company's) and every company page, each linked."""
+    cik = {c["ticker"]: c["cik"] for c in universe["companies"]}
+    parts = []
+    for path in sorted((OUT / "bridge").glob("*.html")):
+        ticker = path.stem
+        b = json.loads((ROOT / "data" / "bridge.json").read_text(encoding="utf-8"))
+        if b["filing"]["cik"] != cik.get(ticker):
+            raise SystemExit(f"docs/bridge/{ticker}.html exists but data/bridge.json is for CIK {b['filing']['cik']}")
+        years = [re.fullmatch(r"FY(\d{4}) operating income", b[k]["label"]) for k in ("start", "end")]
+        if not all(years):
+            raise SystemExit(f"bridge.json start/end labels not of the form 'FYxxxx operating income'")
+        parts.append(f'{escape(display_name(b["filing"]["company"]))}\'s <a href="bridge/{escape(ticker)}.html">one-year '
+                     f'bridge</a>, which walks operating income from fiscal {years[0].group(1)} to '
+                     f'{years[1].group(1)} in the 10-K\'s own words')
+    tickers = [f'<a href="{escape(t)}.html">{escape(t)}</a>' for t in sorted(built)]
+    if tickers:
+        parts.append("company pages for " + (", ".join(tickers[:-1]) + " and " + tickers[-1] if len(tickers) > 1
+                                              else tickers[0]))
+    if not parts:
+        return ""
+    return f'<p class="lede">Built so far: {", and ".join(parts)}.</p>'
+
+
 def bridge_link(ticker):
     """Link to the company's one-year bridge, only if build_bridge has written one (run it first)."""
     if not (OUT / "bridge" / f"{ticker}.html").is_file():
@@ -865,6 +890,7 @@ def main():
     rest = [c["ticker"] for c in universe["companies"] if c["ticker"] not in built]
     readable = sum(census.get(t, {}).get("status") == "pass" for t in rest)
     (OUT / "index.html").write_text(INDEX.format(body=index_body(universe, built, census),
+                                                 built_line=built_line(built, universe),
                                                  total=len(universe["companies"]),
                                                  analyzed=len(built), readable=readable,
                                                  unreadable=len(rest) - readable, source=escape(universe["source"]),
@@ -1025,6 +1051,7 @@ INDEX = """<!doctype html>
 <p class="lede">The S&amp;P 500 by sector and sub-industry: {total} companies, {analyzed} analyzed so far.
 Linked tickers open five years of cost lines from the company's own 10-K filings. Of the rest, {readable} have
 filings that pass every check and {unreadable} cannot be read yet; each row says which, and why.</p>
+{built_line}
 {body}
 <footer>
 <p>Sectors and sub-industries are GICS, a taxonomy owned by S&amp;P and MSCI, taken from Wikipedia's
