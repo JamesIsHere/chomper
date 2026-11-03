@@ -145,7 +145,26 @@ def page(companies, months):
                    f'text-anchor="end">{escape(c["tickers"][-1])}</text>{"".join(cells)}</g>')
     svg = (f'<svg viewBox="0 0 {W} {H}" width="100%" role="img" aria-label="S&amp;P 500 membership by month, '
            f'2016 to 2025, one row per company">{"".join(out)}</svg>')
-    return PAGE_HTML.format(nav=nav(), svg=svg, n=len(rows))
+    return PAGE_HTML.format(nav=nav(), svg=svg, n=len(rows), table=table(rows))
+
+
+def month_name(m):
+    """'2016-01' -> 'Jan 2016'."""
+    y, mo = m.split("-")
+    return f'{["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][int(mo) - 1]} {y}'
+
+
+def table(rows):
+    """The chart's rows as text, same order: every ticker the company used, name, sector, first and last month,
+    months in the index (fewer than the span when a company left and came back)."""
+    out = ['<table class="list"><thead><tr><th>Ticker</th><th>Company</th><th class="sec">Sector</th><th class="d">From</th><th class="d">To</th>'
+           '<th class="n">Months</th></tr></thead><tbody>']
+    for c in rows:
+        out.append(f'<tr><td>{escape(" / ".join(c["tickers"]))}</td><td>{escape(c["name"])}</td>'
+                   f'<td class="sec">{escape(c["sector"])}</td><td class="d">{month_name(c["months"][0])}</td>'
+                   f'<td class="d">{month_name(c["months"][-1])}</td><td class="n">{len(c["months"])}</td></tr>')
+    out.append("</tbody></table>")
+    return "".join(out)
 
 
 PAGE_HTML = """<!doctype html>
@@ -169,6 +188,13 @@ svg .yr {{ stroke: var(--rule); }}
 svg .yl {{ font-size: 6px; fill: var(--ink-2); }}
 svg .tk {{ font-size: 1.5px; fill: var(--ink-2); }}
 p {{ max-width: 46rem; color: var(--ink-2); }}
+h2 {{ font-size: 1.1rem; margin: 2rem 0 .5rem; }}
+.list {{ border-collapse: collapse; width: 100%; font-size: .85rem; }}
+.list th, .list td {{ text-align: left; vertical-align: top; padding: .25rem .5rem .25rem 0; border-bottom: 1px solid var(--rule); }}
+.list th {{ color: var(--ink-2); font-weight: 600; }}
+.list .n {{ text-align: right; padding-right: 0; }}
+.list .d {{ white-space: nowrap; }}
+@media (max-width: 600px) {{ .list {{ font-size: .8rem; }} .list .sec {{ display: none; }} }}
 </style>
 </head>
 <body>
@@ -177,8 +203,14 @@ p {{ max-width: 46rem; color: var(--ink-2); }}
 <h1>Who was in the S&amp;P 500</h1>
 <p>Every company in the index at any point from January 2016 to December 2025, {n} in all, one row each; a bar
 marks the months it was a member. Members at the start come first, longest-staying at the top; companies that
-joined later follow in order of joining. Hover a row for its name and dates.</p>
+joined later follow in order of joining. Hover a row for its name and dates, or read the same rows in the
+table below the chart.</p>
 <div class="wrap">{svg}</div>
+<h2>The same {n} companies, in the chart's order</h2>
+<p>Every ticker the company used in the index, its name and sector in its last month, its first and last month as
+a member, and the number of months it was one (fewer than the span when it left and came back). On a narrow
+screen the sector column is left out.</p>
+{table}
 <p>Source: the version of Wikipedia's "List of S&amp;P 500 companies" current on the first of each month; companies
 are matched across months by SEC identifier, so a ticker change is one row, as is a new identifier that keeps
 the ticker from one month to the next (a new holding company, or a corrected identifier).</p>
