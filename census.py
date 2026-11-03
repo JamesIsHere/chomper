@@ -26,7 +26,7 @@ from pull import ROOT, user_agent
 socket.setdefaulttimeout(60)  # urlopen in pull.fetch has no timeout of its own; a stalled request must not hang the run
 OUT = ROOT / "data" / "census.json"
 REPORT = ROOT / "census.md"
-CONTROL = ["AAPL", "CAT", "CCL", "HD", "JNJ", "JPM", "MSFT", "ODFL", "PGR", "PLD", "UNH"]
+CONTROL = sorted(p.stem for p in (ROOT / "data" / "history").glob("*.json"))  # the built companies run first
 
 # (class, pattern on the stop message), first match wins; every hard stop in history.py and pull.py is covered.
 CLASSES = [
