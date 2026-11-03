@@ -359,3 +359,9 @@ Group: Presentation
 Decision: One sentence after the All page's opening paragraph names what is built, each linked: every one-year bridge in docs/bridge/ (its company and years read from the bridge data, which must be that company's) and every company page. It is generated from the pages on disk, never a hand list.
 Why: The ship-surface audit (audit.md, F5) found the ODFL bridge, the one page that argues rather than presents, two clicks down inside Industrials with nothing above the fold pointing to it; a stranger from the GitHub profile saw a directory, not the product (James, 2026-11-02, approved the wording).
 Status: active
+
+## 2026-11-02 | One deal, two tagged values: within 1%
+Group: Method
+Decision: When a 10-K tags the same deal measure (price paid, or assets acquired) at two values, the reader keeps the larger if they are within 1% of each other and stops otherwise. The 1% stays; it is not tightened to the facts' own rounding.
+Why: The post-ship tolerance census found it the only hand constant among the checks (the rest derive from the data or a cited rule). James ruled it fine as is (2026-11-02): the two values come from one filing and the shares that depend on them are read against a 10% test.
+Status: active
