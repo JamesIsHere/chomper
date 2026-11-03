@@ -14,6 +14,7 @@ from html import escape
 
 import header
 from header import nav
+from headline import FIRST
 from pull import ROOT
 
 DATA = ROOT / "data" / "history"
@@ -310,18 +311,38 @@ def fiscal_start(ends, i):
     return (date.fromisoformat(prev) + timedelta(days=1)).isoformat()
 
 
-def recession_years(ends):
+def recession_years(ends, recessions=RECESSIONS):
     """Fiscal years holding RECESSION_SHARE or more of a US recession's days. A share, not a fixed length, because
     the 2020 recession lasted three months: a fixed three-month test missed a fiscal year starting 3 February."""
     out = set()
     for i, e in enumerate(ends):
         a = date.fromisoformat(fiscal_start(ends, i))
-        for s, t in RECESSIONS:
+        for s, t in recessions:
             s, t = date.fromisoformat(s), date.fromisoformat(t)
             lo, hi = max(a, s), min(date.fromisoformat(e), t)
             if ((hi - lo).days + 1) / ((t - s).days + 1) >= RECESSION_SHARE:
                 out.add(e)
     return out
+
+
+def recession_span(ends):
+    """The recessions that shade a year in this table, as the note names them ("December 2007 to June 2009;
+    February to April 2020"); a recession the table never reaches is left out."""
+    parts = []
+    for s, t in RECESSIONS:
+        if recession_years(ends, [(s, t)]):
+            a, b = date.fromisoformat(s), date.fromisoformat(t)
+            parts.append(f"{a:%B} to {b:%B %Y}" if a.year == b.year else f"{a:%B %Y} to {b:%B %Y}")
+    return "; ".join(parts)
+
+
+def start_note(ends):
+    """One line under the long-view heading when the series does not reach fiscal 2007 (headline.FIRST): the years
+    before its first year have not been read for this company yet."""
+    if ends[0] <= FIRST[1]:
+        return ""
+    return (f'<p class="note">The years before {year(ends[0])} have not yet been read for this company; the long view '
+            'starts at fiscal 2007, the pre-crisis peak, once they are.</p>\n')
 
 
 def trend_chart(h):
@@ -742,11 +763,12 @@ def ten_years(ticker):
                      + "".join(v[i] + c[i] for v, c in cols)
                      + f"<td>{pre[e] / rev[e] * 100:.1f}%</td></tr>" for i, e in enumerate(ends))
     head = "".join(f'<th>{label}</th><th class="dim">change</th>' for label, _, _ in lines)
-    return (f'<h2>{year(ends[0])} to {year(ends[-1])}</h2>\n<div class="wrap"><table class="ten long">\n'
+    return (f'<h2>{year(ends[0])} to {year(ends[-1])}</h2>\n' + start_note(ends)
+            + '<div class="wrap"><table class="ten long">\n'
             f'<thead><tr><th></th>{head}<th>Pre-tax margin</th></tr></thead>\n<tbody>\n{rows}\n</tbody></table></div>\n'
             + ('<p class="note">* See Note 1.</p>\n' if notes else "")
-            + ('<p class="note">Shaded: fiscal years holding a quarter or more of a US recession as the NBER dates it '
-               '(December 2007 to June 2009; February to April 2020).</p>\n' if rec else "")
+            + (f'<p class="note">Shaded: fiscal years holding a quarter or more of a US recession as the NBER dates it '
+               f'({recession_span(ends)}).</p>\n' if rec else "")
             + hand_note(t)
             + trend_chart(t) + '\n')
 
