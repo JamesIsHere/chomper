@@ -347,3 +347,9 @@ Group: Presentation
 Decision: A company page whose long view does not reach fiscal 2007 carries one sentence under its heading: the years before its first year have not yet been read for this company, and the long view starts at fiscal 2007 once they are. The recession note under the table names only the recessions the table shows. Both come from the data (the first period against the fiscal 2007 window), never from a list of companies.
 Why: The ship-surface audit (audit.md, F1) found JNJ, PGR, PLD and UNH headed "2016 to 2025" beside seven pages that reach 2007, with no reason on the page, and a recession note naming 2007 to 2009 on tables that never show those years (James, 2026-11-02, approved the wording).
 Status: active
+
+## 2026-11-02 | Phone long table stays as is
+Group: Presentation
+Decision: On a phone the 2007-2025 table on each company page scrolls sideways inside its box, so pre-tax income and margin start off-screen. It ships that way; a phone column order is version 2.
+Why: Nothing is wrong and the page itself does not scroll sideways; the ship list is frozen and a reorder is a change to what every reader sees first (James, 2026-11-02; audit.md, F3).
+Status: active

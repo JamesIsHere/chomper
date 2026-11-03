@@ -90,3 +90,7 @@ Notes (proposals, not decisions):
 - Macro series already exist in other workshop projects (pharos,
   economy-c, the FRED_API_KEY env var). Using them from here means reading
   their outputs, not modifying those projects.
+
+## I3. Phone column order for the long table (2026-11-02)
+
+On a phone the 2007-2025 table scrolls sideways and pre-tax income and margin start off-screen (audit.md, F3); put them first, or stack the table, at phone width.

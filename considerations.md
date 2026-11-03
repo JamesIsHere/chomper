@@ -133,7 +133,7 @@ Item: Every visual check is at desktop width; the screenshots James gets are the
 Why: Readers of a shared link will often be on a phone.
 Companies: all
 Due: before the site is shared.
-Status: open
+Status: closed 2026-11-02, checked at 390px in the ship-surface audit (audit.md): no page scrolls sideways; the long table on each company page scrolls inside its own box, so pre-tax income and margin start off-screen on a phone. James ruled it stays as is for the ship (decisions.md, "Phone long table stays as is")
 
 ## 2026-10-28 | Sentence links tested in Chrome only
 Theme: Coverage

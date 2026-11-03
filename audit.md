@@ -67,6 +67,7 @@ project is about, are off-screen with a thin scrollbar as the only cue. The char
 it fits but its tick labels are unreadable at that width. Nothing is broken.
 Reader sees it: yes, on a phone. Wrong: no. Confusing: partly.
 considerations.md "Phone layout unchecked" (2026-11-01) is now checked and should say so.
+Ruled 2026-11-02 (James): left as is for the ship; a phone column order is version 2.
 
 ### F4. Membership page is a wall of blue with hover-only names
 
