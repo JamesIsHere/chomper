@@ -127,6 +127,22 @@ Companies: none of the 10; at 500 companies, many.
 Due: before the full S&P 500 run.
 Status: closed 2026-11-02, the income line now breaks at a loss year and the year sits on a loss strip under the plot with its amount; checked on test data only, since no real loss company has passed history.py yet
 
+## 2026-11-02 | Companies that left the index are read nowhere
+Theme: Coverage
+Item: The readers run on today's list. Of the 693 companies in the S&P 500 at some point from January 2016, 194 left before December 2025 and have no page, no census verdict and no ten-year read. Weighted by the SEC's frames, those leavers were 15.4% of the index's revenue in 2016 (8.8% of pre-tax income), 7.7% in 2020 and 3.5% in 2025. Every sample so far is survivors only; the early years are where the survivorship bias is largest and where the cost measure's fall years sit.
+Why: A cost measure read on survivors overstates how well the index held its margins, because leaving the index is correlated with not holding them.
+Companies: the 194 leavers; the membership file holds their identifiers.
+Due: before the cost measure's sample is called representative; the run itself is mechanical (the readers over 194 more identifiers), the choice to show them on the Chomper page is James's.
+Status: open
+
+## 2026-11-02 | What each reading step leaves out, by weight
+Theme: Coverage
+Item: Weighted by latest revenue (SEC frames 2025, else 2024, else the two-filing read; 20 of 503 tickers have no figure anywhere): the two-filing reader covers 85.1% of today's list's revenue and 83.7% of its pre-tax income; the ten-year read 57.6% and 53.4%; the eleven published pages 9.9% and 15.4%. The largest single losses are "fiscal years not consecutive" in the ten-year read (13 companies, 17.1% of pre-tax income: GOOGL, GOOG, NVDA, MMM, FISV), lines reported by member in some years and whole in others (11 companies, 5.4%: BRK-B, T, ALL, DE), and the financials the five-year reader cannot model (Revenue, Anchor and Values classes: WFC, C, GS, PRU, COF, TRV).
+Why: Counts hide weight; one stop on GOOGL costs more than fifty on small companies. The first two are plumbing inside the rails; the third is a statement model the reader does not have.
+Companies: see the Waterfall page for the counts and the stop causes.
+Due: before the cost measure is read across the sample.
+Status: open
+
 ## 2026-11-01 | Phone layout unchecked
 Theme: Presentation
 Item: Every visual check is at desktop width; the screenshots James gets are the desktop layout. How the pages read on a phone is unchecked.
