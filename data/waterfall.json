@@ -106,12 +106,12 @@
   "pre_only_companies": 36
  },
  "aggregate": {
-  "summed": 414,
-  "excluded": 86,
+  "summed": 417,
+  "excluded": 83,
   "reasons": {
-   "no revenue or pre-tax income": 52,
+   "no revenue or pre-tax income": 48,
    "no pre-tax income": 22,
-   "no revenue": 12
+   "no revenue": 13
   }
  }
 }

@@ -32,6 +32,19 @@ OUT = ROOT / "data" / "aggregate.json"
 PAGE = ROOT / "docs" / "aggregate.html"
 
 
+def zeros(v):
+    return len(str(abs(int(v)))) - len(str(abs(int(v))).rstrip("0")) if v else 0
+
+
+def same(a, b):
+    """True if two values agree at the coarser one's precision (round half away from zero, as filers do)."""
+    q = 10 ** max(zeros(a), zeros(b))
+
+    def r(v):
+        return (abs(v) + q // 2) // q * q * (1 if v >= 0 else -1)
+    return r(a) == r(b)
+
+
 def frame(tag, year, ua):
     """{cik: value} for one tag in one calendar year; {} when the SEC has no frame for it (404)."""
     url = f"https://data.sec.gov/api/xbrl/frames/us-gaap/{tag}/USD/CY{year}.json"
@@ -44,7 +57,20 @@ def frame(tag, year, ua):
     return {r["cik"]: r["val"] for r in data["data"]}
 
 
-def collect(universe, ua):
+def identifiers(c, membership):
+    """Every SEC identifier a company on today's list has filed under: its own, plus those the membership file holds
+    for the company carrying its ticker, when that company was still a member in the file's last month (continuity,
+    the same test membership.py applies month to month). A company that re-registers (Exxon, 2025) keeps its
+    history under the old number; an old ticker reused by a different company (SanDisk) fails the continuity test."""
+    last = max(membership["months"])
+    out = [c["cik"]]
+    for m in membership["companies"]:
+        if c["ticker"] in m["tickers"] and last in m["months"]:
+            out += [k for k in m["ciks"] if k not in out]
+    return out
+
+
+def collect(universe, membership, ua):
     rev = {t: {y: frame(t, y, ua) for y in YEARS} for t in REVENUE}
     pre = {t: {y: frame(t, y, ua) for y in YEARS} for t in PRETAX + PARTS}
     by_cik, used, excluded = {}, [], []
@@ -53,12 +79,39 @@ def collect(universe, ua):
     for cik, cs in sorted(by_cik.items(), key=lambda kv: kv[1][0]["ticker"]):
         c = cs[0]
         tickers = sorted(x["ticker"] for x in cs)
-        r = {y: max((rev[t][y][cik] for t in REVENUE if cik in rev[t][y]), default=None) for y in YEARS}
-        p = {y: next((pre[t][y][cik] for t in PRETAX if cik in pre[t][y]), None) for y in YEARS}
-        p = {y: v if v is not None or not all(cik in pre[t][y] for t in PARTS)
-             else sum(pre[t][y][cik] for t in PARTS) for y, v in p.items()}
-        missing = [y for y in YEARS if r[y] is None or p[y] is None]
+        ids = identifiers(c, membership)
+
+        def series(k):
+            r = {y: max((rev[t][y][k] for t in REVENUE if k in rev[t][y]), default=None) for y in YEARS}
+            p = {y: next((pre[t][y][k] for t in PRETAX if k in pre[t][y]), None) for y in YEARS}
+            p = {y: v if v is not None or not all(k in pre[t][y] for t in PARTS)
+                 else sum(pre[t][y][k] for t in PARTS) for y, v in p.items()}
+            return r, p
+        r, p = series(cik)
         row = {"tickers": tickers, "name": c["name"], "sector": c["sector"], "cik": cik}
+        mismatch = None
+        for k in ids[1:]:  # a predecessor fills only the years the company's own identifier lacks
+            r2, p2 = series(k)
+            own = [y for y in YEARS if r[y] is not None and p[y] is not None]
+            theirs = [y for y in YEARS if r2[y] is not None and p2[y] is not None]
+            shared = [y for y in own if y in theirs]
+            if not theirs or not [y for y in theirs if y not in own]:
+                continue
+            same_company = (all(same(r[y], r2[y]) and same(p[y], p2[y]) for y in shared) if shared
+                            else min(own) == max(theirs) + 1 if own else True)
+            if not same_company:
+                mismatch = (f"its earlier identifier (CIK {k}) does not read as the same company: "
+                            + (f"values differ in {shared[0]}" if shared else f"its years end {max(theirs)}, the company's own start {min(own)}"))
+                continue
+            filled = [y for y in theirs if y not in own]
+            for y in filled:
+                r[y], p[y] = r2[y], p2[y]
+            row.setdefault("identifiers", [cik]).append(k)
+            row.setdefault("filled_from_predecessor", []).extend(filled)
+        missing = [y for y in YEARS if r[y] is None or p[y] is None]
+        if mismatch and missing:
+            excluded.append(row | {"reason": f"no revenue or pre-tax income for {', '.join(map(str, missing))}; {mismatch}"})
+            continue
         if len(missing) == len(YEARS) and all(r[y] is None for y in YEARS):
             excluded.append(row | {"reason": f"no revenue or pre-tax income in any year under the tags read, for its SEC identifier (CIK {cik})"})
             continue
@@ -184,8 +237,8 @@ def section(g, note=""):
 def main():
     ua = user_agent()
     universe = json.loads((ROOT / "data" / "sp500.json").read_text(encoding="utf-8"))
-    used, excluded = collect(universe, ua)
     mem = json.loads((ROOT / "data" / "membership.json").read_text(encoding="utf-8"))
+    used, excluded = collect(universe, mem, ua)
     figs = figures(ua)
     at = {y: [c["ciks"] for c in mem["companies"] if f"{y}-01" in c["months"]] for y in YEARS}
     today = [c["ciks"] for c in mem["companies"] if f"{YEARS[-1]}-12" in c["months"]]
