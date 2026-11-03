@@ -365,3 +365,9 @@ Group: Method
 Decision: When a 10-K tags the same deal measure (price paid, or assets acquired) at two values, the reader keeps the larger if they are within 1% of each other and stops otherwise. The 1% stays; it is not tightened to the facts' own rounding.
 Why: The post-ship tolerance census found it the only hand constant among the checks (the rest derive from the data or a cited rule). James ruled it fine as is (2026-11-02): the two values come from one filing and the shares that depend on them are read against a 10% test.
 Status: active
+
+## 2026-11-02 | Every rebuild ends with the cross-page check
+Group: Build and process
+Decision: coherence.py reads every figure or fact that appears on more than one built page, or in the README, from each place and compares them (the All page's counts and rows against the pages, data and README; each company page against its row; the bridge against the All page sentence and README; both ledgers against their files; the S&P 500 page against the membership data; the menu on every page). rebuild.py runs it last and fails on any disagreement. A check that cannot find what it looks for fails rather than skips.
+Why: The post-ship list's "coherence map", settled with James on 2026-11-02 as a cross-page agreement check. The pages are built by four scripts and the README by hand, so a figure can drift in one place; a planted change to the README and to one All page cell were both caught before this was committed.
+Status: active
