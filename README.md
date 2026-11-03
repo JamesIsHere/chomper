@@ -58,7 +58,9 @@ requires.
 ## Status
 
 Version 1, November 2026: one bridge, eleven company pages, the index pages.
-Four company pages stop at fiscal 2016 and say so. Next is a cost measure for
-every company, how far costs fall when revenue falls, and the working sample to
-test it on. The open items are on the Considerations page; parked ideas are in
-`ideas.md`.
+Four company pages stop at fiscal 2016 and say so. Version 2 started 3 November
+2026 with the cost measure: Who holds up lists every year revenue fell 5% or
+more across the 36 companies read so far, with how far pre-tax income fell per
+dollar of revenue lost. 36 of 384 readable companies pass the ten-year read;
+the rest wait on hand records. The open items are on the Considerations page;
+parked ideas are in `ideas.md`.
