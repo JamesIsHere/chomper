@@ -1,0 +1,118 @@
+{
+ "membership": {
+  "first": "2016-01",
+  "last": "2025-12",
+  "companies": 693,
+  "left_before_last": 194,
+  "in_last_month": 499
+ },
+ "today": {
+  "retrieved": "2026-10-30",
+  "tickers": 503,
+  "companies": 500,
+  "two_class": [
+   [
+    "FOXA",
+    "FOX"
+   ],
+   [
+    "GOOGL",
+    "GOOG"
+   ],
+   [
+    "NWSA",
+    "NWS"
+   ]
+  ],
+  "not_in_membership": [
+   "ARES",
+   "BE",
+   "CASY",
+   "CIEN",
+   "COHR",
+   "CRH",
+   "CVNA",
+   "ECHO",
+   "FDXF",
+   "FERG",
+   "FIX",
+   "FLEX",
+   "HONA",
+   "LITE",
+   "MRVL",
+   "P",
+   "RDDT",
+   "SNDK",
+   "TWLO",
+   "VEEV",
+   "VRT",
+   "VYLR",
+   "XOM"
+  ]
+ },
+ "five_year": {
+  "readable": 384,
+  "not_readable": 119,
+  "classes": {
+   "Revenue": 24,
+   "Statement": 23,
+   "Anchor": 21,
+   "Values": 16,
+   "Not found": 13,
+   "Footing": 11,
+   "Member slice": 11
+  }
+ },
+ "ten_year": {
+  "run": "2026-11-02",
+  "passed": 250,
+  "stopped": 134,
+  "classes": {
+   "Series too short under the tags read": 51,
+   "Acquisition spend the tagged deals leave unexplained is itself significant": 20,
+   "No companyfacts tag matches the five-year page": 15,
+   "Fiscal years not consecutive": 13,
+   "A deal tagged at two values more than 1% apart": 12,
+   "A year's 10-K not found": 12,
+   "Conflicting values in one filing": 7,
+   "No 10-K shows two consecutive years": 3,
+   "A year's 10-K has no XBRL instance": 1
+  }
+ },
+ "published": {
+  "pages": [
+   "AAPL",
+   "CAT",
+   "CCL",
+   "HD",
+   "JNJ",
+   "JPM",
+   "MSFT",
+   "ODFL",
+   "PGR",
+   "PLD",
+   "UNH"
+  ],
+  "bridges": [
+   "ODFL"
+  ]
+ },
+ "measure": {
+  "fall": 0.05,
+  "fall_years": 220,
+  "fall_companies": 133,
+  "both_years": 156,
+  "both_companies": 98,
+  "pre_only_years": 64,
+  "pre_only_companies": 35
+ },
+ "aggregate": {
+  "summed": 414,
+  "excluded": 86,
+  "reasons": {
+   "no revenue or pre-tax income": 52,
+   "no pre-tax income": 22,
+   "no revenue": 12
+  }
+ }
+}

@@ -16,7 +16,8 @@ import build_history as B
 from pull import ROOT
 
 DOCS = ROOT / "docs"
-SITE_PAGES = {"index.html", "aggregate.html", "decisions.html", "considerations.html", "membership.html", "readme.html"}
+SITE_PAGES = {"index.html", "aggregate.html", "decisions.html", "considerations.html", "membership.html", "readme.html",
+              "waterfall.html"}
 WORDS = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine",
          10: "ten", 11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen", 15: "fifteen", 16: "sixteen",
          17: "seventeen", 18: "eighteen", 19: "nineteen", 20: "twenty"}
@@ -156,7 +157,20 @@ def main():
     check("Readme page: every README paragraph present", ("README.md paragraphs", len(paras)),
           ("found on the page", sum(re.sub(r"`", "", p_) in plain for p_ in paras)))
 
-    # 7. The same menu on every page
+    # 7. The Waterfall page against the pages it summarises
+    wf = page("waterfall.html")
+    wrow = lambda label: int(one(rf'<th scope="row">{re.escape(label)}</th><td class="n">([\d,]+)</td>', wf,
+                                 f"waterfall row {label!r}").replace(",", ""))
+    check("Waterfall: ever members", ("waterfall", wrow("In the S&amp;P 500 in any month, January 2016 to December 2025")),
+          ("membership page", n_mem))
+    check("Waterfall: tickers today", ("waterfall", wrow("Tickers on today's list")), ("All page lede", total))
+    check("Waterfall: readable", ("waterfall", wrow("Two 10-Ks read, every year footing to pre-tax income")),
+          ("All page lede, readable + analyzed", readable + analyzed))
+    check("Waterfall: published", ("waterfall", wrow("Finished by hand and published")), ("All page lede", analyzed))
+    check("Waterfall: summed on the S&P 500 page", ("waterfall", wrow("Summed")),
+          ("S&P 500 page", int(one(r"summed across (\d+) of today", text(agg), "aggregate summed"))))
+
+    # 8. The same menu on every page
     navs = {}
     for f in sorted(DOCS.glob("*.html")) + sorted((DOCS / "bridge").glob("*.html")):
         nav = one(r'(<nav class="menu">.*?</nav>)', f.read_text(encoding="utf-8"), f"{f.name} menu")

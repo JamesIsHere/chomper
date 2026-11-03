@@ -552,6 +552,84 @@ def plural(n, noun):
     return f"{n} {noun}" if n == 1 else f"{n} {noun}s"
 
 
+def waterfall_page():
+    """The population waterfall from data/waterfall.json (written by waterfall.py): one table per path, each row a
+    level with its count, the share of the level above it, and what fell out and why."""
+    w = json.loads((ROOT / "data" / "waterfall.json").read_text(encoding="utf-8"))
+    mem, today, five, ten, pub, ms, agg = (w[k] for k in ("membership", "today", "five_year", "ten_year", "published",
+                                                           "measure", "aggregate"))
+
+    def month(m):
+        return f'{["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][int(m[5:]) - 1]} {m[:4]}'
+
+    def table(rows):
+        """rows: (label, count, base, note, link); the bar is count / the first row's count."""
+        top = rows[0][1]
+        out = ['<table class="fall"><thead><tr><th>Level</th><th class="n">Companies</th><th class="n">Of the level above</th>'
+               '<th>What falls out, and why</th></tr></thead><tbody>']
+        for label, count, base, note, link in rows:
+            share = "" if base is None else f"{100 * count / base:.0f}%"
+            width = 100 * count / top
+            out.append(f'<tr><th scope="row">{label}</th><td class="n">{count:,}</td><td class="n">{share}</td>'
+                       f'<td class="text"><div class="bar"><i style="width:{width:.1f}%"></i></div><p>{note}'
+                       + (f' <a href="{link[0]}">{link[1]}</a>.' if link else "") + '</p></td></tr>')
+        out.append("</tbody></table>")
+        return "".join(out)
+
+    def classes(d):
+        """'51 series too short under the tags read; 20 acquisition spend ...': the count first, the cause lower-cased."""
+        return "; ".join(f"{v} {escape(k[0].lower() + k[1:])}" for k, v in d.items())
+
+    not_read = {k: NOT_READABLE[k] for k in five["classes"]}
+    sections = []
+    # 1. who could be read
+    sections.append("<h2>Who could be read</h2>" + table([
+        (f"In the S&amp;P 500 in any month, {month(mem['first'])} to {month(mem['last'])}", mem["companies"], None,
+         f"Every company the index held at any point in those ten years, matched across months by SEC identifier. "
+         f"Membership before {month(mem['first'])} has not been read, so a fifteen- or twenty-year population does not "
+         f"exist here yet.", ("membership.html", "Who was in the S&amp;P 500")),
+        (f"Still in the index in {month(mem['last'])}", mem["in_last_month"], mem["companies"],
+         f"{mem['left_before_last']} left the index before then: acquired, delisted or dropped. The readers below run on "
+         f"today's list only, so those {mem['left_before_last']} are not read anywhere yet.", None),
+        (f"On today's list ({today['retrieved']})", today["companies"], None,  # not a subset of the row above: no share
+         f"{today['tickers']} tickers for {today['companies']} companies, since {len(today['two_class'])} companies list two "
+         f"share classes ({', '.join(' and '.join(p) for p in today['two_class'])}). {len(today['not_in_membership'])} of the "
+         f"{today['companies']} are not in the membership file: they joined after {month(mem['last'])} or now file under a "
+         f"new identifier ({', '.join(today['not_in_membership'])}).", None),
+    ]))
+    # 2. the readers
+    sections.append("<h2>Read from the filings</h2>" + table([
+        ("Tickers on today's list", today["tickers"], None, "The population every reader runs on.", ("index.html", "Chomper")),
+        ("Two 10-Ks read, every year footing to pre-tax income", five["readable"], today["tickers"],
+         f"{five['not_readable']} cannot be read yet, by cause: " + "; ".join(
+             f"{v} where {escape(not_read[k][0].lower() + not_read[k][1:].rstrip('.'))}" for k, v in five["classes"].items())
+         + ". Each row on the Chomper page says which", ("index.html", "Chomper")),
+        (f"Read back to the first year the SEC holds (bulk run of {ten['run']})", ten["passed"], five["readable"],
+         f"{ten['stopped']} stopped, by cause: {classes(ten['classes'])}. A stop is not a verdict on the company; the eleven "
+         f"published pages each needed a hand record or a rule to pass this step.", None),
+        ("Finished by hand and published", len(pub["pages"]), ten["passed"],
+         f"{', '.join(pub['pages'])}. One-year bridge: {', '.join(pub['bridges'])}.", ("index.html", "Chomper")),
+    ]))
+    # 3. the cost measure
+    sections.append("<h2>What the cost measure would see (version 2, not built)</h2>" + table([
+        ("Read back to the first year the SEC holds", ten["passed"], None, "The companies with a ten-year series today.", None),
+        (f"With at least one fall year (revenue down {ms['fall'] * 100:.0f}% or more on the prior fiscal year)",
+         ms["fall_companies"], ten["passed"], f"{ms['fall_years']} fall years in all; most companies have one or none, and 2020 "
+         f"holds many of them.", None),
+        ("Fall years carrying both operating and pre-tax income", ms["both_companies"], ms["fall_companies"],
+         f"{ms['both_years']} fall years. The other {ms['pre_only_years']} fall years, in {ms['pre_only_companies']} companies, "
+         f"have pre-tax income only (banks and insurers above all).", None),
+    ]))
+    # 4. the S&P 500 page
+    sections.append("<h2>The S&amp;P 500 page, a separate path</h2>" + table([
+        ("Companies on today's list", today["companies"], None,
+         "This page reads the SEC's frames (one value per company per calendar year), not the filings.", ("aggregate.html", "S&amp;P 500")),
+        ("Summed", agg["summed"], today["companies"],
+         f"{agg['excluded']} left out, by cause: {classes(agg['reasons'])}. The page names each one", ("aggregate.html", "S&amp;P 500")),
+    ]))
+    return WATERFALL.format(sections="\n".join(sections), nav=nav("waterfall.html"), css=CSS)
+
+
 def readme_page():
     """README.md as a page: the same words, the same order. The README's small Markdown (headings, paragraphs,
     bullet lists, one indented code block, an image, inline code, bare links) is converted here; anything else in
@@ -941,8 +1019,9 @@ def main():
                                     encoding="utf-8")
     (OUT / "decisions.html").write_text(decisions_page(), encoding="utf-8")
     (OUT / "readme.html").write_text(readme_page(), encoding="utf-8")
+    (OUT / "waterfall.html").write_text(waterfall_page(), encoding="utf-8")
     (OUT / "considerations.html").write_text(considerations_page(), encoding="utf-8")
-    print(f"docs/: {len(companies)} company pages, index.html, readme.html, decisions.html and considerations.html "
+    print(f"docs/: {len(companies)} company pages, index.html, readme.html, waterfall.html, decisions.html and considerations.html "
           f"({len(universe['companies'])} S&P 500 companies listed)")
 
 
@@ -1092,6 +1171,39 @@ filings that pass every check and {unreadable} cannot be read yet; each row says
 <p>Sectors and sub-industries are GICS, a taxonomy owned by S&amp;P and MSCI, taken from Wikipedia's
 <a href="{source}">list of S&amp;P 500 companies</a> (retrieved {retrieved}); an unofficial copy. Every company's
 SEC identifier was checked against the SEC's own ticker file.</p>
+</footer>
+</main>
+</body>
+</html>
+"""
+
+
+WATERFALL = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waterfall - Chomper</title>
+<style>{css}
+table.fall th, table.fall td {{ white-space: normal; vertical-align: top; }}
+table.fall tbody th {{ min-width: 14rem; }}
+table.fall td.text {{ text-align: left; }}
+table.fall td.text p {{ margin: .3rem 0 0; font-size: .85rem; color: var(--ink-2); max-width: 46rem; }}
+table.fall .bar {{ height: .5rem; background: var(--rule); border-radius: 2px; max-width: 46rem; }}
+table.fall .bar i {{ display: block; height: 100%; background: var(--up); border-radius: 2px; }}
+</style>
+</head>
+<body>
+<main>
+{nav}
+<h1>Waterfall</h1>
+<p class="lede">Where every count on this site comes from: the population at the top of each path, and what falls
+out at each step, with the cause. Companies, not tickers, unless the row says tickers.</p>
+{sections}
+<footer>
+<p>Source: data/waterfall.json, written by waterfall.py from the membership file, today's list, the five-year
+census, the bulk ten-year run, the published pages and the S&amp;P 500 page's data. Rerun it after any of
+those change, then rebuild.</p>
 </footer>
 </main>
 </body>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waterfall - Chomper</title>
+<style>
+:root { color-scheme: light; --bg: #ffffff; --ink: #0b0b0b; --ink-2: #52514e; --ink-3: #75746f; --rule: #e2e1dc;
+  --up: #1f8a4c; --down: #d03b3b; --link: #1c5cab; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: dark; --bg: #1a1a19;
+  --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #9a9992; --rule: #383835; --up: #3fb36b; --down: #e05252;
+  --link: #86b6ef; } }
+:root[data-theme="dark"] { color-scheme: dark; --bg: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #9a9992;
+  --rule: #383835; --up: #3fb36b; --down: #e05252; --link: #86b6ef; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 60rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+a { color: var(--link); }
+
+.menu { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem; margin: 0 0 1.5rem;
+  padding-bottom: .75rem; border-bottom: 1px solid var(--rule); }
+.menu a { padding: .3rem .65rem; border-radius: 4px; text-decoration: none; font-size: .9rem; font-weight: 600;
+  color: var(--ink-2); }
+.menu a:hover { background: var(--rule); }
+.menu a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+.crossref { font-size: .9rem; color: var(--ink-2); margin: 0 0 1rem; }
+
+:root { --s1: #2a78d6; --s2: #eb6834; --up-text: #17703d; --down-text: #b42828; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --s1: #3987e5; --s2: #d95926;
+  --up-text: #3fb36b; --down-text: #e05252; } }
+:root[data-theme="dark"] { --s1: #3987e5; --s2: #d95926; --up-text: #3fb36b; --down-text: #e05252; }
+h1 { font-size: 1.5rem; line-height: 1.25; margin: 0 0 .5rem; }
+h2 { font-size: 1.05rem; margin: 2rem 0 .5rem; }
+.lede { color: var(--ink-2); max-width: 46rem; margin: 0 0 1.25rem; }
+.wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: .9rem; }
+th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
+thead th { font-weight: 600; color: var(--ink-3); font-size: .8rem; }
+tbody th { text-align: left; font-weight: normal; white-space: normal; min-width: 12rem; }
+table.ten tbody th { min-width: 9rem; } /* ten columns of figures must fit the page width */
+table.ten th, table.ten td { padding: .4rem .5rem; }
+table.long tbody th { min-width: 0; } /* years down the rows: the row label is just the year */
+tr.strong th, tr.strong td, td.strong { font-weight: 600; }
+tr.sep th, tr.sep td { border-bottom: 2px solid var(--rule); }
+.dim { color: var(--ink-3); font-size: .8rem; }
+.legend { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; font-size: .85rem; color: var(--ink-2);
+  margin: .5rem 0 .25rem; align-items: center; }
+.legend i { display: inline-block; width: .8rem; height: .2rem; border-radius: 1px; margin-right: .4rem;
+  vertical-align: middle; }
+.trend { display: block; width: 100%; max-width: 40rem; height: auto; margin-bottom: 1rem; }
+.trend .g { stroke: var(--rule); stroke-width: 1; }
+.trend .ax { fill: var(--ink-3); font-size: 11px; }
+.trend .lab { fill: var(--ink-2); font-size: 12px; }
+.trend .dot { stroke: var(--bg); stroke-width: 2; }
+.trend .hit { fill: transparent; }
+.trend .hit:hover { fill: var(--rule); fill-opacity: .35; }
+.trend.wide { max-width: 50rem; }
+.trend .zero { stroke: var(--ink-3); stroke-width: 1; }
+.trend .bar-down { fill: var(--down); fill-opacity: .55; }
+.trend .bar-up { fill: var(--up); fill-opacity: .55; }
+.legend .sw { width: .8rem; height: .8rem; }
+.bar-down-sw { background: var(--down); opacity: .55; }
+.bar-up-sw { background: var(--up); opacity: .55; }
+.trend .rec { fill: var(--ink-3); fill-opacity: .14; }
+.rec-sw { background: var(--ink-3); opacity: .3; }
+tr.rec th, tr.rec td { background: color-mix(in srgb, var(--ink-3) 10%, transparent); }
+.trend .guide { stroke: var(--ink-3); stroke-dasharray: 2 3; stroke-width: 1; }
+.trend .mark { fill: var(--ink); }
+.trend .marknum { fill: var(--bg); font-size: 11px; font-weight: 700; }
+ol.key { list-style: none; padding: 0; margin: .5rem 0 1rem; font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
+ol.key li { margin: 0 0 .3rem; }
+ol.key .num, table.long .num { display: inline-block; width: 1.3rem; height: 1.3rem; line-height: 1.3rem; border-radius: 50%;
+  background: var(--ink); color: var(--bg); text-align: center; font-size: .75rem; font-weight: 700;
+  margin-right: .5rem; }
+table.long .num { width: 1.15rem; height: 1.15rem; line-height: 1.15rem; font-size: .7rem; margin: 0 0 0 .4rem; }
+tr.sub th { text-align: left; font-size: .8rem; font-weight: 600; color: var(--ink-3); padding-top: .9rem; }
+td.name { text-align: left; white-space: normal; }
+table.index tbody th { min-width: 4rem; width: 4rem; }
+table.index td.name { width: 16rem; }
+tr.pending th, tr.pending td { color: var(--ink-3); }
+td.why { text-align: left; white-space: normal; }
+details.sector { border-bottom: 1px solid var(--rule); }
+details.sector > summary { font-weight: 600; font-size: 1.05rem; }
+details.sub { margin-left: 1.25rem; }
+details.sub > summary { font-size: .95rem; }
+details > summary { cursor: pointer; padding: .45rem 0; }
+details > summary .dim { margin-left: .5rem; font-weight: normal; }
+details.sub[open] { margin-bottom: .75rem; }
+h2 .dim { font-weight: normal; margin-left: .4rem; }
+table.decisions td, table.decisions th { vertical-align: top; text-align: left; white-space: normal; }
+table.decisions td.date { white-space: nowrap; color: var(--ink-3); width: 6.5rem; }
+table.decisions tbody th { font-weight: 600; width: 13rem; min-width: 9rem; }
+table.decisions td.text p { margin: 0 0 .3rem; }
+table.decisions .why { color: var(--ink-2); font-size: .85rem; }
+table.decisions .status { color: var(--down-text); font-size: .8rem; }
+table.decisions .due { font-size: .85rem; font-weight: 600; }
+td.up { color: var(--up-text); }  /* text shades: darker than the cell shading, readable at regular weight */
+td.down { color: var(--down-text); }
+tr.superseded th, tr.superseded td.text p:not(.status) { color: var(--ink-3); text-decoration: line-through; }
+table.index thead th { white-space: normal; vertical-align: bottom; }
+ul.breaks { font-size: .85rem; color: var(--ink-2); max-width: 46rem; padding-left: 1.1rem; margin: .75rem 0; }
+ul.breaks li { margin-bottom: .2rem; }
+.note, footer { font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+
+table.fall th, table.fall td { white-space: normal; vertical-align: top; }
+table.fall tbody th { min-width: 14rem; }
+table.fall td.text { text-align: left; }
+table.fall td.text p { margin: .3rem 0 0; font-size: .85rem; color: var(--ink-2); max-width: 46rem; }
+table.fall .bar { height: .5rem; background: var(--rule); border-radius: 2px; max-width: 46rem; }
+table.fall .bar i { display: block; height: 100%; background: var(--up); border-radius: 2px; }
+</style>
+</head>
+<body>
+<main>
+<nav class="menu"><a href="readme.html">Readme</a><a href="index.html">Chomper</a><a href="aggregate.html">S&amp;P 500</a><a href="decisions.html">Decisioning</a><a href="considerations.html">Considerations</a><a href="waterfall.html" aria-current="page">Waterfall</a></nav>
+<h1>Waterfall</h1>
+<p class="lede">Where every count on this site comes from: the population at the top of each path, and what falls
+out at each step, with the cause. Companies, not tickers, unless the row says tickers.</p>
+<h2>Who could be read</h2><table class="fall"><thead><tr><th>Level</th><th class="n">Companies</th><th class="n">Of the level above</th><th>What falls out, and why</th></tr></thead><tbody><tr><th scope="row">In the S&amp;P 500 in any month, January 2016 to December 2025</th><td class="n">693</td><td class="n"></td><td class="text"><div class="bar"><i style="width:100.0%"></i></div><p>Every company the index held at any point in those ten years, matched across months by SEC identifier. Membership before January 2016 has not been read, so a fifteen- or twenty-year population does not exist here yet. <a href="membership.html">Who was in the S&amp;P 500</a>.</p></td></tr><tr><th scope="row">Still in the index in December 2025</th><td class="n">499</td><td class="n">72%</td><td class="text"><div class="bar"><i style="width:72.0%"></i></div><p>194 left the index before then: acquired, delisted or dropped. The readers below run on today's list only, so those 194 are not read anywhere yet.</p></td></tr><tr><th scope="row">On today's list (2026-10-30)</th><td class="n">500</td><td class="n"></td><td class="text"><div class="bar"><i style="width:72.2%"></i></div><p>503 tickers for 500 companies, since 3 companies list two share classes (FOXA and FOX, GOOGL and GOOG, NWSA and NWS). 23 of the 500 are not in the membership file: they joined after December 2025 or now file under a new identifier (ARES, BE, CASY, CIEN, COHR, CRH, CVNA, ECHO, FDXF, FERG, FIX, FLEX, HONA, LITE, MRVL, P, RDDT, SNDK, TWLO, VEEV, VRT, VYLR, XOM).</p></td></tr></tbody></table>
+<h2>Read from the filings</h2><table class="fall"><thead><tr><th>Level</th><th class="n">Companies</th><th class="n">Of the level above</th><th>What falls out, and why</th></tr></thead><tbody><tr><th scope="row">Tickers on today's list</th><td class="n">503</td><td class="n"></td><td class="text"><div class="bar"><i style="width:100.0%"></i></div><p>The population every reader runs on. <a href="index.html">Chomper</a>.</p></td></tr><tr><th scope="row">Two 10-Ks read, every year footing to pre-tax income</th><td class="n">384</td><td class="n">76%</td><td class="text"><div class="bar"><i style="width:76.3%"></i></div><p>119 cannot be read yet, by cause: 24 where its revenue is not tagged as a single line in the income statement&#x27;s arithmetic; 23 where its income statement could not be told apart from its other statements; 21 where pre-tax income could not be found in its income statement&#x27;s arithmetic; 16 where its 10-K reports the same figure twice with values that do not agree; 13 where its two 10-Ks two years apart could not be found on SEC EDGAR; 11 where its income statement lines do not add up to its reported pre-tax income; 11 where a line is reported in parts in one 10-K and as a single total in the other. Each row on the Chomper page says which <a href="index.html">Chomper</a>.</p></td></tr><tr><th scope="row">Read back to the first year the SEC holds (bulk run of 2026-11-02)</th><td class="n">250</td><td class="n">65%</td><td class="text"><div class="bar"><i style="width:49.7%"></i></div><p>134 stopped, by cause: 51 series too short under the tags read; 20 acquisition spend the tagged deals leave unexplained is itself significant; 15 no companyfacts tag matches the five-year page; 13 fiscal years not consecutive; 12 a deal tagged at two values more than 1% apart; 12 a year&#x27;s 10-K not found; 7 conflicting values in one filing; 3 no 10-K shows two consecutive years; 1 a year&#x27;s 10-K has no XBRL instance. A stop is not a verdict on the company; the eleven published pages each needed a hand record or a rule to pass this step.</p></td></tr><tr><th scope="row">Finished by hand and published</th><td class="n">11</td><td class="n">4%</td><td class="text"><div class="bar"><i style="width:2.2%"></i></div><p>AAPL, CAT, CCL, HD, JNJ, JPM, MSFT, ODFL, PGR, PLD, UNH. One-year bridge: ODFL. <a href="index.html">Chomper</a>.</p></td></tr></tbody></table>
+<h2>What the cost measure would see (version 2, not built)</h2><table class="fall"><thead><tr><th>Level</th><th class="n">Companies</th><th class="n">Of the level above</th><th>What falls out, and why</th></tr></thead><tbody><tr><th scope="row">Read back to the first year the SEC holds</th><td class="n">250</td><td class="n"></td><td class="text"><div class="bar"><i style="width:100.0%"></i></div><p>The companies with a ten-year series today.</p></td></tr><tr><th scope="row">With at least one fall year (revenue down 5% or more on the prior fiscal year)</th><td class="n">133</td><td class="n">53%</td><td class="text"><div class="bar"><i style="width:53.2%"></i></div><p>220 fall years in all; most companies have one or none, and 2020 holds many of them.</p></td></tr><tr><th scope="row">Fall years carrying both operating and pre-tax income</th><td class="n">98</td><td class="n">74%</td><td class="text"><div class="bar"><i style="width:39.2%"></i></div><p>156 fall years. The other 64 fall years, in 35 companies, have pre-tax income only (banks and insurers above all).</p></td></tr></tbody></table>
+<h2>The S&amp;P 500 page, a separate path</h2><table class="fall"><thead><tr><th>Level</th><th class="n">Companies</th><th class="n">Of the level above</th><th>What falls out, and why</th></tr></thead><tbody><tr><th scope="row">Companies on today's list</th><td class="n">500</td><td class="n"></td><td class="text"><div class="bar"><i style="width:100.0%"></i></div><p>This page reads the SEC's frames (one value per company per calendar year), not the filings. <a href="aggregate.html">S&amp;P 500</a>.</p></td></tr><tr><th scope="row">Summed</th><td class="n">414</td><td class="n">83%</td><td class="text"><div class="bar"><i style="width:82.8%"></i></div><p>86 left out, by cause: 52 no revenue or pre-tax income; 22 no pre-tax income; 12 no revenue. The page names each one <a href="aggregate.html">S&amp;P 500</a>.</p></td></tr></tbody></table>
+<footer>
+<p>Source: data/waterfall.json, written by waterfall.py from the membership file, today's list, the five-year
+census, the bulk ten-year run, the published pages and the S&amp;P 500 page's data. Rerun it after any of
+those change, then rebuild.</p>
+</footer>
+</main>
+</body>
+</html>
