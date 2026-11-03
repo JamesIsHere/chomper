@@ -65,18 +65,15 @@
  },
  "ten_year": {
   "run": "2026-11-02",
-  "passed": 250,
-  "stopped": 134,
+  "passed": 7,
+  "stopped": 377,
   "classes": {
-   "Series too short under the tags read": 51,
-   "Acquisition spend the tagged deals leave unexplained is itself significant": 20,
-   "No companyfacts tag matches the five-year page": 15,
-   "Fiscal years not consecutive": 13,
-   "A deal tagged at two values more than 1% apart": 12,
-   "A year's 10-K not found": 12,
-   "Conflicting values in one filing": 7,
-   "No 10-K shows two consecutive years": 3,
-   "A year's 10-K has no XBRL instance": 1
+   "Series starts after fiscal 2007 under the tags read; the early years need a hand record": 289,
+   "A 10-K before XBRL: its acquisitions must be read by hand": 68,
+   "Conflicting values in one filing": 9,
+   "A gap in the series no tag fills": 5,
+   "No companyfacts tag matches the five-year page": 5,
+   "A year's 10-K not found": 1
   }
  },
  "published": {
@@ -99,12 +96,14 @@
  },
  "measure": {
   "fall": 0.05,
-  "fall_years": 220,
-  "fall_companies": 133,
-  "both_years": 156,
-  "both_companies": 98,
-  "pre_only_years": 64,
-  "pre_only_companies": 35
+  "run": "earlier rules",
+  "companies": 250,
+  "fall_years": 231,
+  "fall_companies": 136,
+  "both_years": 165,
+  "both_companies": 100,
+  "pre_only_years": 66,
+  "pre_only_companies": 36
  },
  "aggregate": {
   "summed": 414,

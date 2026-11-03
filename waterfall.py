@@ -30,6 +30,10 @@ FALL = 0.05  # a fall year: revenue down by this share or more against the prior
 
 # headline.py's stop messages, in a reader's words; every stop must match one or this script stops
 STOP_CLASSES = [
+    ("Series starts after fiscal 2007 under the tags read; the early years need a hand record",
+     r"starts \d{4}-\d{2}-\d{2}, not fiscal 2007"),
+    ("A 10-K before XBRL: its acquisitions must be read by hand", r"predates XBRL; read its acquisitions"),
+    ("A gap in the series no tag fills", r"has a gap \d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}"),
     ("Series too short under the tags read", r"only \d+ years .*no other tag reaches further back"),
     ("No companyfacts tag matches the five-year page", r"no companyfacts tag matches the five-year page"),
     ("Acquisition spend the tagged deals leave unexplained is itself significant",
@@ -75,7 +79,10 @@ def main():
     if set(res) != set(passes):
         raise SystemExit("data/bulk/results.json does not cover exactly the census passes")
     ten_pass = sorted(t for t, r in res.items() if r["status"] == "pass")
-    stops = Counter(classify(r["message"]) for r in res.values() if r["status"] != "pass")
+    crashes = sorted(t for t, r in res.items() if r["status"] == "crash")
+    if crashes:
+        raise SystemExit(f"{len(crashes)} companies crashed in the bulk run (rerun them first): {crashes[:8]}")
+    stops = Counter(classify(r["message"]) for r in res.values() if r["status"] == "stop")
     run_date = date.fromtimestamp(results_path.stat().st_mtime).isoformat()
 
     built = sorted(p.stem for p in (ROOT / "data" / "history").glob("*.json"))
@@ -84,6 +91,14 @@ def main():
     files = sorted(glob.glob(str(BULK / "headline" / "*.json")))
     if sorted(Path(f).stem for f in files) != ten_pass:
         raise SystemExit("data/bulk/headline/ does not hold exactly the ten-year passes")
+    # The cost-measure rows count the earlier-rules run (before 2026-11-02 17:41: a series could start after fiscal
+    # 2007 and pre-XBRL acquisitions were not required), kept in data/bulk/headline_earlier_rules/. Under the current
+    # rules almost every company waits on a hand record, so that run is the only ten-year sample wide enough to show
+    # what the measure would see. The page says which run each row counts.
+    earlier = sorted(glob.glob(str(BULK / "headline_earlier_rules" / "*.json")))
+    if not earlier:
+        raise SystemExit("data/bulk/headline_earlier_rules/ missing: the earlier-rules run the measure rows count")
+    files = earlier
     fall_years, both_years, pre_only_years = [], [], []
     for f in files:
         d = json.loads(Path(f).read_text(encoding="utf-8"))
@@ -107,7 +122,8 @@ def main():
         "five_year": {"readable": len(passes), "not_readable": sum(fails.values()), "classes": dict(fails.most_common())},
         "ten_year": {"run": run_date, "passed": len(ten_pass), "stopped": sum(stops.values()), "classes": dict(stops.most_common())},
         "published": {"pages": built, "bridges": bridges},
-        "measure": {"fall": FALL, "fall_years": len(fall_years), "fall_companies": len(set(fall_years)),
+        "measure": {"fall": FALL, "run": "earlier rules", "companies": len(files),
+                    "fall_years": len(fall_years), "fall_companies": len(set(fall_years)),
                     "both_years": len(both_years), "both_companies": len(set(both_years)),
                     "pre_only_years": len(pre_only_years), "pre_only_companies": len(set(pre_only_years))},
         "aggregate": {"summed": len(agg["companies"]),
@@ -115,8 +131,9 @@ def main():
     }
     OUT.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
     print(f"data/waterfall.json: {out['membership']['companies']} ever members -> {out['today']['tickers']} tickers today -> "
-          f"{out['five_year']['readable']} readable -> {out['ten_year']['passed']} read to the first year -> "
-          f"{len(built)} published; measure sees {out['measure']['fall_years']} fall years in {out['measure']['fall_companies']} companies")
+          f"{out['five_year']['readable']} readable -> {out['ten_year']['passed']} read to the first year under the current rules -> "
+          f"{len(built)} published; the earlier-rules run ({len(files)} companies) shows {out['measure']['fall_years']} fall years "
+          f"in {out['measure']['fall_companies']} companies")
 
 
 if __name__ == "__main__":

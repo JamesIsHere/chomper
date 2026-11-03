@@ -605,16 +605,20 @@ def waterfall_page():
              f"{v} where {escape(not_read[k][0].lower() + not_read[k][1:].rstrip('.'))}" for k, v in five["classes"].items())
          + ". Each row on the Chomper page says which", ("index.html", "Chomper")),
         (f"Read back to the first year the SEC holds (bulk run of {ten['run']})", ten["passed"], five["readable"],
-         f"{ten['stopped']} stopped, by cause: {classes(ten['classes'])}. A stop is not a verdict on the company; the eleven "
-         f"published pages each needed a hand record or a rule to pass this step.", None),
+         f"{ten['stopped']} stopped, by cause: {classes(ten['classes'])}. A stop is not a verdict on the company: the long "
+         f"view must reach fiscal 2007, and the SEC's structured data begins in 2009, so nearly every company waits on a "
+         f"hand record for its first years, the step each published page went through.", None),
         ("Finished by hand and published", len(pub["pages"]), ten["passed"],
          f"{', '.join(pub['pages'])}. One-year bridge: {', '.join(pub['bridges'])}.", ("index.html", "Chomper")),
     ]))
     # 3. the cost measure
     sections.append("<h2>What the cost measure would see (version 2, not built)</h2>" + table([
-        ("Read back to the first year the SEC holds", ten["passed"], None, "The companies with a ten-year series today.", None),
+        ("Ten-year series under the earlier rules", ms["companies"], None,
+         "Counted on the bulk run made before the fiscal-2007 rule (2026-11-02, 17:15), when a series could start "
+         "after 2007 and acquisitions before XBRL were not required; the only ten-year sample wide enough to show what "
+         "the measure would see. Not the same population as the row above.", None),
         (f"With at least one fall year (revenue down {ms['fall'] * 100:.0f}% or more on the prior fiscal year)",
-         ms["fall_companies"], ten["passed"], f"{ms['fall_years']} fall years in all; most companies have one or none, and 2020 "
+         ms["fall_companies"], ms["companies"], f"{ms['fall_years']} fall years in all; most companies have one or none, and 2020 "
          f"holds many of them.", None),
         ("Fall years carrying both operating and pre-tax income", ms["both_companies"], ms["fall_companies"],
          f"{ms['both_years']} fall years. The other {ms['pre_only_years']} fall years, in {ms['pre_only_companies']} companies, "
