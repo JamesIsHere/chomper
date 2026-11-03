@@ -540,10 +540,10 @@
       "significant": true,
       "accession": "0000950123-09-003840",
       "by_hand": true,
-      "assets_acquired": null,
-      "assets_floor": 288768000000,
-      "assets_source": "XBRL identifiable assets, a floor",
-      "asset_share": 0.18485328205348153,
+      "assets_acquired": 288731000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.18482959670248703,
       "significant_by": "assets"
     },
     {
@@ -558,10 +558,10 @@
       "significant": true,
       "accession": "0000950123-09-003840",
       "by_hand": true,
-      "assets_acquired": null,
-      "assets_floor": 263991000000,
-      "assets_source": "XBRL identifiable assets, a floor",
-      "asset_share": 0.1689924187672479,
+      "assets_acquired": 263649000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.16877348930670416,
       "significant_by": "assets"
     },
     {

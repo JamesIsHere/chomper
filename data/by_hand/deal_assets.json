@@ -220,6 +220,34 @@
    ],
    "total": "Fair value of net assets acquired",
    "note": "A bargain purchase (no goodwill), from the 2023 10-K (Note 34), reflecting adjustments through 31 December 2023."
+  },
+  "jpm:BearStearnsMember": {
+   "accession": "0000950123-09-003840",
+   "document": "y74757e10vk.htm",
+   "unit": 1000000,
+   "quote": "Condensed statement of net assets acquired The following reflects the value assigned to Bear Stearns net assets as of the merger date. (in millions) May 30, 2008 Assets Cash and due from banks $ 534 Federal funds sold and securities purchased under resale agreements 21,204 Securities borrowed 55,195 Trading assets 136,535 Loans 4,407 Accrued interest and accounts receivable 34,677 Goodwill 761 All other assets 35,418 Total assets $ 288,731 Liabilities Federal funds purchased and securities loaned or sold under repurchase agreements $ 54,643 Other borrowings 16,166 Trading liabilities 24,267 Beneficial interests issued by consolidated VIEs 47,042 Long-term debt 67,015 Accounts payable and other liabilities 78,532 Total liabilities 287,665 Bear Stearns net assets (a) $ 1,066",
+   "assets": [
+    "Total assets"
+   ],
+   "liabilities": [
+    "Total liabilities"
+   ],
+   "total": "Bear Stearns net assets (a)",
+   "note": "The 2008 10-K's condensed statement of net assets acquired (Note 2), total assets with goodwill ($761 million) included; the FY2010 10-K's XBRL carries the final figure, $288,768 million."
+  },
+  "jpm:WashingtonMutualMember": {
+   "accession": "0000950123-09-003840",
+   "document": "y74757e10vk.htm",
+   "unit": 1000000,
+   "quote": "The following condensed statement of net assets acquired reflects the value assigned to the Washington Mutual net assets as of September 25, 2008. (in millions) September 25, 2008 Assets Cash and due from banks $ 3,680 Deposits with banks 3,517 Federal funds sold and securities purchased under resale agreements 1,700 Trading assets 5,691 Securities 17,220 Loans (net of allowance for loan losses) 206,436 Accrued interest and accounts receivable 3,201 Mortgage servicing rights 5,874 All other assets 16,330 Total assets $ 263,649 Liabilities Deposits $ 159,869 Federal funds purchased and securities loaned or sold under repurchase agreements 4,549 Other borrowed funds 81,622 Trading liabilities 585 Accounts payable and other liabilities 6,523 Long-term debt 6,654 Total liabilities 259,802 Washington Mutual net assets acquired $ 3,847",
+   "assets": [
+    "Total assets"
+   ],
+   "liabilities": [
+    "Total liabilities"
+   ],
+   "total": "Washington Mutual net assets acquired",
+   "note": "The 2008 10-K's condensed statement of net assets acquired (Note 2); a bargain purchase, no goodwill. The FY2010 10-K's XBRL carries the final figure, $263,991 million."
   }
  },
  "AAPL": {
