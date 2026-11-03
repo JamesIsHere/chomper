@@ -10,7 +10,7 @@ Levels and their sources:
   five-year read  data/census.json          history.py's verdict on every ticker of today's list
   ten-year read   data/bulk/results.json    headline.py run over every readable ticker (the bulk run)
   published       data/history/, docs/      company pages finished by hand; bridges
-  cost measure    data/bulk/headline/       fall years (revenue down 5% or more) and which profit lines they carry
+  cost measure    data/bulk/headline/       fall years (measure.py's definition) and which profit lines they carry
   S&P 500 page    data/aggregate.json       a separate path: companyfacts figures for today's members
 A ten-year pass reaches fiscal 2007 or stops short where the tags end without a gap (a short series, 2026-11-03);
 the ten-year row counts both and says how many reach the peak, and the cost-measure rows count every pass.
@@ -25,12 +25,11 @@ from datetime import date
 from pathlib import Path
 
 from headline import FIRST
+from measure import FALL, fall_years
 from pull import ROOT
 
 BULK = ROOT / "data" / "bulk"
 OUT = ROOT / "data" / "waterfall.json"
-FALL = 0.05  # a fall year: revenue down by this share or more against the prior fiscal year
-
 # headline.py's stop messages, in a reader's words; every stop must match one or this script stops
 STOP_CLASSES = [
     ("Series starts after fiscal 2007 under the tags read; the early years need a hand record",
@@ -98,18 +97,10 @@ def main():
         raise SystemExit("data/bulk/headline/ does not hold exactly the ten-year passes")
     # A pass reaches fiscal 2007 or is a short series (James, 2026-11-03): the page says how many reach the peak.
     to_2007 = sum(min(json.loads(Path(f).read_text(encoding="utf-8"))["period_ends"]) <= FIRST[1] for f in files)
-    fall_years, both_years, pre_only_years = [], [], []
-    for f in files:
-        d = json.loads(Path(f).read_text(encoding="utf-8"))
-        ends = sorted(d["period_ends"])
-        rev, pre, oi = d["revenue"], d["pretax_income"], d.get("operating_income") or {}
-        for a, b in zip(ends, ends[1:]):
-            if rev.get(a) is None or rev.get(b) is None or rev[a] <= 0 or (rev[b] - rev[a]) / rev[a] > -FALL:
-                continue
-            has_pre = pre.get(a) is not None and pre.get(b) is not None
-            has_oi = oi.get(a) is not None and oi.get(b) is not None
-            fall_years.append(d["ticker"])
-            (both_years if has_pre and has_oi else pre_only_years if has_pre else []).append(d["ticker"])
+    falls = [r for f in files for r in fall_years(json.loads(Path(f).read_text(encoding="utf-8")))]
+    fall_tickers = [r["ticker"] for r in falls]
+    both_years = [r["ticker"] for r in falls if r["decremental_operating"] is not None]
+    pre_only_years = [r["ticker"] for r in falls if r["decremental_operating"] is None]
     agg = json.loads((ROOT / "data" / "aggregate.json").read_text(encoding="utf-8"))
     excl = Counter(re.sub(r" in any year.*| for .*", "", e["reason"]) for e in agg["excluded"])
     out = {
@@ -123,7 +114,7 @@ def main():
                      "classes": dict(stops.most_common())},
         "published": {"pages": built, "bridges": bridges},
         "measure": {"fall": FALL, "run": run_date, "companies": len(files),
-                    "fall_years": len(fall_years), "fall_companies": len(set(fall_years)),
+                    "fall_years": len(fall_tickers), "fall_companies": len(set(fall_tickers)),
                     "both_years": len(both_years), "both_companies": len(set(both_years)),
                     "pre_only_years": len(pre_only_years), "pre_only_companies": len(set(pre_only_years))},
         "aggregate": {"summed": len(agg["companies"]),
