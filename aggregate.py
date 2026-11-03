@@ -1,9 +1,13 @@
-"""Trial: revenue and pre-tax income summed across the S&P 500 and each GICS sector, ten calendar years.
+"""Trial: revenue and pre-tax income summed across the S&P 500 and each GICS sector, ten fiscal years.
 
-Values come from the SEC's XBRL frames API (one tag, one calendar year, every filer; the SEC places each fiscal
-year in the calendar year it most nearly covers, and keeps the most recently filed value). A company counts only
-when it has revenue and pre-tax income in all ten years, so every year sums the same companies; the rest are
-listed with the reason. Share classes of one company (GOOGL and GOOG) count once.
+Values come from each company's SEC companyfacts (every XBRL fact it has filed): one-year facts from 10-K filings,
+the most recently filed value for each year end, read as headline.py reads a company. Year ends are chained back
+from the latest (each 350 to 380 days before the next) and placed by the project's fiscal-year rule: the latest
+year sits in the calendar year it most nearly covers (ending 1 July to 30 June of the next year, headline.py
+FIRST) and each earlier year one step before it, so a 52/53-week year that drifts across 30 June keeps its place.
+The frames API placed each year by its end date alone, which dropped Sysco's year ending 30 June 2018, put the
+next two a year early and left 2020 empty (James, 2026-11-02). A company counts only when it has revenue and pre-tax income in all ten years, so every year sums
+the same companies; the rest are listed with the reason. Share classes of one company (GOOGL and GOOG) count once.
 
     python aggregate.py    writes data/aggregate.json and docs/aggregate.html; no AI call
 """
@@ -13,6 +17,7 @@ from html import escape
 
 import build_history as B
 from header import nav
+from headline import annual, days, same, zeros
 from history import get_json
 from pull import ROOT, user_agent
 
@@ -32,29 +37,108 @@ OUT = ROOT / "data" / "aggregate.json"
 PAGE = ROOT / "docs" / "aggregate.html"
 
 
-def zeros(v):
-    return len(str(abs(int(v)))) - len(str(abs(int(v))).rstrip("0")) if v else 0
+def fiscal_year(end):
+    """The calendar year a fiscal year most nearly covers (headline.py FIRST): ending 1 July Y to 30 June Y+1 is Y."""
+    y = int(end[:4])
+    return y if end[5:] >= "07-01" else y - 1
 
 
-def same(a, b):
-    """True if two values agree at the coarser one's precision (round half away from zero, as filers do)."""
-    q = 10 ** max(zeros(a), zeros(b))
+def latest(rows):
+    """The most recently filed value among (filed, value, accession) rows, at the most precise rounding any filing
+    gives it (a filer that moves to coarser rounding has not restated, headline.py's rule: PGR 49,610.7M, later
+    printed 49,611M); None where the latest filing carries two different figures."""
+    top = max(r[0] for r in rows)
+    vals = [r[1] for r in rows if r[0] == top]
+    best = min(vals, key=zeros)
+    if not all(same(v, best) for v in vals):
+        return None
+    return min((r[1] for r in rows if same(r[1], best)), key=zeros)
 
-    def r(v):
-        return (abs(v) + q // 2) // q * q * (1 if v >= 0 else -1)
-    return r(a) == r(b)
+
+_READ = {}
 
 
-def frame(tag, year, ua):
-    """{cik: value} for one tag in one calendar year; {} when the SEC has no frame for it (404)."""
-    url = f"https://data.sec.gov/api/xbrl/frames/us-gaap/{tag}/USD/CY{year}.json"
+def read(cik, ua):
+    """({year: revenue}, {year: pre-tax income}, [notes]) for one SEC identifier from its companyfacts.
+    Every end of a one-year 10-K fact is a fiscal year; ends within 30 days (the width of the 350-to-380-day year)
+    are one year dated two ways (Deere's 2016-10-30 and 2016-10-31); ends further apart are different years, even
+    overlapping ones after a change of year end (Global Payments' May and December 2016). Years 350 to 380 days apart
+    form a run; a run is labelled by fiscal_year() of its latest end, less one per step, so a 52/53-week year that
+    drifts across 30 June keeps its place. A break between runs (a changed year end; a fresh-start year with no
+    twelve-month period, Chesapeake 2021) starts a new run with its own label; a label two runs both claim is
+    noted and the earlier run's year left out. Revenue is the largest total-revenue tag the year carries; pre-tax
+    income the first PRETAX tag, else domestic plus foreign; a tag at two values within one year is a note."""
+    if cik in _READ:
+        return _READ[cik]
+    none = {y: None for y in YEARS}
     try:
-        data = get_json(url, f"frames/{tag}-CY{year}.json", ua)
+        g = get_json(f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json",
+                     f"companyfacts-CIK{cik:010d}.json", ua)["facts"].get("us-gaap", {})
     except urllib.error.HTTPError as e:
         if e.code != 404:
             raise
-        return {}
-    return {r["cik"]: r["val"] for r in data["data"]}
+        _READ[cik] = (dict(none), dict(none), [f"no companyfacts under CIK {cik}"])
+        return _READ[cik]
+    have = {t: {e: latest(rows) for e, rows in annual(g, t).items()} for t in REVENUE + PRETAX + PARTS}
+    notes = [f"{t} {e}: the latest filing carries two different values"
+             for t, f in have.items() for e, v in sorted(f.items()) if v is None and fiscal_year(e) in YEARS]
+    years = []  # [[end, ...]] latest first, one list per fiscal year
+    for e in sorted({e for f in have.values() for e in f}, reverse=True):
+        if years and days(e, years[-1][0]) <= 30:
+            years[-1].append(e)
+        else:
+            years.append([e])
+    runs, label = [], {}
+    for fy in years:
+        if runs and any(350 <= days(e, x) <= 380 for e in fy for x in runs[-1][-1]):
+            runs[-1].append(fy)
+        else:
+            runs.append([fy])
+    for run in runs:
+        for i, fy in enumerate(run):
+            y = fiscal_year(run[0][0]) - i
+            if y in label:
+                if y in YEARS:
+                    notes.append(f"year ending {fy[0]} would also be {y} (the year ending {label[y][0]} is); left out")
+                continue
+            label[y] = fy
+    r, p = dict(none), dict(none)
+
+    def value(t, fy):
+        vals = [have[t][e] for e in fy if have[t].get(e) is not None]
+        if not vals:
+            return None
+        best = min(vals, key=zeros)
+        if all(same(v, best) for v in vals):
+            return best
+        notes.append(f"{t}: two values for the year ending {fy[0]} ({', '.join(f'{v:,}' for v in vals)})")
+        return None
+    for y in YEARS:
+        if y not in label:
+            continue
+        fy = label[y]
+        r[y] = max((v for v in (value(t, fy) for t in REVENUE) if v is not None), default=None)
+        p[y] = next((v for v in (value(t, fy) for t in PRETAX) if v is not None), None)
+        if p[y] is None:
+            parts = [value(t, fy) for t in PARTS]
+            p[y] = sum(parts) if all(v is not None for v in parts) else None
+    _READ[cik] = (r, p, notes)
+    return _READ[cik]
+
+
+def unloaded(cik, ua):
+    """The filing date and period of the latest 10-K when companyfacts holds no one-year fact from it (Clorox's
+    FY2026 10-K, filed 2026-08-07, absent on 2026-11-02), else None."""
+    sub = get_json(f"https://data.sec.gov/submissions/CIK{cik:010d}.json", f"{cik}/submissions.json", ua)
+    rec = sub["filings"]["recent"]
+    tenk = max(((d, rd) for f, d, rd in zip(rec["form"], rec["filingDate"], rec["reportDate"]) if f == "10-K"),
+               default=None)
+    if not tenk:
+        return None
+    g = get_json(f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json",
+                 f"companyfacts-CIK{cik:010d}.json", ua)["facts"].get("us-gaap", {})
+    ends = {e for t in REVENUE + PRETAX + PARTS for e in annual(g, t)}
+    return tenk if tenk[1] not in ends else None
 
 
 def identifiers(c, membership):
@@ -71,8 +155,6 @@ def identifiers(c, membership):
 
 
 def collect(universe, membership, ua):
-    rev = {t: {y: frame(t, y, ua) for y in YEARS} for t in REVENUE}
-    pre = {t: {y: frame(t, y, ua) for y in YEARS} for t in PRETAX + PARTS}
     by_cik, used, excluded = {}, [], []
     for c in universe["companies"]:
         by_cik.setdefault(c["cik"], []).append(c)
@@ -80,18 +162,12 @@ def collect(universe, membership, ua):
         c = cs[0]
         tickers = sorted(x["ticker"] for x in cs)
         ids = identifiers(c, membership)
-
-        def series(k):
-            r = {y: max((rev[t][y][k] for t in REVENUE if k in rev[t][y]), default=None) for y in YEARS}
-            p = {y: next((pre[t][y][k] for t in PRETAX if k in pre[t][y]), None) for y in YEARS}
-            p = {y: v if v is not None or not all(k in pre[t][y] for t in PARTS)
-                 else sum(pre[t][y][k] for t in PARTS) for y, v in p.items()}
-            return r, p
-        r, p = series(cik)
+        r, p, notes = read(cik, ua)
+        r, p = dict(r), dict(p)
         row = {"tickers": tickers, "name": c["name"], "sector": c["sector"], "cik": cik}
         mismatch = None
         for k in ids[1:]:  # a predecessor fills only the years the company's own identifier lacks
-            r2, p2 = series(k)
+            r2, p2, _ = read(k, ua)
             own = [y for y in YEARS if r[y] is not None and p[y] is not None]
             theirs = [y for y in YEARS if r2[y] is not None and p2[y] is not None]
             shared = [y for y in own if y in theirs]
@@ -109,15 +185,15 @@ def collect(universe, membership, ua):
             row.setdefault("identifiers", [cik]).append(k)
             row.setdefault("filled_from_predecessor", []).extend(filled)
         missing = [y for y in YEARS if r[y] is None or p[y] is None]
-        if mismatch and missing:
-            excluded.append(row | {"reason": f"no revenue or pre-tax income for {', '.join(map(str, missing))}; {mismatch}"})
-            continue
+        tail = "".join(f"; {n}" for n in ([mismatch] if mismatch else []) + notes)
         if len(missing) == len(YEARS) and all(r[y] is None for y in YEARS):
-            excluded.append(row | {"reason": f"no revenue or pre-tax income in any year under the tags read, for its SEC identifier (CIK {cik})"})
+            excluded.append(row | {"reason": f"no revenue or pre-tax income in any year under the tags read, for its SEC identifier (CIK {cik}){tail}"})
             continue
         if missing:
             what = [k for k, s in (("revenue", r), ("pre-tax income", p)) if any(s[y] is None for y in YEARS)]
-            excluded.append(row | {"reason": f"no {' or '.join(what)} for {', '.join(map(str, missing))}"})
+            if YEARS[-1] in missing and (u := unloaded(cik, ua)):
+                tail += f"; its 10-K for the year ending {u[1]}, filed {u[0]}, has no figures in the SEC's companyfacts yet"
+            excluded.append(row | {"reason": f"no {' or '.join(what)} for {', '.join(map(str, missing))}{tail}"})
             continue
         if any(r[y] <= 0 for y in YEARS):
             excluded.append(row | {"reason": "revenue zero or negative in a year"})
@@ -126,19 +202,10 @@ def collect(universe, membership, ua):
     return used, excluded
 
 
-def figures(ua):
-    """{cik: ({year: revenue}, {year: pre-tax income})} for every filer in the frames, read as collect() reads them."""
-    rev = {t: {y: frame(t, y, ua) for y in YEARS} for t in REVENUE}
-    pre = {t: {y: frame(t, y, ua) for y in YEARS} for t in PRETAX + PARTS}
-    ciks = {c for d in list(rev.values()) + list(pre.values()) for f in d.values() for c in f}
-    out = {}
-    for cik in ciks:
-        r = {y: max((rev[t][y][cik] for t in REVENUE if cik in rev[t][y]), default=None) for y in YEARS}
-        p = {y: next((pre[t][y][cik] for t in PRETAX if cik in pre[t][y]), None) for y in YEARS}
-        p = {y: v if v is not None or not all(cik in pre[t][y] for t in PARTS)
-             else sum(pre[t][y][cik] for t in PARTS) for y, v in p.items()}
-        out[cik] = (r, p)
-    return out
+def figures(membership, ua):
+    """{cik: ({year: revenue}, {year: pre-tax income})} for every identifier in the membership file, read as
+    collect() reads them."""
+    return {k: read(k, ua)[:2] for c in membership["companies"] for k in c["ciks"]}
 
 
 def chained(name, members, figs):
@@ -239,7 +306,7 @@ def main():
     universe = json.loads((ROOT / "data" / "sp500.json").read_text(encoding="utf-8"))
     mem = json.loads((ROOT / "data" / "membership.json").read_text(encoding="utf-8"))
     used, excluded = collect(universe, mem, ua)
-    figs = figures(ua)
+    figs = figures(mem, ua)
     at = {y: [c["ciks"] for c in mem["companies"] if f"{y}-01" in c["months"]] for y in YEARS}
     today = [c["ciks"] for c in mem["companies"] if f"{YEARS[-1]}-12" in c["months"]]
     was = chained("As it was", at, figs)
@@ -312,10 +379,14 @@ section.agg {{ margin: 0 0 2.5rem; }}
 <h1>Costs and revenue across the S&amp;P 500</h1>
 <p class="lede">Revenue and pre-tax income summed across {used} of today's S&amp;P 500 companies, {first} to {last},
 first for the whole index and then for each sector. Costs are revenue less pre-tax income. Sums are dominated by
-the largest companies. Each company's fiscal year is placed in the calendar year it most nearly covers.</p>
+the largest companies. Each company's figures come from its own 10-K filings. Its latest fiscal year is placed in
+the calendar year it most nearly covers: a year ending on or before 30 June counts as the calendar year before, one
+ending 1 July or later as the year it ends in. Each earlier year sits one step before it, so a 52- or 53-week year
+that drifts across 30 June keeps its place.</p>
 {body}
 <footer>
-<p>Source: the SEC's XBRL frames data, the most recently filed value for each company and year. A company counts
+<p>Source: the SEC's companyfacts data (every figure a company has filed in XBRL), the most recently filed 10-K
+value for each company and fiscal year. A company counts
 only when it reports revenue and pre-tax income in all ten years, so every year sums the same companies; today's
 members are traced back, so companies that left the index are not included. {excluded} companies are left out:</p>
 <ul class="gone">{gone}</ul>

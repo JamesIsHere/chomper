@@ -627,7 +627,7 @@ def waterfall_page():
     # 4. the S&P 500 page
     sections.append("<h2>The S&amp;P 500 page, a separate path</h2>" + table([
         ("Companies on today's list", today["companies"], None,
-         "This page reads the SEC's frames (one value per company per calendar year), not the filings.", ("aggregate.html", "S&amp;P 500")),
+         "This page reads each company's own filed figures (the SEC's companyfacts), one value per fiscal year, placed by the year it most nearly covers.", ("aggregate.html", "S&amp;P 500")),
         ("Summed", agg["summed"], today["companies"],
          f"{agg['excluded']} left out, by cause: {classes(agg['reasons'])}. The page names each one", ("aggregate.html", "S&amp;P 500")),
     ]))

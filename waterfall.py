@@ -11,7 +11,7 @@ Levels and their sources:
   ten-year read   data/bulk/results.json    headline.py run over every readable ticker (the bulk run)
   published       data/history/, docs/      company pages finished by hand; bridges
   cost measure    data/bulk/headline/       fall years (revenue down 5% or more) and which profit lines they carry
-  S&P 500 page    data/aggregate.json       a separate path: SEC frames for today's members
+  S&P 500 page    data/aggregate.json       a separate path: companyfacts figures for today's members
 The bulk folders are not in the repository; this script needs them and stops if they are missing. The json it
 writes is tracked, so the page rebuilds anywhere.
 """
