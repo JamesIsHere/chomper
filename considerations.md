@@ -310,3 +310,11 @@ Why: The crossing column shows changes that are layout, not business.
 Companies: RTX FANG (seen); size unknown
 Due: before the full S&P 500 run.
 Status: open
+
+## 2026-11-03 | S&P 500 sector charts: no shared axis across panels
+Theme: Presentation
+Item: Each sector panel on the S&P 500 page plots summed revenue and summed cost in dollars on its own left axis, and the sectors differ by an order of magnitude (Information Technology against Real Estate), so the eye cannot carry a slope from one panel to the next; the growth figures printed with each panel are the only cross-sector comparable. Three ways to standardize, smallest change first: (1) index both lines to 100 at 2016 on one shared axis, so the gap opening between the lines is the margin story, at the cost of the margin level; (2) plot pre-tax margin as a percent on one axis shared by every panel, level and trend both, at the cost of compression (a range wide enough for Financials or IT flattens Utilities and Staples; a loss year goes below zero); (3) log scale with the same span on every panel, as the company pages' ten-year chart already does, so equal slopes are equal growth and the vertical distance is the margin ratio, at the cost of readers who do not read log axes. James's lean: (2) as an added row of small margin panels under the dollar charts, not a replacement (the dollar panels answer how big, the margin panels who holds up); (1) the fallback if a shared percent axis compresses too much. Two coupled choices when it comes up: which margin (pre-tax is the only line the page sums today), and a fixed axis range across panels (the point) rather than one set from the data (today's problem again).
+Why: The site now leads with "Who holds up when revenue falls?", and the S&P 500 page cannot answer it across sectors as drawn.
+Companies: all summed on the S&P 500 page.
+Due: after the profit-line decision, since the margin plotted depends on it; reader-visible, so James rules it.
+Status: open
