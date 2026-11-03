@@ -1,5 +1,10 @@
 # chomper
 
+Who holds up when revenue falls?
+
+Chomper reads S&P 500 10-Ks to show what a company's costs did when its
+revenue fell. Eleven companies so far, every number traced to the filing.
+
 Live: https://jamesishere.github.io/chomper/
 
 ![Old Dominion's one-year bridge: why operating income fell $183.0M in 2025](docs/readme/odfl-bridge.png)

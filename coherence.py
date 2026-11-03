@@ -73,7 +73,8 @@ def main():
           ("'Built so far' links", len(re.findall(r'company pages for (.*?)\.</p>', idx, re.S) and
                                        re.findall(r'<a href="[A-Z.]+\.html">', re.search(r'company pages for (.*?)\.</p>', idx, re.S).group(1)))),
           ("README", readme.count(f"({WORDS[analyzed]} so far)") and analyzed),
-          ("README status", readme.count(f"{WORDS[analyzed]} company pages") and analyzed))
+          ("README status", readme.count(f"{WORDS[analyzed]} company pages") and analyzed),
+          ("README one-liner", readme.count(f"{WORDS[analyzed].capitalize()} companies so far") and analyzed))
     check("All page: readable + unreadable + analyzed = total", ("lede", total), ("sum", readable + unreadable + analyzed))
     check("All page: readable rows", ("lede", readable), ("rows saying Readable", idx.count('class="why">Readable:')))
     check("All page: not-readable rows", ("lede", unreadable), ("rows saying Not readable", idx.count('class="why">Not readable:')))
