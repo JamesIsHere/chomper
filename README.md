@@ -1,21 +1,5 @@
 # chomper
 
-After 2008, a friend from my master's in accounting, where we were studying
-bond analysis together, told me that if you had just looked at Apple you would
-have seen it blow right through the crisis with its margins expanding. It has
-made me wonder ever since which companies hold their margins when revenue
-turns, which cannot, and whether the income statement shows it.
-
-chomper is my attempt to look. It reads a company's 10-K filings the way an
-analyst would, at the highest level: a three-line income statement (revenue,
-pre-tax income, margin) traced back to fiscal 2007, the last peak before the
-crisis, then five years of cost lines under it, and for one company a one-year
-bridge that walks operating income bar by bar against what management said in
-its own filing. It is a measure of elasticities: how costs respond when revenue
-moves, company by company, across the business cycle. I built it for my own
-portfolio and for the kind of financial planning and analysis I did for a
-living.
-
 Live: https://jamesishere.github.io/chomper/
 
 ![Old Dominion's one-year bridge: why operating income fell $183.0M in 2025](docs/readme/odfl-bridge.png)
