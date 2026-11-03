@@ -635,7 +635,12 @@
       "share_of_assets": 0.008679528149287885,
       "significant": false,
       "accession": "0001193125-08-224958",
-      "by_hand": true
+      "by_hand": true,
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Various Other Business Acquisitions",
@@ -647,7 +652,12 @@
       "prior_total_assets": 176064000000,
       "share_of_assets": 0.002817157397310069,
       "significant": false,
-      "accession": "0001193125-14-383437"
+      "accession": "0001193125-14-383437",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Beats",
@@ -659,7 +669,12 @@
       "prior_total_assets": 207000000000,
       "share_of_assets": 0.012560386473429951,
       "significant": false,
-      "accession": "0001193125-15-356351"
+      "accession": "0001193125-15-356351",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "not determinable: the 10-K gives no gross assets acquired",
+      "asset_share": null,
+      "significant_by": null
     }
   ],
   "standards": [

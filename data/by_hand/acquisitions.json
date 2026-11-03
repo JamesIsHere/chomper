@@ -404,5 +404,78 @@
     }
    ]
   }
+ },
+ "JPM": {
+  "2007-12-31": {
+   "deals": [],
+   "spend": 70000000,
+   "prior_total_assets": 1351520000000,
+   "note": "No business combination completed in 2007 (Note 2, Business changes and developments, names the January 2008 Highbridge step-up and the October 2006 Bank of New York exchange). Spend is the cash flow line, 2007 column (net cash used, $70 million). Total assets at 31 Dec 2006 from Selected financial data (columns 2007 to 2003).",
+   "sources": [
+    {
+     "accession": "0001193125-08-043536",
+     "document": "d10k.htm",
+     "quote": "business acquisitions or dispositions (70 ) 185 (1,039 )"
+    },
+    {
+     "accession": "0001193125-08-043536",
+     "document": "d10k.htm",
+     "quote": "Total assets $ 1,562,147 $ 1,351,520 $ 1,198,942 $ 1,157,248 $ 770,912"
+    }
+   ]
+  },
+  "2008-12-31": {
+   "deals": [
+    {
+     "name": "The Bear Stearns Companies Inc.",
+     "member": "jpm:BearStearnsMember",
+     "date": "2008-05-31",
+     "size": 1496000000,
+     "measure": "consideration"
+    },
+    {
+     "name": "Washington Mutual Bank (banking operations, from the FDIC)",
+     "member": "jpm:WashingtonMutualMember",
+     "date": "2008-09-25",
+     "size": 1941000000,
+     "measure": "consideration"
+    }
+   ],
+   "spend": -2128000000,
+   "prior_total_assets": 1562147000000,
+   "note": "Sizes are each deal's total purchase price (Note 2). Bear Stearns was bought in two steps (49.4% on 8 April, the rest on 30 May 2008); members as JPM's FY2010 10-K tags them, and Bear Stearns's date (2008-05-31; the merger was effective 30 May). Spend is negative: the cash flow line shows net cash received in business acquisitions, $2,128 million, because the cash acquired exceeded the cash paid. Total assets at 31 Dec 2007 (balance sheet columns 2008, 2007). Price test only; under the asset test both deals are significant (considerations.md, 2026-11-02).",
+   "sources": [
+    {
+     "accession": "0000950123-09-003840",
+     "document": "y74757e10vk.htm",
+     "quote": "Effective May 30, 2008, BSC Merger Corporation, a wholly owned subsidiary of JPMorgan Chase, merged with The Bear Stearns Companies Inc."
+    },
+    {
+     "accession": "0000950123-09-003840",
+     "document": "y74757e10vk.htm",
+     "quote": "Direct acquisition costs 27 Less: Fair value of Bear Stearns common stock held in the RSU Trust and included in the exchange of common stock (269 ) (b) Total purchase price 1,496"
+    },
+    {
+     "accession": "0000950123-09-003840",
+     "document": "y74757e10vk.htm",
+     "quote": "On September 25, 2008, JPMorgan Chase acquired the banking operations of Washington Mutual Bank."
+    },
+    {
+     "accession": "0000950123-09-003840",
+     "document": "y74757e10vk.htm",
+     "quote": "Purchase price Purchase price $ 1,938 Direct acquisition costs 3 Total purchase price 1,941"
+    },
+    {
+     "accession": "0000950123-09-003840",
+     "document": "y74757e10vk.htm",
+     "quote": "business acquisitions or dispositions 2,128 (70 ) 185"
+    },
+    {
+     "accession": "0000950123-09-003840",
+     "document": "y74757e10vk.htm",
+     "quote": "Total assets $ 2,175,052 $ 1,562,147"
+    }
+   ]
+  }
  }
 }

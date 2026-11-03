@@ -47,6 +47,22 @@ Companies: all; none checked for cumulative small deals.
 Due: before the full S&P 500 run.
 Status: open
 
+## 2026-11-02 | Significance uses the price test only, not the asset test
+Theme: Acquisitions
+Item: SEC Regulation S-X Rule 1-02(w) has three tests (investment, asset, income); the pages apply only the investment test (price paid against prior total assets). A deal bought cheaply but carrying a large balance sheet is not marked. JPM 2008: Bear Stearns $1,496M paid but $288,731M of assets acquired (18.5% of JPM's $1,562,147M at 31 Dec 2007); Washington Mutual $1,941M paid, $263,649M of assets (16.9%). Both significant under the asset test, neither under the price test, so JPM's 2008 shows no break. The asset test needs total assets acquired, which only 9 of the 58 tagged deals on the 11 pages carry in XBRL; the rest need the 10-K's purchase-price allocation read by hand (about 14 deals at 1% or more of assets).
+Why: A distressed purchase is a regime break the price test cannot see; the time-window rule forbids an undisclosed one.
+Companies: JPM 2008 found (Bear Stearns, Washington Mutual); others not checked.
+Due: before JPM's page is called finished, or before the full S&P 500 run. Parked by James 2026-11-02 ("too much work for now").
+Status: closed 2026-11-02, the asset test added alongside the price test (decisions.md, "Significance: price or assets"); JPM 2008 now marks both deals
+
+## 2026-11-02 | Deals the asset test cannot reach
+Theme: Acquisitions
+Item: Five deals stay on the price test alone because the buyer's 10-K never states the gross assets acquired, only net figures or the main classes: AAPL Beats (2014, price 1.3% of assets), HD's fiscal 2023 acquisitions taken together (2.0%), MSFT Skype (fiscal 2012, 7.9%; the goodwill and intangibles named, $8.7 billion, are 8.0%), MSFT Mojang (fiscal 2015, 1.5%), ODFL's 2007 purchase of business assets from Priority Freight Lines and Bullocks Express (2.3%). Separately, outside Financials, deals priced under 1% of prior total assets are not read for the asset test at all (the screen). The S-X income test is not applied anywhere.
+Why: A deal whose assets reach 10% is a break the page would not mark. Skype is the closest: its named assets alone are 8.0%.
+Companies: AAPL, HD, MSFT, ODFL found; JNJ, PGR, PLD, UNH not checked (their pages do not yet reach fiscal 2007).
+Due: before the full S&P 500 run, or if a reader question turns on one of these years.
+Status: open
+
 ## 2026-11-01 | Same-business (organic) growth is not measured
 Theme: Acquisitions
 Item: The ten-year headline promises the same accounting basis, not the same business. Organic growth would come from each deal's ASC 805 pro forma disclosure (revenue and earnings as if acquired at the start of the prior year), read and approved company by company.

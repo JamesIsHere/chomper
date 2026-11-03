@@ -1,0 +1,264 @@
+{
+ "MSFT": {
+  "by_hand:aQuantive": {
+   "accession": "0001193125-08-162768",
+   "document": "d10k.htm",
+   "unit": 1000000,
+   "columns": 2,
+   "quote": "(In millions) aQuantive as of August 10, 2007 FAST as of April 24, 2008 Cash and cash equivalents $ 342 $ 91 Accounts receivable, net 273 46 Other current assets 6 7 Property, plant and equipment 50 30 Intangible assets 939 266 Goodwill 5,189 981 Deferred income taxes 179 – Other long-term assets 7 5 Total assets acquired $ 6,985 $ 1,426 Accrued compensation 37 39 Other current liabilities 683 38 Deferred income taxes 338 65 Other long-term liabilities 70 10 Total liabilities assumed $ 1,128 $ 152 Net assets acquired $ 5,857 $ 1,274",
+   "assets": [
+    "Total assets acquired"
+   ],
+   "liabilities": [
+    "Total liabilities assumed"
+   ],
+   "total": "Net assets acquired",
+   "column": 0,
+   "note": "The FY2008 10-K's table for aQuantive and FAST prints total assets acquired."
+  },
+  "by_hand:FastSearchTransfer": {
+   "accession": "0001193125-08-162768",
+   "document": "d10k.htm",
+   "unit": 1000000,
+   "columns": 2,
+   "quote": "(In millions) aQuantive as of August 10, 2007 FAST as of April 24, 2008 Cash and cash equivalents $ 342 $ 91 Accounts receivable, net 273 46 Other current assets 6 7 Property, plant and equipment 50 30 Intangible assets 939 266 Goodwill 5,189 981 Deferred income taxes 179 – Other long-term assets 7 5 Total assets acquired $ 6,985 $ 1,426 Accrued compensation 37 39 Other current liabilities 683 38 Deferred income taxes 338 65 Other long-term liabilities 70 10 Total liabilities assumed $ 1,128 $ 152 Net assets acquired $ 5,857 $ 1,274",
+   "assets": [
+    "Total assets acquired"
+   ],
+   "liabilities": [
+    "Total liabilities assumed"
+   ],
+   "total": "Net assets acquired",
+   "column": 1,
+   "note": "Second column of the same table."
+  },
+  "msft:SkypeMember": {
+   "not_determinable": true,
+   "sources": [
+    {
+     "accession": "0001193125-12-316848",
+     "document": "d347676d10k.htm",
+     "quote": "The major classes of assets and liabilities to which we allocated the purchase price were goodwill of $7.1 billion, identifiable intangible assets of $1.6 billion, and unearned revenue of $222 million."
+    }
+   ],
+   "note": "Only the major classes are given; no table and no gross total. The classes named, $8.7 billion, are 8.0% of total assets at 30 June 2011."
+  },
+  "msft:NokiaDevicesAndServicesBusinessMember": {
+   "accession": "0001193125-15-272806",
+   "document": "d918813d10k.htm",
+   "unit": 1000000,
+   "quote": "(In millions) Cash $ 1,506 Accounts receivable (a) 754 Inventories 544 Other current assets 936 Property and equipment 981 Intangible assets 4,509 Goodwill (b) 5,456 Other 221 Current liabilities (4,575 ) Long-term liabilities (890 ) Total purchase price $ 9,442",
+   "assets": [
+    "Cash",
+    "Accounts receivable (a)",
+    "Inventories",
+    "Other current assets",
+    "Property and equipment",
+    "Intangible assets",
+    "Goodwill (b)",
+    "Other"
+   ],
+   "liabilities": [
+    "Current liabilities",
+    "Long-term liabilities"
+   ],
+   "total": "Total purchase price",
+   "note": "The final allocation (completed 31 March 2015), from the FY2015 10-K."
+  },
+  "msft:MojangSynergiesABMember": {
+   "not_determinable": true,
+   "sources": [
+    {
+     "accession": "0001193125-15-272806",
+     "document": "d918813d10k.htm",
+     "quote": "The significant classes of assets and liabilities to which we preliminarily allocated the purchase price were goodwill of $1.8 billion and identifiable intangible assets of $928 million, primarily marketing-related (trade names)."
+    }
+   ],
+   "note": "Only the significant classes are given, in the FY2015 10-K; the FY2016 10-K gives no table either."
+  },
+  "msft:GitHubIncMember": {
+   "accession": "0001564590-19-027952",
+   "document": "msft-10k_20190630.htm",
+   "unit": 1000000,
+   "quote": "(In millions) Cash, cash equivalents, and short-term investments $ 234 Goodwill 5,497 Intangible assets 1,267 Other assets 143 Other liabilities (217 ) Total $ 6,924",
+   "assets": [
+    "Cash, cash equivalents, and short-term investments",
+    "Goodwill",
+    "Intangible assets",
+    "Other assets"
+   ],
+   "liabilities": [
+    "Other liabilities"
+   ],
+   "total": "Total",
+   "note": "The final allocation (completed 30 June 2019), from the FY2019 10-K."
+  },
+  "msft:ZeniMaxMediaIncMember": {
+   "accession": "0001564590-22-026876",
+   "document": "msft-10k_20220630.htm",
+   "unit": 1000000,
+   "quote": "(In millions) Cash and cash equivalents $ 766 Goodwill 5,510 Intangible assets 1,968 Other assets 121 Other liabilities ( 244 ) Total $ 8,121",
+   "assets": [
+    "Cash and cash equivalents",
+    "Goodwill",
+    "Intangible assets",
+    "Other assets"
+   ],
+   "liabilities": [
+    "Other liabilities"
+   ],
+   "total": "Total",
+   "note": "The final allocation (completed 31 December 2021), from the FY2022 10-K."
+  },
+  "msft:NuanceCommunicationsIncMember": {
+   "accession": "0000950170-23-035122",
+   "document": "msft-20230630.htm",
+   "unit": 1000000,
+   "quote": "(In millions) Goodwill (a) $ 16,326 Intangible assets 4,365 Other assets 42 Other liabilities (b) ( 1,972 ) Total $ 18,761",
+   "assets": [
+    "Goodwill (a)",
+    "Intangible assets",
+    "Other assets"
+   ],
+   "liabilities": [
+    "Other liabilities (b)"
+   ],
+   "total": "Total",
+   "note": "The final allocation (completed 31 December 2022), from the FY2023 10-K."
+  }
+ },
+ "CAT": {
+  "cat:ElectroMotiveDieselMember": {
+   "accession": "0001104659-11-008938",
+   "document": "a10-18643_1ex13.htm",
+   "quote": "Electro-Motive Diesel, Inc. (EMD) for approximately $901 million, consisting of $928 million paid at closing less a final net working capital adjustment of $27 million received in the fourth quarter of 2010. Headquartered in LaGrange, Illinois with additional manufacturing facilities in Canada and Mexico, EMD designs, manufactures and sells diesel-electric locomotives for commercial railroad applications and sells its products to customers throughout the world. EMD has a significant field population in North America and throughout the world supported by an aftermarket business offering customers replacement parts, maintenance solutions, and a range of value-added services. EMD is also a global provider of diesel engines for marine propulsion, offshore and land-based oil well drilling rigs, and stationary power generation. The acquisition supports our strategic plan to grow our presence in the global rail industry. The EMD acquisition will enable us to provide rail and transit customers a range of locomotive, engine and emissions solutions, as well as aftermarket product and parts support and a full line of rail-related services and solutions. The transaction was financed with available cash. Tangible assets acquired of $890 million, recorded at their fair values, primarily were receivables of $186 million, inventories of $549 million and property, plant and equipment of $131 million. Finite-lived intangible assets acquired of $329 million were primarily related to customer relationships and also included intellectual property and trade names. The finite-lived intangible assets are being amortized on a straight-line basis over a weighted-average amortization period of approximately 15 years. An additional intangible asset acquired of $18 million, related to in-process research and development, is considered indefinite-lived until the completion or abandonment of the development activities. Liabilities assumed of $518 million, recorded at their fair values, primarily included accounts payable of $124 million and accrued expenses of $161 million. Additionally, net deferred tax liabilities were $104 million. Goodwill of $286 million",
+   "prose": true,
+   "assets": [
+    "Tangible assets acquired of $890 million",
+    "Finite-lived intangible assets acquired of $329 million",
+    "An additional intangible asset acquired of $18 million",
+    "Goodwill of $286 million"
+   ],
+   "liabilities": [
+    "Liabilities assumed of $518 million",
+    "net deferred tax liabilities were $104 million"
+   ],
+   "total": [
+    "for approximately $901 million"
+   ],
+   "note": "FY2010 10-K (exhibit 13, Note 23)."
+  },
+  "cat:MWMHoldingMember": {
+   "accession": "0001104659-12-011331",
+   "document": "a12-2184_1ex13.htm",
+   "quote": "The preliminary purchase price, net of $94 million of acquired cash, was approximately $774 million (€574 million). The purchase price included preliminary net working capital and other purchase price adjustments anticipated to be finalized in the first quarter of 2012. A-72 The transaction was financed with available cash. Tangible assets acquired of $535 million, recorded at their fair values, primarily were cash of $94 million, receivables of $96 million, inventories of $205 million and property, plant and equipment of $108 million. Finite-lived intangible assets acquired of $221 million were primarily related to customer relationships and also included intellectual property and trade names. The finite lived intangible assets are being amortized on a straight-line basis over a weighted average amortization period of approximately 10 years. Liabilities assumed of $275 million, recorded at their fair values, primarily included accounts payable of $77 million, net deferred tax liabilities of $67 million and advance payments of $43 million. Goodwill of $387 million",
+   "prose": true,
+   "assets": [
+    "Tangible assets acquired of $535 million",
+    "Finite-lived intangible assets acquired of $221 million",
+    "Goodwill of $387 million"
+   ],
+   "liabilities": [
+    "Liabilities assumed of $275 million"
+   ],
+   "total": [
+    "net of $94 million of acquired cash",
+    "was approximately $774 million"
+   ],
+   "note": "Preliminary allocation, FY2011 10-K (exhibit 13, Note 23). The price net of cash plus the cash acquired is the gross consideration the assets and liabilities foot to."
+  },
+  "cat:MwmHoldingMember": {
+   "accession": "0001104659-12-011331",
+   "document": "a12-2184_1ex13.htm",
+   "quote": "The preliminary purchase price, net of $94 million of acquired cash, was approximately $774 million (€574 million). The purchase price included preliminary net working capital and other purchase price adjustments anticipated to be finalized in the first quarter of 2012. A-72 The transaction was financed with available cash. Tangible assets acquired of $535 million, recorded at their fair values, primarily were cash of $94 million, receivables of $96 million, inventories of $205 million and property, plant and equipment of $108 million. Finite-lived intangible assets acquired of $221 million were primarily related to customer relationships and also included intellectual property and trade names. The finite lived intangible assets are being amortized on a straight-line basis over a weighted average amortization period of approximately 10 years. Liabilities assumed of $275 million, recorded at their fair values, primarily included accounts payable of $77 million, net deferred tax liabilities of $67 million and advance payments of $43 million. Goodwill of $387 million",
+   "prose": true,
+   "assets": [
+    "Tangible assets acquired of $535 million",
+    "Finite-lived intangible assets acquired of $221 million",
+    "Goodwill of $387 million"
+   ],
+   "liabilities": [
+    "Liabilities assumed of $275 million"
+   ],
+   "total": [
+    "net of $94 million of acquired cash",
+    "was approximately $774 million"
+   ],
+   "note": "Preliminary allocation, FY2011 10-K (exhibit 13, Note 23). The price net of cash plus the cash acquired is the gross consideration the assets and liabilities foot to. The same deal, tagged under a second member name in the FY2012 10-K."
+  }
+ },
+ "CCL": {
+  "by_hand:IberoCruises": {
+   "accession": "0001169232-08-000308",
+   "document": "d73197_ex13.htm",
+   "quote": "The $451 million purchase price was allocated as follows: $254 million to ships, $161 million to goodwill, $35 million to trademarks and $1 million to other.",
+   "prose": true,
+   "assets": [
+    "$254 million to ships",
+    "$161 million to goodwill",
+    "$35 million to trademarks",
+    "$1 million to other"
+   ],
+   "liabilities": [],
+   "total": [
+    "The $451 million purchase price"
+   ],
+   "note": "FY2007 annual report (exhibit 13, Note 15); no liabilities named."
+  }
+ },
+ "JPM": {
+  "jpm:FirstRepublicBankMember": {
+   "accession": "0000019617-24-000225",
+   "document": "jpm-20231231.htm",
+   "quote": "Fair value purchase price allocation as of May 1, 2023 (in millions) Purchase price consideration Amounts paid/due to the FDIC, net of cash acquired (a) $ 13,524 Purchase Money Note (at fair value) 48,848 Settlement of First Republic deposit and other related party transactions (b) 5,447 Contingent consideration - Shared-loss agreements 15 Purchase price consideration $ 67,834 Assets Securities $ 30,285 Loans (c) 153,242 Core deposit and customer relationship intangibles 1,455 Indemnification assets - Shared-loss agreements 675 Accounts receivable and other assets (c)(d) 6,574 Total assets acquired $ 192,231 Liabilities Deposits $ 87,572 FHLB advances 27,919 Lending-related commitments 2,614 Accounts payable and other liabilities (c)(d) 2,793 Deferred tax liabilities 724 Total liabilities assumed $ 121,622 Fair value of net assets acquired $ 70,609",
+   "unit": 1000000,
+   "assets": [
+    "Total assets acquired"
+   ],
+   "liabilities": [
+    "Total liabilities assumed"
+   ],
+   "total": "Fair value of net assets acquired",
+   "note": "A bargain purchase (no goodwill), from the 2023 10-K (Note 34), reflecting adjustments through 31 December 2023."
+  }
+ },
+ "AAPL": {
+  "aapl:BeatsMember": {
+   "not_determinable": true,
+   "sources": [
+    {
+     "accession": "0001193125-14-383437",
+     "document": "d783162d10k.htm",
+     "quote": "The total purchase price consideration for these acquisitions was $2.6 billion, which consisted primarily of cash, of which $2.2 billion was allocated to goodwill, $636 million to acquired intangible assets and $258 million to net liabilities assumed."
+    }
+   ],
+   "note": "Net liabilities only; no gross assets or liabilities. Goodwill and intangibles named, $2.8 billion, are 1.4% of total assets at 28 September 2013."
+  }
+ },
+ "HD": {
+  "us-gaap:SeriesOfIndividuallyImmaterialBusinessAcquisitionsMember": {
+   "not_determinable": true,
+   "sources": [
+    {
+     "accession": "0000354950-24-000062",
+     "document": "hd-20240128.htm",
+     "quote": "acquisitions for total aggregate cash purchase consideration of $ 1.5 billion . Based on preliminary acquisition date fair values, we recognized aggregate definite-lived intangible assets of $ 469 million with a weighted average amortization period of 17 years, primarily related to customer relationships, and goodwill of $ 998 million."
+    }
+   ],
+   "note": "Fiscal 2023 acquisitions in aggregate: intangibles and goodwill only, no table."
+  }
+ },
+ "ODFL": {
+  "by_hand:PriorityFreightBullocksExpress": {
+   "not_determinable": true,
+   "sources": [
+    {
+     "accession": "0001193125-08-043137",
+     "document": "d10k.htm",
+     "quote": "paid $20,431,000 to acquire certain business assets from Priority Freight Lines, Inc. and Bullocks Express Transportation, Inc."
+    }
+   ],
+   "note": "The 10-K gives only the cash paid for the business assets; no allocation."
+  }
+ }
+}

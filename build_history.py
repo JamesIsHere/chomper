@@ -210,9 +210,15 @@ def chart_breaks(h):
             name = names.get(d["member"]) or (d["name"] if d.get("by_hand") else None)  # hand records carry it
             if name is None:
                 raise SystemExit(f"{h['ticker']}: no name for {d['member']} in data/deal_names.json")
-            out.setdefault(d["fiscal_year_end"], []).append(
-                f"Acquired {name}, {m(d['size'], False)}, {d['share_of_assets']:.0%} of total assets at the "
-                f"prior year end")
+            if d.get("significant_by") == "assets":  # cheap to buy, large to absorb: the asset test marked it
+                brought = (f"{m(d['assets_acquired'], False)} of assets" if d.get("assets_acquired") is not None
+                           else f"at least {m(d['assets_floor'], False)} of assets")
+                text = (f"Acquired {name} for {m(d['size'], False)}, bringing {brought}, {d['asset_share']:.0%} of "
+                        f"total assets at the prior year end")
+            else:
+                text = (f"Acquired {name}, {m(d['size'], False)}, {d['share_of_assets']:.0%} of total assets at the "
+                        f"prior year end")
+            out.setdefault(d["fiscal_year_end"], []).append(text)
     records = adoptions()
     for s in h["standards"]:
         code = s["standard"].split()[1]  # "ASC 606 (revenue)" -> "606"

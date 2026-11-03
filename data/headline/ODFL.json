@@ -594,7 +594,12 @@
       "share_of_assets": 0.022899753752831507,
       "significant": false,
       "accession": "0001193125-08-043137",
-      "by_hand": true
+      "by_hand": true,
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "not determinable: the 10-K gives no gross assets acquired",
+      "asset_share": null,
+      "significant_by": null
     }
   ],
   "standards": [

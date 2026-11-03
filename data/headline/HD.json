@@ -552,7 +552,12 @@
       "prior_total_assets": 51236000000,
       "share_of_assets": 0.1698024826294012,
       "significant": true,
-      "accession": "0000354950-23-000059"
+      "accession": "0000354950-23-000059",
+      "assets_acquired": null,
+      "assets_floor": 10599000000,
+      "assets_source": "XBRL identifiable assets, a floor",
+      "asset_share": 0.20686626590678428,
+      "significant_by": "price"
     },
     {
       "name": "Series of Individually Immaterial Business Acquisitions",
@@ -564,7 +569,12 @@
       "prior_total_assets": 76445000000,
       "share_of_assets": 0.019621950421871936,
       "significant": false,
-      "accession": "0000354950-25-000085"
+      "accession": "0000354950-25-000085",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "not determinable: the 10-K gives no gross assets acquired",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "SRS Acquisition",
@@ -576,7 +586,12 @@
       "prior_total_assets": 76530000000,
       "share_of_assets": 0.23556775120867635,
       "significant": true,
-      "accession": "0001628280-26-019436"
+      "accession": "0001628280-26-019436",
+      "assets_acquired": 22296000000,
+      "assets_floor": null,
+      "assets_source": "XBRL total",
+      "asset_share": 0.2913367306938455,
+      "significant_by": "price"
     },
     {
       "name": "GMS Inc",
@@ -588,7 +603,12 @@
       "prior_total_assets": 96119000000,
       "share_of_assets": 0.052861557028267045,
       "significant": false,
-      "accession": "0001628280-26-019436"
+      "accession": "0001628280-26-019436",
+      "assets_acquired": 7186000000,
+      "assets_floor": null,
+      "assets_source": "XBRL total",
+      "asset_share": 0.07476149356526805,
+      "significant_by": null
     }
   ],
   "standards": [

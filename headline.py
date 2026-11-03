@@ -58,6 +58,15 @@ SIZE = [("consideration", {"BusinessCombinationConsiderationTransferred1", "Busi
         ("net assets acquired", {"BusinessCombinationRecognizedIdentifiableAssetsAcquiredGoodwillAndLiabilitiesAssumedNet"}),
         ("cash paid", {"PaymentsToAcquireBusinessesGross"}),
         ("cash paid net of cash acquired", {"PaymentsToAcquireBusinessesNetOfCashAcquired"})]
+# Assets a deal brought, for the S-X asset test (James, 2026-11-02): the total including goodwill, or identifiable
+# assets (goodwill excluded), which bound the total only from below (goodwill can exceed the price when the target
+# has net liabilities, so there is no upper bound without the liabilities assumed).
+ASSETS = {"total": {"BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedAssetsAcquiredIncludingGoodwill"},
+          "identifiable": {"BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedAssets",
+                           "BusinessAcquisitionPurchasePriceAllocationAssetsAcquired"}}
+SCREEN = 0.01  # outside Financials, a deal priced under 1% of prior total assets is not read for the asset test
+DEAL_ASSETS = ROOT / "data" / "by_hand" / "deal_assets.json"
+SP500 = ROOT / "data" / "sp500.json"
 SPEND = ["PaymentsToAcquireBusinessesNetOfCashAcquired", "PaymentsToAcquireBusinessesGross",
          "GoodwillAcquiredDuringPeriod"]
 AXIS = "us-gaap:BusinessAcquisitionAxis"
@@ -262,7 +271,9 @@ def hand_links(ticker, what, cik, ua):
 
 def printed(v):
     """The ways a filing prints a whole-dollar amount: in millions ("5,900") when it is whole millions, and in
-    thousands ("20,431") when it is whole thousands (ODFL's statements are in thousands)."""
+    thousands ("20,431") when it is whole thousands (ODFL's statements are in thousands). A negative amount (JPM
+    2008: net cash received in acquisitions) is printed without its sign, so the absolute value is looked for."""
+    v = abs(v)
     return ([f"{v // 1_000_000:,}"] if v % 1_000_000 == 0 else []) + ([f"{v // 1000:,}"] if v % 1000 == 0 else [])
 
 
@@ -275,6 +286,23 @@ def filed_on(cik, accession, ua):
     if len(hits) != 1:
         raise SystemExit(f"{accession}: expected one filing date, found {sorted(hits)}")
     return hits.pop()
+
+
+def quoted_row(q, label, n, unit, who):
+    """The n numbers after a row label in a verbatim table quote, in dollars: the label must appear once; a number
+    in parentheses is negative ("(4,575 )", "( 223 )")."""
+    # The label must stand alone and be followed by its number: "Other" must not match "Other current assets 936".
+    hits = [m.end() for m in re.finditer(r"(?<![A-Za-z])" + re.escape(label) + r" (?=\$ ?\(? ?\d|\( ?\d|\d)", q)]
+    if len(hits) != 1:
+        raise SystemExit(f"{who}: row {label!r} appears {len(hits)} times in the quote")
+    i, vals = hits[0], []
+    for _ in range(n):
+        m = re.match(r"(?:\$ ?)?(\( ?)?([\d,]+)(?: ?\))? ?", q[i:])
+        if not m:
+            raise SystemExit(f"{who}: row {label!r} has fewer than {n} numbers")
+        vals.append((-1 if m.group(1) else 1) * int(m.group(2).replace(",", "")) * unit)
+        i += m.end()
+    return vals
 
 
 def hand_levels(ticker, cik, ua):
@@ -293,17 +321,7 @@ def hand_levels(ticker, cik, ua):
             raise SystemExit(f"{who}: the quote does not state {unit!r} and the columns {header!r}")
 
         def row(label):
-            hits = [m.end() for m in re.finditer(re.escape(label) + " ", q)]
-            if len(hits) != 1:
-                raise SystemExit(f"{who}: row {label!r} appears {len(hits)} times in the quote")
-            i, vals = hits[0], []
-            for _ in rec["columns"]:
-                m = re.match(r"(?:\$ )?(\()?([\d,]+)(?: \))? ?", q[i:])
-                if not m:
-                    raise SystemExit(f"{who}: row {label!r} has fewer than {len(rec['columns'])} numbers")
-                vals.append((-1 if m.group(1) else 1) * int(m.group(2).replace(",", "")) * rec["unit"])
-                i += m.end()
-            return dict(zip(rec["columns"], vals))
+            return dict(zip(rec["columns"], quoted_row(q, label, len(rec["columns"]), rec["unit"], who)))
         for a, b, c in rec["footing"]:
             ra, rb, rc = row(a), row(b), row(c)
             for e in rec["columns"]:
@@ -415,6 +433,101 @@ def deals(path):
     return dict(kept.values())
 
 
+def deal_assets(path):
+    """{member: {"total" | "identifiable": value}} for the assets a deal brought, as one filing tags them on the
+    BusinessAcquisitionAxis alone: total assets acquired including goodwill, or identifiable assets (goodwill
+    excluded). Fails if one filing gives a deal two values for the same measure more than 1% apart."""
+    root = ET.parse(path).getroot()
+    usd = {u.get("id") for u in root.iter(X + "unit") if (u.findtext(X + "measure") or "").strip() == "iso4217:USD"}
+    ctx = {c.get("id"): dims[AXIS] for c in root.iter(X + "context")
+           if list(dims := {m.get("dimension"): m.text.strip() for m in c.iter(XDI + "explicitMember")}) == [AXIS]}
+    kind = {t: k for k, tags in ASSETS.items() for t in tags}
+    out = {}
+    for el in root:
+        member, local = ctx.get(el.get("contextRef")), el.tag.split("}")[-1]
+        if member is None or el.text is None or local not in kind or el.get("unitRef") not in usd:
+            continue
+        v, k = int(float(el.text.strip())), kind[local]
+        have = out.setdefault(member, {}).get(k)
+        if have is not None and abs(have - v) > 0.01 * max(have, v):
+            raise SystemExit(f"{path.name} {member}: {k} assets acquired {have:,} and {v:,} in one filing")
+        out[member][k] = max(v, have or 0)
+    return out
+
+
+def asset_test(ticker, cik, ua, out_deals, tagged):
+    """Adds the S-X asset test to each deal, in place (James, 2026-11-02): significant when the price (investment
+    test) or the total assets acquired, goodwill included (asset test), reach 10% of prior total assets.
+    The assets come from data/by_hand/deal_assets.json (the 10-K's purchase price allocation table, quoted and
+    footed; or, where the 10-K gives only net figures, a record that it does not state them, and the deal stays
+    price-tested and is named on the Considerations page), else the
+    XBRL total; XBRL identifiable assets settle the test only when they alone reach 10%. A deal significant on
+    price needs no asset figure. Outside the Financials sector, a deal priced under SCREEN (1%) of prior total
+    assets is screened out: for its assets to reach 10% the target's liabilities would have to exceed nine times
+    the price. In Financials (banks, insurers), whose targets carry that much, every deal is tested. Fails, naming
+    each, if a deal needs its assets read by hand."""
+    sectors = {c["ticker"]: c["sector"] for c in json.loads(SP500.read_text(encoding="utf-8"))["companies"]}
+    if ticker not in sectors:
+        raise SystemExit(f"{ticker}: no sector in {SP500.relative_to(ROOT)}")
+    financial = sectors[ticker] == "Financials"
+    records = json.loads(DEAL_ASSETS.read_text(encoding="utf-8")) if DEAL_ASSETS.exists() else {}
+    by_hand_assets, not_stated = {}, set()
+    for member, rec in records.get(ticker, {}).items():
+        who = f"{ticker} {member} assets"
+        if rec.get("not_determinable"):  # the 10-K gives only net or partial figures: the quotes show what it says
+            verified_quotes(who, cik, rec["sources"], ua)
+            not_stated.add(member)
+            continue
+        q = verified_quotes(who, cik, [rec], ua)[0]
+        if rec.get("prose"):  # the allocation written as sentences (CAT, CCL): each named amount is a phrase quoted
+            def amount(phrase):
+                m = re.search(r"\$ ?([\d,.]+) (million|billion)", phrase)
+                if phrase not in q or not m:
+                    raise SystemExit(f"{who}: phrase {phrase!r} not in the quote or names no amount")
+                return round(float(m.group(1).replace(",", "")) * {"million": 1e6, "billion": 1e9}[m.group(2)])
+            a, li, total = ([amount(p) for p in rec[k]] for k in ("assets", "liabilities", "total"))
+            if sum(a) - sum(li) != sum(total):
+                raise SystemExit(f"{who}: assets {sum(a):,} less liabilities {sum(li):,} is not {sum(total):,}")
+            by_hand_assets[member] = sum(a)
+            continue
+        # The 10-K's purchase price allocation table, quoted: asset rows less liability rows must equal its total.
+        if {1000: "(In thousands", 1_000_000: "(In millions"}[rec["unit"]].lower() not in q.lower():
+            raise SystemExit(f"{who}: the quote does not state its unit")
+        col, n = rec.get("column", 0), rec.get("columns", 1)
+        a = [quoted_row(q, r, n, rec["unit"], who)[col] for r in rec["assets"]]
+        li = [abs(quoted_row(q, r, n, rec["unit"], who)[col]) for r in rec["liabilities"]]
+        total = quoted_row(q, rec["total"], n, rec["unit"], who)[col]
+        if min(a) <= 0 or sum(a) - sum(li) != total:
+            raise SystemExit(f"{who}: assets {sum(a):,} less liabilities {sum(li):,} is not {rec['total']} {total:,}")
+        by_hand_assets[member] = sum(a)
+    if unknown := (set(by_hand_assets) | not_stated) - {d["member"] for d in out_deals}:
+        raise SystemExit(f"{ticker}: deal_assets.json names deals not in the window: {sorted(unknown)}")
+    missing = []
+    for d in out_deals:
+        prior, price = d["prior_total_assets"], d["share_of_assets"]
+        t = tagged.get(d["member"], {})
+        total, how = ((by_hand_assets[d["member"]], "by hand") if d["member"] in by_hand_assets else
+                      (t["total"], "XBRL total") if "total" in t else (None, None))
+        floor = t.get("identifiable") if total is None else None
+        on_assets = (total is not None and total / prior >= SIGNIFICANT) or (floor is not None and floor / prior >= SIGNIFICANT)
+        d |= {"assets_acquired": total, "assets_floor": floor, "assets_source": how or ("XBRL identifiable assets, a floor" if floor else None),
+              "asset_share": total / prior if total is not None else floor / prior if floor else None,
+              "significant": price >= SIGNIFICANT or on_assets,
+              "significant_by": "price" if price >= SIGNIFICANT else "assets" if on_assets else None}
+        if price < SIGNIFICANT and not on_assets and total is None:
+            if d["member"] in not_stated:
+                d["assets_source"] = "not determinable: the 10-K gives no gross assets acquired"
+            elif financial or price >= SCREEN:
+                missing.append(d)
+            else:
+                d["assets_source"] = "screened: price under 1% of prior total assets"
+    if missing:
+        raise SystemExit(f"{ticker}: {len(missing)} deal(s) need total assets acquired read from the 10-K into "
+                         f"{DEAL_ASSETS.relative_to(ROOT)}:\n" + "\n".join(
+                             f"  {d['member']} | {d['name']} | {d['date']} | price {d['share_of_assets']:.1%} of "
+                             f"prior assets | {d['accession']}" for d in missing))
+
+
 def main():
     if len(sys.argv) != 2:
         raise SystemExit("usage: python headline.py TICKER")
@@ -475,10 +588,12 @@ def main():
     # A 10-K filed before the company's first XBRL filing has no instance: that year's acquisitions come from a
     # record written by hand from the filing (data/by_hand/acquisitions.json), its quotes checked verbatim.
     hand = {e: by_hand(ticker, e, cik, filings[e], ua) for e in ends if not instance_names(cik, filings[e], ua)}
-    found = {}
+    found, tagged_assets = {}, {}
     for e in ends:  # oldest first: for the same deal, measure and date, the later filing's value wins
         if e in hand:
             continue
+        for member, kinds in deal_assets(instance(cik, filings[e], ua)).items():
+            tagged_assets.setdefault(member, {}).update(kinds)  # the later filing's allocation wins
         for member, (r, when, v, measure) in deals(instance(cik, filings[e], ua)).items():
             have = found.get(member)
             if have is None or (r, when) <= have[:2]:
@@ -510,6 +625,7 @@ def main():
                            "significant": d["size"] / a >= SIGNIFICANT, "accession": filings[e]["accession"],
                            "by_hand": True} for d in rec["deals"]]
     out_deals.sort(key=lambda d: d["date"])
+    asset_test(ticker, cik, ua, out_deals, tagged_assets)
     for e in ends:  # spend the tagged deals leave unexplained, large enough to be a significant deal of its own
         assets = prior_assets(e)
         tagged = sum(d["size"] for d in out_deals if d["fiscal_year_end"] == e)

@@ -632,7 +632,12 @@
       "share_of_assets": 0.003207059418064491,
       "significant": false,
       "accession": "0000018230-08-000052",
-      "by_hand": true
+      "by_hand": true,
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Blount International's Forestry Division",
@@ -645,7 +650,12 @@
       "share_of_assets": 0.0015938113471593229,
       "significant": false,
       "accession": "0000018230-08-000052",
-      "by_hand": true
+      "by_hand": true,
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Lovat Inc.",
@@ -658,7 +668,12 @@
       "share_of_assets": 0.0008729423501745885,
       "significant": false,
       "accession": "0000018230-09-000063",
-      "by_hand": true
+      "by_hand": true,
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Gremada Industries, Inc.",
@@ -671,7 +686,12 @@
       "share_of_assets": 0.001104539300220908,
       "significant": false,
       "accession": "0000018230-09-000063",
-      "by_hand": true
+      "by_hand": true,
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Shin Caterpillar Mitsubishi (Caterpillar Japan), 50 to 67 percent",
@@ -684,7 +704,12 @@
       "share_of_assets": 0.008266229601653246,
       "significant": false,
       "accession": "0000018230-09-000063",
-      "by_hand": true
+      "by_hand": true,
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "This element represents the information relating to equity investment made in GE Transportation's Inspection Products Business",
@@ -696,7 +721,12 @@
       "prior_total_assets": 60038000000,
       "share_of_assets": 0.0007661814184349912,
       "significant": false,
-      "accession": "0001104659-12-011331"
+      "accession": "0001104659-12-011331",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "This element represents the information relating to equity investment made in JCS Company, Ltd",
@@ -708,7 +738,12 @@
       "prior_total_assets": 60038000000,
       "share_of_assets": 0.0005663080049302108,
       "significant": false,
-      "accession": "0001104659-12-011331"
+      "accession": "0001104659-12-011331",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "This element represents the information relating to equity investment made in GE Transportation's Inspection Products Business",
@@ -720,7 +755,12 @@
       "prior_total_assets": 60038000000,
       "share_of_assets": 0.0007661814184349912,
       "significant": false,
-      "accession": "0000018230-13-000075"
+      "accession": "0000018230-13-000075",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "This element represents the information relating to equity investment made in JCS Company, Ltd",
@@ -732,7 +772,12 @@
       "prior_total_assets": 60038000000,
       "share_of_assets": 0.0005663080049302108,
       "significant": false,
-      "accession": "0000018230-13-000075"
+      "accession": "0000018230-13-000075",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "This element represents the information relating to equity investment made in FCM Rail Ltd",
@@ -744,7 +789,12 @@
       "prior_total_assets": 60038000000,
       "share_of_assets": 0.0016156434258303074,
       "significant": false,
-      "accession": "0001104659-12-011331"
+      "accession": "0001104659-12-011331",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "This element represents the information relating to equity investment made in FCM Rail Ltd",
@@ -756,7 +806,12 @@
       "prior_total_assets": 60038000000,
       "share_of_assets": 0.0016156434258303074,
       "significant": false,
-      "accession": "0000018230-13-000075"
+      "accession": "0000018230-13-000075",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "This element represents information relating to equity investment made in Electro-Motive Diesel",
@@ -768,7 +823,12 @@
       "prior_total_assets": 60038000000,
       "share_of_assets": 0.015007162130650589,
       "significant": false,
-      "accession": "0000018230-13-000075"
+      "accession": "0000018230-13-000075",
+      "assets_acquired": 1523000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.025367267397315034,
+      "significant_by": null
     },
     {
       "name": "The details pertaining to the acquisition of assets and certain liabilities of United Kingdom trackwork business from Balfour Beatty Rail Limited",
@@ -780,7 +840,12 @@
       "prior_total_assets": 64020000000,
       "share_of_assets": 0.0009372071227741331,
       "significant": false,
-      "accession": "0000018230-13-000075"
+      "accession": "0000018230-13-000075",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Represents the information pertaining to Bucyrus International Inc",
@@ -792,7 +857,12 @@
       "prior_total_assets": 64020000000,
       "share_of_assets": 0.13745704467353953,
       "significant": true,
-      "accession": "0000018230-13-000075"
+      "accession": "0000018230-13-000075",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": null,
+      "asset_share": null,
+      "significant_by": "price"
     },
     {
       "name": "Details pertaining to Pyroban Group Limited",
@@ -804,7 +874,12 @@
       "prior_total_assets": 64020000000,
       "share_of_assets": 0.001077788191190253,
       "significant": false,
-      "accession": "0000018230-13-000075"
+      "accession": "0000018230-13-000075",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "This element represents the information relating to acquisition of MWM Holding GmbH",
@@ -816,7 +891,12 @@
       "prior_total_assets": 64020000000,
       "share_of_assets": 0.012089971883786316,
       "significant": false,
-      "accession": "0001104659-12-011331"
+      "accession": "0001104659-12-011331",
+      "assets_acquired": 1143000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.017853795688847235,
+      "significant_by": null
     },
     {
       "name": "This element represents the information relating to acquisition of MWM Holding GmbH",
@@ -828,7 +908,12 @@
       "prior_total_assets": 64020000000,
       "share_of_assets": 0.012089971883786316,
       "significant": false,
-      "accession": "0000018230-13-000075"
+      "accession": "0000018230-13-000075",
+      "assets_acquired": 1143000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.017853795688847235,
+      "significant_by": null
     },
     {
       "name": "This element represents the information relating to acquisition of Caterpillar Tohoku Limited",
@@ -840,7 +925,12 @@
       "prior_total_assets": 81218000000,
       "share_of_assets": 0.002536383560294516,
       "significant": false,
-      "accession": "0000018230-13-000075"
+      "accession": "0000018230-13-000075",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "This element represents the information relating to acquisition of ERA Mining Machinery Limited",
@@ -852,7 +942,12 @@
       "prior_total_assets": 81218000000,
       "share_of_assets": 0.008335590632618385,
       "significant": false,
-      "accession": "0000018230-13-000075"
+      "accession": "0000018230-13-000075",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Johan Walter Berg AB",
@@ -864,7 +959,12 @@
       "prior_total_assets": 88970000000,
       "share_of_assets": 0.0018995166910194448,
       "significant": false,
-      "accession": "0000018230-16-000410"
+      "accession": "0000018230-16-000410",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Rail Product Solutions Inc",
@@ -876,7 +976,12 @@
       "prior_total_assets": 84498000000,
       "share_of_assets": 0.001964543539492059,
       "significant": false,
-      "accession": "0000018230-16-000410"
+      "accession": "0000018230-16-000410",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "RDS Manufacturing Inc",
@@ -888,7 +993,12 @@
       "prior_total_assets": 84498000000,
       "share_of_assets": 0.0008757603730265805,
       "significant": false,
-      "accession": "0000018230-18-000042"
+      "accession": "0000018230-18-000042",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Kemper Valve & Fittings Corp",
@@ -900,7 +1010,12 @@
       "prior_total_assets": 78342000000,
       "share_of_assets": 0.0011743381583314188,
       "significant": false,
-      "accession": "0000018230-19-000034"
+      "accession": "0000018230-19-000034",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Downer Freight Rail",
@@ -912,7 +1027,12 @@
       "prior_total_assets": 76962000000,
       "share_of_assets": 0.0012603622566981108,
       "significant": false,
-      "accession": "0000018230-20-000056"
+      "accession": "0000018230-20-000056",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "ECM S.p.A",
@@ -924,7 +1044,12 @@
       "prior_total_assets": 76962000000,
       "share_of_assets": 0.003235362906369377,
       "significant": false,
-      "accession": "0000018230-20-000056"
+      "accession": "0000018230-20-000056",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "SPM Oil & Gas",
@@ -936,7 +1061,12 @@
       "prior_total_assets": 78324000000,
       "share_of_assets": 0.004583524845513508,
       "significant": false,
-      "accession": "0000018230-24-000009"
+      "accession": "0000018230-24-000009",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     }
   ],
   "standards": [

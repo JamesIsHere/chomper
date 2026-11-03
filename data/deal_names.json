@@ -9,6 +9,9 @@
     {"member": "pld:DCTIndustrialTrustIncAndDCTIndustrialOperatingPartnershipLPMember", "name": "DCT Industrial Trust", "accession": "0001564590-21-005312", "quote": "acquired DCT Industrial Trust Inc."},
     {"member": "pld:LibertyPropertyTrustAndLibertyPropertyLimitedPartnershipMember", "name": "Liberty Property Trust", "accession": "0001564590-21-005312", "quote": "On February 4, 2020, we acquired Liberty Property Trust and Liberty Property Limited Partnership"},
     {"member": "pld:DukeRealtyCorporationAndDukeRealtyLimitedPartnershipMember", "name": "Duke Realty", "accession": "0000950170-25-021272", "quote": "On October 3, 2022 , we acquired Duke Realty Corporation and Duke Realty Limited Partnership"},
-    {"member": "cat:BucyrusInternationalIncMember", "name": "Bucyrus", "accession": "0001104659-12-011331", "quote": "Our Resource Industries business was transformed by the acquisition of Bucyrus International, Inc. (Bucyrus) in July 2011, and now offers mining customers the broadest product range in the industry."}
+    {"member": "cat:BucyrusInternationalIncMember", "name": "Bucyrus", "accession": "0001104659-12-011331", "quote": "Our Resource Industries business was transformed by the acquisition of Bucyrus International, Inc. (Bucyrus) in July 2011, and now offers mining customers the broadest product range in the industry."},
+    {"member": "msft:NokiaDevicesAndServicesBusinessMember", "name": "Nokia's Devices and Services business", "accession": "0001193125-14-289961", "quote": "On April 25, 2014, we acquired substantially all of Nokia’s Devices and Services business (“NDS”)."},
+    {"member": "jpm:BearStearnsMember", "name": "Bear Stearns", "accession": "0000950123-09-003840", "quote": "Effective May 30, 2008, BSC Merger Corporation, a wholly owned subsidiary of JPMorgan Chase, merged with The Bear Stearns Companies Inc."},
+    {"member": "jpm:WashingtonMutualMember", "name": "Washington Mutual's banking operations", "accession": "0000950123-09-003840", "quote": "On September 25, 2008, JPMorgan Chase acquired the banking operations of Washington Mutual Bank."}
   ]
 }

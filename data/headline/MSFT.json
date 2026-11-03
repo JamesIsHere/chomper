@@ -633,9 +633,14 @@
       "fiscal_year_end": "2008-06-30",
       "prior_total_assets": 63171000000,
       "share_of_assets": 0.09339728672967026,
-      "significant": false,
+      "significant": true,
       "accession": "0001193125-08-162768",
-      "by_hand": true
+      "by_hand": true,
+      "assets_acquired": 6985000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.11057288945877064,
+      "significant_by": "assets"
     },
     {
       "name": "Fast Search & Transfer",
@@ -648,7 +653,12 @@
       "share_of_assets": 0.020579063177723955,
       "significant": false,
       "accession": "0001193125-08-162768",
-      "by_hand": true
+      "by_hand": true,
+      "assets_acquired": 1426000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.022573649301103355,
+      "significant_by": null
     },
     {
       "name": "Skype",
@@ -660,7 +670,12 @@
       "prior_total_assets": 108704000000,
       "share_of_assets": 0.07911392405063292,
       "significant": false,
-      "accession": "0001193125-14-289961"
+      "accession": "0001193125-14-289961",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "not determinable: the 10-K gives no gross assets acquired",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Yammer, Inc",
@@ -672,7 +687,12 @@
       "prior_total_assets": 121271000000,
       "share_of_assets": 0.009070593958984423,
       "significant": false,
-      "accession": "0001193125-15-272806"
+      "accession": "0001193125-15-272806",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Other Acquired Entities",
@@ -684,7 +704,12 @@
       "prior_total_assets": 121271000000,
       "share_of_assets": 0.0036034996000692664,
       "significant": false,
-      "accession": "0001193125-13-310206"
+      "accession": "0001193125-13-310206",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Nokia Devices And Services Business",
@@ -695,8 +720,13 @@
       "measure": "consideration",
       "prior_total_assets": 142431000000,
       "share_of_assets": 0.06599686865921042,
-      "significant": false,
-      "accession": "0001193125-16-662209"
+      "significant": true,
+      "accession": "0001193125-16-662209",
+      "assets_acquired": 14907000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.10466120437264359,
+      "significant_by": "assets"
     },
     {
       "name": "Series of Individually Immaterial Business Acquisitions",
@@ -708,7 +738,12 @@
       "prior_total_assets": 142431000000,
       "share_of_assets": 0.0009829320864137724,
       "significant": false,
-      "accession": "0001193125-14-289961"
+      "accession": "0001193125-14-289961",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "Mojang Synergies AB",
@@ -720,7 +755,12 @@
       "prior_total_assets": 172384000000,
       "share_of_assets": 0.01450250603304251,
       "significant": false,
-      "accession": "0001193125-16-662209"
+      "accession": "0001193125-16-662209",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "not determinable: the 10-K gives no gross assets acquired",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "LinkedIn Corporation",
@@ -732,7 +772,12 @@
       "prior_total_assets": 193468000000,
       "share_of_assets": 0.13955796307399673,
       "significant": true,
-      "accession": "0001564590-19-027952"
+      "accession": "0001564590-19-027952",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": null,
+      "asset_share": null,
+      "significant_by": "price"
     },
     {
       "name": "Other acquisitions",
@@ -744,7 +789,12 @@
       "prior_total_assets": 250312000000,
       "share_of_assets": 0.0037872734826935985,
       "significant": false,
-      "accession": "0001564590-18-019062"
+      "accession": "0001564590-18-019062",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": "screened: price under 1% of prior total assets",
+      "asset_share": null,
+      "significant_by": null
     },
     {
       "name": "GitHub, Inc",
@@ -756,7 +806,12 @@
       "prior_total_assets": 258848000000,
       "share_of_assets": 0.028974533316850043,
       "significant": false,
-      "accession": "0001564590-21-039151"
+      "accession": "0001564590-21-039151",
+      "assets_acquired": 7141000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.027587618988750156,
+      "significant_by": null
     },
     {
       "name": "ZeniMax Media Inc",
@@ -768,7 +823,12 @@
       "prior_total_assets": 301311000000,
       "share_of_assets": 0.0268825233728606,
       "significant": false,
-      "accession": "0000950170-23-035122"
+      "accession": "0000950170-23-035122",
+      "assets_acquired": 8365000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.027762013335059125,
+      "significant_by": null
     },
     {
       "name": "Nuance Communications, Inc.",
@@ -780,7 +840,12 @@
       "prior_total_assets": 333779000000,
       "share_of_assets": 0.05632469388427672,
       "significant": false,
-      "accession": "0000950170-24-087843"
+      "accession": "0000950170-24-087843",
+      "assets_acquired": 20733000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.06211595097354836,
+      "significant_by": null
     },
     {
       "name": "Activision Blizzard, Inc",
@@ -792,7 +857,12 @@
       "prior_total_assets": 411976000000,
       "share_of_assets": 0.1830203701186477,
       "significant": true,
-      "accession": "0001193125-26-323660"
+      "accession": "0001193125-26-323660",
+      "assets_acquired": null,
+      "assets_floor": null,
+      "assets_source": null,
+      "asset_share": null,
+      "significant_by": "price"
     }
   ],
   "standards": [

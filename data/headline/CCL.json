@@ -635,7 +635,12 @@
       "share_of_assets": 0.011095836606441476,
       "significant": false,
       "accession": "0001169232-08-000308",
-      "by_hand": true
+      "by_hand": true,
+      "assets_acquired": 451000000,
+      "assets_floor": null,
+      "assets_source": "by hand",
+      "asset_share": 0.014761717727153706,
+      "significant_by": null
     }
   ],
   "standards": [
