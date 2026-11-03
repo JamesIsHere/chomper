@@ -12,6 +12,8 @@ Levels and their sources:
   published       data/history/, docs/      company pages finished by hand; bridges
   cost measure    data/bulk/headline/       fall years (revenue down 5% or more) and which profit lines they carry
   S&P 500 page    data/aggregate.json       a separate path: companyfacts figures for today's members
+A ten-year pass reaches fiscal 2007 or stops short where the tags end without a gap (a short series, 2026-11-03);
+the ten-year row counts both and says how many reach the peak, and the cost-measure rows count every pass.
 The bulk folders are not in the repository; this script needs them and stops if they are missing. The json it
 writes is tracked, so the page rebuilds anywhere.
 """
@@ -22,6 +24,7 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
+from headline import FIRST
 from pull import ROOT
 
 BULK = ROOT / "data" / "bulk"
@@ -33,6 +36,8 @@ STOP_CLASSES = [
     ("Series starts after fiscal 2007 under the tags read; the early years need a hand record",
      r"starts \d{4}-\d{2}-\d{2}, not fiscal 2007"),
     ("A 10-K before XBRL: its acquisitions must be read by hand", r"predates XBRL; read its acquisitions"),
+    ("A deal's assets acquired are not tagged: read them from the 10-K by hand",
+     r"deal\(s\) need total assets acquired read from the 10-K"),
     ("A gap in the series no tag fills", r"has a gap \d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}"),
     ("Series too short under the tags read", r"only \d+ years .*no other tag reaches further back"),
     ("No companyfacts tag matches the five-year page", r"no companyfacts tag matches the five-year page"),
@@ -43,7 +48,7 @@ STOP_CLASSES = [
     ("Conflicting values in one filing", r"reports different values under the tags used"),
     ("No 10-K shows two consecutive years", r"no 10-K reports both"),
     ("A deal tagged at two values more than 1% apart",
-     r"(consideration|net assets acquired|cash paid net of cash acquired) [\d,]+ and [\d,]+ in one filing"),
+     r"(consideration|net assets acquired|cash paid net of cash acquired|identifiable assets acquired) [\d,]+ and [\d,]+ in one filing"),
     ("A year's 10-K has no XBRL instance", r"expected one XBRL instance, found \[\]"),
 ]
 
@@ -91,14 +96,8 @@ def main():
     files = sorted(glob.glob(str(BULK / "headline" / "*.json")))
     if sorted(Path(f).stem for f in files) != ten_pass:
         raise SystemExit("data/bulk/headline/ does not hold exactly the ten-year passes")
-    # The cost-measure rows count the earlier-rules run (before 2026-11-02 17:41: a series could start after fiscal
-    # 2007 and pre-XBRL acquisitions were not required), kept in data/bulk/headline_earlier_rules/. Under the current
-    # rules almost every company waits on a hand record, so that run is the only ten-year sample wide enough to show
-    # what the measure would see. The page says which run each row counts.
-    earlier = sorted(glob.glob(str(BULK / "headline_earlier_rules" / "*.json")))
-    if not earlier:
-        raise SystemExit("data/bulk/headline_earlier_rules/ missing: the earlier-rules run the measure rows count")
-    files = earlier
+    # A pass reaches fiscal 2007 or is a short series (James, 2026-11-03): the page says how many reach the peak.
+    to_2007 = sum(min(json.loads(Path(f).read_text(encoding="utf-8"))["period_ends"]) <= FIRST[1] for f in files)
     fall_years, both_years, pre_only_years = [], [], []
     for f in files:
         d = json.loads(Path(f).read_text(encoding="utf-8"))
@@ -120,9 +119,10 @@ def main():
         "today": {"retrieved": uni["retrieved"], "tickers": len(tickers), "companies": len(ciks), "two_class": two_class,
                   "not_in_membership": new_today},
         "five_year": {"readable": len(passes), "not_readable": sum(fails.values()), "classes": dict(fails.most_common())},
-        "ten_year": {"run": run_date, "passed": len(ten_pass), "stopped": sum(stops.values()), "classes": dict(stops.most_common())},
+        "ten_year": {"run": run_date, "passed": len(ten_pass), "to_2007": to_2007, "stopped": sum(stops.values()),
+                     "classes": dict(stops.most_common())},
         "published": {"pages": built, "bridges": bridges},
-        "measure": {"fall": FALL, "run": "earlier rules", "companies": len(files),
+        "measure": {"fall": FALL, "run": run_date, "companies": len(files),
                     "fall_years": len(fall_years), "fall_companies": len(set(fall_years)),
                     "both_years": len(both_years), "both_companies": len(set(both_years)),
                     "pre_only_years": len(pre_only_years), "pre_only_companies": len(set(pre_only_years))},
@@ -132,7 +132,7 @@ def main():
     OUT.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
     print(f"data/waterfall.json: {out['membership']['companies']} ever members -> {out['today']['tickers']} tickers today -> "
           f"{out['five_year']['readable']} readable -> {out['ten_year']['passed']} read to the first year under the current rules -> "
-          f"{len(built)} published; the earlier-rules run ({len(files)} companies) shows {out['measure']['fall_years']} fall years "
+          f"{len(built)} published; the {len(files)} passes show {out['measure']['fall_years']} fall years "
           f"in {out['measure']['fall_companies']} companies")
 
 

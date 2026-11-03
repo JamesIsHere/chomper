@@ -604,19 +604,19 @@ def waterfall_page():
          f"{five['not_readable']} cannot be read yet, by cause: " + "; ".join(
              f"{v} where {escape(not_read[k][0].lower() + not_read[k][1:].rstrip('.'))}" for k, v in five["classes"].items())
          + ". Each row on the Chomper page says which", ("index.html", "Chomper")),
-        (f"Read back to the first year the SEC holds (bulk run of {ten['run']})", ten["passed"], five["readable"],
-         f"{ten['stopped']} stopped, by cause: {classes(ten['classes'])}. A stop is not a verdict on the company: the long "
-         f"view must reach fiscal 2007, and the SEC's structured data begins in 2009, so nearly every company waits on a "
-         f"hand record for its first years, the step each published page went through.", None),
+        (f"Read back as far as the tags reach without a gap (bulk run of {ten['run']})", ten["passed"], five["readable"],
+         f"{ten['to_2007']} reach fiscal 2007, the pre-crisis peak; the rest start later, and a company page built from "
+         f"one says which years have not been read. {ten['stopped']} stopped, by cause: {classes(ten['classes'])}. A stop is a rule the reader "
+         f"cannot meet from the tagged data alone (an acquisition in a 10-K before XBRL, a deal whose assets are not "
+         f"tagged), the hand step each published page went through.", None),
         ("Finished by hand and published", len(pub["pages"]), ten["passed"],
          f"{', '.join(pub['pages'])}. One-year bridge: {', '.join(pub['bridges'])}.", ("index.html", "Chomper")),
     ]))
     # 3. the cost measure
     sections.append("<h2>What the cost measure would see (version 2, not built)</h2>" + table([
-        ("Ten-year series under the earlier rules", ms["companies"], None,
-         "Counted on the bulk run made before the fiscal-2007 rule (2026-11-02, 17:15), when a series could start "
-         "after 2007 and acquisitions before XBRL were not required; the only ten-year sample wide enough to show what "
-         "the measure would see. Not the same population as the row above.", None),
+        (f"Series read (bulk run of {ms['run']})", ms["companies"], None,
+         "Every company the ten-year reader finished, whatever year its series starts: the same companies as the "
+         "read-back row above.", None),
         (f"With at least one fall year (revenue down {ms['fall'] * 100:.0f}% or more on the prior fiscal year)",
          ms["fall_companies"], ms["companies"], f"{ms['fall_years']} fall years in all; most companies have one or none, and 2020 "
          f"holds many of them.", None),

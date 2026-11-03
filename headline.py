@@ -104,8 +104,9 @@ def same(a, b):
 
 
 def series(g, candidates, reference, page, what, links=None, extra=None):
-    """({end: value}, [tags used], [disagreements], [years read by hand]) back to fiscal 2007 (FIRST), ending at the
-    reference's last year.
+    """({end: value}, [tags used], [disagreements], [years read by hand]) back to fiscal 2007 (FIRST) where the tags
+    and hand records reach, else as far back as they do without a gap (a short series; the page says which years
+    are not yet read), ending at the reference's last year.
     reference: the five-year page's latest-filing years, which a tag must match to anchor the series.
     page: all five years of the five-year page; in those years its value is used, so the pages agree.
     links: hand_links() for this series: a listed tag joins when every linked year shows its as-first-reported
@@ -150,8 +151,9 @@ def series(g, candidates, reference, page, what, links=None, extra=None):
                         or (t in links and all(e in f and e in xbrl and latest(f, e) == old and winner(e)[0] == new
                                                for e, (old, new) in links[t].items())))]
         if not joiners:
-            where = (f"has a gap {gaps[0][0]} to {gaps[0][1]}" if gaps and ends[0] <= FIRST[1]
-                     else f"starts {ends[0] if ends else 'nowhere'}, not fiscal 2007")
+            if ends and not gaps:  # the tags reach back only part way: a short series (James, 2026-11-03)
+                break
+            where = f"has a gap {gaps[0][0]} to {gaps[0][1]}" if gaps else "starts nowhere"
             raise SystemExit(f"{what}: {where}; no other tag brings the missing years and matches the series in "
                              f"a shared year")
         accepted += joiners
@@ -555,15 +557,28 @@ def main():
                                        hand_links(ticker, "revenue", cik, ua), extra("revenue"))
     pretax, pre_tags, d2, h2 = series(g, PRETAX, {e: h["pretax_income"][e] for e in anchor_years},
                                       h["pretax_income"], "pre-tax income", extra=extra("pretax_income"))
-    if list(revenue) != list(pretax):
-        raise SystemExit(f"revenue years {list(revenue)} != pre-tax income years {list(pretax)}")
     operating, op_tags, d3, h3 = None, [], [], h1
     if h["operating_income"] is not None:  # only where the five-year page has it (banks and insurers report none)
         operating, op_tags, d3, h3 = series(g, OPERATING, {e: h["operating_income"][e] for e in anchor_years},
                                             h["operating_income"], "operating income",
                                             extra=extra("operating_income"))
-        if list(operating) != list(revenue):
-            raise SystemExit(f"operating income years {list(operating)} != revenue years {list(revenue)}")
+    # The lines start together: where one reaches further back than another (NVDA: revenue from fiscal 2007,
+    # pre-tax income from 2008), the series starts at the latest first year (a short series, James, 2026-11-03).
+    # A year before the company's first 10-K under this identifier (a comparative in that first 10-K: AppLovin 2019,
+    # Aptiv 2010) is not read either, since its acquisitions cannot be checked from a filing of its own.
+    tens = all_ten_ks(cik, ua)
+    own = [e for e in revenue if len([f for f in tens if abs(days(f["report_date"], e)) <= 21]) == 1]
+    if not own:
+        raise SystemExit(f"no 10-K under CIK {cik} matches any year of the series {list(revenue)}")
+    first = max([min(d) for d in (revenue, pretax, operating) if d] + [min(own)])
+    revenue, pretax = ({e: v for e, v in d.items() if e >= first} for d in (revenue, pretax))
+    operating = {e: v for e, v in operating.items() if e >= first} if operating else None
+    h1, h2, h3 = ([e for e in hs if e >= first] for hs in (h1, h2, h3))
+    d1, d2, d3 = ([d for d in ds if d["period_end"] >= first] for ds in (d1, d2, d3))
+    if list(revenue) != list(pretax):
+        raise SystemExit(f"revenue years {list(revenue)} != pre-tax income years {list(pretax)}")
+    if operating and list(operating) != list(revenue):
+        raise SystemExit(f"operating income years {list(operating)} != revenue years {list(revenue)}")
     if not h1 == h2 == h3:
         raise SystemExit(f"years read by hand differ by line: revenue {h1}, pre-tax {h2}, operating {h3}")
     # Each year read by hand, its filing, and the years of that filing that series() matched to the XBRL data.
@@ -579,7 +594,6 @@ def main():
 
     # One 10-K per year; deals of a fiscal year appear in that year's 10-K and the next.
     filings = {}
-    tens = all_ten_ks(cik, ua)
     for e in ends:
         hits = [f for f in tens if abs(days(f["report_date"], e)) <= 21]
         if len(hits) != 1:
