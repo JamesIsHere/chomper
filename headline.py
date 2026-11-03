@@ -290,19 +290,22 @@ def filed_on(cik, accession, ua):
     return hits.pop()
 
 
+DASHES = "—–-"  # a dash in a table cell (em, en, hyphen): zero
+
+
 def quoted_row(q, label, n, unit, who):
     """The n numbers after a row label in a verbatim table quote, in dollars: the label must appear once; a number
-    in parentheses is negative ("(4,575 )", "( 223 )")."""
+    in parentheses is negative ("(4,575 )", "( 223 )"); a dash cell is zero."""
     # The label must stand alone and be followed by its number: "Other" must not match "Other current assets 936".
-    hits = [m.end() for m in re.finditer(r"(?<![A-Za-z])" + re.escape(label) + r" (?=\$ ?\(? ?\d|\( ?\d|\d)", q)]
+    hits = [m.end() for m in re.finditer(r"(?<![A-Za-z])" + re.escape(label) + r" (?=\$ ?\(? ?\d|\( ?\d|\d|\$ ?[" + DASHES + r"]|[" + DASHES + r"])", q)]
     if len(hits) != 1:
         raise SystemExit(f"{who}: row {label!r} appears {len(hits)} times in the quote")
     i, vals = hits[0], []
     for _ in range(n):
-        m = re.match(r"(?:\$ ?)?(\( ?)?([\d,]+)(?: ?\))? ?", q[i:])
+        m = re.match(r"(?:\$ ?)?(?:(\( ?)?([\d,]+)(?: ?\))?|[" + DASHES + r"]) ?", q[i:])
         if not m:
             raise SystemExit(f"{who}: row {label!r} has fewer than {n} numbers")
-        vals.append((-1 if m.group(1) else 1) * int(m.group(2).replace(",", "")) * unit)
+        vals.append((-1 if m.group(1) else 1) * int(m.group(2).replace(",", "")) * unit if m.group(2) else 0)
         i += m.end()
     return vals
 
@@ -457,6 +460,37 @@ def deal_assets(path):
     return out
 
 
+def assets_from_record(ticker, member, rec, cik, ua):
+    """Total assets acquired from one deal_assets.json record, every figure read out of its verbatim quote, or None
+    for a record that says the 10-K does not state them. Stops on any quote not in the filing, a table that does
+    not foot, or a phrase without an amount. The reader and the drafter (draft_hand.py) both verify through this."""
+    who = f"{ticker} {member} assets"
+    if rec.get("not_determinable"):  # the 10-K gives only net or partial figures: the quotes show what it says
+        verified_quotes(who, cik, rec["sources"], ua)
+        return None
+    q = verified_quotes(who, cik, [rec], ua)[0]
+    if rec.get("prose"):  # the allocation written as sentences (CAT, CCL): each named amount is a phrase quoted
+        def amount(phrase):
+            m = re.search(r"\$ ?([\d,.]+) (million|billion)", phrase)
+            if phrase not in q or not m:
+                raise SystemExit(f"{who}: phrase {phrase!r} not in the quote or names no amount")
+            return round(float(m.group(1).replace(",", "")) * {"million": 1e6, "billion": 1e9}[m.group(2)])
+        a, li, total = ([amount(p) for p in rec[k]] for k in ("assets", "liabilities", "total"))
+        if sum(a) - sum(li) != sum(total):
+            raise SystemExit(f"{who}: assets {sum(a):,} less liabilities {sum(li):,} is not {sum(total):,}")
+        return sum(a)
+    # The 10-K's purchase price allocation table, quoted: asset rows less liability rows must equal its total.
+    if {1000: "(In thousands", 1_000_000: "(In millions"}[rec["unit"]].lower() not in q.lower():
+        raise SystemExit(f"{who}: the quote does not state its unit")
+    col, n = rec.get("column", 0), rec.get("columns", 1)
+    a = [quoted_row(q, r, n, rec["unit"], who)[col] for r in rec["assets"]]
+    li = [abs(quoted_row(q, r, n, rec["unit"], who)[col]) for r in rec["liabilities"]]
+    total = quoted_row(q, rec["total"], n, rec["unit"], who)[col]
+    if min(a) <= 0 or sum(a) - sum(li) != total:
+        raise SystemExit(f"{who}: assets {sum(a):,} less liabilities {sum(li):,} is not {rec['total']} {total:,}")
+    return sum(a)
+
+
 def asset_test(ticker, cik, ua, out_deals, tagged):
     """Adds the S-X asset test to each deal, in place (James, 2026-11-02): significant when the price (investment
     test) or the total assets acquired, goodwill included (asset test), reach 10% of prior total assets.
@@ -475,33 +509,11 @@ def asset_test(ticker, cik, ua, out_deals, tagged):
     records = json.loads(DEAL_ASSETS.read_text(encoding="utf-8")) if DEAL_ASSETS.exists() else {}
     by_hand_assets, not_stated = {}, set()
     for member, rec in records.get(ticker, {}).items():
-        who = f"{ticker} {member} assets"
-        if rec.get("not_determinable"):  # the 10-K gives only net or partial figures: the quotes show what it says
-            verified_quotes(who, cik, rec["sources"], ua)
+        total = assets_from_record(ticker, member, rec, cik, ua)
+        if total is None:
             not_stated.add(member)
-            continue
-        q = verified_quotes(who, cik, [rec], ua)[0]
-        if rec.get("prose"):  # the allocation written as sentences (CAT, CCL): each named amount is a phrase quoted
-            def amount(phrase):
-                m = re.search(r"\$ ?([\d,.]+) (million|billion)", phrase)
-                if phrase not in q or not m:
-                    raise SystemExit(f"{who}: phrase {phrase!r} not in the quote or names no amount")
-                return round(float(m.group(1).replace(",", "")) * {"million": 1e6, "billion": 1e9}[m.group(2)])
-            a, li, total = ([amount(p) for p in rec[k]] for k in ("assets", "liabilities", "total"))
-            if sum(a) - sum(li) != sum(total):
-                raise SystemExit(f"{who}: assets {sum(a):,} less liabilities {sum(li):,} is not {sum(total):,}")
-            by_hand_assets[member] = sum(a)
-            continue
-        # The 10-K's purchase price allocation table, quoted: asset rows less liability rows must equal its total.
-        if {1000: "(In thousands", 1_000_000: "(In millions"}[rec["unit"]].lower() not in q.lower():
-            raise SystemExit(f"{who}: the quote does not state its unit")
-        col, n = rec.get("column", 0), rec.get("columns", 1)
-        a = [quoted_row(q, r, n, rec["unit"], who)[col] for r in rec["assets"]]
-        li = [abs(quoted_row(q, r, n, rec["unit"], who)[col]) for r in rec["liabilities"]]
-        total = quoted_row(q, rec["total"], n, rec["unit"], who)[col]
-        if min(a) <= 0 or sum(a) - sum(li) != total:
-            raise SystemExit(f"{who}: assets {sum(a):,} less liabilities {sum(li):,} is not {rec['total']} {total:,}")
-        by_hand_assets[member] = sum(a)
+        else:
+            by_hand_assets[member] = total
     if unknown := (set(by_hand_assets) | not_stated) - {d["member"] for d in out_deals}:
         raise SystemExit(f"{ticker}: deal_assets.json names deals not in the window: {sorted(unknown)}")
     missing = []

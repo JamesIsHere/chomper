@@ -477,5 +477,49 @@
     }
    ]
   }
+ },
+ "COST": {
+  "2009-08-30": {
+   "deals": [],
+   "spend": 0,
+   "prior_total_assets": 20682000000,
+   "sources": [
+    {
+     "accession": "0001193125-09-208963",
+     "document": "d10k.htm",
+     "quote": "CASH FLOWS FROM INVESTING ACTIVITIES Additions to property and equipment, net of $20, $21, and $42 of non-cash capital expenditures for 2009, 2008 and 2007, respectively (1,250 ) (1,599 ) (1,386 ) Proceeds from the sale of property and equipment 7 48 14 Purchases of short-term investments (1,806 ) (1,507 ) (1,161 ) Maturities of short-term investments 1,780 1,561 1,418 Sales of investments 183 165 496 Change in certain other assets and other, net (9 ) (14 ) (36 ) Investments transferred from cash and cash equivalents (6 ) (371 ) — Net cash used in investing activities (1,101 ) (1,717 ) (655 )"
+    },
+    {
+     "accession": "0001193125-09-208963",
+     "document": "d10k.htm",
+     "quote": "TOTAL ASSETS $ 21,979 $ 20,682"
+    }
+   ],
+   "note": "No business acquisitions are stated in the passages for fiscal 2009; the only \"acquisition\" mentions are generic (property for warehouses, internal-control boilerplate, SFAS 141R adoption pending for fiscal 2010). The cash flow statement's investing section has no line for acquisitions of businesses, so the whole section is quoted and spend is 0. The cash flow statement's own column headings and unit heading are not in the passages: column order 2009, 2008, 2007 is inferred from the additions-to-property row's \"for 2009, 2008 and 2007, respectively\" and from the ending cash row ($3,157 = Aug 30, 2009 balance sheet cash); the millions unit is inferred from the balance sheet heading \"(dollars in millions, except par value and share data)\" and the MD&A text \"Net cash used in investing activities totaled $1,101 in 2009\", which matches the statement figure. Balance sheet total assets of $20,682 at August 31, 2008 agrees with the selected financial data and Note 12 segment table.",
+   "drafted": "claude -p 2026-11-03, verified by headline.py",
+   "spend_line": "Net cash used in investing activities"
+  }
+ },
+ "TSLA": {
+  "2010-12-31": {
+   "deals": [],
+   "spend": 0,
+   "prior_total_assets": 130424000,
+   "sources": [
+    {
+     "accession": "0001193125-11-054847",
+     "document": "d10k.htm",
+     "quote": "Cash flows from investing activities Payments related to acquisition of Fremont manufacturing facility and related assets (65,210 ) — — Purchases of property and equipment excluding capital leases (40,203 ) (11,884 ) (10,630 ) Transfer of restricted cash into our dedicated Department of Energy account (100,000 ) — — Withdrawals out of our dedicated Department of Energy account 26,403 — — Increase in other restricted cash (1,287 ) (2,360 ) (960 ) Net cash used in investing activities (180,297 ) (14,244 ) (11,590 )"
+    },
+    {
+     "accession": "0001193125-11-054847",
+     "document": "d10k.htm",
+     "quote": "Total assets $ 386,082 $ 130,424"
+    }
+   ],
+   "note": "No business acquisitions are stated for fiscal 2010. The cash flow statement's investing section has no line for acquisitions of businesses; its first line, \"Payments related to acquisition of Fremont manufacturing facility and related assets (65,210 )\", is the October 2010 purchase from NUMMI of the Fremont, California plant and certain manufacturing assets, which the MD&A describes as part of \"capital purchases of $105.4 million\" ($65.2 million Fremont plus $40.2 million other property and equipment), i.e. an asset purchase, not a business combination; it is therefore excluded from deals and spend, and is noted here so the $65,210 thousand line is not mistaken for acquisition spend. The cash flow statement's own column headings and unit heading are not in the passages (the quoted section starts mid-statement); the column order 2010, 2009, 2008 and the thousands unit are taken from the MD&A \"Summary of Cash Flows 2010 2009 2008 (in thousands)\" table, whose figures (180,297), (14,244), (11,590) match the statement row. Balance sheet unit from its heading \"(in thousands, except share and per share data)\"; prior-year total assets of $130,424 thousand also agrees with the Selected Financial Data row \"Total assets 386,082 130,424 51,699 34,837 44,466\".",
+   "drafted": "claude -p 2026-11-03, verified by headline.py",
+   "spend_line": "Net cash used in investing activities"
+  }
  }
 }

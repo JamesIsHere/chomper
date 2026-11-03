@@ -288,5 +288,27 @@
    ],
    "note": "The 10-K gives only the cash paid for the business assets; no allocation."
   }
+ },
+ "AMP": {
+  "amp:EuropeMiddleEastAndAfricaAssetManagementAssetManagementBusinessOfBMOFinancialGroupMember": {
+   "accession": "0000820027-22-000016",
+   "document": "amp-20211231.htm",
+   "quote": "(in millions) Consideration paid Cash $ 973 Deferred considerations ( 35 ) Contingent considerations 28 Total fair value $ 966 Recognized Assets / Liabilities Assets Cash and cash equivalents $ 397 Investments 77 Receivables 116 Other assets 295 Total assets 885 Liabilities Debt 2 Accounts payable and accrued expenses 235 Other liabilities 190 Total liabilities 427 Identifiable net assets $ 458 Intangible assets $ 295 Deferred tax liability 74 Goodwill 287",
+   "note": "Note 9 (goodwill and intangibles) prints the November 8, 2021 allocation for the BMO Global Asset Management (EMEA) acquisition in one column. The table lists Total assets 885, then Intangible assets 295, Deferred tax liability 74 and Goodwill 287 below Identifiable net assets 458; gross assets 885 + 295 + 287 = 1,467 less liabilities 427 + 74 = 501 equals Total fair value 966.",
+   "drafted": "claude -p 2026-11-03, verified by headline.py",
+   "unit": 1000000,
+   "columns": 1,
+   "column": 0,
+   "assets": [
+    "Total assets",
+    "Intangible assets",
+    "Goodwill"
+   ],
+   "liabilities": [
+    "Total liabilities",
+    "Deferred tax liability"
+   ],
+   "total": "Total fair value"
+  }
  }
 }
