@@ -1,10 +1,11 @@
-"""The site header shared by every Chomper page: the main menu: Readme, Chomper (home), S&P 500, Decisioning, Considerations, Waterfall.
+"""The site header shared by every Chomper page: the main menu: Readme, Chomper (home), Who holds up, S&P 500, Decisioning,
+Considerations, Waterfall.
 
 Pages one folder down pass prefix="../" so every link resolves from where the page lives.
 """
 
-MENU = [("readme.html", "Readme"), ("index.html", "Chomper"), ("aggregate.html", "S&amp;P 500"), ("decisions.html", "Decisioning"),
-        ("considerations.html", "Considerations"), ("waterfall.html", "Waterfall")]
+MENU = [("readme.html", "Readme"), ("index.html", "Chomper"), ("holds-up.html", "Who holds up"), ("aggregate.html", "S&amp;P 500"),
+        ("decisions.html", "Decisioning"), ("considerations.html", "Considerations"), ("waterfall.html", "Waterfall")]
 
 # The site's colour tokens (light, dark by system preference, dark by data-theme) and base rules, shared by every
 # page; a page adds its own tokens in its own :root block.

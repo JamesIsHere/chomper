@@ -17,7 +17,7 @@ from pull import ROOT
 
 DOCS = ROOT / "docs"
 SITE_PAGES = {"index.html", "aggregate.html", "decisions.html", "considerations.html", "membership.html", "readme.html",
-              "waterfall.html"}
+              "waterfall.html", "holds-up.html"}
 WORDS = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine",
          10: "ten", 11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen", 15: "fifteen", 16: "sixteen",
          17: "seventeen", 18: "eighteen", 19: "nineteen", 20: "twenty"}
@@ -170,6 +170,24 @@ def main():
     check("Waterfall: published", ("waterfall", wrow("Finished by hand and published")), ("All page lede", analyzed))
     check("Waterfall: summed on the S&P 500 page", ("waterfall", wrow("Summed")),
           ("S&P 500 page", int(one(r"summed across (\d+) of today", text(agg), "aggregate summed"))))
+
+    # 7b. Who holds up against data/measure.json and the Waterfall's measure rows
+    hu = page("holds-up.html")
+    measure = json.loads((ROOT / "data" / "measure.json").read_text(encoding="utf-8"))
+    wfj = json.loads((ROOT / "data" / "waterfall.json").read_text(encoding="utf-8"))["measure"]
+    hu_lede = text(one(r'<p class="lede">(Every fiscal year in which.*?)</p>', hu, "Who holds up lede", re.S))
+    hu_read, hu_cos, hu_years = map(int, one(r"across the (\d+) S&P 500\s+companies whose filings have been read so far: (\d+) of them had such a year, (\d+) years in all", hu_lede, "Who holds up lede"))
+    check("Who holds up: companies read", ("lede", hu_read), ("data/measure.json", measure["companies_read"]),
+          ("waterfall", wrow(f"Series read (bulk run of {wfj['run']})")))
+    check("Who holds up: companies with a fall year", ("lede", hu_cos),
+          ("data/measure.json", len({r["ticker"] for r in measure["fall_years"]})),
+          ("waterfall", wrow(f"With at least one fall year (revenue down {wfj['fall'] * 100:.0f}% or more on the prior fiscal year)")))
+    check("Who holds up: fall years", ("lede", hu_years), ("rows", hu.count('<tr><th scope="row">')),
+          ("data/measure.json", len(measure["fall_years"])),
+          ("waterfall", int(one(r"(\d+) fall years in all", text(wf), "waterfall measure note"))))
+    linked = set(re.findall(r'<th scope="row"><a href="([A-Z.]+)\.html">', hu))
+    with_page = {r["ticker"] for r in measure["fall_years"]} & set(company_pages)
+    check("Who holds up: every company with a page is linked, no other", ("linked", sorted(linked)), ("pages", sorted(with_page)))
 
     # 8. The same menu on every page
     navs = {}

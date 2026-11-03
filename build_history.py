@@ -613,10 +613,10 @@ def waterfall_page():
          f"{', '.join(pub['pages'])}. One-year bridge: {', '.join(pub['bridges'])}.", ("index.html", "Chomper")),
     ]))
     # 3. the cost measure
-    sections.append("<h2>What the cost measure would see (version 2, not built)</h2>" + table([
+    sections.append("<h2>What the cost measure sees</h2>" + table([
         (f"Series read (bulk run of {ms['run']})", ms["companies"], None,
          "Every company the ten-year reader finished, whatever year its series starts: the same companies as the "
-         "read-back row above.", None),
+         "read-back row above. Every fall year among them is on", ("holds-up.html", "Who holds up")),
         (f"With at least one fall year (revenue down {ms['fall'] * 100:.0f}% or more on the prior fiscal year)",
          ms["fall_companies"], ms["companies"], f"{ms['fall_years']} fall years in all; most companies have one or none, and 2020 "
          f"holds many of them.", None),
@@ -632,6 +632,42 @@ def waterfall_page():
          f"{agg['excluded']} left out, by cause: {classes(agg['reasons'])}. The page names each one", ("aggregate.html", "S&amp;P 500")),
     ]))
     return WATERFALL.format(sections="\n".join(sections), nav=nav("waterfall.html"), css=CSS)
+
+
+VERDICT = {"below zero": "rose", "zero to one": "fell by less than revenue", "above one": "fell by more than revenue"}
+
+
+def holds_up_page():
+    """Every fall year across the series the bulk run passed, from data/measure.json (written by measure.py), one
+    row each, sorted by the pre-tax ratio, lowest first. The verdict is the pre-tax band in words; where the company
+    reports operating income its ratio sits beside it and a note says when its band differs (James, 2026-11-03)."""
+    ms = json.loads((ROOT / "data" / "measure.json").read_text(encoding="utf-8"))
+    rows = sorted(ms["fall_years"], key=lambda r: r["decremental_pretax"])
+    pages = {p.stem for p in DATA.glob("*.json")}
+    names = {c["ticker"]: c["name"] for c in json.loads((ROOT / "data" / "sp500.json").read_text(encoding="utf-8"))["companies"]}
+    out = []
+    for r in rows:
+        name = escape(display_name(names.get(r["ticker"], r["company"])))  # the list's name, as the company pages
+        who = f'<a href="{r["ticker"]}.html">{name}</a>' if r["ticker"] in pages else name
+        oi = r["decremental_operating"]
+        note = ""
+        if oi is None:
+            oi_cell = '<td class="dim">not reported</td>'
+        else:
+            oi_cell = f'<td>{oi:.2f}</td>'
+            if r["bands_differ"]:
+                note = f"operating income {VERDICT[B_band(oi)]}"
+        out.append(f'<tr><th scope="row">{who} <span class="dim">{r["ticker"]}</span></th><td>{year(r["period_end"])}</td>'
+                   f'<td class="down">{100 * r["revenue_change"]:+.1f}%</td><td>{r["decremental_pretax"]:.2f}</td>'
+                   f'<td class="text">{VERDICT[r["band"]]}</td>{oi_cell}<td class="text dim">{note}</td></tr>')
+    companies = len({r["ticker"] for r in rows})
+    return HOLDS_UP.format(nav=nav("holds-up.html"), css=CSS, rows="".join(out), fall=f"{100 * ms['fall']:.0f}",
+                           read=ms["companies_read"], companies=companies, years=len(rows),
+                           differ=sum(r["bands_differ"] for r in rows))
+
+
+def B_band(m):
+    return "below zero" if m < 0 else "zero to one" if m <= 1 else "above one"
 
 
 def readme_page():
@@ -1024,8 +1060,9 @@ def main():
     (OUT / "decisions.html").write_text(decisions_page(), encoding="utf-8")
     (OUT / "readme.html").write_text(readme_page(), encoding="utf-8")
     (OUT / "waterfall.html").write_text(waterfall_page(), encoding="utf-8")
+    (OUT / "holds-up.html").write_text(holds_up_page(), encoding="utf-8")
     (OUT / "considerations.html").write_text(considerations_page(), encoding="utf-8")
-    print(f"docs/: {len(companies)} company pages, index.html, readme.html, waterfall.html, decisions.html and considerations.html "
+    print(f"docs/: {len(companies)} company pages, index.html, readme.html, holds-up.html, waterfall.html, decisions.html and considerations.html "
           f"({len(universe['companies'])} S&P 500 companies listed)")
 
 
@@ -1214,6 +1251,44 @@ those change, then rebuild.</p>
 </html>
 """
 
+
+HOLDS_UP = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who holds up - Chomper</title>
+<style>{css}
+table.holds tbody th {{ min-width: 9rem; }}
+table.holds th.text, table.holds td.text {{ text-align: left; white-space: normal; }}
+table.holds thead th {{ vertical-align: bottom; }}
+table.holds td.text.dim {{ max-width: 12rem; }}
+</style>
+</head>
+<body>
+<main>
+{nav}
+<h1>Who holds up when revenue falls?</h1>
+<p class="lede">Every fiscal year in which a company's revenue fell {fall}% or more, across the {read} S&amp;P 500
+companies whose filings have been read so far: {companies} of them had such a year, {years} years in all. For each, how far
+pre-tax income fell with revenue: the change in pre-tax income over the change in revenue, so 0.62 means pre-tax
+income fell 62 cents for each dollar of revenue lost, a figure below 0 means it rose, and one above 1 means it fell by
+more than revenue did. The same ratio on operating income sits beside it where the company reports one; in {differ}
+years the two land on different sides of 0 or 1, and the row says so. Sorted by the pre-tax ratio, lowest first.</p>
+<div class="wrap"><table class="holds">
+<thead><tr><th>Company</th><th>Fiscal year</th><th>Revenue change</th><th>Pre-tax income</th><th class="text">What pre-tax income did</th>
+<th>Operating income</th><th class="text">Where operating income differs</th></tr></thead>
+<tbody>{rows}</tbody>
+</table></div>
+<footer>
+<p>Source: data/measure.json, written by measure.py from each company's ten-year series (revenue, pre-tax income
+and operating income as filed, the series the bulk run passed). The ratios are arithmetic on those figures; no
+special items are stripped. A company name is a link where its page is built.</p>
+</footer>
+</main>
+</body>
+</html>
+"""
 
 README = """<!doctype html>
 <html lang="en">
