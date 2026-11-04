@@ -669,6 +669,8 @@ def main():
     asset_test(ticker, cik, ua, out_deals, tagged_assets)
     for e in ends:  # spend the tagged deals leave unexplained, large enough to be a significant deal of its own
         assets = prior_assets(e)
+        if assets <= 0:  # BAC's FY2010 10-K tags Assets 0 at 2008-12-31: not a balance-sheet total, so stop, not divide
+            raise SystemExit(f"{e}: prior total assets read as {assets:,}; not a balance-sheet total, read by hand")
         tagged = sum(d["size"] for d in out_deals if d["fiscal_year_end"] == e)
         spends = ([("spend recorded by hand", hand[e]["spend"])] if e in hand else
                   [(t, max(f[e])[1] if e in (f := annual(g, t)) else 0) for t in SPEND])

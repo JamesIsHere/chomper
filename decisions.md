@@ -419,3 +419,9 @@ Group: Method
 Decision: The reader reads a quoted table cell printed with decimals in the table's unit ("Total assets $ 12,442.7" in millions is 12,442,700,000 dollars), exactly, in decimal arithmetic; a cell that does not come to whole dollars in its unit stops the reader. A hand record's spend and prior total assets may appear in a quote in tenths of a million. No tolerance is added.
 Why: Some balance sheets print in millions with one decimal (Nike, ADP and others), and the row reader read only whole numbers, so correctly drafted records were rejected. Replaying the saved replies, all 6 such rejections now pass the reader's gate. The 11 published companies' ten-year files come out the same under the new reader as under the old (7 byte-identical under both; JNJ, PGR, UNH and PLD differ under both, the known lag of their files behind the fiscal-2007 rule).
 Status: active
+
+## 2026-11-04 | A total assets figure of zero stops the reader
+Group: Method
+Decision: Where the prior year's total assets read from the SEC's XBRL data is zero or less, the ten-year reader stops and names the year, to be read by hand, rather than dividing by it or taking the figure from another filing.
+Why: Bank of America's FY2010 10-K tags Assets at 0 for 31 December 2008 (filed 2011-02-25), and the reader takes the latest-filed value, so the deal-significance test divided by zero and the run crashed. A zero is not a balance-sheet total; choosing another filing's value instead would be a rule about which filing wins, which is not plumbing. The stop can only fire where the reader would otherwise have crashed, so no published figure moves.
+Status: active
