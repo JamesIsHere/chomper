@@ -279,6 +279,13 @@ def printed(v):
     return ([f"{v // 1_000_000:,}"] if v % 1_000_000 == 0 else []) + ([f"{v // 1000:,}"] if v % 1000 == 0 else [])
 
 
+def deal_forms(v):
+    """The ways prose prints a deal's size: in millions ("5,900") or thousands ("20,431") as a table does, in tenths
+    of a billion ("$5.9 billion"), or in tenths of a million ("$576.4 million", NKE's Umbro, 2008)."""
+    return (printed(v) + ([f"${v / 1e9:.1f} billion"] if v % 100_000_000 == 0 else [])
+            + ([f"${v / 1e6:,.1f} million"] if v % 100_000 == 0 and v % 1_000_000 else []))
+
+
 def filed_on(cik, accession, ua):
     """The date the SEC received a filing, from the company's submissions record."""
     sub = get_json(f"https://data.sec.gov/submissions/CIK{cik:010d}.json", f"{cik}/submissions.json", ua)
@@ -357,8 +364,7 @@ def by_hand(ticker, end, cik, filing, ua):
         if not any(f in q for f in printed(v) for q in quotes):
             raise SystemExit(f"{ticker} {end}: {what} {v:,} does not appear in millions or thousands in any quote")
     for d in rec["deals"]:
-        v = d["size"]  # in millions ("5,900"), thousands ("20,431") or tenths of a billion ("$5.9 billion")
-        forms = printed(v) + ([f"${v / 1e9:.1f} billion"] if v % 100_000_000 == 0 else [])
+        forms = deal_forms(d["size"])
         if not any(f in q for f in forms for q in quotes):
             raise SystemExit(f"{ticker} {end}: deal {d['name']} size {d['size']:,} does not appear in any quote")
     return rec

@@ -128,9 +128,9 @@ class ModelFailure(Exception):
     """A claude -p call that failed (usage limit, auth, outage): the batch stops at the first one."""
 
 
-def ask(schema, prompt, tag):
+def ask(schema, prompt, tag, reuse=False):
     saved = DUMP / f"{tag}.json"
-    if saved.exists():  # a reply already on disk is reused: the checks after this are the gate, not the call
+    if reuse and saved.exists():  # a first-attempt reply on disk is reused (the checks are the gate); a retry is always fresh
         with CALLS.open("a", encoding="utf-8") as f:
             f.write(json.dumps({"tag": tag, "reused": True}) + "\n")
         return json.loads(saved.read_text(encoding="utf-8"))
@@ -270,7 +270,7 @@ def year_record(ticker, cik, end, accession, docs, draft, prior_end):
         verbatim(d["document"], d["quote"], f"deal {d['name']}")
         if not (prior_end < d["date"] <= end):
             raise ValueError(f"deal {d['name']}: date {d['date']} is outside {prior_end} to {end}")
-        forms = headline.printed(d["size"]) + ([f"${d['size'] / 1e9:.1f} billion"] if d["size"] % 100_000_000 == 0 else [])
+        forms = headline.deal_forms(d["size"])
         if not any(f in d["quote"] for f in forms):
             raise ValueError(f"deal {d['name']}: size {d['size']:,} does not appear in its quote as {forms}")
         deals.append({"name": d["name"], "member": d["member"], "date": d["date"], "size": d["size"],
@@ -316,7 +316,7 @@ def draft_year(ticker, company, cik, end, accession, ua, required=()):
     failure = None
     for attempt in range(2):
         draft = ask(YEAR_SCHEMA, year_prompt(ticker, company, end, prior_end, docs, required, failure),
-                    f"{ticker}_{end}_{attempt}")
+                    f"{ticker}_{end}_{attempt}", reuse=attempt == 0)
         try:
             rec = year_record(ticker, cik, end, accession, docs, draft, prior_end)
             for m, d, v in required:
@@ -401,7 +401,7 @@ def draft_assets(ticker, company, cik, member, name, when, accession, ua):
     failure = None
     for attempt in range(2):
         draft = ask(ASSETS_SCHEMA, assets_prompt(ticker, company, member, name, when, docs, failure),
-                    f"{ticker}_{re.sub(r'[^A-Za-z0-9]+', '_', member)}_{attempt}")
+                    f"{ticker}_{re.sub(r'[^A-Za-z0-9]+', '_', member)}_{attempt}", reuse=attempt == 0)
         try:
             rec = assets_record(docs, draft, accession)
             headline.assets_from_record(ticker, member, rec, cik, ua)  # the reader's gate; None is a valid outcome
