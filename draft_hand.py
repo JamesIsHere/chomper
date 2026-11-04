@@ -34,6 +34,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date
@@ -128,11 +129,18 @@ class ModelFailure(Exception):
     """A claude -p call that failed (usage limit, auth, outage): the batch stops at the first one."""
 
 
+CALLS_LOCK = threading.Lock()  # a company's deals are drafted four at a time; unlocked appends interleaved (2 lines, 2026-11-04)
+
+
+def log_call(line):
+    with CALLS_LOCK, CALLS.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(line) + "\n")
+
+
 def ask(schema, prompt, tag, reuse=False):
     saved = DUMP / f"{tag}.json"
     if reuse and saved.exists():  # a first-attempt reply on disk is reused (the checks are the gate); a retry is always fresh
-        with CALLS.open("a", encoding="utf-8") as f:
-            f.write(json.dumps({"tag": tag, "reused": True}) + "\n")
+        log_call({"tag": tag, "reused": True})
         return json.loads(saved.read_text(encoding="utf-8"))
     cmd =["claude", "-p", "--output-format", "json", "--no-session-persistence", "--tools", "",
            "--model", MODEL, "--effort", EFFORT, "--safe-mode", "--strict-mcp-config",
@@ -153,8 +161,7 @@ def ask(schema, prompt, tag, reuse=False):
                  "list_price_usd": reply.get("total_cost_usd"), "is_error": reply.get("is_error")}
     if run.returncode != 0 or not reply or reply.get("is_error"):
         line["error"] = ((run.stderr or "") + " | " + (run.stdout or ""))[-600:]
-    with CALLS.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(line) + "\n")
+    log_call(line)
     if "error" in line:
         raise ModelFailure(f"claude -p failed ({run.returncode}) on {tag}: {line['error']}")
     if not reply.get("structured_output"):
