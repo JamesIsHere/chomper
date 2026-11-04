@@ -508,10 +508,19 @@ def main():
     if not args:
         raise SystemExit(__doc__)
     headline.HISTORY = BULK / "history"
+    start = None
+    if "--from" in args:  # resume a --stops run at this ticker (alphabetical), e.g. after the run was killed
+        i = args.index("--from")
+        start = args[i + 1].upper()
+        del args[i:i + 2]
     if args == ["--stops"]:
         res = json.loads((BULK / "results.json").read_text(encoding="utf-8"))
         tickers = sorted(t for t, r in res.items() if r["status"] == "stop" and
                          ("predates XBRL" in r["message"] or "need total assets acquired" in r["message"]))
+        if start:
+            if start not in tickers:
+                raise SystemExit(f"--from {start}: not one of the {len(tickers)} stops")
+            tickers = tickers[tickers.index(start):]
     else:
         tickers = [t.upper() for t in args]
     ua = user_agent()
