@@ -41,14 +41,17 @@ STOP_CLASSES = [
     ("Series too short under the tags read", r"only \d+ years .*no other tag reaches further back"),
     ("No companyfacts tag matches the five-year page", r"no companyfacts tag matches the five-year page"),
     ("Acquisition spend the tagged deals leave unexplained is itself significant",
-     r"(PaymentsToAcquireBusinesses|GoodwillAcquiredDuringPeriod).* leaves "),
+     r"(PaymentsToAcquireBusinesses|GoodwillAcquiredDuringPeriod|spend recorded by hand).* leaves "),
     ("A year's 10-K not found", r"expected one 10-K, found \[\]"),
     ("Fiscal years not consecutive", r"are not consecutive"),
     ("Conflicting values in one filing", r"reports different values under the tags used"),
     ("No 10-K shows two consecutive years", r"no 10-K reports both"),
     ("A deal tagged at two values more than 1% apart",
-     r"(consideration|net assets acquired|cash paid net of cash acquired|identifiable assets acquired) [\d,]+ and [\d,]+ in one filing"),
+     r"(consideration|net assets acquired|cash paid net of cash acquired|identifiable assets acquired|total assets acquired) [\d,]+ and [\d,]+ in one filing"),
     ("A year's 10-K has no XBRL instance", r"expected one XBRL instance, found \[\]"),
+    ("The prior year's total assets are not in the SEC's XBRL data", r"^Assets: no 10-K value near"),
+    ("The prior year's total assets are tagged as zero", r"prior total assets read as -?[\d,]+; not a balance-sheet total"),
+    ("A later 10-K tags a deal the hand record for that year lacks", r"but the hand record for \S+ lacks it"),
 ]
 
 

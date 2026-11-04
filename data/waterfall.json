@@ -64,18 +64,23 @@
   }
  },
  "ten_year": {
-  "run": "2026-11-03",
-  "passed": 36,
-  "to_2007": 7,
-  "stopped": 348,
+  "run": "2026-11-04",
+  "passed": 146,
+  "to_2007": 28,
+  "stopped": 238,
   "classes": {
-   "A 10-K before XBRL: its acquisitions must be read by hand": 159,
-   "A deal's assets acquired are not tagged: read them from the 10-K by hand": 108,
+   "A deal's assets acquired are not tagged: read them from the 10-K by hand": 88,
+   "A deal tagged at two values more than 1% apart": 33,
    "Conflicting values in one filing": 23,
+   "A 10-K before XBRL: its acquisitions must be read by hand": 22,
    "A gap in the series no tag fills": 20,
-   "A deal tagged at two values more than 1% apart": 18,
+   "Acquisition spend the tagged deals leave unexplained is itself significant": 19,
    "No companyfacts tag matches the five-year page": 14,
-   "A year's 10-K not found": 6
+   "A year's 10-K not found": 6,
+   "A later 10-K tags a deal the hand record for that year lacks": 6,
+   "The prior year's total assets are not in the SEC's XBRL data": 5,
+   "The prior year's total assets are tagged as zero": 1,
+   "No 10-K shows two consecutive years": 1
   }
  },
  "published": {
@@ -98,14 +103,14 @@
  },
  "measure": {
   "fall": 0.05,
-  "run": "2026-11-03",
-  "companies": 36,
-  "fall_years": 52,
-  "fall_companies": 25,
-  "both_years": 47,
-  "both_companies": 21,
-  "pre_only_years": 5,
-  "pre_only_companies": 4
+  "run": "2026-11-04",
+  "companies": 146,
+  "fall_years": 200,
+  "fall_companies": 92,
+  "both_years": 158,
+  "both_companies": 71,
+  "pre_only_years": 42,
+  "pre_only_companies": 21
  },
  "aggregate": {
   "summed": 421,
