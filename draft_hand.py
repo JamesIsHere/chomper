@@ -2,8 +2,12 @@
 then verifies each draft exactly as it verifies a record typed by hand, and a draft that does not verify is not kept
 (James, 2026-11-03: draft at scale rather than waive the two hand-work rules).
 
-    python draft_hand.py TICKER...     draft for these companies
-    python draft_hand.py --stops       every company whose bulk result is one of the two hand-work stops
+    python draft_hand.py --model M --effort E TICKER...   draft for these companies
+    python draft_hand.py --model M --effort E --stops     every company whose bulk result is one of the two hand-work stops
+
+--model and --effort are required. Each claude -p call runs with --safe-mode --strict-mcp-config from an empty
+folder (no CLAUDE.md, hooks or MCP servers), logs its usage to data/bulk/draft_calls.jsonl, and the first failed
+call stops the batch.
 
 For each company the reader is run; its stop says what is missing:
   * a pre-XBRL 10-K ("predates XBRL; read its acquisitions"): the drafter reads that filing's documents, sends the
@@ -32,7 +36,7 @@ import sys
 import tempfile
 import time
 from concurrent.futures import ThreadPoolExecutor
-from datetime import date, timedelta
+from datetime import date
 from pathlib import Path
 
 import headline
@@ -115,14 +119,45 @@ def passages(docs, specs):
 DUMP = BULK / "drafts"  # every model reply, for inspection: {ticker}_{item}_{attempt}.json
 
 
+CALLS = BULK / "draft_calls.jsonl"  # one line per model call: model, effort, seconds, every usage count
+MODEL = EFFORT = None              # set from --model / --effort; required, no default (a default once ran the batch on Fable)
+NEUTRAL = Path(tempfile.mkdtemp(prefix="draft_hand_cwd_"))  # no CLAUDE.md above it is read with --safe-mode anyway
+
+
+class ModelFailure(Exception):
+    """A claude -p call that failed (usage limit, auth, outage): the batch stops at the first one."""
+
+
 def ask(schema, prompt, tag):
-    cmd = ["claude", "-p", "--output-format", "json", "--no-session-persistence", "--tools", "",
+    saved = DUMP / f"{tag}.json"
+    if saved.exists():  # a reply already on disk is reused: the checks after this are the gate, not the call
+        with CALLS.open("a", encoding="utf-8") as f:
+            f.write(json.dumps({"tag": tag, "reused": True}) + "\n")
+        return json.loads(saved.read_text(encoding="utf-8"))
+    cmd =["claude", "-p", "--output-format", "json", "--no-session-persistence", "--tools", "",
+           "--model", MODEL, "--effort", EFFORT, "--safe-mode", "--strict-mcp-config",
            "--system-prompt", SYSTEM, "--json-schema", json.dumps(schema)]
-    run = subprocess.run(cmd, input=prompt, capture_output=True, text=True, encoding="utf-8", shell=False)
-    if run.returncode != 0:
-        raise RuntimeError(f"claude -p failed ({run.returncode}): {run.stderr[:300]}")
-    reply = json.loads(run.stdout)
-    if reply.get("is_error") or not reply.get("structured_output"):
+    t = time.time()
+    run = subprocess.run(cmd, input=prompt, capture_output=True, text=True, encoding="utf-8", shell=False, cwd=NEUTRAL)
+    line = {"tag": tag, "model": MODEL, "effort": EFFORT, "seconds": round(time.time() - t, 1),
+            "prompt_chars": len(prompt), "returncode": run.returncode}
+    try:
+        reply = json.loads(run.stdout)
+    except ValueError:
+        reply = None
+    if reply:
+        u = reply.get("usage") or {}
+        line |= {"input_fresh": u.get("input_tokens", 0), "cache_write": u.get("cache_creation_input_tokens", 0),
+                 "cache_read": u.get("cache_read_input_tokens", 0), "output": u.get("output_tokens", 0),
+                 "model_turns": reply.get("num_turns"), "models": sorted(reply.get("modelUsage", {})),
+                 "list_price_usd": reply.get("total_cost_usd"), "is_error": reply.get("is_error")}
+    if run.returncode != 0 or not reply or reply.get("is_error"):
+        line["error"] = ((run.stderr or "") + " | " + (run.stdout or ""))[-600:]
+    with CALLS.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(line) + "\n")
+    if "error" in line:
+        raise ModelFailure(f"claude -p failed ({run.returncode}) on {tag}: {line['error']}")
+    if not reply.get("structured_output"):
         raise RuntimeError(f"no structured output: {run.stdout[:300]}")
     DUMP.mkdir(parents=True, exist_ok=True)
     (DUMP / f"{tag}.json").write_text(json.dumps(reply["structured_output"], indent=1, ensure_ascii=False),
@@ -202,11 +237,25 @@ def check_row(quote, label, columns, column, unit, value, year, what):
     and the chosen column heading must name the year asked for."""
     if not (0 <= column < len(columns)):
         raise ValueError(f"{what}: column {column} outside {columns}")
-    if str(year) not in columns[column]:
-        raise ValueError(f"{what}: column {column} is headed {columns[column]!r}, not {year}")
+    if not any(str(y) in columns[column] for y in year):
+        raise ValueError(f"{what}: column {column} is headed {columns[column]!r}, not {' or '.join(map(str, year))}")
     vals = headline.quoted_row(quote, label, len(columns), unit, what)
     if abs(vals[column]) != abs(value):
         raise ValueError(f"{what}: the quote's column {column} reads {vals[column]:,}, the draft says {value:,}")
+
+
+def heading_years(end):
+    """The years a column for the fiscal year ending `end` may be headed by: the end's calendar year, and the year
+    before when a 52/53-week year ends in the first week of January (CDNS's year ending 2010-01-02 is fiscal 2009)."""
+    d = date.fromisoformat(end)
+    return (d.year, d.year - 1) if d.month == 1 and d.day <= 7 else (d.year,)
+
+
+def prior_year_end(end):
+    """The same date one year earlier (Feb 29 -> Feb 28). Not end - 365 days: that lands on 1 January in a leap year
+    and demanded a '2008' column for the balance sheet at 31 December 2007 (20 drafts rejected, 2026-11-03)."""
+    d = date.fromisoformat(end)
+    return (d.replace(year=d.year - 1) if not (d.month == 2 and d.day == 29) else d.replace(year=d.year - 1, day=28)).isoformat()
 
 
 def year_record(ticker, cik, end, accession, docs, draft, prior_end):
@@ -228,11 +277,11 @@ def year_record(ticker, cik, end, accession, docs, draft, prior_end):
                       "measure": d["measure"]})
     verbatim(draft["assets_document"], draft["assets_quote"], "total assets")
     check_row(draft["assets_quote"], draft["assets_label"], draft["assets_columns"], draft["assets_column"],
-              draft["assets_unit"], draft["prior_total_assets"], prior_end[:4], "total assets")
+              draft["assets_unit"], draft["prior_total_assets"], heading_years(prior_end), "total assets")
     verbatim(draft["spend_document"], draft["spend_quote"], "spend")
     if draft["spend"]:
         check_row(draft["spend_quote"], draft["spend_label"], draft["spend_columns"], draft["spend_column"],
-                  draft["spend_unit"], draft["spend"], end[:4], "spend")
+                  draft["spend_unit"], draft["spend"], heading_years(end), "spend")
     elif draft["spend_label"] not in draft["spend_quote"]:
         raise ValueError("spend 0: the label is not in the quote")
     elif "investing" not in draft["spend_quote"].lower() and "acqui" not in draft["spend_quote"].lower():
@@ -262,7 +311,7 @@ def verify_year(ticker, end, cik, accession, rec, ua):
 
 
 def draft_year(ticker, company, cik, end, accession, ua, required=()):
-    prior_end = (date.fromisoformat(end) - timedelta(days=365)).isoformat()
+    prior_end = prior_year_end(end)
     docs = documents(cik, accession, ua)
     failure = None
     for attempt in range(2):
@@ -438,7 +487,17 @@ def one(ticker, ua, out_dir, log):
 
 
 def main():
+    global MODEL, EFFORT
     args = sys.argv[1:]
+    for flag in ("--model", "--effort"):
+        if flag not in args or args.index(flag) + 1 >= len(args):
+            raise SystemExit(f"{flag} is required (no default).\n{__doc__}")
+        i = args.index(flag)
+        if flag == "--model":
+            MODEL = args[i + 1]
+        else:
+            EFFORT = args[i + 1]
+        del args[i:i + 2]
     if not args:
         raise SystemExit(__doc__)
     headline.HISTORY = BULK / "history"
@@ -457,6 +516,9 @@ def main():
         t1 = time.time()
         try:
             rec = one(t, ua, out_dir, log)
+        except ModelFailure as err:  # the model is unavailable: every later company would fail the same way
+            print(f"{i}/{len(tickers)} {t} STOPPED, model call failed: {err}", flush=True)
+            raise SystemExit(f"stopped at {t}; {CALLS} has the failing call. Nothing recorded for {t}.")
         except Exception as err:  # a crash is a bug in this script or a network failure, recorded, not fatal
             rec = {"status": "crash", "message": f"{type(err).__name__}: {err}"[:400], "records": []}
         rec["seconds"] = round(time.time() - t1)
