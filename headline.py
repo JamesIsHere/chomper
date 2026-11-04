@@ -30,6 +30,7 @@ Usage: python headline.py TICKER   (run history.py TICKER first)
 """
 import html
 import json
+from decimal import Decimal
 import re
 import sys
 import xml.etree.ElementTree as ET
@@ -309,10 +310,17 @@ def quoted_row(q, label, n, unit, who):
         raise SystemExit(f"{who}: row {label!r} appears {len(hits)} times in the quote")
     i, vals = hits[0], []
     for _ in range(n):
-        m = re.match(r"(?:\$ ?)?(?:(\( ?)?([\d,]+)(?: ?\))?|[" + DASHES + r"]) ?", q[i:])
+        # A cell may carry decimals in its unit ("12,442.7" in millions: Nike, ADP); read exactly, never as a float.
+        m = re.match(r"(?:\$ ?)?(?:(\( ?)?([\d,]+(?:\.\d+)?)(?: ?\))?|[" + DASHES + r"]) ?", q[i:])
         if not m:
             raise SystemExit(f"{who}: row {label!r} has fewer than {n} numbers")
-        vals.append((-1 if m.group(1) else 1) * int(m.group(2).replace(",", "")) * unit if m.group(2) else 0)
+        if m.group(2):
+            dollars = Decimal(m.group(2).replace(",", "")) * unit
+            if dollars != dollars.to_integral_value():
+                raise SystemExit(f"{who}: row {label!r} cell {m.group(2)} is not whole dollars in unit {unit}")
+            vals.append((-1 if m.group(1) else 1) * int(dollars))
+        else:
+            vals.append(0)
         i += m.end()
     return vals
 
@@ -361,7 +369,8 @@ def by_hand(ticker, end, cik, filing, ua):
             if not rec.get("spend_line") or not any(rec["spend_line"] in q for q in quotes):
                 raise SystemExit(f"{ticker} {end}: spend 0 needs spend_line, the cash flow line quoted")
             continue
-        if not any(f in q for f in printed(v) for q in quotes):
+        tenths = [f"{v / 1e6:,.1f}"] if v % 100_000 == 0 and v % 1_000_000 else []  # "12,442.7" in millions
+        if not any(f in q for f in printed(v) + tenths for q in quotes):
             raise SystemExit(f"{ticker} {end}: {what} {v:,} does not appear in millions or thousands in any quote")
     for d in rec["deals"]:
         forms = deal_forms(d["size"])

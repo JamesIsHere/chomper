@@ -413,3 +413,9 @@ Group: Method
 Decision: The reader accepts a deal's size where the filing's prose prints it in tenths of a million ("approximately $576.4 million"), alongside the forms it already accepted: millions or thousands as a table prints them, and tenths of a billion ("$5.9 billion"). The recorded size is the printed amount, exactly as with tenths of a billion; no tolerance is added.
 Why: The drafting batch's 10-company test (2026-11-03) and the earlier batch rejected deals whose size the model had read correctly because the check did not know this form (Nike's Umbro, $576.4 million; NVIDIA's Ageia, $29.7 million). Replaying the saved replies: 5 of the 10 such rejections now pass the reader's gate; the other 5 fail on their own (a figure printed in decimal millions on the balance sheet, a size not in the quote at all).
 Status: active
+
+## 2026-11-03 | A table cell may carry decimals in its unit
+Group: Method
+Decision: The reader reads a quoted table cell printed with decimals in the table's unit ("Total assets $ 12,442.7" in millions is 12,442,700,000 dollars), exactly, in decimal arithmetic; a cell that does not come to whole dollars in its unit stops the reader. A hand record's spend and prior total assets may appear in a quote in tenths of a million. No tolerance is added.
+Why: Some balance sheets print in millions with one decimal (Nike, ADP and others), and the row reader read only whole numbers, so correctly drafted records were rejected. Replaying the saved replies, all 6 such rejections now pass the reader's gate. The 11 published companies' ten-year files come out the same under the new reader as under the old (7 byte-identical under both; JNJ, PGR, UNH and PLD differ under both, the known lag of their files behind the fiscal-2007 rule).
+Status: active
